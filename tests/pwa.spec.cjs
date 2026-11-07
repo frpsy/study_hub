@@ -10,7 +10,7 @@ test('PWA manifest, scoped paths and iPhone metadata are valid',async({page,requ
   expect(response.ok()).toBe(true);
   const manifest=await response.json();
   expect(manifest.display).toBe('standalone');
-  expect(manifest.id).toBe('/study_joohankim/');
+  expect(manifest.id).toBe('/study_hub/');
   expect(manifest.scope).toBe('./');
   expect(manifest.start_url).toBe('./index.html');
   expect(manifest.icons.some(i=>i.sizes==='512x512' && i.purpose==='any')).toBe(true);
