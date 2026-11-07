@@ -4,8 +4,8 @@ from pathlib import Path
 import json,html,sys
 R=Path(__file__).resolve().parents[1]
 SITE_NAME='내면의 서재'
-SITE_DESCRIPTOR='강의 요약 · 타임스탬프'
-SITE_DESCRIPTION='강의의 핵심 요약과 타임스탬프를 모은 개인 학습 서재'
+SITE_DESCRIPTOR='개인 학습 서재'
+SITE_DESCRIPTION='강의별 핵심 요약과 타임스탬프·상세 요약을 모은 개인 학습 서재'
 ASSET_VERSION=json.loads((R/'build-info.json').read_text(encoding='utf-8'))['version']
 def header(base='',active='lectures'):
     return f'<a class="skip-link" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="site-header-inner"><a class="site-brand" href="{base}index.html"><img class="brand-symbol" src="{base}assets/icon.svg" width="32" height="32" alt="" aria-hidden="true"><span class="brand-name">{SITE_NAME}<small>{SITE_DESCRIPTOR}</small></span></a></div></header>'
