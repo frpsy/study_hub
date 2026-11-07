@@ -1,0 +1,141 @@
+[
+  {
+    "id": "affirmation-20261101",
+    "date": "2026-11-01",
+    "title": "내가 나에게 하는 말이 나를 살린다",
+    "duration": "2시간 32분 49초",
+    "description": "공포와 기대가 몸에 미치는 영향, 노시보 현상, 가치 확인에 기반한 자기확언과 4단계 연습",
+    "tags": [
+      "자기확언",
+      "노시보",
+      "내면소통"
+    ],
+    "creator": "김주환",
+    "kind": "lecture",
+    "video_url": "https://www.youtube.com/watch?v=oD5-nTDCKPg"
+  },
+  {
+    "id": "izYj8g-j00U",
+    "date": "2026-10-25",
+    "title": "나쁜 기억을 끄는 스위치는 따로 있다",
+    "duration": "2시간 29분",
+    "description": "기억의 편향과 편도체 내부의 위협·보상 회로, 긍정 기억을 구체적으로 떠올리는 방법",
+    "tags": [
+      "긍정 기억",
+      "편도체",
+      "정서 조절"
+    ],
+    "creator": "김주환",
+    "kind": "lecture"
+  },
+  {
+    "id": "vHuZh8xLcDc",
+    "date": "2026-10-11",
+    "title": "내면소통명상은 무엇이 다른가",
+    "duration": "2시간 55분",
+    "description": "명상 전통의 차이, 그리고 몸 알아차림과 자타긍정 훈련을 결합한 내면소통명상의 구성",
+    "tags": [
+      "명상 전통",
+      "마음챙김",
+      "마음근력",
+      "MBSR",
+      "MBCT"
+    ],
+    "filter_tag": "명상",
+    "creator": "김주환",
+    "kind": "lecture"
+  },
+  {
+    "id": "xA-4G4z-1MM",
+    "date": "2023-09-24",
+    "title": "두려움과 분노로부터 자유로워지는 법",
+    "duration": "1시간 4분 37초",
+    "description": "감정에 동반되는 몸의 변화와 분노 뒤의 두려움·집착을 알아차리는 과정",
+    "tags": [
+      "불안",
+      "분노",
+      "몸과 마음",
+      "집착"
+    ],
+    "creator": "김주환",
+    "kind": "lecture"
+  },
+  {
+    "id": "7R3-3HR6-u4",
+    "date": "2023-03-13",
+    "title": "식사 시각을 일정하게 지키면 몸의 시계가 맞는다",
+    "duration": "2시간 49분",
+    "description": "시간제한 식사와 칼로리 제한, 식사 시각과 생체 시계, 너무 짧은 식사 창의 위험, 교대 근무 소방관 연구",
+    "tags": [
+      "시간제한 식사",
+      "생체 시계",
+      "교대 근무",
+      "수면"
+    ],
+    "creator": "Satchin Panda",
+    "kind": "lecture",
+    "video_url": "https://www.youtube.com/watch?v=7R3-3HR6-u4"
+  },
+  {
+    "id": "ZCty0wvogDo",
+    "date": "2023-01-29",
+    "title": "수용 - 무슨 일이 일어나든",
+    "duration": "1시간 42분",
+    "description": "수용과 체념, 저항과 집착, 선호와 집착의 차이, 그리고 오유지족의 의미",
+    "tags": [
+      "수용",
+      "집착",
+      "선호",
+      "오유지족"
+    ],
+    "creator": "김주환",
+    "kind": "lecture"
+  },
+  {
+    "id": "hw4_kLaHOMg",
+    "date": "2023-01-08",
+    "title": "나를 위해 용서한다",
+    "duration": "1시간 35분",
+    "description": "감정적 용서와 책임 추궁의 차이, 반복되는 분노와 자기비난을 다루는 내면소통 훈련",
+    "tags": [
+      "용서",
+      "자기용서",
+      "자타긍정",
+      "분노"
+    ],
+    "creator": "김주환",
+    "kind": "lecture"
+  },
+  {
+    "id": "9tRohh0gErM",
+    "date": "2021-10-11",
+    "title": "언제 먹느냐가 단식의 효과를 정한다",
+    "duration": "2시간 26분",
+    "description": "식사 창의 위치와 길이, 단식 상태가 시작되는 시점, 단식을 깨는 것과 호르몬·간 건강에 미치는 영향",
+    "tags": [
+      "간헐적 단식",
+      "시간제한 식사",
+      "혈당",
+      "간 건강"
+    ],
+    "creator": "Andrew Huberman",
+    "kind": "lecture",
+    "video_url": "https://www.youtube.com/watch?v=9tRohh0gErM"
+  },
+  {
+    "id": "QmOF0crdyRU",
+    "date": "2021-09-27",
+    "title": "도파민은 의욕과 노력에 어떤 역할을 할까",
+    "duration": "2시간 17분",
+    "description": "원하는 마음과 실제 즐거움의 차이, 보상 기대와 노력 유지에 관여하는 도파민의 역할",
+    "tags": [
+      "도파민",
+      "동기",
+      "보상 예측",
+      "노력",
+      "습관"
+    ],
+    "creator": "Andrew Huberman",
+    "kind": "lecture"
+  }
+]

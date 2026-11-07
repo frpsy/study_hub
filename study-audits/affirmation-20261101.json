@@ -1,0 +1,30 @@
+{
+  "content_id": "affirmation-20261101",
+  "source_title": "내가 나에게 하는 말이 나를 살린다 | 부두 데스와 자기확언의 뇌과학",
+  "creator": "김주환",
+  "published_date": "2026-11-01",
+  "caption_type": "Korean auto-generated SRT supplied by user",
+  "caption_segments": 3219,
+  "caption_first": "00:00:00",
+  "caption_last": "02:32:49",
+  "main_lecture_start": "00:35:11",
+  "source_video_id": "oD5-nTDCKPg",
+  "source_url_verified": true,
+  "checks": {
+    "subtitle": "Entire timestamped transcript parsed and major sections cross-checked; not a sentence-by-sentence manual correction.",
+    "timeline": "Major markers cross-checked against SRT timestamps.",
+    "research": "Cannon (1942), Creswell et al. (2005), Cascio et al. (2016), Cohen et al. (2006) referenced with limits of interpretation.",
+    "slides": "No original video slide comparison available.",
+    "publication": "Internal stable content ID retained for reading history; original YouTube video linked separately.",
+    "public_site": "2026-11-02: home, lecture, mini-course, 5-minute summary returned HTTP 200 and expected content/version"
+  },
+  "follow_up": "Video ID and source URL confirmed; slide-by-slide comparison remains unchecked.",
+  "site_version": "2026.11.02.9",
+  "site_routes": [
+    "lectures/affirmation-20261101.html",
+    "mini-courses/affirmation-20261101.html",
+    "summaries/affirmation-20261101.html"
+  ],
+  "source_url": "https://www.youtube.com/watch?v=oD5-nTDCKPg",
+  "source_verification_method": "yt-dlp official YouTube channel /streams title and video ID (2026-11-02)"
+}

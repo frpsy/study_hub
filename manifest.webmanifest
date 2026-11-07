@@ -1,0 +1,30 @@
+{
+  "id": "/study_joohankim/",
+  "name": "내면의 서재",
+  "short_name": "내면의 서재",
+  "description": "강의의 핵심 요약과 타임스탬프를 모은 개인 학습 서재",
+  "lang": "ko-KR",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": [
+    "standalone"
+  ],
+  "orientation": "any",
+  "background_color": "#f5f5f6",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "./assets/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
