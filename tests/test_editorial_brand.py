@@ -18,7 +18,7 @@ class EditorialBrandContract(unittest.TestCase):
             with self.subTest(page=str(path.relative_to(ROOT))):
                 html = path.read_text(encoding='utf-8')
                 self.assertIn('<title>내면의 서재 · ', html)
-                self.assertIn('<span class="brand-name">내면의 서재<small>강의 요약 · 타임스탬프</small></span>', html)
+                self.assertIn('<span class="brand-name">내면의 서재<small>개인 학습 서재</small></span>', html)
                 self.assertRegex(html, r'<img class="brand-symbol"[^>]+alt=""')
                 self.assertNotIn('내면을 공부하는 시간', html)
                 self.assertIn('site.css?v='+asset_version, html)

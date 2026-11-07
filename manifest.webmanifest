@@ -2,7 +2,7 @@
   "id": "/study_hub/",
   "name": "내면의 서재",
   "short_name": "내면의 서재",
-  "description": "강의의 핵심 요약과 타임스탬프를 모은 개인 학습 서재",
+  "description": "강의별 핵심 요약과 타임스탬프·상세 요약을 모은 개인 학습 서재",
   "lang": "ko-KR",
   "start_url": "./index.html",
   "scope": "./",
