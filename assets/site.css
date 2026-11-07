@@ -775,3 +775,16 @@ a{color:var(--ink);text-decoration-color:var(--accent);text-decoration-thickness
 }
 @media(prefers-reduced-motion:reduce){.pager-link{transition:none}}
 @media print{.lecture-pager{display:none}}
+
+/* Accent choice (settings in footer): red is the default token set above; blue and green override only the accent family. */
+.accent-picker{display:inline-flex;align-items:center;gap:4px;margin-left:auto}
+.accent-swatch{width:44px;height:44px;padding:0;border:0;background:transparent;border-radius:50%;position:relative;min-width:0}
+.accent-swatch::before{content:"";position:absolute;inset:11px;border-radius:50%;background:var(--sw);border:2px solid transparent;box-shadow:0 0 0 1px var(--line)}
+.accent-swatch[aria-pressed="true"]::before{box-shadow:0 0 0 2px var(--surface),0 0 0 4px var(--sw)}
+.accent-swatch[data-accent="red"]{--sw:#c8102e}.accent-swatch[data-accent="blue"]{--sw:#1f4fd8}.accent-swatch[data-accent="green"]{--sw:#0e7a4b}
+:root[data-theme="dark"] .accent-swatch[data-accent="red"]{--sw:#ff4d63}:root[data-theme="dark"] .accent-swatch[data-accent="blue"]{--sw:#7aa5ff}:root[data-theme="dark"] .accent-swatch[data-accent="green"]{--sw:#46d391}
+:root[data-accent="blue"]{--accent:#1f4fd8;--focus-color:#1f4fd8;--glow:rgba(31,79,216,.085)}
+:root[data-accent="green"]{--accent:#0e7a4b;--focus-color:#0e7a4b;--glow:rgba(14,122,75,.085)}
+:root[data-accent="blue"][data-theme="dark"]{--accent:#7aa5ff;--focus-color:#7aa5ff;--glow:rgba(122,165,255,.16)}
+:root[data-accent="green"][data-theme="dark"]{--accent:#46d391;--focus-color:#46d391;--glow:rgba(70,211,145,.16)}
+:root[data-accent] .lecture:hover{box-shadow:0 14px 32px -16px color-mix(in srgb,var(--accent) 45%,transparent)}
