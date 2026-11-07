@@ -2,7 +2,7 @@
 
 강의의 **핵심 요약과 타임스탬프**(김주환 강의), **상세 요약과 출처**(그 외 강연자)만 모은 **로그인 없는 정적 학습 사이트**입니다. 김주환 교수뿐 아니라 다른 강연자의 강의도 같은 구성으로 다룹니다.
 
-- **웹:** https://frpsy.github.io/study_joohankim/
+- **웹:** https://frpsy.github.io/study_hub/
 - **공개 경로:** `index.html`(강의 목록), `lectures/<id>.html`(강의 페이지), `offline.html`
 - **기능:** 강의 검색·필터, 한 문장 핵심, 핵심 세 가지, 원본 YouTube 링크, 타임스탬프 복사, 정적 오프라인 캐시, 시스템·라이트·다크 화면
 - **보존만 하는 원고:** 5분 요약(`data/summaries.json`), 미니강좌 해설(`data/mini_courses.json`), 용어집(`용어집.md`)은 게시하지 않습니다.
