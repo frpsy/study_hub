@@ -24,9 +24,24 @@
       button.title='화면 테마: '+labels[choice];
     }
   };
+  const accentKey='study-site-accent';
+  const accents=['red','blue','green'];
+  let accent='red';
+  try{const stored=localStorage.getItem(accentKey);if(accents.includes(stored))accent=stored}catch{}
+  const applyAccent=()=>{
+    if(accent==='red')delete document.documentElement.dataset.accent;else document.documentElement.dataset.accent=accent;
+    document.querySelectorAll('[data-accent]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.accent===accent)));
+  };
+  applyAccent();
   apply();
   const initialize=()=>{
     apply();
+    applyAccent();
+    document.querySelectorAll('.accent-swatch').forEach(b=>b.addEventListener('click',()=>{
+      accent=b.dataset.accent;
+      try{if(accent==='red')localStorage.removeItem(accentKey);else localStorage.setItem(accentKey,accent)}catch{}
+      applyAccent();
+    }));
     const button=document.querySelector('[data-theme-toggle]');
     button?.addEventListener('click',()=>{
       choice=modes[(modes.indexOf(choice)+1)%modes.length];
