@@ -12,7 +12,7 @@
 |---|---|
 | 강의 등록(최신순) | `lectures.json` → `python3 scripts/build_library.py` |
 | 한 문장·핵심 세 가지 | `data/mini_courses.json`의 `lead`·`three` |
-| 타임스탬프(김주환만)·상세 요약 `detail`(그 외)·출처·옛 앵커 | `data/lecture_compact.json` → `python3 scripts/build_compact_lectures.py` |
+| 타임스탬프(김주환만)·상세 요약 `detail`(그 외)·실천 포인트 `practice`(선택)·출처·옛 앵커 | `data/lecture_compact.json` → `python3 scripts/build_compact_lectures.py` |
 | 화면 버전 | `build-info.json`의 `version` (보이는 변경마다 올리고 재생성) |
 | 원본 자막·근거 | `transcripts/`(가공 금지), `study-audits/<영상ID>.json` |
 

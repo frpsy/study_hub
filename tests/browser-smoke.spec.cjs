@@ -218,12 +218,19 @@ test('catalog restores a shared search and returns to it after reading',async({p
   await expect(page.locator('[data-filter-for="search"][data-value="수용"]')).toHaveAttribute('aria-pressed','true');
 });
 
-test('a lecture card opens a page with only the key summary and timestamps',async({page})=>{
+test('a lecture card opens a page with the key summary, practice points and timestamps',async({page})=>{
   await page.goto('/index.html');
   await page.locator('#lecture-list [data-video-id="affirmation-20261101"]').click();
   await expect(page).toHaveURL(/\/lectures\/affirmation-20261101\.html$/);
-  await expect(page.locator('main .lecture-section')).toHaveCount(2);
+  await expect(page.locator('main .lecture-section')).toHaveCount(3);
   await expect(page.locator('#lecture-overview>h2')).toHaveText('핵심 요약');
+  await expect(page.locator('#lecture-practice>h2')).toHaveText('실천 포인트');
+  await expect(page.locator('#lecture-practice .summary-list li')).toHaveCount(3);
+  await expect(page.locator('#lecture-practice details')).toHaveCount(4);
+  const firstStep=page.locator('#lecture-practice details').first();
+  await expect(firstStep.locator('ul')).toBeHidden();
+  await firstStep.locator('summary').click();
+  await expect(firstStep.locator('ul')).toBeVisible();
   await expect(page.locator('#lecture-comment>h2')).toHaveText('타임스탬프');
   for(const removed of ['5분 요약','미니강좌','용어와 개념']){
     await expect(page.getByText(removed)).toHaveCount(0);

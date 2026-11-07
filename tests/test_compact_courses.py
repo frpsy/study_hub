@@ -34,6 +34,16 @@ class CompactCourseChecks(unittest.TestCase):
     for block in record['detail']:
      self.assertTrue(block['h'] and block['p'],vid)
      for text in block['p']:self.assertRegex(text,r'[.)]$',vid+': '+text[:30])
+ def test_practice_section_renders_once_with_expandable_steps(self):
+  records=json.loads((R/'data/lecture_compact.json').read_text())
+  for vid,record in records.items():
+   source=(R/'lectures'/f'{vid}.html').read_text()
+   if 'practice' not in record:continue
+   self.assertEqual(source.count('id="lecture-practice"'),1,vid)
+   self.assertEqual(source.count('<details><summary>'),len(record['practice']['steps']),vid)
+   self.assertEqual(len(record['practice']['today']),3,vid)
+   for step in record['practice']['steps']:
+    self.assertRegex(step['t'],r'^\d+:\d\d(:\d\d)?$',vid);self.assertTrue(step['b'],vid)
  def test_course_coverage_and_tiers(self):
   rows=json.loads((R/'lectures.json').read_text());courses=json.loads((R/'data/mini_courses.json').read_text())
   self.assertEqual({r['id'] for r in rows},set(courses))
