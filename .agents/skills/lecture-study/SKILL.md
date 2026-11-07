@@ -1,6 +1,6 @@
 ---
 name: lecture-study
-description: 내면의 서재(frpsy/study_joohankim)에 강의를 추가하거나 핵심 요약·타임스탬프를 작성·검수할 때 사용
+description: 내면의 서재(frpsy/study_hub)에 강의를 추가하거나 핵심 요약·타임스탬프를 작성·검수할 때 사용
 ---
 
 # 강의 추가·수정 절차

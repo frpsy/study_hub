@@ -9,7 +9,7 @@ ROOT=Path(__file__).resolve().parents[1]
 class IPhonePWAContract(unittest.TestCase):
     def test_manifest_is_scoped_to_repo_and_uses_existing_icons(self):
         data=json.loads((ROOT/'manifest.webmanifest').read_text(encoding='utf-8'))
-        self.assertEqual(data['id'],'/study_joohankim/')
+        self.assertEqual(data['id'],'/study_hub/')
         self.assertEqual(data['start_url'],'./index.html')
         self.assertEqual(data['scope'],'./')
         self.assertEqual(data['display'],'standalone')
