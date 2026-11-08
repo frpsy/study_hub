@@ -44,6 +44,12 @@ class CompactCourseChecks(unittest.TestCase):
    self.assertEqual(len(record['practice']['today']),3,vid)
    for step in record['practice']['steps']:
     self.assertRegex(step['t'],r'^\d+:\d\d(:\d\d)?$',vid);self.assertTrue(step['b'],vid)
+ def test_kim_lectures_do_not_use_instructor_subject_phrasing(self):
+  rows={r['id']:r for r in json.loads((R/'lectures.json').read_text(encoding='utf-8'))}
+  for name in ('mini_courses','summaries','lecture_compact'):
+   for vid,item in json.loads((R/'data'/f'{name}.json').read_text(encoding='utf-8')).items():
+    if rows.get(vid,{}).get('creator')!='김주환':continue
+    self.assertNotIn('강사',json.dumps(item,ensure_ascii=False),f'{name}:{vid}')
  def test_course_coverage_and_tiers(self):
   rows=json.loads((R/'lectures.json').read_text());courses=json.loads((R/'data/mini_courses.json').read_text())
   self.assertEqual({r['id'] for r in rows},set(courses))
