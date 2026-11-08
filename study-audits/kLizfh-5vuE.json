@@ -1,0 +1,30 @@
+{
+  "video_id": "kLizfh-5vuE",
+  "duration_seconds": 7143,
+  "image_count": 0,
+  "review_basis": "유튜브 한국어 자막(전사 패널 950구간, 0:01~1:58:58)을 처음부터 끝까지 읽고 타임스탬프와 요약을 대조했다. 영상 화면(슬라이드)은 대조하지 않았다.",
+  "transcript": {
+    "path": "transcripts/kLizfh-5vuE.ko.txt",
+    "status": "전사 패널 원문 그대로 저장(줄당 m:ss<TAB>자막)",
+    "coverage": "0:01~1:58:58 (950구간)"
+  },
+  "content_id": "kLizfh-5vuE",
+  "source_title": "존중 - 모든 마음근력의 근원",
+  "creator": "김주환",
+  "published_date": "2023-02-12",
+  "caption_type": "Korean captions read from YouTube transcript panel (built-in browser); manual or auto type not confirmed",
+  "caption_segments": 950,
+  "caption_first": "0:01",
+  "caption_last": "1:58:58",
+  "source_video_id": "kLizfh-5vuE",
+  "source_url": "https://www.youtube.com/watch?v=kLizfh-5vuE",
+  "source_url_verified": true,
+  "source_verification_method": "YouTube watch page (ytInitialPlayerResponse): videoId, title, lengthSeconds 7143 (=1:59:03)",
+  "checks": {
+    "subtitle": "Entire timestamped transcript read (950 segments, 0:01~1:58:58). Caption misrecognitions corrected from context in timeline wording. No gap of 20 seconds or more between segments.",
+    "timeline": "Timestamps taken from transcript segment start times.",
+    "slides": "No slide comparison.",
+    "raw_transcript": "Saved unmodified as transcripts/kLizfh-5vuE.ko.txt (transcript panel dump, one 'm:ss<TAB>text' line per segment)."
+  },
+  "follow_up": "Slide comparison not done."
+}
