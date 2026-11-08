@@ -1,0 +1,30 @@
+{
+  "video_id": "ENm40KZM1_g",
+  "duration_seconds": 6506,
+  "image_count": 0,
+  "review_basis": "유튜브 한국어 자막(전사 패널 780구간, 0:22~1:48:16)을 처음부터 끝까지 읽고 타임스탬프와 요약을 대조했다. 영상 화면(슬라이드)은 대조하지 않았다.",
+  "transcript": {
+    "path": "transcripts/ENm40KZM1_g.ko.txt",
+    "status": "전사 패널 원문 그대로 저장(줄당 m:ss<TAB>자막)",
+    "coverage": "0:22~1:48:16 (780구간)"
+  },
+  "content_id": "ENm40KZM1_g",
+  "source_title": "연민 - 친절하고 따뜻해야 마음근력이 강해진다",
+  "creator": "김주환",
+  "published_date": "2023-01-15",
+  "caption_type": "Korean auto-generated captions read from YouTube transcript panel (built-in browser)",
+  "caption_segments": 780,
+  "caption_first": "0:22",
+  "caption_last": "1:48:16",
+  "source_video_id": "ENm40KZM1_g",
+  "source_url": "https://www.youtube.com/watch?v=ENm40KZM1_g",
+  "source_url_verified": true,
+  "source_verification_method": "YouTube watch page (ytInitialPlayerResponse): videoId, title, lengthSeconds 6506 (=1:48:26)",
+  "checks": {
+    "subtitle": "Entire timestamped transcript read (780 segments, 0:22~1:48:16). Auto-caption misrecognitions corrected from context in timeline wording. A gap of about one minute exists between 1:33:37 and 1:34:43 in the auto captions.",
+    "timeline": "Timestamps taken from transcript segment start times.",
+    "slides": "No slide comparison.",
+    "raw_transcript": "Saved unmodified as transcripts/ENm40KZM1_g.ko.txt (transcript panel dump, one 'm:ss<TAB>text' line per segment)."
+  },
+  "follow_up": "Slide comparison not done."
+}

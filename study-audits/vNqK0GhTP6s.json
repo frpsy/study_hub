@@ -1,0 +1,30 @@
+{
+  "video_id": "vNqK0GhTP6s",
+  "duration_seconds": 5792,
+  "image_count": 0,
+  "review_basis": "유튜브 한국어 자막(전사 패널 711구간, 0:03~1:36:23)을 처음부터 끝까지 읽고 타임스탬프와 요약을 대조했다. 영상 화면(슬라이드)은 대조하지 않았다.",
+  "transcript": {
+    "path": "transcripts/vNqK0GhTP6s.ko.txt",
+    "status": "전사 패널 원문 그대로 저장(줄당 m:ss<TAB>자막)",
+    "coverage": "0:03~1:36:23 (711구간)"
+  },
+  "content_id": "vNqK0GhTP6s",
+  "source_title": "사랑 - 연애하면 불행하고, 사랑해야 행복하다",
+  "creator": "김주환",
+  "published_date": "2023-01-22",
+  "caption_type": "Korean auto-generated captions read from YouTube transcript panel (built-in browser)",
+  "caption_segments": 711,
+  "caption_first": "0:03",
+  "caption_last": "1:36:23",
+  "source_video_id": "vNqK0GhTP6s",
+  "source_url": "https://www.youtube.com/watch?v=vNqK0GhTP6s",
+  "source_url_verified": true,
+  "source_verification_method": "YouTube watch page (ytInitialPlayerResponse): videoId, title, lengthSeconds 5792 (=1:36:32)",
+  "checks": {
+    "subtitle": "Entire timestamped transcript read (711 segments, 0:03~1:36:23). Auto-caption misrecognitions corrected from context in timeline wording. A gap of about one minute exists between 50:43 and 51:47 in the auto captions.",
+    "timeline": "Timestamps taken from transcript segment start times.",
+    "slides": "No slide comparison.",
+    "raw_transcript": "Saved unmodified as transcripts/vNqK0GhTP6s.ko.txt (transcript panel dump, one 'm:ss<TAB>text' line per segment)."
+  },
+  "follow_up": "Slide comparison not done."
+}
