@@ -236,7 +236,7 @@ body{letter-spacing:-.012em}
 .site-brand{display:inline-flex;align-items:center;gap:11px;flex-shrink:0;font-size:19px;line-height:1.25;letter-spacing:-.05em;color:var(--brand-ink);font-weight:750}
 .site-brand img.brand-symbol{display:block;width:34px;height:34px;flex:0 0 34px;border:none;border-radius:9px;object-fit:contain}
 .site-brand .brand-name{display:block}
-.site-brand small{display:block;font-size:10px;font-weight:550;letter-spacing:.03em;line-height:1.3;margin-top:3px;color:var(--muted)}
+.site-brand small{display:block;font-size:12px;font-weight:600;letter-spacing:.03em;line-height:1.3;margin-top:3px;color:var(--ink)}
 .global-nav{align-items:center;gap:5px}
 .global-nav a{min-height:42px;display:inline-flex;align-items:center;justify-content:center;padding:8px 14px;border-radius:11px;font-size:14px;line-height:1.35;letter-spacing:-.025em;color:var(--muted);font-weight:550;transition:background-color .15s ease,color .15s ease}
 .global-nav a[aria-current=page]{background:var(--brand-soft);color:var(--brand-ink);font-weight:700}
@@ -658,7 +658,7 @@ a{color:var(--ink);text-decoration-color:var(--accent);text-decoration-thickness
 .site-header{background:var(--header-bg);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);border-bottom:1px solid var(--line);box-shadow:none}
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.site-header{background:var(--header-solid)}}
 .site-brand,.site-brand .brand-name{font-weight:800;letter-spacing:-.045em}
-.site-brand small{font-weight:500;letter-spacing:.08em;color:var(--muted)}
+.site-brand small{font-weight:600;letter-spacing:.04em;color:var(--ink)}
 .site-brand img.brand-symbol{border-radius:7px}
 .breadcrumb,.breadcrumb a{color:var(--muted);text-decoration:none}
 .breadcrumb a:hover{color:var(--ink);text-decoration:underline;text-decoration-color:var(--accent)}
