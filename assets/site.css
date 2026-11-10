@@ -788,3 +788,10 @@ a{color:var(--ink);text-decoration-color:var(--accent);text-decoration-thickness
 :root[data-accent="blue"][data-theme="dark"]{--accent:#7aa5ff;--focus-color:#7aa5ff;--glow:rgba(122,165,255,.16)}
 :root[data-accent="green"][data-theme="dark"]{--accent:#46d391;--focus-color:#46d391;--glow:rgba(70,211,145,.16)}
 :root[data-accent] .lecture:hover{box-shadow:0 14px 32px -16px color-mix(in srgb,var(--accent) 45%,transparent)}
+
+/* Home catalog discovery: retain the existing theme tokens and card geometry. */
+.home-main .catalog-intro{margin:0 0 var(--space-3);max-width:68ch;font-size:var(--font-ui-size);line-height:1.6;color:var(--muted);overflow-wrap:break-word}
+@media(max-width:390px){
+ .home-main .home-title{margin-top:var(--space-6);margin-bottom:var(--space-3)}
+ .home-main .search-panel{margin-bottom:var(--space-3)}
+}

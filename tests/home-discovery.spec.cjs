@@ -19,6 +19,8 @@ for(const viewport of [{width:390,height:844},{width:1280,height:800}]){
         filterHeight:Math.round(chips.height),horizontalOverflow:document.documentElement.scrollWidth-innerWidth};
     });
     expect(layout.horizontalOverflow).toBeLessThanOrEqual(1);
+    expect(layout.scrollToSeeFirstTitle,'first card title must appear above fold').toBe(0);
+    if(viewport.width===390)expect(layout.filterHeight,'topic chips stay on one compact row').toBeLessThanOrEqual(48);
     await first.click();  // No search: one card tap.
     await expect(page).toHaveURL(/\/lectures\/.*\.html$/);
     await page.goto('/index.html');
