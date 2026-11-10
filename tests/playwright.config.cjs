@@ -1,7 +1,7 @@
 const {defineConfig}=require('@playwright/test');
 module.exports=defineConfig({
   testDir:'.',
-  testMatch:['browser-smoke.spec.cjs','pwa.spec.cjs'],
+  testMatch:['browser-smoke.spec.cjs','pwa.spec.cjs','home-discovery.spec.cjs'],
   timeout:30000,
   retries:1,
   workers:1,

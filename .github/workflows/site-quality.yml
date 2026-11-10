@@ -22,6 +22,12 @@ jobs:
         env:
           PR_BODY: ${{ github.event.pull_request.body }}
         run: python3 scripts/check_pr_impact.py
+      - name: Generate public pages and ensure outputs are committed
+        run: |
+          python3 scripts/content_registry.py
+          python3 scripts/build_library.py
+          python3 scripts/build_compact_lectures.py
+          git diff --exit-code -- index.html lectures/
       - name: Check design contract, source links and generated output
         run: |
           python3 scripts/validate_design_system.py
