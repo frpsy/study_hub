@@ -1,0 +1,38 @@
+const {test,expect}=require('@playwright/test');
+
+// Measures actual browser geometry before and after the catalog intro adjustment.
+for(const viewport of [{width:390,height:844},{width:1280,height:800}]){
+  test('home discovery paths and first-title visibility at '+viewport.width+'px',async({browser})=>{
+    const context=await browser.newContext({viewport,reducedMotion:'reduce'});
+    const page=await context.newPage();
+    await page.goto('/index.html');
+    const first=page.locator('#lecture-list .lecture').first();
+    await expect(first).toBeVisible();
+    const layout=await page.evaluate(()=>{
+      const title=document.querySelector('#lecture-list .lecture h2').getBoundingClientRect();
+      const search=document.querySelector('#search').getBoundingClientRect();
+      const chips=document.querySelector('.filter-chips').getBoundingClientRect();
+      const card=document.querySelector('#lecture-list .lecture').getBoundingClientRect();
+      return {viewportHeight:innerHeight,searchTop:Math.round(search.top),
+        firstCardTop:Math.round(card.top),firstTitleBottom:Math.round(title.bottom),
+        scrollToSeeFirstTitle:Math.max(0,Math.ceil(title.bottom-innerHeight)),
+        filterHeight:Math.round(chips.height),horizontalOverflow:document.documentElement.scrollWidth-innerWidth};
+    });
+    expect(layout.horizontalOverflow).toBeLessThanOrEqual(1);
+    await first.click();  // No search: one card tap.
+    await expect(page).toHaveURL(/\/lectures\/.*\.html$/);
+    await page.goto('/index.html');
+    await page.locator('[data-filter-for="search"][data-value="명상"]').click();
+    await expect(page.locator('#lecture-list .lecture:visible')).toHaveCount(1);
+    await page.locator('#lecture-list .lecture:visible').first().click(); // Filter + card: two taps.
+    await expect(page.locator('#lecture-overview')).toBeVisible();
+    await page.goto('/index.html');
+    await page.locator('#search').click();
+    await page.locator('#search').fill('Huberman');
+    await expect(page.locator('#lecture-list .lecture:visible')).toHaveCount(2);
+    await page.locator('#lecture-list .lecture:visible').first().click(); // Search + card: two taps, typing excluded.
+    await expect(page.locator('#lecture-detail')).toBeVisible();
+    console.log('HOME_DISCOVERY_METRICS '+JSON.stringify({viewport,...layout,taps:{first:1,filter:2,search:2}}));
+    await context.close();
+  });
+}
