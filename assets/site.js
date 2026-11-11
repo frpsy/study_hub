@@ -146,17 +146,36 @@
   bar.className='read-progress';
   bar.setAttribute('aria-hidden','true');
   document.body.append(bar);
-  let frame=0;
-  const update=()=>{
-    frame=0;
+  const motion=window.matchMedia('(prefers-reduced-motion: reduce)');
+  let frame=0,current=0,target=0,last=0;
+  const measure=()=>{
     const total=document.documentElement.scrollHeight-window.innerHeight;
-    const ratio=total>0?Math.min(1,Math.max(0,window.scrollY/total)):0;
-    bar.style.setProperty('--p',ratio.toFixed(4));
+    return total>0?Math.min(1,Math.max(0,window.scrollY/total)):0;
   };
-  const schedule=()=>{if(!frame)frame=requestAnimationFrame(update)};
+  const paint=()=>bar.style.setProperty('--p',String(current));
+  const animate=time=>{
+    frame=0;
+    const elapsed=last?Math.min(time-last,64):16;
+    last=time;
+    current=motion.matches?target:current+(target-current)*(1-Math.exp(-elapsed/85));
+    if(Math.abs(target-current)<0.0001)current=target;
+    paint();
+    if(current!==target)frame=requestAnimationFrame(animate);else last=0;
+  };
+  const schedule=()=>{
+    target=measure();
+    if(!frame)frame=requestAnimationFrame(animate);
+  };
+  const restore=()=>{
+    if(frame)cancelAnimationFrame(frame);
+    frame=0;last=0;current=target=measure();paint();
+  };
   window.addEventListener('scroll',schedule,{passive:true});
   window.addEventListener('resize',schedule);
-  update();
+  window.addEventListener('pageshow',restore);
+  motion.addEventListener('change',schedule);
+  if('ResizeObserver' in window)new ResizeObserver(schedule).observe(document.body);
+  restore();
 })();
 
 // Highlight the section currently being read. Plain anchors work without JS.
