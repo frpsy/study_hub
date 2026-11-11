@@ -323,3 +323,22 @@ test('reading navigation tracks sections and source disclosure opens',async({bro
   await expect(page.locator('#lecture-sources')).toHaveAttribute('open','');
   await context.close();
 });
+
+test('reading progress eases toward scroll position and respects reduced motion',async({page})=>{
+ await page.emulateMedia({reducedMotion:'no-preference'});
+ await page.goto('/lectures/VUHrJZbpIjI.html');
+ await page.waitForTimeout(600);
+ const sample=await page.evaluate(async()=>{
+  const bar=document.querySelector('.read-progress');
+  const value=()=>Number(bar.style.getPropertyValue('--p'));
+  window.scrollTo({top:(document.documentElement.scrollHeight-innerHeight)/2,behavior:'instant'});
+  await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+  return {value:value(),target:scrollY/(document.documentElement.scrollHeight-innerHeight)};
+ });
+ expect(sample.value).toBeGreaterThan(0);
+ expect(sample.value).toBeLessThan(sample.target);
+ await expect.poll(()=>page.locator('.read-progress').evaluate(el=>Number(el.style.getPropertyValue('--p')))).toBeCloseTo(sample.target,3);
+ await page.emulateMedia({reducedMotion:'reduce'});
+ await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));
+ await expect.poll(()=>page.locator('.read-progress').evaluate(el=>Number(el.style.getPropertyValue('--p')))).toBe(0);
+});
