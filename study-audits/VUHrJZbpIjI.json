@@ -30,5 +30,13 @@
     "raw_transcript": "원본 json3와 시각 텍스트를 transcripts/에 저장.",
     "supplement": "카페인 단계의 보충 항목: Drake 외(2013)는 PMC 본문에서, FDA 수치는 FDA 안내문에서, Gardiner 외(2023)는 소개 기사(AJMC)에서 수치를 확인함. Gardiner 논문 원문은 열어 보지 못함."
   },
-  "follow_up": "인용 연구 원문 대조와 영상 화면 대조는 하지 못함."
+  "follow_up": "인용 연구 원문 대조와 영상 화면 대조는 하지 못함.",
+  "description_file": "transcripts/VUHrJZbpIjI.description.txt",
+  "description_check": "2026-11-12 yt-dlp로 설명란 전문을 받아 원문 그대로 저장하고, 강의 소개문·인용 연구자 목록·추천 곡 목록을 상세 요약과 대조함. 설명란의 연구자·연도는 설명란이 소개한 내용으로만 적고 원문은 열어 보지 않았다.",
+  "detail_check": "2026-11-12 자막 전 구간(3015줄, 0:00:01~2:20:26)을 처음부터 끝까지 읽고 상세 요약 8개 소제목을 작성함. 수치(10~16%, 유전율 약 40%, 133만 명, 154명, 5~12초)는 자막 시각과 대조함. 공연·앱 홍보 구간(2:15:04~2:19:59)은 요약하지 않음.",
+  "unverified": [
+    "강의가 소개한 연구(먼로 1967, MSLT, 3P 모델 비율, 유전율, 154명 무작위 대조 연구)의 원문 수치",
+    "설명란이 소개한 Riemann 2010, Stepanski 1988, Bonnet & Arand 1995, Baron 2017, Broomfield & Espie 2005, Frankl 1960, Ansfield 1996, Harvey 2003, Harvey & Payne 2002 원문",
+    "평균율의 수면 효과는 강연자가 실험하지 않았다고 밝힌 이론적 추론"
+  ]
 }
