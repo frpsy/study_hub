@@ -1,0 +1,30 @@
+{
+  "content_id": "peaceful-life-live",
+  "source_title": "평온하고 편안하게 사는 방법 (유튜브 라이브 강연)",
+  "creator": "김주환",
+  "published_date": null,
+  "published_date_note": "방송 날짜를 공식 출처로 확인하지 못해 비워 둠",
+  "caption_type": "Korean auto-generated text and timestamped SRT supplied by user (DownSub)",
+  "caption_first": "00:00:04",
+  "caption_last": "02:38:43",
+  "main_lecture_start": "00:01:45",
+  "source_video_id": "_Q3yyZvwH1o",
+  "source_url": "https://www.youtube.com/live/_Q3yyZvwH1o",
+  "source_url_verified": false,
+  "checks": {
+    "subtitle": "Entire text transcript and SRT read; ASR errors corrected by context in the summary only. Raw files kept unmodified in transcripts/.",
+    "timeline": "Key markers spot-checked against SRT timestamps (1:45, 19:53, 53:11, 1:52:44, 2:23:06, 2:37:40).",
+    "supplement": "[보충] sentences rest on sources opened on 2026-11-11: encykorea E0031514, earticle A368266, journal.kabs.re.kr QPYa, en.wikipedia Heart_Sutra, khan.co.kr 202206271824001.",
+    "public_site": "pending until merge and deploy"
+  },
+  "unverified": [
+    "방송 날짜와 영상 전체 길이(자막 마지막 시각 2:38:43만 확인)",
+    "공적영지의 종밀·하택 신회 계보 설명",
+    "관세음과 관자재 번역어의 역자별 귀속",
+    "진심직설 저자 문제",
+    "의무교육 진단과 종교 해석은 강연자의 견해로만 기록"
+  ],
+  "follow_up": "공식 방송 정보로 날짜와 길이를 확인하면 lectures.json의 date와 duration을 채운다.",
+  "site_version": "2026.11.11.10",
+  "site_routes": ["lectures/peaceful-life-live.html"]
+}
