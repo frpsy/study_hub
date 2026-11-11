@@ -1,0 +1,33 @@
+{
+  "video_id": "VUHrJZbpIjI",
+  "layout": "compact",
+  "duration_seconds": 8435,
+  "image_count": 0,
+  "review_basis": "2026-11-11 유튜브 한국어 자동 자막(1513구간, 0:01~2:20:31)을 처음부터 끝까지 읽고 타임스탬프와 요약을 대조했다. 영상 화면과 설명란은 대조하지 못했다.",
+  "units": [],
+  "transcript": {
+    "path": "transcripts/VUHrJZbpIjI.ko.txt",
+    "raw_json3": "transcripts/VUHrJZbpIjI.ytdlp.ko-orig.json3",
+    "status": "yt-dlp(web_embedded)로 받은 자동 자막 json3 원본을 그대로 보존하고, 같은 내용을 시각이 붙은 txt로 옮겨 저장",
+    "coverage": "0:01~2:20:31 (1513구간)"
+  },
+  "content_id": "VUHrJZbpIjI",
+  "source_title": "자려고 애쓸수록 못자는 이유 - 바흐 평균율로 잠드는 법",
+  "creator": "김주환",
+  "published_date": "2026-11-08",
+  "caption_type": "YouTube Korean auto-generated captions (ko-orig); manual captions not available",
+  "caption_segments": 1513,
+  "caption_first": "0:01",
+  "caption_last": "2:20:31",
+  "source_video_id": "VUHrJZbpIjI",
+  "source_url": "https://www.youtube.com/watch?v=VUHrJZbpIjI",
+  "source_url_verified": true,
+  "source_verification_method": "yt-dlp 메타데이터: 제목, 업로드일 20261108, 길이 2:20:35(8435초) 확인",
+  "checks": {
+    "subtitle": "자막 전체를 순서대로 읽음. 60초 이상 공백 없음. 자동 자막 오인식(예: 연구자·곡 이름, 성부, 용어)은 문맥으로 해석하거나 이름을 쓰지 않음.",
+    "timeline": "타임스탬프는 자막 구간 시작 시각에서 가져옴.",
+    "research": "카페인 연속 투여 실험은 초록으로 확인(12명 건강한 성인 남성, 7일, 수면 효율 감소). 역설 의도 연구(Ascher & Turner, 1979)는 초록으로 확인. 먼로, 코르티솔, 뇌 대사, 3P, 하비 모델, 인지적 셔플 154명 연구 등은 강의 발언 그대로이며 원문 대조는 하지 못함.",
+    "raw_transcript": "원본 json3와 시각 텍스트를 transcripts/에 저장."
+  },
+  "follow_up": "인용 연구 원문 대조와 영상 화면 대조는 하지 못함."
+}
