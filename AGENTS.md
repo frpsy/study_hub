@@ -34,7 +34,7 @@ PR 본문에는 `## 변경 범위` `## 영향 기능` `## 검증 증거` `## 남
 ## 작업별 문서 (해당 작업 때만 읽기)
 | 작업 | 문서 |
 |---|---|
-| 강의 추가·요약·타임스탬프·상세 요약 수정, 자막 확보 | `편집규칙.md` → `.agents/skills/lecture-study/SKILL.md` |
+| 강의 추가·요약·타임스탬프·상세 요약 수정, 자막 확보 | `편집규칙.md` → `.agents/skills/lecture-study/SKILL.md` (김주환 문체: `docs/kimjuhwan-style.md`) |
 | 디자인·CSS·화면 동작 | `docs/design-system.md` |
 | 서비스 워커·캐시·성능 | `편집규칙.md` 13절, `docs/navigation-performance-2026-11-01.md` |
 | 책·논문 등 다른 자료 등록 | `docs/content-model.md` |
