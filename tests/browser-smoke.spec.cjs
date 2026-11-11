@@ -153,8 +153,8 @@ test('library identity and reading hierarchy stay consistent',async({browser})=>
   expect(compact.titleHeight).toBeLessThan(95);
   expect(compact.cardCount).toBe(expectedLibraryCount);
   await page.locator('[data-filter-for="search"][data-value="명상"]').click();
-  await expect(page.locator('#count')).toHaveText('1개 강의');
-  await expect(page.locator('#lecture-list .lecture:visible')).toHaveCount(1);
+  await expect(page.locator('#count')).toHaveText('2개 강의');
+  await expect(page.locator('#lecture-list .lecture:visible')).toHaveCount(2);
   await context.close();
 });
 

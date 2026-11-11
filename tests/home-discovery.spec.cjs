@@ -26,7 +26,7 @@ for(const viewport of [{width:390,height:844},{width:1280,height:800}]){
     await expect(page).toHaveURL(/\/lectures\/.*\.html$/);
     await page.goto('/index.html');
     await page.locator('[data-filter-for="search"][data-value="명상"]').click();
-    await expect(page.locator('#lecture-list .lecture:visible')).toHaveCount(1);
+    await expect(page.locator('#lecture-list .lecture:visible')).toHaveCount(2);
     await page.locator('#lecture-list .lecture:visible').first().click(); // Filter + card: two taps.
     await expect(page.locator('#lecture-overview')).toBeVisible();
     await page.goto('/index.html');
