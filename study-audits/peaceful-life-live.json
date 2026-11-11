@@ -1,9 +1,9 @@
 {
   "content_id": "peaceful-life-live",
-  "source_title": "평온하고 편안하게 사는 방법 (유튜브 라이브 강연)",
+  "source_title": "텅 빈 고요를 알아차리는 것이 곧 명상",
   "creator": "김주환",
-  "published_date": null,
-  "published_date_note": "방송 날짜를 공식 출처로 확인하지 못해 비워 둠",
+  "published_date": "2026-05-24",
+  "published_date_note": "사용자 제공 유튜브 앱 스크린샷(2026-11-11 확인)에서 게시일 확인. 공식 API 대조는 수행하지 않음.",
   "caption_type": "Korean auto-generated text and timestamped SRT supplied by user (DownSub)",
   "caption_first": "00:00:04",
   "caption_last": "02:38:43",
@@ -15,16 +15,29 @@
     "subtitle": "Entire text transcript and SRT read; ASR errors corrected by context in the summary only. Raw files kept unmodified in transcripts/.",
     "timeline": "Key markers spot-checked against SRT timestamps (1:45, 19:53, 53:11, 1:52:44, 2:23:06, 2:37:40).",
     "supplement": "[보충] sentences rest on sources opened on 2026-11-11: encykorea E0031514, earticle A368266, journal.kabs.re.kr QPYa, en.wikipedia Heart_Sutra, khan.co.kr 202206271824001.",
-    "public_site": "pending until merge and deploy"
+    "public_site": "pending until merge and deploy",
+    "video_metadata": "2026-11-11 사용자 제공 유튜브 앱 캡처로 영상 제목·게시일·전체 길이·썸네일 문구와 설명란 일부를 확인함."
   },
   "unverified": [
-    "방송 날짜와 영상 전체 길이(자막 마지막 시각 2:38:43만 확인)",
+    "설명란 전체(하단 타임스탬프·링크 포함)는 미확인",
     "공적영지의 종밀·하택 신회 계보 설명",
     "관세음과 관자재 번역어의 역자별 귀속",
     "진심직설 저자 문제",
     "의무교육 진단과 종교 해석은 강연자의 견해로만 기록"
   ],
-  "follow_up": "공식 방송 정보로 날짜와 길이를 확인하면 lectures.json의 date와 duration을 채운다.",
-  "site_version": "2026.11.11.10",
-  "site_routes": ["lectures/peaceful-life-live.html"]
+  "follow_up": "설명란 하단의 나머지 문구·타임스탬프·링크는 미확인.",
+  "site_version": "2026.11.11.11",
+  "site_routes": [
+    "lectures/peaceful-life-live.html"
+  ],
+  "video_duration": "02:38:51",
+  "video_duration_note": "사용자 제공 유튜브 앱 재생 화면(2026-11-11 확인)의 전체 길이",
+  "thumbnail_title": "평온하고 편안하게 사는 세 가지 방법",
+  "editorial_title": "평온하고 편안하게 사는 방법",
+  "description_excerpt_source": "사용자 제공 유튜브 설명란 스크린샷 중 화면에 보이는 부분",
+  "description_excerpt_topics": [
+    "텅 빈 고요 알아차리기",
+    "일상생활 속 영적 스승 발견하기",
+    "애쓰지 않는 노력으로 향한 부드러운 결단"
+  ]
 }
