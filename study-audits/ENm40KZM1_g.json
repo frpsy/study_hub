@@ -30,5 +30,16 @@
   "wording_review_2026_11_11": {
     "scope": "Lead and key-point wording edited against existing summary and practice content. Reduced chained clauses and repetitive attribution; no new research claim or source time introduced.",
     "source": "data/mini_courses.json and data/lecture_compact.json at parent commit"
-  }
+  },
+  "description_file": "transcripts/ENm40KZM1_g.description.txt",
+  "description_check": "2026-11-12 yt-dlp로 설명란 전문을 받아 원문 그대로 저장하고 상세 요약과 대조함. 설명란은 자기연민의 정의와 해시태그로 이루어져 있고 타임스탬프와 링크는 없음.",
+  "detail_check": "2026-11-12 자막 전 구간(780줄, 0:22~1:48:16)을 처음부터 끝까지 읽고 상세 요약 8개 소제목을 작성함. 자막 1:33:37~1:34:43 구간은 자동 자막에 내용이 없음. 질의응답의 죽음 관련 답변, 시한부 환자 관련 통계, 책 출간 일정은 확인하기 어렵거나 강의 주제에서 벗어나 요약하지 않음.",
+  "unverified": [
+    "하이데거 존재론에 대한 강연자의 독해",
+    "네프의 이력과 MSC 프로그램 시작 시기",
+    "자존감 교육 비판과 RNT·치매 관련 연구(책 교정본 낭독 포함)",
+    "어려운 영어 어휘 시험 실험",
+    "자기 연민이 면역력을 높인다는 설명",
+    "자막 1:33:37~1:34:43 구간"
+  ]
 }
