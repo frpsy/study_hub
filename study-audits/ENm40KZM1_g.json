@@ -30,5 +30,14 @@
   "wording_review_2026_11_11": {
     "scope": "Lead and key-point wording edited against existing summary and practice content. Reduced chained clauses and repetitive attribution; no new research claim or source time introduced.",
     "source": "data/mini_courses.json and data/lecture_compact.json at parent commit"
+  },
+  "plain_prose_review_2026_11_11": {
+    "scope": "Public practice prompts and explanations; existing leads and key points reviewed for declarative prose. Direct quotations and timeline text retained.",
+    "checks": [
+      "Readability, particles, sentence connections and repetitive wording",
+      "Plain declarative narration; source attribution and research limitations retained",
+      "No new research claim, number or video time introduced"
+    ],
+    "basis": "Existing reviewed site copy; wording review, not a new whole-source factual audit."
   }
 }
