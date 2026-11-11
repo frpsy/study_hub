@@ -26,5 +26,14 @@
     "summaries/affirmation-20261101.html"
   ],
   "source_url": "https://www.youtube.com/watch?v=oD5-nTDCKPg",
-  "source_verification_method": "yt-dlp official YouTube channel /streams title and video ID (2026-11-02)"
+  "source_verification_method": "yt-dlp official YouTube channel /streams title and video ID (2026-11-02)",
+  "plain_prose_review_2026_11_11": {
+    "scope": "Public practice prompts and explanations; existing leads and key points reviewed for declarative prose. Direct quotations and timeline text retained.",
+    "checks": [
+      "Readability, particles, sentence connections and repetitive wording",
+      "Plain declarative narration; source attribution and research limitations retained",
+      "No new research claim, number or video time introduced"
+    ],
+    "basis": "Existing reviewed site copy; wording review, not a new whole-source factual audit."
+  }
 }
