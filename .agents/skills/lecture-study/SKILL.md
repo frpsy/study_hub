@@ -10,7 +10,7 @@ description: 내면의 서재(frpsy/study_hub)에 강의를 추가하거나 핵�
 ## 새 강의
 1. 영상 ID를 먼저 확정한다(확인 안 된 ID를 만들지 않는다).
 2. 자막 확보(편집규칙 8절 순서). 원문 그대로 `transcripts/<영상ID>.<언어>.txt`(+SRT/VTT)로 저장한다. 아직 없으면 편집규칙 10절대로 `caption-queue/<영상ID>.json`과 2시간 재확인으로 관리한다.
-3. 자막 전 구간과 설명란을 읽고, 읽은 범위를 `study-audits/<영상ID>.json`에 기록한다.
+3. 김주환 영상은 설명란 전문을 `transcripts/<영상ID>.description.txt`에 저장하고(편집규칙 16절) 최종 정리에 반영한다. 자막 전 구간과 설명란을 읽고, 읽은 범위를 `study-audits/<영상ID>.json`에 기록한다.
 4. `lectures.json` 맨 앞(최신순)에 등록: `id`, `date`, `title`, `duration`, `description`, `tags`, `creator`, `kind`(lecture), 필요 시 `video_url`.
 5. `data/mini_courses.json`에 `lead`(한 문장)·`three`(세 문장) 작성 — 편집규칙 2·3절 기준.
 6. `data/lecture_compact.json`에 — 김주환 강의: `timeline`(편집규칙 4절 형식)과 `detail`(16절: 평서문·질문형 소제목·[보충] 구분). 그 외 강연자: `timeline` 없이 `detail`(자막 기반 상세 요약, 필요 시 웹 보충은 `[보충]` 표시, 편집규칙 14절). 공통: `sources`(label·url, 실제 확인한 링크만), 필요 시 `note`·`aliases`.
@@ -27,7 +27,7 @@ description: 내면의 서재(frpsy/study_hub)에 강의를 추가하거나 핵�
 
 ## 김주환 새 강의 만드는 법 (기준 예시: `peaceful-life-live`)
 - 문체는 `docs/kimjuhwan-style.md`를 따른다. 데이터 형식은 `data/lecture_compact.json`·`mini_courses.json`·`summaries.json`의 `peaceful-life-live` 항목을 그대로 본뜬다(타임스탬프 → 상세 요약 소제목 8개 → 실천 포인트 순으로 쓰면 수월하다).
-- 순서: 자막 전 구간 읽기 → 확인할 항목(고유명사·번역·계보·수치) 목록 → 웹 검색으로 실제 열어 본 출처만 `[보충]` → 쓰기 → 휴머나이저식 문장 검수 → 생성·검증.
+- 순서: 설명란·메타데이터(제목·게시일·길이) 확인 → 자막 전 구간 읽기 → 확인할 항목(고유명사·번역·계보·수치) 목록 → 웹 검색으로 실제 열어 본 출처만 `[보충]` → 쓰기 → 휴머나이저식 문장 검수 → 생성·검증.
 - `practice`는 필수다. `today` 3개, `steps`는 각 `t`(타임스탬프에 있는 시각)·`h`·`b`를 갖고, `note`에 덧붙인 안내를 밝힌다. 강연에 없는 처방·기간·수치를 만들지 않는다.
 - 확인하지 못한 값(방송 날짜, 영상 길이, 번역 귀속 등)은 비우거나 "약"으로 쓰고 `note`·`study-audits/`·PR 남은 위험에 적는다.
 

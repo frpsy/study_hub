@@ -1,16 +1,16 @@
 {
   "content_id": "peaceful-life-live",
-  "source_title": "평온하고 편안하게 사는 방법 (유튜브 라이브 강연)",
+  "source_title": "텅 빈 고요를 알아차리는 것이 곧 명상 (유튜브 라이브 강연)",
   "creator": "김주환",
-  "published_date": null,
-  "published_date_note": "방송 날짜를 공식 출처로 확인하지 못해 비워 둠",
+  "published_date": "2026-05-24",
+  "published_date_note": "2026-11-12 yt-dlp 메타데이터(upload_date·release_date 20260524)와 사용자 제공 유튜브 앱 화면(2026년 5월 24일)으로 확인",
   "caption_type": "Korean auto-generated text and timestamped SRT supplied by user (DownSub)",
   "caption_first": "00:00:04",
   "caption_last": "02:38:43",
   "main_lecture_start": "00:01:45",
   "source_video_id": "_Q3yyZvwH1o",
   "source_url": "https://www.youtube.com/live/_Q3yyZvwH1o",
-  "source_url_verified": false,
+  "source_url_verified": true,
   "checks": {
     "subtitle": "Entire text transcript and SRT read; ASR errors corrected by context in the summary only. Raw files kept unmodified in transcripts/.",
     "timeline": "Key markers spot-checked against SRT timestamps (1:45, 19:53, 53:11, 1:52:44, 2:23:06, 2:37:40).",
@@ -18,13 +18,19 @@
     "public_site": "pending until merge and deploy"
   },
   "unverified": [
-    "방송 날짜와 영상 전체 길이(자막 마지막 시각 2:38:43만 확인)",
     "공적영지의 종밀·하택 신회 계보 설명",
     "관세음과 관자재 번역어의 역자별 귀속",
     "진심직설 저자 문제",
     "의무교육 진단과 종교 해석은 강연자의 견해로만 기록"
   ],
-  "follow_up": "공식 방송 정보로 날짜와 길이를 확인하면 lectures.json의 date와 duration을 채운다.",
   "site_version": "2026.11.11.10",
-  "site_routes": ["lectures/peaceful-life-live.html"]
+  "site_routes": [
+    "lectures/peaceful-life-live.html"
+  ],
+  "duration_seconds": 9531,
+  "duration_note": "yt-dlp 메타데이터 2:38:51(9531초), 사용자 화면의 2:38:51과 일치",
+  "source_verification_method": "yt-dlp 메타데이터로 제목·게시일·길이 확인. 영상 제목은 '텅 빈 고요를 알아차리는 것이 곧 명상', 썸네일 문구는 '평온하고 편안하게 사는 세 가지 방법'",
+  "description_file": "transcripts/_Q3yyZvwH1o.description.txt",
+  "description_check": "2026-11-12 설명란 전문(세 가지 방법 소개, 허공 비유 본문, 해시태그 9개)을 확인함. 타임스탬프·링크·챕터는 없음.",
+  "site_title_decision": "2026-11-12 사용자가 권장안을 선택해 사이트 제목을 영상 실제 제목으로 맞춤"
 }
