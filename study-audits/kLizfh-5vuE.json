@@ -30,5 +30,16 @@
   "wording_review_2026_11_11": {
     "scope": "Lead and key-point wording edited against existing summary and practice content. Reduced chained clauses and repetitive attribution; no new research claim or source time introduced.",
     "source": "data/mini_courses.json and data/lecture_compact.json at parent commit"
-  }
+  },
+  "description_file": "transcripts/kLizfh-5vuE.description.txt",
+  "description_check": "2026-11-12 yt-dlp로 설명란 전문을 받아 원문 그대로 저장하고 상세 요약과 대조함. 설명란의 관련 논문(2020, ScienceDirect)과 매슬로 영상 링크는 열어 보지 않았다.",
+  "detail_check": "2026-11-12 자막 전 구간(950줄, 0:01~1:58:58)을 처음부터 끝까지 읽고 상세 요약 8개 소제목을 작성함. 자막에 없는 '창세기' 표현과 불분명한 수치(열정적 사랑이 식는 기간)는 빼고, 질의응답의 칙센트미하이 평가는 강연자의 개인 취향이어서 요약하지 않음.",
+  "unverified": [
+    "가트만 이혼 예측 연구의 변인과 수치",
+    "한국 명품 소비 1인당 순위와 금액(모건스탠리 보고서)",
+    "강점 중심 성장 사례(축구 51가지 기술, 성적표, 햄버거 체인점 투자)",
+    "방콕 황금 불상 이야기와 퀸틸리아누스 서술의 사실관계",
+    "의무교육이 존중 교육을 없앴다는 진단은 강연자의 해석",
+    "설명란의 2020년 뇌영상 논문과 매슬로 영상"
+  ]
 }
