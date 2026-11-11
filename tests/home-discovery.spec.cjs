@@ -21,6 +21,7 @@ for(const viewport of [{width:390,height:844},{width:1280,height:800}]){
     expect(layout.horizontalOverflow).toBeLessThanOrEqual(1);
     expect(layout.scrollToSeeFirstTitle,'first card title must appear above fold').toBe(0);
     if(viewport.width===390)expect(layout.filterHeight,'topic chips stay on one compact row').toBeLessThanOrEqual(48);
+    if(process.env.STUDY_SCREENSHOT_DIR&&viewport.width===1280)await page.screenshot({path:require('node:path').join(process.env.STUDY_SCREENSHOT_DIR,'study-hub-home.png')});
     await first.click();  // No search: one card tap.
     await expect(page).toHaveURL(/\/lectures\/.*\.html$/);
     await page.goto('/index.html');

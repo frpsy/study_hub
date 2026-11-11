@@ -7,3 +7,8 @@ _tmp_vtt/
 
 # Generated subtitle search database
 data/subtitles.db
+
+# Local browser verification
+node_modules/
+test-results/
+playwright-report/

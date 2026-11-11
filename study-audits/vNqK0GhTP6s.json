@@ -26,5 +26,9 @@
     "slides": "No slide comparison.",
     "raw_transcript": "Saved unmodified as transcripts/vNqK0GhTP6s.ko.txt (transcript panel dump, one 'm:ss<TAB>text' line per segment)."
   },
-  "follow_up": "Slide comparison not done."
+  "follow_up": "Slide comparison not done.",
+  "wording_review_2026_11_11": {
+    "scope": "Lead and key-point wording edited against existing summary and practice content. Reduced chained clauses and repetitive attribution; no new research claim or source time introduced.",
+    "source": "data/mini_courses.json and data/lecture_compact.json at parent commit"
+  }
 }

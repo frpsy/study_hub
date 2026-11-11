@@ -43,7 +43,12 @@ class CompactCourseChecks(unittest.TestCase):
    self.assertEqual(source.count('<details><summary>'),len(record['practice']['steps']),vid)
    self.assertEqual(len(record['practice']['today']),3,vid)
    for step in record['practice']['steps']:
-    self.assertRegex(step['t'],r'^\d+:\d\d(:\d\d)?$',vid);self.assertTrue(step['b'],vid)
+    self.assertTrue(step['b'],vid)
+    if 'timeline' in record:
+     self.assertRegex(step['t'],r'^\d+:\d\d(:\d\d)?$',vid)
+    else:
+     self.assertNotIn('t',step,vid)
+     self.assertIn(step['detail_index'],range(len(record['detail'])),vid)
  def test_kim_lectures_do_not_use_instructor_subject_phrasing(self):
   rows={r['id']:r for r in json.loads((R/'lectures.json').read_text(encoding='utf-8'))}
   for name in ('mini_courses','summaries','lecture_compact'):

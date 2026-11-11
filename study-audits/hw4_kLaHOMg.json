@@ -582,5 +582,22 @@
     "basis": "Existing summary copy, source ledgers and timeline preserved. Mini courses synthesize those materials; no new whole-transcript or slide review claimed.",
     "timeline": "unchanged",
     "original_images": "Retained in repository and Git history, removed from reading pages per user request."
+  },
+  "practice_refinement_2026_11_11": {
+    "basis": [
+      "data/mini_courses.json:hw4_kLaHOMg",
+      "data/lecture_compact.json:hw4_kLaHOMg",
+      "existing source-review ledger in this file"
+    ],
+    "scope": "Editorial application prompts synthesized from existing reviewed summaries, explanations and timelines. No new whole-transcript or external-paper review claimed.",
+    "checks": [
+      "Three actionable prompts; steps matched to existing timeline or detail block",
+      "No new research numbers, treatment promises, invented timestamps or medication instructions",
+      "Original lead, three points, timeline, detailed summary and source links preserved",
+      "Korean wording and distinction between source claims and editorial examples reviewed"
+    ],
+    "limitations": [
+      "Underlying lecture claims rely on the prior source review; this is not an independent re-audit of every original video."
+    ]
   }
 }

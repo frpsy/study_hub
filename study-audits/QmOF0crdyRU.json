@@ -196,5 +196,22 @@
   ],
   "grammar_review": "문단 종결, 같은 서술어 반복, 사실·해석 구분을 점검해 수정함",
   "timestamps": "김주환 외 강의라 제거함"
+ },
+ "practice_refinement_2026_11_11": {
+  "basis": [
+   "data/mini_courses.json:QmOF0crdyRU",
+   "data/lecture_compact.json:QmOF0crdyRU",
+   "existing source-review ledger in this file"
+  ],
+  "scope": "Editorial application prompts synthesized from existing reviewed summaries, explanations and timelines. No new whole-transcript or external-paper review claimed.",
+  "checks": [
+   "Three actionable prompts; steps matched to existing timeline or detail block",
+   "No new research numbers, treatment promises, invented timestamps or medication instructions",
+   "Original lead, three points, timeline, detailed summary and source links preserved",
+   "Korean wording and distinction between source claims and editorial examples reviewed"
+  ],
+  "limitations": [
+   "Underlying lecture claims rely on the prior source review; this is not an independent re-audit of every original video."
+  ]
  }
 }

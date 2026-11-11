@@ -158,3 +158,24 @@
   window.addEventListener('resize',schedule);
   update();
 })();
+
+// Highlight the section currently being read. Plain anchors work without JS.
+(()=>{
+  const nav=document.querySelector('.reading-nav');
+  if(!nav)return;
+  const links=[...nav.querySelectorAll('a[href^="#"]')];
+  const sections=links.map(link=>document.getElementById(link.hash.slice(1)));
+  let frame=0;
+  const update=()=>{
+    frame=0;
+    const edge=nav.getBoundingClientRect().bottom+32;
+    let active=0;
+    sections.forEach((section,index)=>{if(section&&section.getBoundingClientRect().top<=edge)active=index});
+    links.forEach((link,index)=>{if(index===active)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current')});
+  };
+  const schedule=()=>{if(!frame)frame=requestAnimationFrame(update)};
+  addEventListener('scroll',schedule,{passive:true});
+  addEventListener('resize',schedule);
+  addEventListener('pageshow',schedule);
+  update();
+})();
