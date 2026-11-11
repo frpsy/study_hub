@@ -342,3 +342,27 @@ test('reading progress eases toward scroll position and respects reduced motion'
  await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));
  await expect.poll(()=>page.locator('.read-progress').evaluate(el=>Number(el.style.getPropertyValue('--p')))).toBe(0);
 });
+
+for(const width of [390,1280]){
+ test('progress stays visible below the header at '+width+'px',async({browser})=>{
+  const context=await browser.newContext({viewport:{width,height:844},isMobile:width===390,hasTouch:width===390,reducedMotion:'no-preference'});
+  const page=await context.newPage();
+  await page.goto('/lectures/VUHrJZbpIjI.html');
+  await page.evaluate(()=>window.scrollTo({top:800,behavior:'instant'}));
+  const bar=page.locator('.site-header>.read-progress');
+  await expect(bar).toBeVisible();
+  await expect.poll(()=>bar.evaluate(el=>Number(el.style.getPropertyValue('--p')))).toBeGreaterThan(0);
+  const box=await bar.evaluate(el=>{
+   const rect=el.getBoundingClientRect(),head=el.parentElement.getBoundingClientRect(),style=getComputedStyle(el,'::before');
+   return {top:rect.top,bottom:rect.bottom,width:rect.width,headerBottom:head.bottom,transform:style.transform,background:style.backgroundColor};
+  });
+  expect(box.top).toBeGreaterThan(0);
+  expect(Math.abs(box.bottom-box.headerBottom)).toBeLessThanOrEqual(1);
+  expect(box.width).toBe(width);
+  expect(box.background).not.toBe('rgba(0, 0, 0, 0)');
+  expect(box.transform).not.toBe('matrix(0, 0, 0, 1, 0, 0)');
+  await page.locator('.reading-nav a[href="#lecture-practice"]').click();
+  await expect(bar).toBeVisible();
+  await context.close();
+ });
+}

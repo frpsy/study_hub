@@ -634,7 +634,8 @@ details[open]>:not(summary){animation:reveal-in var(--motion-base) var(--ease-ou
 .home-main .lecture:nth-child(4),.concept-grid .card:nth-child(4){animation-delay:.15s}
 .home-main .lecture:nth-child(5),.concept-grid .card:nth-child(5){animation-delay:.2s}
 .home-main .lecture:nth-child(n+6),.concept-grid .card:nth-child(n+6){animation-delay:.25s}
-.read-progress{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;height:3px;z-index:60;pointer-events:none;background:transparent}
+.read-progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:60;pointer-events:none;background:var(--line)}
+.site-header>.read-progress{position:absolute;top:auto;bottom:-1px}
 .read-progress::before{content:"";display:block;height:100%;background:var(--accent);transform-origin:0 50%;transform:scaleX(var(--p,0));will-change:transform;transition:none}
 :focus-visible{outline-offset:3px}
 @media print{.read-progress{display:none}}

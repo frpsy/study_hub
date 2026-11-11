@@ -145,7 +145,8 @@
   const bar=document.createElement('div');
   bar.className='read-progress';
   bar.setAttribute('aria-hidden','true');
-  document.body.append(bar);
+  const host=document.querySelector('.site-header')||document.body;
+  host.append(bar);
   const motion=window.matchMedia('(prefers-reduced-motion: reduce)');
   let frame=0,current=0,target=0,last=0;
   const measure=()=>{
