@@ -77,5 +77,22 @@
     "timeline": "all listed seconds derived from original cue starts; floor to integer seconds",
     "tests": "27 unit tests passed; validate_site.py and validate_study_pages.py passed",
     "screen_review": "not performed; no screenshots represented as lecture source"
+  },
+  "practice_refinement_2026_11_11": {
+    "basis": [
+      "data/mini_courses.json:xA-4G4z-1MM",
+      "data/lecture_compact.json:xA-4G4z-1MM",
+      "existing source-review ledger in this file"
+    ],
+    "scope": "Editorial application prompts synthesized from existing reviewed summaries, explanations and timelines. No new whole-transcript or external-paper review claimed.",
+    "checks": [
+      "Three actionable prompts; steps matched to existing timeline or detail block",
+      "No new research numbers, treatment promises, invented timestamps or medication instructions",
+      "Original lead, three points, timeline, detailed summary and source links preserved",
+      "Korean wording and distinction between source claims and editorial examples reviewed"
+    ],
+    "limitations": [
+      "Underlying lecture claims rely on the prior source review; this is not an independent re-audit of every original video."
+    ]
   }
 }

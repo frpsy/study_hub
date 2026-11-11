@@ -266,3 +266,60 @@ test('lecture summary keeps a clear type hierarchy and readable width',async({br
     await context.close();
   }
 });
+
+test('every lecture offers practice and valid source navigation',async({page})=>{
+  for(const row of studyLectures){
+    await page.goto('/lectures/'+row.id+'.html');
+    await expect(page.locator('#lecture-practice .summary-list li')).toHaveCount(3);
+    const steps=page.locator('#lecture-practice details');
+    expect(await steps.count()).toBeGreaterThanOrEqual(3);
+    await steps.first().locator('summary').click();
+    const source=steps.first().locator('.practice-source');
+    await expect(source).toBeVisible();
+    if(row.creator==='김주환'){
+      const expectedVideo=row.video_url||'https://www.youtube.com/watch?v='+row.id;
+      const href=await source.getAttribute('href');
+      expect(href).toContain(expectedVideo+'&t=');
+      expect(href).toMatch(/&t=\d+s$/);
+    }else{
+      const hash=await source.getAttribute('href');
+      await source.click();
+      await expect(page.locator(hash)).toBeVisible();
+      expect(await page.locator(hash).evaluate(el=>el.getBoundingClientRect().top)).toBeGreaterThan(100);
+    }
+  }
+});
+
+test('reading navigation and disclosures work on small screens without scripts',async({browser})=>{
+  const context=await browser.newContext({viewport:{width:320,height:760},javaScriptEnabled:false,reducedMotion:'reduce'});
+  const page=await context.newPage();
+  await page.goto('/lectures/izYj8g-j00U.html');
+  await page.getByRole('navigation',{name:'이 강의 목차'}).getByRole('link',{name:'실천 포인트'}).click();
+  await expect(page).toHaveURL(/#lecture-practice$/);
+  const summary=page.locator('#lecture-practice summary').first();
+  await summary.focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('#lecture-practice details').first()).toHaveAttribute('open','');
+  await expect(page.locator('#lecture-practice details').first().locator('.practice-source')).toBeVisible();
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(1);
+  await context.close();
+});
+
+test('reading navigation tracks sections and source disclosure opens',async({browser})=>{
+  const context=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce'});
+  const page=await context.newPage();
+  await page.goto('/lectures/izYj8g-j00U.html');
+  if(process.env.STUDY_SCREENSHOT_DIR)await page.screenshot({path:require('node:path').join(process.env.STUDY_SCREENSHOT_DIR,'study-hub-mobile.png')});
+  const nav=page.getByRole('navigation',{name:'이 강의 목차'});
+  await nav.getByRole('link',{name:'실천 포인트'}).click();
+  await expect(nav.getByRole('link',{name:'실천 포인트'})).toHaveAttribute('aria-current','location');
+  const geometry=await page.evaluate(()=>({heading:document.querySelector('#lecture-practice>h2').getBoundingClientRect().top,nav:document.querySelector('.reading-nav').getBoundingClientRect().bottom}));
+  expect(geometry.heading).toBeGreaterThanOrEqual(geometry.nav);
+  if(process.env.STUDY_SCREENSHOT_DIR){
+    await page.locator('#lecture-practice summary').first().click();
+    await page.screenshot({path:require('node:path').join(process.env.STUDY_SCREENSHOT_DIR,'study-hub-practice.png')});
+  }
+  await nav.getByRole('link',{name:'참고 자료'}).click();
+  await expect(page.locator('#lecture-sources')).toHaveAttribute('open','');
+  await context.close();
+});
