@@ -32,21 +32,24 @@ def render(row,record,mini,prev=None,nxt=None):
  old=''.join(f'<span id="{E(a)}" class="legacy-anchor" aria-hidden="true"></span>' for a in sorted(aliases))
  note=f'<p class="source-note">{E(record["note"])}</p>' if record.get('note') else ''
  timed='timeline' in record
+ detailed='detail' in record
+ second='';actions=[]
+ if detailed:
+  actions.append('<a class="btn secondary" href="#lecture-detail">상세 요약으로 이동</a>')
+  blocks=''.join(f'<h3 id="detail-{i+1}">'+E(b['h'])+'</h3>'+''.join('<p>'+E(t)+'</p>' for t in b['p']) for i,b in enumerate(record['detail']))
+  second+=f'<section id="lecture-detail" class="lecture-section"><h2>상세 요약</h2><div class="detail-body">{blocks}</div></section>'
  if timed:
   timeline_text=E(record['timeline'])
-  action='<a class="btn secondary" href="#lecture-comment">타임스탬프로 이동</a>'
-  second=f'<section id="lecture-comment" class="lecture-section"><span id="timeline"></span><h2>타임스탬프</h2><div class="actions"><button id="copy" data-copy-target="comment" type="button">타임스탬프 복사</button><span id="status" role="status" aria-live="polite"></span></div><input type="checkbox" id="timeline-toggle" class="timeline-toggle" aria-label="타임스탬프 전체 펼치기"><label class="timeline-box" for="timeline-toggle"><pre id="comment" tabindex="0"><code>{timeline_text}</code></pre></label></section>'
- else:
-  action='<a class="btn secondary" href="#lecture-detail">상세 요약으로 이동</a>'
-  blocks=''.join(f'<h3 id="detail-{i+1}">'+E(b['h'])+'</h3>'+''.join('<p>'+E(t)+'</p>' for t in b['p']) for i,b in enumerate(record['detail']))
-  second=f'<section id="lecture-detail" class="lecture-section"><h2>상세 요약</h2><div class="detail-body">{blocks}</div></section>'
+  actions.append('<a class="btn secondary" href="#lecture-comment">타임스탬프로 이동</a>')
+  second+=f'<section id="lecture-comment" class="lecture-section"><span id="timeline"></span><h2>타임스탬프</h2><div class="actions"><button id="copy" data-copy-target="comment" type="button">타임스탬프 복사</button><span id="status" role="status" aria-live="polite"></span></div><input type="checkbox" id="timeline-toggle" class="timeline-toggle" aria-label="타임스탬프 전체 펼치기"><label class="timeline-box" for="timeline-toggle"><pre id="comment" tabindex="0"><code>{timeline_text}</code></pre></label></section>'
+ action=''.join(actions)
  practice_html=''
  if practice:
   steps=''.join(practice_step(x,record,youtube_url) for x in practice['steps'])
   today=''.join('<li>'+E(t)+'</li>' for t in practice['today'])
   practice_html='<section id="lecture-practice" class="lecture-section"><h2>실천 포인트</h2><div class="summary-tier"><h3>오늘의 실천 세 가지</h3><ol class="summary-list">'+today+'</ol></div><div class="summary-tier"><h3>'+E(practice.get('steps_title','단계별 따라 하기'))+'</h3>'+steps+'<p class="source-note">'+E(practice['note'])+'</p></div></section>'
  sources=''.join(f'<li><a href="{E(s["url"],quote=True)}" target="_blank" rel="noopener">{E(s["label"])}</a></li>' for s in record['sources'])
- sections=[('lecture-overview','핵심 요약')]+([('lecture-practice','실천 포인트')] if practice else [])+([('lecture-comment','타임스탬프')] if timed else [('lecture-detail','상세 요약')])+[('lecture-sources','참고 자료')]
+ sections=[('lecture-overview','핵심 요약')]+([('lecture-practice','실천 포인트')] if practice else [])+([('lecture-detail','상세 요약')] if detailed else [])+([('lecture-comment','타임스탬프')] if timed else [])+[('lecture-sources','참고 자료')]
  section_nav='<nav class="reading-nav" aria-label="이 강의 목차">'+''.join(f'<a href="#{target}">{label}</a>' for target,label in sections)+'</nav>'
  body=f'''<div class="site-shell"><nav class="breadcrumb" aria-label="현재 위치"><a href="../index.html">강의 목록</a><span aria-hidden="true">/</span><span>{title}</span></nav><main id="main" class="compact-lecture" data-layout="compact"><header class="summary-head"><span class="eyebrow">강의 요약</span><h1>{title}</h1><p class="meta">{date_info}{E(row['duration'])} · {E(row.get("creator","출처 미기재"))} · {source_info}</p><div class="actions">{action}</div></header>{old}<section id="lecture-overview" class="lecture-section"><span id="overview"></span><h2>핵심 요약</h2><div class="summary-tier"><span class="eyebrow">한 문장</span><p class="summary-lead">{E(mini['lead'])}</p></div><div class="summary-tier"><h3>핵심 세 가지</h3><ol class="summary-list">{''.join('<li>'+E(t)+'</li>' for t in mini['three'])}</ol></div></section>{practice_html}{second}<details class="source-disclosure"><summary>원본과 참고 자료</summary><ul>{sources}</ul>{note}</details>{pager(prev,nxt)}<nav class="summary-links" aria-label="탐색"><a class="btn secondary" href="../index.html">강의 목록</a></nav></main></div>'''
  body=body.replace('<div class="actions">'+action+'</div>','')

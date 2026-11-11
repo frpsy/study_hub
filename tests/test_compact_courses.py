@@ -26,7 +26,10 @@ class CompactCourseChecks(unittest.TestCase):
   for row in rows:
    vid=row['id'];record=records[vid];source=(R/'lectures'/f'{vid}.html').read_text()
    if row.get('creator')=='김주환':
-    self.assertIn('timeline',record,vid);self.assertIn('id="lecture-comment"',source,vid);self.assertNotIn('id="lecture-detail"',source,vid)
+    self.assertIn('timeline',record,vid);self.assertIn('id="lecture-comment"',source,vid);self.assertEqual('detail' in record,'id="lecture-detail"' in source,vid)
+    for block in record.get('detail',[]):
+     self.assertTrue(block['h'] and block['p'],vid)
+     for text in block['p']:self.assertRegex(text,r'[.)]$',vid+': '+text[:30])
    else:
     self.assertNotIn('timeline',record,vid);self.assertNotIn('id="lecture-comment"',source,vid);self.assertNotIn('timeline-toggle',source,vid)
     self.assertIn('id="lecture-detail"',source,vid);self.assertGreaterEqual(len(record['detail']),5,vid)

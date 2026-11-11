@@ -34,7 +34,7 @@ def lecture_layout_errors(source):
     d=Document();d.feed(source);errors=[]
     compact='data-layout="compact"' in source
     timed='id="lecture-comment"' in source
-    required=['lecture-overview','lecture-comment' if timed else 'lecture-detail'] if compact else ['lecture-overview','lecture-mindmap','lecture-details','lecture-practice','lecture-sources','lecture-comment']
+    required=['lecture-overview']+(['lecture-detail'] if 'id="lecture-detail"' in source or not timed else [])+(['lecture-comment'] if timed else []) if compact else ['lecture-overview','lecture-mindmap','lecture-details','lecture-practice','lecture-sources','lecture-comment']
     if any(id not in d.ids for id in required):errors.append('standard lecture section missing')
     else:
         positions=[d.ids.index(id) for id in required]

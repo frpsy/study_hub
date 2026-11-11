@@ -1,5 +1,19 @@
 [
   {
+    "id": "peaceful-life-live",
+    "title": "평온하고 편안하게 사는 방법",
+    "duration": "약 2시간 39분",
+    "description": "텅빈 고요를 알아차리는 한 가지 방법과 영적 스승, 애쓰지 않는 노력, 반문문성과 돈오점수",
+    "tags": [
+      "평온",
+      "텅빈 고요",
+      "내면소통"
+    ],
+    "creator": "김주환",
+    "kind": "lecture",
+    "video_url": "https://www.youtube.com/watch?v=_Q3yyZvwH1o"
+  },
+  {
     "id": "VUHrJZbpIjI",
     "date": "2026-11-08",
     "title": "자려고 애쓸수록 못 자는 이유",
