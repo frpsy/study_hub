@@ -1,16 +1,16 @@
 {
   "content_id": "peaceful-life-live",
-  "source_title": "텅 빈 고요를 알아차리는 것이 곧 명상",
+  "source_title": "텅 빈 고요를 알아차리는 것이 곧 명상 (유튜브 라이브 강연)",
   "creator": "김주환",
   "published_date": "2026-05-24",
-  "published_date_note": "사용자 제공 유튜브 앱 스크린샷(2026-11-11 확인)에서 게시일 확인. 공식 API 대조는 수행하지 않음.",
+  "published_date_note": "2026-11-12 yt-dlp 메타데이터(upload_date·release_date 20260524)로 확인했고 사용자 제공 앱 화면(2026년 5월 24일)과 일치함",
   "caption_type": "Korean auto-generated text and timestamped SRT supplied by user (DownSub)",
   "caption_first": "00:00:04",
   "caption_last": "02:38:43",
   "main_lecture_start": "00:01:45",
   "source_video_id": "_Q3yyZvwH1o",
   "source_url": "https://www.youtube.com/live/_Q3yyZvwH1o",
-  "source_url_verified": false,
+  "source_url_verified": true,
   "checks": {
     "subtitle": "Entire text transcript and SRT read; ASR errors corrected by context in the summary only. Raw files kept unmodified in transcripts/.",
     "timeline": "Key markers spot-checked against SRT timestamps (1:45, 19:53, 53:11, 1:52:44, 2:23:06, 2:37:40).",
@@ -19,25 +19,27 @@
     "video_metadata": "2026-11-11 사용자 제공 유튜브 앱 캡처로 영상 제목·게시일·전체 길이·썸네일 문구와 설명란 일부를 확인함."
   },
   "unverified": [
-    "설명란 전체(하단 타임스탬프·링크 포함)는 미확인",
     "공적영지의 종밀·하택 신회 계보 설명",
     "관세음과 관자재 번역어의 역자별 귀속",
     "진심직설 저자 문제",
     "의무교육 진단과 종교 해석은 강연자의 견해로만 기록"
   ],
-  "follow_up": "설명란 하단의 나머지 문구·타임스탬프·링크는 미확인.",
-  "site_version": "2026.11.11.11",
+  "site_version": "2026.11.12.1",
   "site_routes": [
     "lectures/peaceful-life-live.html"
   ],
   "video_duration": "02:38:51",
-  "video_duration_note": "사용자 제공 유튜브 앱 재생 화면(2026-11-11 확인)의 전체 길이",
+  "video_duration_note": "yt-dlp 메타데이터 2:38:51(9531초), 사용자 화면의 2:38:51과 일치",
   "thumbnail_title": "평온하고 편안하게 사는 세 가지 방법",
-  "editorial_title": "평온하고 편안하게 사는 방법",
+  "editorial_title": "텅 빈 고요를 알아차리는 것이 곧 명상",
   "description_excerpt_source": "사용자 제공 유튜브 설명란 스크린샷 중 화면에 보이는 부분",
   "description_excerpt_topics": [
     "텅 빈 고요 알아차리기",
     "일상생활 속 영적 스승 발견하기",
     "애쓰지 않는 노력으로 향한 부드러운 결단"
-  ]
+  ],
+  "source_verification_method": "yt-dlp 메타데이터로 제목·게시일·길이(9531초) 확인",
+  "description_file": "transcripts/_Q3yyZvwH1o.description.txt",
+  "description_check": "2026-11-12 설명란 전문(세 가지 방법 소개, 허공 비유 본문, 해시태그 9개)을 확인함. 타임스탬프·링크·챕터는 없음.",
+  "site_title_decision": "2026-11-12 사용자가 권장안을 선택해 사이트 제목을 영상 실제 제목으로 맞춤"
 }
