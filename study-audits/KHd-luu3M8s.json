@@ -12,11 +12,11 @@
   "coverage": "0:00~33:23, 60초 이상 공백 없음",
   "raw": "원본 json3는 보존하지 못했고 수집 스크립트가 만든 시각 텍스트를 가공 없이 저장함"
  },
- "published_date": "미확인",
+ "published_date": "2026-08-13",
  "source_url": "https://www.youtube.com/watch?v=KHd-luu3M8s",
  "source_title": "Your phone addiction is keeping you from achieving flow state | Arthur Brooks",
  "source_channel": "Big Think Clips",
- "metadata_verification": "oEmbed로 제목·채널 확인. 길이는 자막 수집 결과 2004초(33분 24초)와 SozAI 페이지의 33:23이 일치해 '33분'으로 표기. 유튜브 게시일은 yt-dlp가 429/403으로 막혀 확인하지 못해 date를 비웠고, Open Culture 소개글(2026-09-01) 이전 게시로 보아 등록 순서만 2026-05-24 강의 앞에 둠. 설명란도 가져오지 못함.",
+ "metadata_verification": "oEmbed로 제목·채널(Big Think Clips) 확인. 게시일 2026-08-13과 길이 33:24는 사용자가 보낸 YouTube 앱 화면 캡처(2026-11-12)로 확인했다. 자동 조회(yt-dlp 429/403, WebFetch 봇 차단)로는 확인하지 못했다. 설명란은 화면에 보이는 앞부분만 확인했다.",
  "fact_checked": [
   "Open Culture 소개글(2026-09-01): 영상의 흑백 화면, 알림 끄기, 기기 없는 시간, 며칠 수련 언급과 Csikszentmihalyi 귀속 확인",
   "Britannica: 에머슨 에세이집 첫 권 1841년, 자기 신뢰·자기 수양 강조 확인(에세이 「자기 신뢰」가 첫 권에 실렸다는 문구는 해당 페이지에서 확인하지 못함)",
