@@ -1,0 +1,33 @@
+{
+ "video_id": "KHd-luu3M8s",
+ "layout": "compact",
+ "duration_seconds": 2004,
+ "image_count": 0,
+ "review_basis": "2026-11-12 yt-dlp(web_embedded)로 받은 YouTube 수동 영어 자막 366구간(0:00~33:23)을 처음부터 끝까지 읽고 상세 요약과 대조했다. 영상 화면은 대조하지 못했다.",
+ "transcript": {
+  "path": "transcripts/KHd-luu3M8s.en.txt",
+  "language": "en",
+  "caption_type": "YouTube 수동 영어 자막(auto_generated=false)",
+  "segments": 366,
+  "coverage": "0:00~33:23, 60초 이상 공백 없음",
+  "raw": "원본 json3는 보존하지 못했고 수집 스크립트가 만든 시각 텍스트를 가공 없이 저장함"
+ },
+ "published_date": "2026-08-13",
+ "source_url": "https://www.youtube.com/watch?v=KHd-luu3M8s",
+ "source_title": "Your phone addiction is keeping you from achieving flow state | Arthur Brooks",
+ "source_channel": "Big Think Clips",
+ "metadata_verification": "oEmbed로 제목·채널(Big Think Clips) 확인. 게시일 2026-08-13과 길이 33:24는 사용자가 보낸 YouTube 앱 화면 캡처(2026-11-12)로 확인했다. 자동 조회(yt-dlp 429/403, WebFetch 봇 차단)로는 확인하지 못했다. 설명란은 화면에 보이는 앞부분만 확인했다.",
+ "fact_checked": [
+  "Open Culture 소개글(2026-09-01): 영상의 흑백 화면, 알림 끄기, 기기 없는 시간, 며칠 수련 언급과 Csikszentmihalyi 귀속 확인",
+  "Britannica: 에머슨 에세이집 첫 권 1841년, 자기 신뢰·자기 수양 강조 확인(에세이 「자기 신뢰」가 첫 권에 실렸다는 문구는 해당 페이지에서 확인하지 못함)",
+  "NPR(2026-04-08): The Meaning of Your Life 저서와 Brooks의 하버드 소속 확인(폰 관련 조언은 해당 글에 없음)"
+ ],
+ "not_verified": [
+  "하루 16% 부정 감정, 하루 205회 확인, 4~9시간 화면, 메스암페타민 약 10배, 미국 절반 넘는 주의 학교 폰 허용",
+  "알코올의 편도체-전전두엽 연결 차단, 청색광·멜라토닌, 식사 중 폰과 옥시토신, 흑백 화면 효과, 2008년 이후 출생자 관련 발언",
+  "Csikszentmihalyi 개념 설명은 Britannica 페이지를 열지 못해 Open Culture의 귀속 확인에 의존함",
+  "증조할아버지 출생 연도·지역 등 개인사는 요약에 넣지 않음"
+ ],
+ "grammar_review": "문단 종결, 같은 서술어 반복, 사실·해석 구분을 점검하고 한국어 문장 검수(번역투·쉼표·접속어 과다)를 반영함. 타임스탬프는 김주환 외 강의라 두지 않음.",
+ "human_content_review_required": true
+}
