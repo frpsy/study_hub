@@ -67,6 +67,30 @@
     clearButton?.addEventListener('click',()=>{input.value='';filter(true);input.focus()});
     document.querySelectorAll('[data-filter-for="'+input.id+'"]').forEach(button=>button.addEventListener('click',()=>{input.value=button.dataset.value||'';filter(true)}));
   });
+  document.querySelectorAll('.sort-toggle').forEach(group=>{
+    const list=document.getElementById('lecture-list');if(!list)return;
+    const cards=[...list.children].filter(el=>el.matches('[data-video-id],[data-kind]'));
+    const original=new Map(cards.map((card,index)=>[card,index]));
+    const buttons=[...group.querySelectorAll('[data-sort]')];
+    const stamp=(card,key)=>{const value=Date.parse(card.dataset[key]||'');return Number.isNaN(value)?-Infinity:value};
+    const apply=(mode,save)=>{
+      if(!buttons.some(button=>button.dataset.sort===mode))mode='latest';
+      const key=mode==='added'?'added':'date';
+      // 같은 값이면 등록 순서(최신순)를 유지하고, 값이 없는 자료는 맨 뒤로 보낸다.
+      [...cards].sort((a,b)=>stamp(b,key)-stamp(a,key)||original.get(a)-original.get(b)).forEach(card=>list.appendChild(card));
+      buttons.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.sort===mode)));
+      if(save){
+        try{localStorage.setItem('study-hub-sort',mode)}catch{}
+        const url=new URL(location.href);
+        if(mode==='latest')url.searchParams.delete('sort');else url.searchParams.set('sort',mode);
+        try{history.replaceState(history.state,'',url.href)}catch{}
+      }
+    };
+    const saved=()=>{let mode=new URLSearchParams(location.search).get('sort');if(!mode){try{mode=localStorage.getItem('study-hub-sort')}catch{}}return mode||'latest'};
+    buttons.forEach(button=>button.addEventListener('click',()=>apply(button.dataset.sort,true)));
+    apply(saved(),false);
+    window.addEventListener('pageshow',()=>apply(saved(),false));
+  });
   document.querySelectorAll('[data-copy-target]').forEach(button=>{
     const originalLabel=button.textContent.trim();
     let resetTimer;

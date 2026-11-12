@@ -804,6 +804,9 @@ a{color:var(--ink);text-decoration-color:var(--accent);text-decoration-thickness
 .filter-chips button{min-height:44px;font-size:12px;padding:8px 12px}
 .catalog-order{display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;font-size:12px;color:var(--muted)}
 .catalog-order>span:first-child{font-weight:700;color:var(--ink)}
+.sort-toggle{display:inline-flex;gap:2px;padding:2px;border:1px solid var(--line);border-radius:6px}
+.sort-toggle button{min-height:32px;padding:4px 12px;border-color:transparent;border-radius:4px;background:transparent;color:var(--muted);font-size:12px;font-weight:400}
+.sort-toggle button[aria-pressed=true]{background:var(--tint);color:var(--ink);font-weight:650}
 .home-main .lecture-grid{gap:14px}
 .home-main .lecture{position:relative;padding:26px 28px;background:var(--surface)}
 .lecture h2{max-width:95%;margin:12px 0 10px;font-size:22px;line-height:1.45}
