@@ -37,7 +37,9 @@ def render(row,record,mini,prev=None,nxt=None):
  if detailed:
   actions.append('<a class="btn secondary" href="#lecture-detail">상세 요약으로 이동</a>')
   blocks=''.join(f'<h3 id="detail-{i+1}">'+E(b['h'])+'</h3>'+''.join('<p>'+E(t)+'</p>' for t in b['p']) for i,b in enumerate(record['detail']))
-  second+=f'<section id="lecture-detail" class="lecture-section"><h2>상세 요약</h2><div class="detail-body">{blocks}</div></section>'
+  # In-section outline: the question headings double as a map of the summary.
+  outline=''.join(f'<li><a href="#detail-{i+1}">'+E(b['h'])+'</a></li>' for i,b in enumerate(record['detail']))
+  second+=f'<section id="lecture-detail" class="lecture-section"><h2>상세 요약</h2><nav class="detail-toc" aria-label="상세 요약 소제목"><ol>{outline}</ol></nav><div class="detail-body">{blocks}</div></section>'
  if timed:
   timeline_text=E(record['timeline'])
   actions.append('<a class="btn secondary" href="#lecture-comment">타임스탬프로 이동</a>')
