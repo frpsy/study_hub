@@ -40,3 +40,24 @@ for(const viewport of [{width:390,height:844},{width:1280,height:800}]){
     await context.close();
   });
 }
+
+test('home sort toggle orders by lecture date or by when it was added',async({page})=>{
+  await page.goto('/index.html');
+  const ids=()=>page.locator('#lecture-list .lecture').evaluateAll(cards=>cards.map(card=>card.dataset.videoId));
+  const latest=await ids();
+  const dates=await page.locator('#lecture-list .lecture').evaluateAll(cards=>cards.map(card=>card.dataset.date));
+  expect(dates).toEqual([...dates].sort().reverse());
+  await expect(page.locator('[data-sort="latest"]')).toHaveAttribute('aria-pressed','true');
+  await page.locator('[data-sort="added"]').click();
+  await expect(page.locator('[data-sort="added"]')).toHaveAttribute('aria-pressed','true');
+  const added=await page.locator('#lecture-list .lecture').evaluateAll(cards=>cards.map(card=>Date.parse(card.dataset.added)));
+  expect(added).toEqual([...added].sort((a,b)=>b-a));
+  expect(await ids()).not.toEqual(latest);
+  expect((await ids())[0]).toBe('KHd-luu3M8s');
+  await expect(page).toHaveURL(/[?&]sort=added/);
+  await page.reload();  // The choice survives a reload.
+  await expect(page.locator('[data-sort="added"]')).toHaveAttribute('aria-pressed','true');
+  await page.locator('[data-sort="latest"]').click();
+  expect(await ids()).toEqual(latest);
+  await expect(page).not.toHaveURL(/sort=/);
+});

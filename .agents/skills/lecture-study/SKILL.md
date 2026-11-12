@@ -11,7 +11,7 @@ description: 내면의 서재(frpsy/study_hub)에 강의를 추가하거나 핵�
 1. 영상 ID를 먼저 확정한다(확인 안 된 ID를 만들지 않는다).
 2. 자막 확보(편집규칙 8절 순서). 원문 그대로 `transcripts/<영상ID>.<언어>.txt`(+SRT/VTT)로 저장한다. 아직 없으면 편집규칙 10절대로 `caption-queue/<영상ID>.json`과 2시간 재확인으로 관리한다.
 3. 김주환 영상은 설명란 전문을 `transcripts/<영상ID>.description.txt`에 저장하고(편집규칙 16절) 최종 정리에 반영한다. 자막 전 구간과 설명란을 읽고, 읽은 범위를 `study-audits/<영상ID>.json`에 기록한다.
-4. `lectures.json` 맨 앞(최신순)에 등록: `id`, `date`, `title`, `duration`, `description`, `tags`, `creator`, `kind`(lecture), 필요 시 `video_url`.
+4. `lectures.json` 맨 앞(최신순)에 등록: `id`, `date`, `added`(사이트에 등록하는 시각, KST ISO 예 `2026-11-12T17:30:00+09:00`; 홈의 ‘추가된순’ 정렬 기준), `title`, `duration`, `description`, `tags`, `creator`, `kind`(lecture), 필요 시 `video_url`.
 5. `data/mini_courses.json`에 `lead`(한 문장)·`three`(세 문장) 작성 — 편집규칙 2·3절 기준.
 6. `data/lecture_compact.json`에 — 김주환 강의: `timeline`(편집규칙 4절 형식)과 `detail`(16절: 평서문·질문형 소제목·[보충] 구분). 그 외 강연자: `timeline` 없이 `detail`(자막 기반 상세 요약, 필요 시 웹 보충은 `[보충]` 표시, 편집규칙 14절). 공통: `sources`(label·url, 실제 확인한 링크만), 필요 시 `note`·`aliases`.
 7. `build-info.json` 버전을 올리고 `build_library.py`, `build_compact_lectures.py` 실행.
