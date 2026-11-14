@@ -898,11 +898,16 @@ html{scroll-padding-top:158px}
 @media(hover:hover){.detail-toc a:hover{color:var(--accent)}}
 .compact-lecture .lecture-section .detail-body p{font-size:17px;line-height:1.9;max-width:38em;text-wrap:pretty}
 .compact-lecture .lecture-section .detail-body h3{max-width:38em;line-height:1.45;text-wrap:balance}
+.detail-body .detail-points{margin:12px 0 20px;padding-left:1.25em}
+.detail-body .detail-points li{margin:0 0 10px;font-size:16px;line-height:1.85;overflow-wrap:anywhere;word-break:keep-all}
+.detail-body .detail-points strong{font-weight:700}
+.compact-lecture .lecture-section .detail-body .detail-points li{font-size:17px;line-height:1.9;max-width:38em;text-wrap:pretty}
 @media(max-width:780px){
  .detail-toc{padding:4px 16px;margin-bottom:22px}
  .detail-toc ol{grid-template-columns:1fr}
  .detail-toc li:nth-child(2){border-top:1px solid var(--line)}
  .compact-lecture .lecture-section .detail-body p{font-size:16px;line-height:1.85}
+ .compact-lecture .lecture-section .detail-body .detail-points li{font-size:16px;line-height:1.85}
 }
 #lecture-practice .summary-tier:last-of-type{border-bottom:0;margin-bottom:0;padding-bottom:0}
 @media print{.detail-toc{display:none}}
