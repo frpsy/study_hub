@@ -214,7 +214,7 @@ test('catalog restores a shared search and returns to it after reading',async({p
   await page.locator('[data-filter-for="search"][data-value="수용"]').click();
   expect(new URL(page.url()).searchParams.get('q')).toBe('수용');
   await page.reload();
-  await expect(page.locator('#count')).toHaveText('1개 강의');
+  await expect(page.locator('#count')).toHaveText('2개 강의');
   await expect(page.locator('[data-filter-for="search"][data-value="수용"]')).toHaveAttribute('aria-pressed','true');
 });
 

@@ -53,7 +53,7 @@ test('home sort toggle orders by lecture date or by when it was added',async({pa
   const added=await page.locator('#lecture-list .lecture').evaluateAll(cards=>cards.map(card=>Date.parse(card.dataset.added)));
   expect(added).toEqual([...added].sort((a,b)=>b-a));
   expect(await ids()).not.toEqual(latest);
-  expect((await ids())[0]).toBe('KHd-luu3M8s');
+  expect((await ids())[0]).toBe('a2SVP-H_wPY');
   await expect(page).toHaveURL(/[?&]sort=added/);
   await page.reload();  // The choice survives a reload.
   await expect(page.locator('[data-sort="added"]')).toHaveAttribute('aria-pressed','true');
