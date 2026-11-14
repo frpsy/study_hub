@@ -1,0 +1,45 @@
+{
+  "video_id": "a2SVP-H_wPY",
+  "layout": "compact",
+  "duration_seconds": 7191,
+  "image_count": 0,
+  "review_basis": "2026-11-14 유튜브 한국어 자동 자막(2525구간, 0:00~1:59:51)을 처음부터 끝까지 읽고 타임스탬프와 요약을 대조했다. 영상 화면은 대조하지 못했다.",
+  "units": [],
+  "transcript": {
+    "path": "transcripts/a2SVP-H_wPY.ko.txt",
+    "raw_json3": "transcripts/a2SVP-H_wPY.ytdlp.ko-orig.json3",
+    "status": "yt-dlp(web_embedded)로 받은 자동 자막 json3 원본을 그대로 보존하고, 같은 내용을 시각이 붙은 txt로 옮겨 저장",
+    "coverage": "0:00~1:59:51 (2525구간)"
+  },
+  "content_id": "a2SVP-H_wPY",
+  "source_title": "'자유 의지'란 환상이다",
+  "creator": "김주환",
+  "published_date": "2025-07-13",
+  "caption_type": "YouTube Korean auto-generated captions (ko-orig); manual captions not available",
+  "caption_segments": 2525,
+  "caption_first": "0:00",
+  "caption_last": "1:59:51",
+  "source_video_id": "a2SVP-H_wPY",
+  "source_url": "https://www.youtube.com/watch?v=a2SVP-H_wPY",
+  "source_url_verified": true,
+  "source_verification_method": "사용자가 전달한 링크와 설명란 화면 캡처, yt-dlp 설명란 전문의 일치를 확인함. 영상 길이는 마지막 자막 시각(1:59:51)으로 보아 약 2시간이다.",
+  "checks": {
+    "subtitle": "자막 전체를 순서대로 읽음. 자동 자막 오인식(예: 새폴스키·준비전위·공공보건형 등)은 문맥과 설명란으로 해석함.",
+    "timeline": "타임스탬프는 자막 구간 시작 시각에서 가져오고 주요 구간은 자막과 다시 대조함. 수 초 어긋날 수 있음.",
+    "research": "가석방 판결 연구(Danziger 2011)는 원문 PDF로, 『Determined』 서평은 NDPR로, 테그마크·해머로프 논문은 arXiv 초록으로, 클로르프로마진·L-도파는 리뷰 논문으로, 1973년 APA 결정은 EBSCO 개요로 확인함.",
+    "raw_transcript": "원본 json3와 시각 텍스트를 transcripts/에 저장.",
+    "supplement": "[보충] 표시 문장만 외부 자료로 확인한 내용이다."
+  },
+  "follow_up": "아래 미확인 항목의 원문 대조와 영상 화면 대조는 하지 못함.",
+  "description_file": "transcripts/a2SVP-H_wPY.description.txt",
+  "description_check": "2026-11-14 yt-dlp로 설명란 전문을 받아 원문 그대로 저장하고, 새폴스키 소개와 1:07:10 L-도파 정정을 상세 요약에 반영함. 방송 일정 안내는 요약하지 않았다.",
+  "detail_check": "2026-11-14 자막 전 구간을 읽고 상세 요약 9개 소제목을 작성함.",
+  "unverified": [
+    "1960년대 미국 최고 의료 책임자의 조현병 부모 대상 공개 사과 서한",
+    "준비전위 실험의 0.3~0.7초 값",
+    "저소득층 아이의 코르티솔·편도체 연구",
+    "『Determined』의 해당 장 구성과 가난에 관한 문장",
+    "영국의 미혼모 감금 사례(1913년 정신결함법 관련)",
+    "모든 종교가 자유의지 신념을 공유한다는 주장, 동성애의 생물학적 근거, 청소년 자살률과의 연결은 강연자의 견해"
+  ]
+}
