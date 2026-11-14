@@ -4,6 +4,16 @@ R=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(R/'scripts'))
 from build_compact_lectures import build
 from validate_site import validate
+
+def detail_texts(block):
+ """Yield every sentence group of a detail block: paragraphs and labelled-list items."""
+ for item in block['p']:
+  if isinstance(item,str):yield item
+  else:
+   assert item['list'],block['h']
+   for point in item['list']:
+    assert re.match(r'^[가-힣A-Za-z0-9].*[가-힣A-Za-z0-9]$|^[가-힣A-Za-z0-9]$',point['l']),point['l']
+    yield point['t']
 class CompactCourseChecks(unittest.TestCase):
  def test_timeline_text_is_preserved_and_copy_has_single_target(self):
   records=json.loads((R/'data/lecture_compact.json').read_text())
@@ -29,14 +39,14 @@ class CompactCourseChecks(unittest.TestCase):
     self.assertIn('timeline',record,vid);self.assertIn('id="lecture-comment"',source,vid);self.assertEqual('detail' in record,'id="lecture-detail"' in source,vid)
     for block in record.get('detail',[]):
      self.assertTrue(block['h'] and block['p'],vid)
-     for text in block['p']:self.assertRegex(text,r'[.)]$',vid+': '+text[:30])
+     for text in detail_texts(block):self.assertRegex(text,r'[.)]$',vid+': '+text[:30])
    else:
     self.assertNotIn('timeline',record,vid);self.assertNotIn('id="lecture-comment"',source,vid);self.assertNotIn('timeline-toggle',source,vid)
     self.assertIn('id="lecture-detail"',source,vid);self.assertGreaterEqual(len(record['detail']),5,vid)
     self.assertGreaterEqual(len(record['sources']),3,vid)
     for block in record['detail']:
      self.assertTrue(block['h'] and block['p'],vid)
-     for text in block['p']:self.assertRegex(text,r'[.)]$',vid+': '+text[:30])
+     for text in detail_texts(block):self.assertRegex(text,r'[.)]$',vid+': '+text[:30])
  def test_practice_section_renders_once_with_expandable_steps(self):
   records=json.loads((R/'data/lecture_compact.json').read_text())
   for vid,record in records.items():

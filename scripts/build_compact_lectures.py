@@ -3,6 +3,11 @@ from pathlib import Path
 import html,json,sys
 from build_library import page,R
 E=html.escape
+def block_html(t):
+ """A detail item is a paragraph (str) or a labelled list ({"list": [{"l": label, "t": text}, ...]})."""
+ if isinstance(t,str):return '<p>'+E(t)+'</p>'
+ return '<ul class="detail-points">'+''.join('<li><strong>'+E(i['l'])+'</strong>. '+E(i['t'])+'</li>' for i in t['list'])+'</ul>'
+
 def load(name):return json.loads((R/'data'/name).read_text(encoding='utf-8'))
 def practice_step(step, record, youtube_url):
  # Keep disclosure and source navigation separate: opening an explanation never
@@ -36,7 +41,7 @@ def render(row,record,mini,prev=None,nxt=None):
  second='';actions=[]
  if detailed:
   actions.append('<a class="btn secondary" href="#lecture-detail">상세 요약으로 이동</a>')
-  blocks=''.join(f'<h3 id="detail-{i+1}">'+E(b['h'])+'</h3>'+''.join('<p>'+E(t)+'</p>' for t in b['p']) for i,b in enumerate(record['detail']))
+  blocks=''.join(f'<h3 id="detail-{i+1}">'+E(b['h'])+'</h3>'+''.join(block_html(t) for t in b['p']) for i,b in enumerate(record['detail']))
   # In-section outline: the question headings double as a map of the summary.
   outline=''.join(f'<li><a href="#detail-{i+1}">'+E(b['h'])+'</a></li>' for i,b in enumerate(record['detail']))
   second+=f'<section id="lecture-detail" class="lecture-section"><h2>상세 요약</h2><nav class="detail-toc" aria-label="상세 요약 소제목"><ol>{outline}</ol></nav><div class="detail-body">{blocks}</div></section>'
