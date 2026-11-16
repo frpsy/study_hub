@@ -1,0 +1,46 @@
+{
+  "video_id": "sAgj5V4Ewno",
+  "layout": "compact",
+  "duration_seconds": 7442,
+  "image_count": 0,
+  "review_basis": "2026-11-16 유튜브 한국어 자동 자막(2536구간, 1:26~2:03:58)을 처음부터 끝까지 읽고 타임스탬프·상세 요약·실천 포인트를 대조했다. 영상 화면(슬라이드·개관식 사진)은 대조하지 못했다.",
+  "units": [],
+  "transcript": {
+    "path": "transcripts/sAgj5V4Ewno.ko.txt",
+    "raw_json3": "transcripts/sAgj5V4Ewno.ytdlp.ko-orig.json3",
+    "status": "youtube-transcript-api는 IpBlocked, yt-dlp 기본·web_embedded 클라이언트는 자막 목록이 비어 실패. yt-dlp tv_embedded 클라이언트로 ko-orig json3를 받아 원본 그대로 보존하고 같은 내용을 시각이 붙은 txt로 옮겨 저장.",
+    "coverage": "1:26~2:03:58 (2536구간, 60초 이상 공백 없음)"
+  },
+  "content_id": "sAgj5V4Ewno",
+  "source_title": "내 목소리로 하는 내면소통명상의 뇌과학 – INZEUM 명상 앱",
+  "creator": "김주환",
+  "published_date": "2026-11-15",
+  "caption_type": "YouTube Korean auto-generated captions (ko-orig); manual captions not available",
+  "caption_segments": 2536,
+  "caption_first": "1:26",
+  "caption_last": "2:03:58",
+  "source_video_id": "sAgj5V4Ewno",
+  "source_url": "https://www.youtube.com/watch?v=sAgj5V4Ewno",
+  "source_url_verified": true,
+  "source_verification_method": "yt-dlp 메타데이터: 제목, 업로드일 20261115, 길이 2:04:02 확인. 사용자가 준 주소는 https://www.youtube.com/live/sAgj5V4Ewno",
+  "description_file": "transcripts/sAgj5V4Ewno.description.txt",
+  "description_check": "2026-11-16 yt-dlp로 설명란 전문을 받아 원문 그대로 저장. 출시일(11월 14일), 무료·유료 범위, 내면AI가 학습한 책(내면소통, 명상수업, 그릿, 회복탄력성), 해외 계정 안내를 상세 요약과 대조함.",
+  "checks": {
+    "subtitle": "자막 전체를 순서대로 읽음. 자동 자막 오인식은 문맥으로 교정함(인지점·인점→인지엄, 뉴럴프닝→neural sharpening, 코로라리→corollary, 마코플랭킷→Markov blanket, 1Hz·2Hz→1kHz·2kHz, 카와드 카와다라 스직기→카와다(와 스즈키)로 추정, 신지·신재 의사님→신재호 이사).",
+    "timeline": "타임스탬프는 자막 구간 시작 시각에서 가져옴. 사용자가 첨부한 유튜브 페이지의 시청자 댓글 타임라인은 참고만 하고 시각은 자막으로 다시 확인함.",
+    "research": "Hughes & Harrison(2013) 초록(PSU 페이지), Wang 외(2014) PMC 본문 요약, Kawada & Suzuki(1993) J-STAGE 초록, Basner 외(Sleep) NBC 보도, inzeum.com/app 공식 안내를 열어 확인함.",
+    "kawada": "강의는 대조 23분 vs 핑크 노이즈 13.5분, 무작위 대조 시험이라고 소개함. 열어 본 Kawada & Suzuki(1993) 초록은 피험자 1명·4명의 실험에서 4.2분·9.5분 단축을 보고함. 강의가 인용한 논문이 이 논문인지는 확인하지 못해 '[보충]'에서 같은 연구라고 쓰지 않음.",
+    "proofread": "평서문, '강사' 미사용, '교수님은 ~했습니다' 미사용, 질문형 소제목 8개, 문단·라벨 목록 혼용 확인.",
+    "raw_transcript": "원본 json3와 시각 텍스트를 transcripts/에 저장."
+  },
+  "detail_check": "2026-11-16 자막 전 구간을 읽고 상세 요약 8개 소제목을 작성함. 수치(63~125Hz, 300Hz·1kHz·2kHz, 23분·13.5분, 0.1Hz, 14일·100건·60분·4,900원·19,900원·199,000원)는 자막 시각과 대조함. 휴방·라이브 일정, 개관식 사진 설명은 상세 요약에 넣지 않고 타임스탬프에만 둠.",
+  "unverified": [
+    "강의가 소개한 카와다 연구의 23분·13.5분 수치와 무작위 대조 설계 여부(열어 본 1993년 초록과 수치가 다름)",
+    "고위험군보다 대중 전체를 옮기는 편이 효과적이라는 연구의 원문",
+    "골전도 주파수 대역별 특성의 원문 근거",
+    "핑크 노이즈의 서파 동조 연구 원문",
+    "Basner 외 Sleep 논문의 원문과 게재일(보도 기사로만 확인)",
+    "영상 화면(슬라이드)과 개관식 사진"
+  ],
+  "follow_up": "인용 연구 원문 대조와 영상 화면 대조는 하지 못함."
+}

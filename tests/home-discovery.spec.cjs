@@ -26,7 +26,7 @@ for(const viewport of [{width:390,height:844},{width:1280,height:800}]){
     await expect(page).toHaveURL(/\/lectures\/.*\.html$/);
     await page.goto('/index.html');
     await page.locator('[data-filter-for="search"][data-value="명상"]').click();
-    await expect(page.locator('#lecture-list .lecture:visible')).toHaveCount(2);
+    await expect(page.locator('#lecture-list .lecture:visible')).toHaveCount(3);
     await page.locator('#lecture-list .lecture:visible').first().click(); // Filter + card: two taps.
     await expect(page.locator('#lecture-overview')).toBeVisible();
     await page.goto('/index.html');
@@ -53,7 +53,7 @@ test('home sort toggle orders by lecture date or by when it was added',async({pa
   const added=await page.locator('#lecture-list .lecture').evaluateAll(cards=>cards.map(card=>Date.parse(card.dataset.added)));
   expect(added).toEqual([...added].sort((a,b)=>b-a));
   expect(await ids()).not.toEqual(latest);
-  expect((await ids())[0]).toBe('a2SVP-H_wPY');
+  expect((await ids())[0]).toBe('sAgj5V4Ewno');
   await expect(page).toHaveURL(/[?&]sort=added/);
   await page.reload();  // The choice survives a reload.
   await expect(page.locator('[data-sort="added"]')).toHaveAttribute('aria-pressed','true');
