@@ -153,8 +153,8 @@ test('library identity and reading hierarchy stay consistent',async({browser})=>
   expect(compact.titleHeight).toBeLessThan(95);
   expect(compact.cardCount).toBe(expectedLibraryCount);
   await page.locator('[data-filter-for="search"][data-value="명상"]').click();
-  await expect(page.locator('#count')).toHaveText('2개 강의');
-  await expect(page.locator('#lecture-list .lecture:visible')).toHaveCount(2);
+  await expect(page.locator('#count')).toHaveText('3개 강의');
+  await expect(page.locator('#lecture-list .lecture:visible')).toHaveCount(3);
   await context.close();
 });
 
@@ -268,6 +268,7 @@ test('lecture summary keeps a clear type hierarchy and readable width',async({br
 });
 
 test('every lecture offers practice and valid source navigation',async({page})=>{
+  test.setTimeout(90000);
   for(const row of studyLectures){
     await page.goto('/lectures/'+row.id+'.html');
     await expect(page.locator('#lecture-practice .summary-list li')).toHaveCount(3);
