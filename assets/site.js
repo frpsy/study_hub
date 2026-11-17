@@ -39,34 +39,63 @@
     const cards=[...target.querySelectorAll('[data-search]')];
     const count=document.getElementById(input.dataset.count),empty=document.getElementById(input.dataset.empty);
     const clearButton=document.querySelector('[data-clear-for="'+input.id+'"]');
+    const chips=[...document.querySelectorAll('[data-filter-for="topic"]')];
     const persist=input.dataset.persistQuery==='true';
+    let topic='';
     const filter=(saveURL=false)=>{
       const words=input.value.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);let shown=0;
-      cards.forEach(card=>{const hay=(card.textContent+' '+card.dataset.search).toLocaleLowerCase();card.hidden=!words.every(word=>hay.includes(word));if(!card.hidden)shown++});
+      cards.forEach(card=>{
+        const hay=(card.textContent+' '+card.dataset.search).toLocaleLowerCase();
+        card.hidden=!words.every(word=>hay.includes(word))||(topic!==''&&card.dataset.topic!==topic);
+        if(!card.hidden)shown++;
+      });
       if(count)count.textContent=shown+'개 '+input.dataset.noun;
       if(empty)empty.hidden=shown!==0;
       if(clearButton)clearButton.hidden=!input.value;
       if(saveURL && persist){
         const url=new URL(location.href);
         if(input.value.trim())url.searchParams.set('q',input.value);else url.searchParams.delete('q');
+        if(topic)url.searchParams.set('topic',topic);else url.searchParams.delete('topic');
         // Replacing this entry preserves the search when returning from a reading
         // page, without adding a browser-history entry for every keystroke.
         try{history.replaceState(history.state,'',url.href)}catch{}
       }
-      document.querySelectorAll('[data-filter-for="'+input.id+'"]').forEach(button=>{
-        button.setAttribute('aria-pressed',String((button.dataset.value||'')===input.value.trim()));
-      });
+      chips.forEach(button=>button.setAttribute('aria-pressed',String((button.dataset.value||'')===topic)));
     };
-    const query=new URLSearchParams(location.search).get('q');if(query)input.value=query;
+    const fromURL=()=>{
+      const params=new URLSearchParams(location.search);
+      input.value=params.get('q')||'';
+      const wanted=params.get('topic')||'';
+      topic=chips.some(button=>button.dataset.value===wanted)?wanted:'';
+    };
+    fromURL();
     input.addEventListener('input',()=>filter(true));filter();
     if(persist){
-      const restore=()=>{input.value=new URLSearchParams(location.search).get('q')||'';filter()};
+      const restore=()=>{fromURL();filter()};
       window.addEventListener('pageshow',restore);
       window.addEventListener('popstate',restore);
     }
     clearButton?.addEventListener('click',()=>{input.value='';filter(true);input.focus()});
-    document.querySelectorAll('[data-filter-for="'+input.id+'"]').forEach(button=>button.addEventListener('click',()=>{input.value=button.dataset.value||'';filter(true)}));
+    chips.forEach(button=>button.addEventListener('click',()=>{
+      const value=button.dataset.value||'';
+      topic=topic===value?'':value;
+      filter(true);
+    }));
   });
+  // 오늘의 한 문장: 날짜마다 다른 강의의 한 문장을 보여 준다. 스크립트가 없으면 최신 강의가 그대로 보인다.
+  const today=document.querySelector('.today-line');
+  if(today){
+    const pool=[...document.querySelectorAll('#lecture-list .lecture')].filter(card=>card.querySelector('.card-lead'));
+    if(pool.length){
+      const now=new Date();
+      const day=Math.floor((Date.UTC(now.getFullYear(),now.getMonth(),now.getDate())-Date.UTC(2026,0,1))/864e5);
+      const pick=pool[((day%pool.length)+pool.length)%pool.length];
+      today.href=pick.getAttribute('href');
+      today.querySelector('blockquote').textContent=pick.querySelector('.card-lead').textContent;
+      const source=today.querySelector('.today-source');
+      source.firstChild.textContent=pick.querySelector('h2').textContent+' · '+(pick.dataset.creator||'');
+    }
+  }
   document.querySelectorAll('.sort-toggle').forEach(group=>{
     const list=document.getElementById('lecture-list');if(!list)return;
     const cards=[...list.children].filter(el=>el.matches('[data-video-id],[data-kind]'));
@@ -222,4 +251,53 @@
   addEventListener('resize',schedule);
   addEventListener('pageshow',schedule);
   update();
+})();
+
+// 깊이 목차: 섹션과 상세 요약 소제목을 한 시트에 모은다. 링크는 원래 앵커를 그대로 쓴다.
+(()=>{
+  const nav=document.querySelector('.reading-nav');
+  if(!nav||typeof HTMLDialogElement!=='function')return;
+  const detailLinks=[...document.querySelectorAll('.detail-toc a[href^="#"]')];
+  const sheet=document.createElement('dialog');
+  sheet.className='outline-sheet';
+  sheet.setAttribute('aria-label','이 강의 전체 목차');
+  const list=document.createElement('ol');
+  [...nav.querySelectorAll('a[href^="#"]')].forEach(link=>{
+    const item=document.createElement('li');
+    const copy=link.cloneNode(true);copy.removeAttribute('aria-current');
+    item.append(copy);
+    if(link.hash==='#lecture-detail'&&detailLinks.length){
+      const sub=document.createElement('ol');
+      detailLinks.forEach(d=>{const li=document.createElement('li');li.append(d.cloneNode(true));sub.append(li)});
+      item.append(sub);
+    }
+    list.append(item);
+  });
+  const head=document.createElement('div');head.className='outline-head';
+  const title=document.createElement('strong');title.textContent='목차';
+  const close=document.createElement('button');close.type='button';close.className='outline-close';close.textContent='닫기';
+  head.append(title,close);sheet.append(head,list);
+  const button=document.createElement('button');
+  button.type='button';button.className='outline-fab';button.setAttribute('aria-haspopup','dialog');
+  const label=document.createElement('span');const prefix=document.createElement('b');prefix.textContent='목차';button.append(prefix,label);
+  document.body.append(sheet,button);
+  const current=()=>nav.querySelector('[aria-current="location"]')||nav.querySelector('a');
+  const sync=()=>{
+    const active=current();label.textContent=active?active.textContent:'';
+    const foot=document.querySelector('.site-footer');
+    const nearFooter=foot&&foot.getBoundingClientRect().top<innerHeight;
+    button.classList.toggle('is-visible',(nav.getBoundingClientRect().bottom<0||scrollY>480)&&!nearFooter);
+    sheet.querySelectorAll(':scope>ol>li>a').forEach(a=>a.classList.toggle('is-current',active&&a.hash===active.hash));
+  };
+  button.addEventListener('click',()=>{sync();sheet.showModal()});
+  close.addEventListener('click',()=>sheet.close());
+  sheet.addEventListener('click',event=>{
+    if(event.target===sheet){sheet.close();return}
+    const link=event.target.closest('a[href^="#"]');
+    if(link){sheet.close()}
+  });
+  let frame=0;
+  addEventListener('scroll',()=>{if(!frame)frame=requestAnimationFrame(()=>{frame=0;sync()})},{passive:true});
+  addEventListener('pageshow',sync);
+  sync();
 })();

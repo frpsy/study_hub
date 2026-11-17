@@ -152,9 +152,11 @@ test('library identity and reading hierarchy stay consistent',async({browser})=>
   expect(compact.headerHeight).toBeLessThan(80);
   expect(compact.titleHeight).toBeLessThan(95);
   expect(compact.cardCount).toBe(expectedLibraryCount);
-  await page.locator('[data-filter-for="search"][data-value="명상"]').click();
-  await expect(page.locator('#count')).toHaveText('3개 강의');
-  await expect(page.locator('#lecture-list .lecture:visible')).toHaveCount(3);
+  await page.locator('[data-filter-for="topic"][data-value="명상"]').click();
+  await expect(page.locator('#count')).toHaveText('4개 강의');
+  await expect(page.locator('#lecture-list .lecture:visible')).toHaveCount(4);
+  await page.locator('[data-filter-for="topic"][data-value="명상"]').click();  // 같은 주제를 다시 누르면 전체로 돌아간다.
+  await expect(page.locator('#count')).toHaveText(expectedLibraryCount+'개 강의');
   await context.close();
 });
 
@@ -211,11 +213,13 @@ test('catalog restores a shared search and returns to it after reading',async({p
   await expect(page.locator('#count')).toHaveText(expectedLibraryCount+'개 강의');
   expect(new URL(page.url()).searchParams.has('q')).toBe(false);
   expect(new URL(page.url()).searchParams.get('source')).toBe('test');
-  await page.locator('[data-filter-for="search"][data-value="수용"]').click();
-  expect(new URL(page.url()).searchParams.get('q')).toBe('수용');
+  await page.locator('[data-filter-for="topic"][data-value="마음근력"]').click();
+  expect(new URL(page.url()).searchParams.get('topic')).toBe('마음근력');
   await page.reload();
-  await expect(page.locator('#count')).toHaveText('2개 강의');
-  await expect(page.locator('[data-filter-for="search"][data-value="수용"]')).toHaveAttribute('aria-pressed','true');
+  await expect(page.locator('#count')).toHaveText('6개 강의');
+  await expect(page.locator('[data-filter-for="topic"][data-value="마음근력"]')).toHaveAttribute('aria-pressed','true');
+  await page.locator('#search').fill('수용');  // 주제와 검색어는 함께 걸린다.
+  await expect(page.locator('#count')).toHaveText('1개 강의');
 });
 
 test('a lecture card opens a page with the key summary, practice points and timestamps',async({page})=>{
@@ -367,3 +371,57 @@ for(const width of [390,1280]){
   await context.close();
  });
 }
+
+test('home opens with a daily key sentence that links to its lecture',async({page})=>{
+  await page.goto('/index.html');
+  const line=page.locator('.today-line');
+  await expect(line).toBeVisible();
+  const text=(await line.locator('blockquote').textContent()).trim();
+  const href=await line.getAttribute('href');
+  expect(await page.locator('#lecture-list .lecture[href="'+href+'"] .card-lead').textContent()).toBe(text);
+  await line.click();
+  await expect(page.locator('#lecture-overview .summary-lead')).toHaveText(text);
+});
+
+test('time map places chapters and key sessions on the lecture length above the original text',async({page})=>{
+  await page.goto('/lectures/izYj8g-j00U.html');
+  const map=page.locator('#lecture-comment .time-map');
+  await expect(map).toBeVisible();
+  expect(await map.locator('rect.mark').count()).toBeGreaterThanOrEqual(2);
+  expect(await map.locator('rect.seg').count()).toBeGreaterThanOrEqual(2);
+  const order=await page.evaluate(()=>document.querySelector('.time-map').getBoundingClientRect().bottom<=document.querySelector('#comment').getBoundingClientRect().top);
+  expect(order).toBe(true);
+});
+
+test('outline sheet lists sections and detail headings and closes on navigation',async({browser})=>{
+  const context=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce'});
+  const page=await context.newPage();
+  await page.goto('/lectures/sAgj5V4Ewno.html');
+  await page.evaluate(()=>window.scrollTo({top:1400,behavior:'instant'}));
+  const fab=page.locator('.outline-fab');
+  await expect(fab).toHaveClass(/is-visible/);
+  await fab.click();
+  const sheet=page.locator('.outline-sheet');
+  await expect(sheet).toBeVisible();
+  expect(await sheet.locator('ol ol a').count()).toBe(await page.locator('.detail-toc a').count());
+  await sheet.locator('ol ol a').first().click();
+  await expect(sheet).toBeHidden();
+  await expect(page).toHaveURL(/#detail-1$/);
+  await context.close();
+});
+
+test('view settings change text size and keep it on this device only',async({page})=>{
+  await page.goto('/lectures/sAgj5V4Ewno.html');
+  const size=()=>page.locator('.detail-body p').first().evaluate(el=>parseFloat(getComputedStyle(el).fontSize));
+  const base=await size();
+  await page.locator('.view-settings>summary').click();
+  await page.locator('.text-size[data-text-size="lg"]').click();
+  await expect(page.locator('.text-size[data-text-size="lg"]')).toHaveAttribute('aria-pressed','true');
+  expect(await size()).toBeGreaterThan(base);
+  await page.reload();
+  expect(await size()).toBeGreaterThan(base);
+  await page.locator('.view-settings>summary').click();
+  await page.locator('.text-size[data-text-size="md"]').click();
+  expect(await size()).toBe(base);
+  expect(await page.evaluate(()=>localStorage.getItem('study-site-text-size'))).toBeNull();
+});

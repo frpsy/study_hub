@@ -3,7 +3,7 @@ from pathlib import Path
 from html.parser import HTMLParser
 from urllib.parse import urlparse,unquote
 import re,json,sys
-from build_library import render
+from build_library import render,load_leads
 from content_registry import validate_catalog
 from build_mindmaps import errors as mindmap_errors
 class Document(HTMLParser):
@@ -83,7 +83,7 @@ def validate(root):
     if (root/'data/lecture_mindmaps.json').is_file():errors.extend(mindmap_errors(root))
     home=(root/'index.html').read_text(encoding='utf-8')
     try:
-        generated=render(rows,materials)
+        generated=render(rows,materials,load_leads(root))
         if home!=generated:
             errors.append('generated home differs from index.html')
             first=next((i for i,(a,b) in enumerate(zip(generated,home)) if a!=b),min(len(generated),len(home)))

@@ -30,13 +30,29 @@
   try{const stored=localStorage.getItem(accentKey);if(accents.includes(stored))accent=stored}catch{}
   const applyAccent=()=>{
     if(accent==='red')delete document.documentElement.dataset.accent;else document.documentElement.dataset.accent=accent;
-    document.querySelectorAll('[data-accent]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.accent===accent)));
+    document.querySelectorAll('.accent-swatch[data-accent]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.accent===accent)));
+  };
+  // 글자 크기: 긴 글을 읽는 보기 설정. 이 기기에만 저장한다.
+  const sizeKey='study-site-text-size';
+  const sizes=['sm','md','lg'];
+  let size='md';
+  try{const stored=localStorage.getItem(sizeKey);if(sizes.includes(stored))size=stored}catch{}
+  const applySize=()=>{
+    if(size==='md')delete document.documentElement.dataset.textSize;else document.documentElement.dataset.textSize=size;
+    document.querySelectorAll('.text-size[data-text-size]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.textSize===size)));
   };
   applyAccent();
+  applySize();
   apply();
   const initialize=()=>{
     apply();
     applyAccent();
+    applySize();
+    document.querySelectorAll('.text-size').forEach(b=>b.addEventListener('click',()=>{
+      size=b.dataset.textSize;
+      try{if(size==='md')localStorage.removeItem(sizeKey);else localStorage.setItem(sizeKey,size)}catch{}
+      applySize();
+    }));
     document.querySelectorAll('.accent-swatch').forEach(b=>b.addEventListener('click',()=>{
       accent=b.dataset.accent;
       try{if(accent==='red')localStorage.removeItem(accentKey);else localStorage.setItem(accentKey,accent)}catch{}

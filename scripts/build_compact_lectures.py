@@ -1,6 +1,6 @@
 """Generate lecture pages: a key summary (one sentence, three points) plus timestamps (김주환 lectures) or a detailed summary (other creators)."""
 from pathlib import Path
-import html,json,sys
+import html,json,re,sys
 from build_library import page,R
 E=html.escape
 def block_html(t):
@@ -23,6 +23,40 @@ def practice_step(step, record, youtube_url):
   index=step['detail_index']
   source=f'<a class="practice-source" href="#detail-{index+1}">관련 해설 · {E(record["detail"][index]["h"])}</a>'
  return '<details><summary>'+E(step['h'])+label+'</summary><ul>'+''.join('<li>'+E(t)+'</li>' for t in step['b'])+'</ul>'+source+'</details>'
+def seconds(stamp):
+ total=0
+ for part in stamp.split(':'):total=total*60+int(part)
+ return total
+def duration_seconds(text):
+ # "2시간 4분 2초" 형식. 읽지 못하면 None을 돌려주고 마지막 시각을 길이로 쓴다.
+ m=re.fullmatch(r'\s*(?:(\d+)시간)?\s*(?:(\d+)분)?\s*(?:(\d+)초)?\s*',text or '')
+ if not m or not any(m.groups()):return None
+ h,mi,se=(int(x or 0) for x in m.groups());return h*3600+mi*60+se
+def time_map(timeline,duration,youtube_url=None):
+ """강의 전체 길이 위에 장(■ N.)의 구간과 핵심 세션 위치를 보여 주는 막대. 원문 타임스탬프는 그대로 둔다."""
+ key,chapters,mode=[],[],None
+ for line in timeline.splitlines():
+  line=line.strip()
+  if line.startswith('■'):
+   mode='key' if '핵심' in line else 'chapter'
+   if mode=='chapter':chapters.append([re.sub(r'^■\s*(\d+\.)?\s*','',line),None])
+   continue
+  if line.startswith('—'):mode=None;continue
+  m=re.match(r'^(\d{1,2}(?::\d{2}){1,2})\s+(.+)$',line)
+  if not m:continue
+  if mode=='key':key.append((m.group(1),m.group(2)))
+  elif mode=='chapter' and chapters and chapters[-1][1] is None:chapters[-1][1]=seconds(m.group(1))
+ chapters=[c for c in chapters if c[1] is not None]
+ if len(key)<2 and len(chapters)<2:return ''
+ points=[seconds(t) for t,_ in key]+[c[1] for c in chapters]
+ total=max(duration_seconds(duration) or 0,max(points)+60)
+ x=lambda t:round(t/total*1000,1)
+ segs=''
+ for i,(title,start) in enumerate(chapters):
+  end=chapters[i+1][1] if i+1<len(chapters) else total
+  segs+=f'<rect class="seg seg-{i%2}" x="{x(start)}" y="6" width="{round(max(x(end)-x(start)-2,1),1)}" height="12"><title>{E(title)}</title></rect>'
+ marks=''.join(f'<rect class="mark" x="{max(x(seconds(t))-1.5,0)}" y="0" width="3" height="24"><title>{E(t)} {E(label)}</title></rect>' for t,label in key)
+ return f'<figure class="time-map"><svg viewBox="0 0 1000 24" preserveAspectRatio="none" role="img" aria-label="강의 전체 길이에서 장과 핵심 세션의 위치">{segs}{marks}</svg><figcaption class="time-scale"><span>0:00</span><span class="time-legend"><i class="legend-mark" aria-hidden="true"></i>핵심 세션 · 막대 구간은 장</span><span>{E(duration)}</span></figcaption></figure>'
 def pager(prev,nxt):
  cell=lambda r,cls,label:(f'<a class="pager-link {cls}" href="{E(r["id"],quote=True)}.html"><small>{label}</small><span>{E(r["title"])}</span></a>' if r else '<span class="pager-link is-empty" aria-hidden="true"></span>')
  return f'<nav class="lecture-pager" aria-label="다른 강의">{cell(prev,"is-prev","← 더 최근 강의")}{cell(nxt,"is-next","지난 강의 →")}</nav>'
@@ -48,7 +82,7 @@ def render(row,record,mini,prev=None,nxt=None):
  if timed:
   timeline_text=E(record['timeline'])
   actions.append('<a class="btn secondary" href="#lecture-comment">타임스탬프로 이동</a>')
-  second+=f'<section id="lecture-comment" class="lecture-section"><span id="timeline"></span><h2>타임스탬프</h2><div class="actions"><button id="copy" data-copy-target="comment" type="button">타임스탬프 복사</button><span id="status" role="status" aria-live="polite"></span></div><input type="checkbox" id="timeline-toggle" class="timeline-toggle" aria-label="타임스탬프 전체 펼치기"><label class="timeline-box" for="timeline-toggle"><pre id="comment" tabindex="0"><code>{timeline_text}</code></pre></label></section>'
+  second+=f'<section id="lecture-comment" class="lecture-section"><span id="timeline"></span><h2>타임스탬프</h2><div class="actions"><button id="copy" data-copy-target="comment" type="button">타임스탬프 복사</button><span id="status" role="status" aria-live="polite"></span></div>{time_map(record['timeline'],row.get('duration',''),youtube_url)}<input type="checkbox" id="timeline-toggle" class="timeline-toggle" aria-label="타임스탬프 전체 펼치기"><label class="timeline-box" for="timeline-toggle"><pre id="comment" tabindex="0"><code>{timeline_text}</code></pre></label></section>'
  action=''.join(actions)
  practice_html=''
  if practice:
@@ -62,7 +96,7 @@ def render(row,record,mini,prev=None,nxt=None):
  body=body.replace('<div class="actions">'+action+'</div>','')
  body=body.replace('</header>'+old,'</header>'+section_nav+old)
  body=body.replace('<details class="source-disclosure">','<details class="source-disclosure" id="lecture-sources">')
- return page(row['title'],body,base='../')
+ return page(row['title'],body,base='../',description=mini['lead'],path=f'lectures/{vid}.html')
 def build(check=False):
  records=load('lecture_compact.json');minis=load('mini_courses.json');issues=[]
  rows=json.loads((R/'lectures.json').read_text(encoding='utf-8'))
