@@ -6,7 +6,7 @@
 ## 자료 등록 계약
 ### 영상 강의 — `lectures.json`
 - 필수: `id`(안정적인 내부 콘텐츠 ID; 검증된 YouTube 영상 ID 또는 별도 슬러그), `kind: "lecture"`, `creator`(실제 화자), `title`, `duration`, `description`, `tags`.
-- 날짜는 확인된 공개일만 `date`로 기록하고, `filter_tag`는 필요할 때만 사용한다.
+- 날짜는 확인된 공개일만 `date`로 기록한다. 홈 주제 칩은 `topic`(명상·마음근력·감정과 뇌·몸과 수면 중 하나)으로 만든다. 새 주제는 꼭 필요할 때만 추가한다.
 
 ### 책·연구·글·개인 노트 — `materials.json`
 현재 값은 `[]`로 시작한다. 새로운 자료가 있을 때만 등록한다.

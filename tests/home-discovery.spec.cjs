@@ -25,8 +25,8 @@ for(const viewport of [{width:390,height:844},{width:1280,height:800}]){
     await first.click();  // No search: one card tap.
     await expect(page).toHaveURL(/\/lectures\/.*\.html$/);
     await page.goto('/index.html');
-    await page.locator('[data-filter-for="search"][data-value="명상"]').click();
-    await expect(page.locator('#lecture-list .lecture:visible')).toHaveCount(3);
+    await page.locator('[data-filter-for="topic"][data-value="명상"]').click();
+    await expect(page.locator('#lecture-list .lecture:visible')).toHaveCount(4);
     await page.locator('#lecture-list .lecture:visible').first().click(); // Filter + card: two taps.
     await expect(page.locator('#lecture-overview')).toBeVisible();
     await page.goto('/index.html');

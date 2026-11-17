@@ -13,6 +13,7 @@
       "핑크 노이즈",
       "인지엄"
     ],
+    "topic": "명상",
     "creator": "김주환",
     "kind": "lecture",
     "video_url": "https://www.youtube.com/watch?v=sAgj5V4Ewno"
@@ -30,6 +31,7 @@
       "과각성",
       "바흐 평균율"
     ],
+    "topic": "몸과 수면",
     "creator": "김주환",
     "kind": "lecture",
     "video_url": "https://www.youtube.com/watch?v=VUHrJZbpIjI"
@@ -46,6 +48,7 @@
       "노시보",
       "내면소통"
     ],
+    "topic": "명상",
     "creator": "김주환",
     "kind": "lecture",
     "video_url": "https://www.youtube.com/watch?v=oD5-nTDCKPg"
@@ -62,6 +65,7 @@
       "편도체",
       "정서 조절"
     ],
+    "topic": "감정과 뇌",
     "creator": "김주환",
     "kind": "lecture"
   },
@@ -79,7 +83,7 @@
       "MBSR",
       "MBCT"
     ],
-    "filter_tag": "명상",
+    "topic": "명상",
     "creator": "김주환",
     "kind": "lecture"
   },
@@ -96,6 +100,7 @@
       "몰입",
       "지루함"
     ],
+    "topic": "감정과 뇌",
     "creator": "Arthur Brooks",
     "kind": "lecture",
     "video_url": "https://www.youtube.com/watch?v=KHd-luu3M8s"
@@ -110,6 +115,7 @@
       "텅 빈 고요",
       "내면소통"
     ],
+    "topic": "명상",
     "creator": "김주환",
     "kind": "lecture",
     "video_url": "https://www.youtube.com/watch?v=_Q3yyZvwH1o",
@@ -129,6 +135,7 @@
       "결정론",
       "마음근력"
     ],
+    "topic": "감정과 뇌",
     "creator": "김주환",
     "kind": "lecture",
     "video_url": "https://www.youtube.com/watch?v=a2SVP-H_wPY"
@@ -146,6 +153,7 @@
       "몸과 마음",
       "집착"
     ],
+    "topic": "감정과 뇌",
     "creator": "김주환",
     "kind": "lecture"
   },
@@ -162,6 +170,7 @@
       "교대 근무",
       "수면"
     ],
+    "topic": "몸과 수면",
     "creator": "Satchin Panda",
     "kind": "lecture",
     "video_url": "https://www.youtube.com/watch?v=7R3-3HR6-u4"
@@ -180,6 +189,7 @@
       "자타긍정",
       "마음근력"
     ],
+    "topic": "마음근력",
     "creator": "김주환",
     "kind": "lecture"
   },
@@ -196,6 +206,7 @@
       "자타긍정",
       "마음근력"
     ],
+    "topic": "마음근력",
     "creator": "김주환",
     "kind": "lecture"
   },
@@ -212,6 +223,7 @@
       "선호",
       "오유지족"
     ],
+    "topic": "마음근력",
     "creator": "김주환",
     "kind": "lecture"
   },
@@ -228,6 +240,7 @@
       "자타긍정",
       "마음근력"
     ],
+    "topic": "마음근력",
     "creator": "김주환",
     "kind": "lecture"
   },
@@ -244,6 +257,7 @@
       "자타긍정",
       "마음근력"
     ],
+    "topic": "마음근력",
     "creator": "김주환",
     "kind": "lecture"
   },
@@ -260,6 +274,7 @@
       "자타긍정",
       "분노"
     ],
+    "topic": "마음근력",
     "creator": "김주환",
     "kind": "lecture"
   },
@@ -276,6 +291,7 @@
       "혈당",
       "간 건강"
     ],
+    "topic": "몸과 수면",
     "creator": "Andrew Huberman",
     "kind": "lecture",
     "video_url": "https://www.youtube.com/watch?v=9tRohh0gErM"
@@ -294,6 +310,7 @@
       "노력",
       "습관"
     ],
+    "topic": "감정과 뇌",
     "creator": "Andrew Huberman",
     "kind": "lecture"
   }
