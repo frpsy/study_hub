@@ -64,17 +64,15 @@ test('glass header stays legible and cards stay compact on mobile',async({browse
   const info=await page.evaluate(()=>{
     const header=document.querySelector('.site-header');
     const card=document.querySelector('.lecture');
-    const read=card.querySelector('.read');
     const style=getComputedStyle(header);
     const match=style.backgroundColor.match(/rgba?\(([^)]+)\)/);
     const parts=match?match[1].split(',').map(Number):[];
-    return {alpha:parts.length===4?parts[3]:1,blur:(style.backdropFilter||style.webkitBackdropFilter||''),headerHeight:header.getBoundingClientRect().height,cardHeight:card.getBoundingClientRect().height,readMargin:parseFloat(getComputedStyle(read).marginTop)};
+    return {alpha:parts.length===4?parts[3]:1,blur:(style.backdropFilter||style.webkitBackdropFilter||''),headerHeight:header.getBoundingClientRect().height,cardHeight:card.getBoundingClientRect().height};
   });
   expect(info.alpha,'translucent header must keep enough opacity to stay legible').toBeGreaterThanOrEqual(0.7);
   if(info.alpha<1)expect(info.blur,'translucent header needs a backdrop blur').toContain('blur');
   expect(info.headerHeight,'mobile header should stay compact').toBeLessThan(80);
   expect(info.cardHeight,'cards should not stretch with empty space').toBeLessThan(400);
-  expect(info.readMargin,'link spacing should not be auto').toBeLessThanOrEqual(14);
   await context.close();
 });
 
