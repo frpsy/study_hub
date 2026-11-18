@@ -38,10 +38,9 @@ def render(rows, materials=None, leads=None):
         creator=html.escape(row.get('creator','출처 미기재'))
         topic=html.escape(topic_of(row),quote=True)
         searchable=html.escape(" ".join([row['title'],row.get('description',''),row.get('creator',''),topic_of(row)]+row['tags']),quote=True)
-        tags=''.join('<span>'+html.escape(x)+'</span>' for x in row['tags'][:2])
         lead=leads.get(row['id'])
         text=f'<p class="card-lead">{html.escape(lead)}</p>' if lead else f'<p>{html.escape(row["description"])}</p>'
-        cards+=f'<a class="lecture" data-video-id="{row["id"]}" data-kind="lecture" data-topic="{topic}" data-date="{row.get("date","")}" data-added="{row.get("added","")}" data-creator="{html.escape(row.get("creator",""),quote=True)}" data-search="{searchable}" href="lectures/{row["id"]}.html"><div class="meta"><span class="card-topic">{topic}</span>'+(f'<time datetime="{row["date"]}">{row["date"].replace("-",".")}</time>' if row.get("date") else '')+f'<span>{html.escape(row["duration"])}</span><span class="creator">{creator}</span></div><h2>{html.escape(row["title"])}</h2>{text}<div class="tags">{tags}</div><span class="read">'+("핵심 요약과 타임스탬프 →" if row.get("creator","김주환")=="김주환" else "상세 요약 →")+'</span></a>'
+        cards+=f'<a class="lecture" data-video-id="{row["id"]}" data-kind="lecture" data-topic="{topic}" data-date="{row.get("date","")}" data-added="{row.get("added","")}" data-creator="{html.escape(row.get("creator",""),quote=True)}" data-search="{searchable}" href="lectures/{row["id"]}.html"><div class="meta"><span class="card-topic">{topic}</span>'+(f'<time datetime="{row["date"]}">{row["date"].replace("-",".")}</time>' if row.get("date") else '')+f'<span>{html.escape(row["duration"])}</span><span class="creator">{creator}</span></div><h2>{html.escape(row["title"])}</h2>{text}</a>'
     # Other material types have their own pages and are not assumed to have a YouTube ID.
     type_names={'book':'책','paper':'연구','article':'글','note':'학습 노트'}
     for item in materials:
@@ -60,7 +59,7 @@ def render(rows, materials=None, leads=None):
     feature=''
     first=next((r for r in rows if leads.get(r['id'])),None)
     if first:
-        feature=f'<a class="today-line" href="lectures/{first["id"]}.html"><span class="eyebrow">오늘의 한 문장</span><blockquote>{html.escape(leads[first["id"]])}</blockquote><span class="today-source">{html.escape(first["title"])} · {html.escape(first.get("creator",""))}<span aria-hidden="true"> →</span></span></a>'
+        feature=f'<a class="today-line" href="lectures/{first["id"]}.html"><span class="eyebrow">오늘의 한 문장</span><blockquote>{html.escape(leads[first["id"]])}</blockquote><span class="today-source">{html.escape(first["title"])} · {html.escape(first.get("creator",""))}</span></a>'
     body=f'''<div class="site-shell"><main id="main" class="home-main"><section id="lectures"><div id="home-catalog"><h1 class="home-title">강의 요약</h1><p class="catalog-intro">한 문장에서 시작해 깊이 읽는 강의 서재</p>{feature}<div class="search-panel"><label for="search">{noun} 검색</label><div class="search-controls"><input class="search" id="search" type="search" placeholder="제목, 강연자, 주제로 검색" data-filter-input="#home-catalog" data-count="count" data-empty="empty" data-noun="{noun}" data-persist-query="true"><button type="button" class="btn secondary" data-clear-for="search" hidden>초기화</button></div><div class="filter-chips" role="group" aria-label="주제">{chips}</div><p class="search-summary" id="count" aria-live="polite">{total}개 {noun}</p></div><div class="catalog-order"><span>모든 {noun}</span><div class="sort-toggle" role="group" aria-label="정렬"><button type="button" data-sort="latest" aria-pressed="true">최신순</button><button type="button" data-sort="added" aria-pressed="false">추가된순</button></div></div><div class="lecture-grid" id="lecture-list">{cards}</div></div><p class="empty" id="empty" hidden>검색 결과가 없습니다. 다른 단어로 찾거나 ‘전체’를 선택해 주세요.</p></section></main></div>'''
     return page('강의 요약',body)
 
