@@ -9,6 +9,10 @@ def block_html(t):
  return '<ul class="detail-points">'+''.join('<li><strong>'+E(i['l'])+'</strong>. '+E(i['t'])+'</li>' for i in t['list'])+'</ul>'
 
 def load(name):return json.loads((R/'data'/name).read_text(encoding='utf-8'))
+def seconds(stamp):
+ total=0
+ for part in stamp.split(':'):total=total*60+int(part)
+ return total
 def practice_step(step, record, youtube_url):
  # Keep disclosure and source navigation separate: opening an explanation never
  # launches a video. Non-Kim lectures link to a real summary section, not a time.
@@ -16,22 +20,19 @@ def practice_step(step, record, youtube_url):
  label=(' <small>('+E(stamp)+')</small>') if stamp else ''
  source=''
  if stamp and youtube_url:
-  seconds=0
-  for part in stamp.split(':'):seconds=seconds*60+int(part)
-  source=f'<a class="practice-source" href="{E(youtube_url,quote=True)}&amp;t={seconds}s" target="_blank" rel="noopener">영상에서 {E(stamp)} 보기 ↗</a>'
+  source=f'<a class="practice-source" href="{E(youtube_url,quote=True)}&amp;t={seconds(stamp)}s" target="_blank" rel="noopener">영상에서 {E(stamp)} 보기 ↗</a>'
  elif 'detail_index' in step:
   index=step['detail_index']
   source=f'<a class="practice-source" href="#detail-{index+1}">관련 해설 · {E(record["detail"][index]["h"])}</a>'
  return '<details><summary>'+E(step['h'])+label+'</summary><ul>'+''.join('<li>'+E(t)+'</li>' for t in step['b'])+'</ul>'+source+'</details>'
-def seconds(stamp):
- total=0
- for part in stamp.split(':'):total=total*60+int(part)
- return total
 def duration_seconds(text):
  # "2시간 4분 2초" 형식. 읽지 못하면 None을 돌려주고 마지막 시각을 길이로 쓴다.
  m=re.fullmatch(r'\s*(?:(\d+)시간)?\s*(?:(\d+)분)?\s*(?:(\d+)초)?\s*',text or '')
  if not m or not any(m.groups()):return None
  h,mi,se=(int(x or 0) for x in m.groups());return h*3600+mi*60+se
+def stamp_label(total):
+ h,rest=divmod(total,3600);m,sec=divmod(rest,60)
+ return f'{h}:{m:02d}:{sec:02d}' if h else f'{m}:{sec:02d}'
 def time_map(timeline,duration,youtube_url=None):
  """강의 전체 길이 위에 장(■ N.)의 구간과 핵심 세션 위치를 보여 주는 막대. 원문 타임스탬프는 그대로 둔다."""
  key,chapters,mode=[],[],None
@@ -51,12 +52,16 @@ def time_map(timeline,duration,youtube_url=None):
  points=[seconds(t) for t,_ in key]+[c[1] for c in chapters]
  total=max(duration_seconds(duration) or 0,max(points)+60)
  x=lambda t:round(t/total*1000,1)
+ def seek(start,label,shape):
+  # 막대의 구간·표시를 누르면 원본 영상의 그 시각으로 간다. 영상 주소가 없으면 그림만 둔다.
+  if not youtube_url:return shape
+  return f'<a href="{E(youtube_url,quote=True)}&amp;t={start}s" target="_blank" rel="noopener" aria-label="{E(label)} 영상에서 보기">{shape}</a>'
  segs=''
  for i,(title,start) in enumerate(chapters):
   end=chapters[i+1][1] if i+1<len(chapters) else total
-  segs+=f'<rect class="seg seg-{i%2}" x="{x(start)}" y="6" width="{round(max(x(end)-x(start)-2,1),1)}" height="12"><title>{E(title)}</title></rect>'
- marks=''.join(f'<rect class="mark" x="{max(x(seconds(t))-1.5,0)}" y="0" width="3" height="24"><title>{E(t)} {E(label)}</title></rect>' for t,label in key)
- return f'<figure class="time-map"><svg viewBox="0 0 1000 24" preserveAspectRatio="none" role="img" aria-label="강의 전체 길이에서 장과 핵심 세션의 위치">{segs}{marks}</svg><figcaption class="time-scale"><span>0:00</span><span class="time-legend"><i class="legend-mark" aria-hidden="true"></i>핵심 세션 · 막대 구간은 장</span><span>{E(duration)}</span></figcaption></figure>'
+  segs+=seek(start,f'{stamp_label(start)} {title}',f'<rect class="seg seg-{i%2}" x="{x(start)}" y="6" width="{round(max(x(end)-x(start)-2,1),1)}" height="12"><title>{E(title)}</title></rect>')
+ marks=''.join(seek(seconds(t),f'{t} {label}',f'<rect class="hit" x="{max(x(seconds(t))-8,0)}" y="0" width="16" height="24"/><rect class="mark" x="{max(x(seconds(t))-1.5,0)}" y="0" width="3" height="24"><title>{E(t)} {E(label)}</title></rect>') for t,label in key)
+ return f'<figure class="time-map"><svg viewBox="0 0 1000 24" preserveAspectRatio="none" role="group" aria-label="강의 전체 길이에서 장과 핵심 세션의 위치">{segs}{marks}</svg><figcaption class="time-scale"><span>0:00</span><span class="time-legend"><i class="legend-mark" aria-hidden="true"></i>핵심 세션 · 눌러서 그 시각 재생</span><span>{E(duration)}</span></figcaption></figure>'
 def pager(prev,nxt):
  cell=lambda r,cls,label:(f'<a class="pager-link {cls}" href="{E(r["id"],quote=True)}.html"><small>{label}</small><span>{E(r["title"])}</span></a>' if r else '<span class="pager-link is-empty" aria-hidden="true"></span>')
  return f'<nav class="lecture-pager" aria-label="다른 강의">{cell(prev,"is-prev","← 더 최근 강의")}{cell(nxt,"is-next","지난 강의 →")}</nav>'
@@ -82,8 +87,12 @@ def render(row,record,mini,prev=None,nxt=None):
  if timed:
   timeline_text=E(record['timeline'])
   timeline_map=time_map(record['timeline'],row.get('duration',''),youtube_url)
+  # 영상은 처음부터 불러오지 않는다. 버튼·막대·실천 포인트의 시각 링크를 누를 때만 이 자리에 플레이어를 넣는다(assets/site.js).
+  # 스크립트가 없으면 같은 링크가 유튜브를 새 탭으로 연다.
+  m=re.search(r'[?&]v=([A-Za-z0-9_-]{11})',youtube_url or '')
+  embed=(f'<div class="video-embed" data-video-id="{m.group(1)}"><a class="video-open" href="{E(youtube_url,quote=True)}&amp;t=0s" target="_blank" rel="noopener">▶ 이 페이지에서 영상 보기</a></div>' if m else '')
   actions.append('<a class="btn secondary" href="#lecture-comment">타임스탬프로 이동</a>')
-  second+=f'<section id="lecture-comment" class="lecture-section"><span id="timeline"></span><h2>타임스탬프</h2><div class="actions"><button id="copy" data-copy-target="comment" type="button">타임스탬프 복사</button><span id="status" role="status" aria-live="polite"></span></div>{timeline_map}<input type="checkbox" id="timeline-toggle" class="timeline-toggle" aria-label="타임스탬프 전체 펼치기"><label class="timeline-box" for="timeline-toggle"><pre id="comment" tabindex="0"><code>{timeline_text}</code></pre></label></section>'
+  second+=f'<section id="lecture-comment" class="lecture-section"><span id="timeline"></span><h2>타임스탬프</h2><div class="actions"><button id="copy" data-copy-target="comment" type="button">타임스탬프 복사</button><span id="status" role="status" aria-live="polite"></span></div>{embed}{timeline_map}<input type="checkbox" id="timeline-toggle" class="timeline-toggle" aria-label="타임스탬프 전체 펼치기"><label class="timeline-box" for="timeline-toggle"><pre id="comment" tabindex="0"><code>{timeline_text}</code></pre></label></section>'
  action=''.join(actions)
  practice_html=''
  if practice:

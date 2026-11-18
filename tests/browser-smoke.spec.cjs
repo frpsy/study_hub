@@ -393,6 +393,25 @@ test('time map places chapters and key sessions on the lecture length above the 
   expect(order).toBe(true);
 });
 
+test('time map and practice links play the lecture inside the page from that time',async({page})=>{
+  await page.route(/youtube(-nocookie)?\.com/,route=>route.abort());
+  await page.goto('/lectures/xA-4G4z-1MM.html');
+  await expect(page.locator('.video-embed iframe')).toHaveCount(0);
+  const mark=page.locator('#lecture-comment .time-map a').nth(1);
+  const href=await mark.getAttribute('href');
+  const start=/[?&]t=(\d+)s/.exec(href)[1];
+  await mark.click();
+  const frame=page.locator('.video-embed iframe');
+  await expect(frame).toHaveCount(1);
+  expect(await frame.getAttribute('src')).toContain('embed/xA-4G4z-1MM?start='+start+'&');
+  expect(page.context().pages().length).toBe(1);
+  const practice=page.locator('#lecture-practice details').first();
+  await practice.locator('summary').click();
+  await practice.locator('.practice-source').click();
+  expect(await frame.getAttribute('src')).toContain('start=1889&');
+  await expect(page.locator('.video-embed iframe')).toHaveCount(1);
+});
+
 test('outline sheet lists sections and detail headings and closes on navigation',async({browser})=>{
   const context=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce'});
   const page=await context.newPage();

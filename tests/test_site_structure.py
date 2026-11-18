@@ -73,6 +73,34 @@ class TimelineDisplayRegression(unittest.TestCase):
             for section in sections:
                 self.assertNotRegex(section,r'<(?:ol|ul)\b',page.name)
 
+class TimeMapSeekLinks(unittest.TestCase):
+    def test_time_map_shapes_link_to_video_time(self):
+        import re
+        root=Path(__file__).resolve().parents[1]
+        checked=0
+        for page in (root/'lectures').glob('*.html'):
+            source=page.read_text(encoding='utf-8')
+            if 'class="time-map"' not in source:
+                continue
+            svg=re.search(r'<figure class="time-map"><svg.*?</svg>',source,re.S).group(0)
+            shapes=len(re.findall(r'<rect class="(?:seg seg-\d|mark)"',svg))
+            links=re.findall(r'<a href="[^"]+&amp;t=\d+s" target="_blank" rel="noopener" aria-label="[^"]+">',svg)
+            if '<a ' in svg:
+                self.assertEqual(len(links),shapes,page.name)
+                checked+=1
+        self.assertGreater(checked,0)
+
+class VideoEmbedPlaceholder(unittest.TestCase):
+    def test_timed_lectures_offer_lazy_embed_without_iframe(self):
+        import re
+        root=Path(__file__).resolve().parents[1]
+        for page in (root/'lectures').glob('*.html'):
+            source=page.read_text(encoding='utf-8')
+            self.assertNotIn('<iframe',source,page.name)
+            if 'class="time-map"' in source and 'youtube.com/watch?v=' in source:
+                m=re.search(r'<div class="video-embed" data-video-id="([A-Za-z0-9_-]{11})"><a class="video-open" href="[^"]+&amp;t=0s"',source)
+                self.assertIsNotNone(m,page.name)
+
 class LectureLayoutRegression(unittest.TestCase):
     def test_missing_required_stage_is_rejected(self):
         from validate_site import lecture_layout_errors
