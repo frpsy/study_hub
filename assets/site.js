@@ -301,3 +301,35 @@
   addEventListener('pageshow',sync);
   sync();
 })();
+
+// 영상 임베드: 버튼·타임라인 막대·실천 포인트의 시각 링크를 누르면 이 페이지 안의 플레이어가 그 시각부터 재생한다.
+// 누르기 전에는 유튜브를 전혀 불러오지 않는다. 새 탭 열기(보조키·가운데 버튼)와 오프라인에서는 원래 링크대로 둔다.
+(()=>{
+  const box=document.querySelector('.video-embed[data-video-id]');
+  if(!box)return;
+  const id=box.dataset.videoId;
+  let frame=null;
+  const startOf=href=>{const m=/[?&]t=(\d+)s/.exec(href||'');return m?Number(m[1]):0};
+  const play=start=>{
+    const src='https://www.youtube-nocookie.com/embed/'+encodeURIComponent(id)+'?start='+start+'&autoplay=1&playsinline=1&rel=0';
+    if(!frame){
+      frame=document.createElement('iframe');
+      frame.title='강의 영상';
+      frame.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';
+      frame.allowFullscreen=true;
+      frame.referrerPolicy='strict-origin-when-cross-origin';
+      box.classList.add('is-playing');
+      box.replaceChildren(frame);
+    }
+    frame.src=src;
+    const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    box.scrollIntoView({block:'start',behavior:reduce?'auto':'smooth'});
+  };
+  document.addEventListener('click',event=>{
+    const link=event.target.closest('.video-open,.time-map a,.practice-source[href*="youtube.com/watch"]');
+    if(!link||event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
+    if(navigator.onLine===false)return;
+    event.preventDefault();
+    play(startOf(link.getAttribute('href')));
+  });
+})();

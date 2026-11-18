@@ -8,9 +8,9 @@ SITE_DESCRIPTOR='개인 학습 서재'
 SITE_DESCRIPTION='강의별 핵심 요약과 타임스탬프·상세 요약을 모은 개인 학습 서재'
 SITE_URL='https://frpsy.github.io/study_hub/'
 ASSET_VERSION=json.loads((R/'build-info.json').read_text(encoding='utf-8'))['version']
-def header(base='',active='lectures'):
+def header(base=''):
     return f'<a class="skip-link" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="site-header-inner"><a class="site-brand" href="{base}index.html"><img class="brand-symbol" src="{base}assets/icon.svg" width="32" height="32" alt="" aria-hidden="true"><span class="brand-name">{SITE_NAME}<small>{SITE_DESCRIPTOR}</small></span></a></div></header>'
-def footer(base='',account=False):
+def footer(base=''):
     # 화면 테마 버튼은 늘 보이게 두고, 강조 색·글자 크기는 보기 설정 패널에 모은다. 값은 이 기기에만 저장하고 학습 기록은 남기지 않는다.
     swatches=''.join(f'<button type="button" class="accent-swatch" data-accent="{k}" aria-label="강조 색 {n}" aria-pressed="{str(k=="red").lower()}"></button>' for k,n in (('red','레드'),('blue','블루'),('green','그린')))
     sizes=''.join(f'<button type="button" class="text-size" data-text-size="{k}" aria-pressed="{str(k=="md").lower()}">{n}</button>' for k,n in (('sm','작게'),('md','보통'),('lg','크게')))
@@ -19,8 +19,8 @@ def share_meta(title,description,path):
     # 공유 미리보기: 강의마다 한 문장 핵심을 설명으로 쓴다. 이미지는 사이트 아이콘이다.
     d=html.escape(description,quote=True);t=html.escape(title,quote=True)
     return f'<meta name="description" content="{d}"><meta property="og:type" content="{"article" if path else "website"}"><meta property="og:site_name" content="{SITE_NAME}"><meta property="og:title" content="{t}"><meta property="og:description" content="{d}"><meta property="og:url" content="{SITE_URL}{html.escape(path,quote=True)}"><meta property="og:image" content="{SITE_URL}assets/icon-512.png"><meta name="twitter:card" content="summary">'
-def page(title,body,base='',active='lectures',account=False,description=None,path=''):
-    return f'<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#ffffff"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="{SITE_NAME}"><meta name="apple-mobile-web-app-status-bar-style" content="default">{share_meta(title,description or SITE_DESCRIPTION,path)}<title>{SITE_NAME} · {html.escape(title)}</title><link rel="icon" href="{base}assets/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" sizes="180x180" href="{base}assets/apple-touch-icon.png"><link rel="manifest" href="{base}manifest.webmanifest"><script src="{base}assets/theme.js?v={ASSET_VERSION}"></script><link rel="stylesheet" href="{base}assets/site.css?v={ASSET_VERSION}"><script defer src="{base}assets/site.js?v={ASSET_VERSION}"></script></head><body>{header(base,active)}{body}{footer(base,account)}</body></html>'
+def page(title,body,base='',description=None,path=''):
+    return f'<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#ffffff"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="{SITE_NAME}"><meta name="apple-mobile-web-app-status-bar-style" content="default">{share_meta(title,description or SITE_DESCRIPTION,path)}<title>{SITE_NAME} · {html.escape(title)}</title><link rel="icon" href="{base}assets/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" sizes="180x180" href="{base}assets/apple-touch-icon.png"><link rel="manifest" href="{base}manifest.webmanifest"><script src="{base}assets/theme.js?v={ASSET_VERSION}"></script><link rel="stylesheet" href="{base}assets/site.css?v={ASSET_VERSION}"><script defer src="{base}assets/site.js?v={ASSET_VERSION}"></script></head><body>{header(base)}{body}{footer(base)}</body></html>'
 def topic_of(row):
     # 홈의 주제 묶음. 등록부의 topic이 우선이고, 없으면 첫 태그를 쓴다.
     return row.get('topic') or row.get('filter_tag') or row['tags'][0]
