@@ -938,8 +938,13 @@ body{background:var(--paper)}
 .compact-lecture #lecture-overview .summary-tier>.summary-lead{padding:4px 0 4px 20px;background:transparent;border:0;border-left:3px solid var(--accent);border-radius:0;font-weight:600;line-height:1.8}
 
 /* 핵심 세 가지는 순서가 아니므로 번호 대신 점 */
-.compact-lecture #lecture-overview .summary-list li{padding-left:24px}
-.compact-lecture #lecture-overview .summary-list li::before{content:"";top:27px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.compact-lecture #lecture-overview .summary-list li{padding-left:22px}
+/* 점을 첫 줄 글자에 붙여 둔다. 고정 top 값은 글자 크기·기기마다 어긋난다. */
+.compact-lecture #lecture-overview .summary-list li::before{content:"";position:static;display:inline-block;top:auto;left:auto;width:6px;height:6px;margin:0 14px 0 -20px;border-radius:50%;background:var(--accent);vertical-align:middle;transform:translateY(-1px)}
+
+/* 오늘의 실천 번호 원: 카드 가운데가 아니라 첫 줄에 맞춘다. 원 안 숫자와 문장의 기준선을 맞추므로 글자 크기·줄 수와 상관없다. */
+#lecture-practice .summary-tier:first-of-type .summary-list li{display:grid;grid-template-columns:26px minmax(0,1fr);column-gap:14px;align-items:baseline;padding-left:18px}
+#lecture-practice .summary-tier:first-of-type .summary-list li::before{position:static;top:auto;left:auto;transform:none;line-height:1}
 
 @media(max-width:780px){
  .home-title{margin:26px 0 4px;font-size:22px}

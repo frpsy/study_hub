@@ -410,6 +410,40 @@ test('time map and practice links play the lecture inside the page from that tim
   await expect(page.locator('.video-embed iframe')).toHaveCount(1);
 });
 
+test('list markers sit on the first text line at every text size',async({browser})=>{
+  for(const [width,size] of [[360,'lg'],[390,'md'],[1280,'sm']]){
+    const context=await browser.newContext({viewport:{width,height:844}});
+    await context.addInitScript(s=>{try{localStorage.setItem('study-site-text-size',s)}catch{}},size);
+    const page=await context.newPage();
+    for(const url of ['/lectures/ZCty0wvogDo.html','/lectures/sAgj5V4Ewno.html','/index.html']){
+      await page.goto(url);
+      const result=await page.evaluate(()=>{
+        const off=[];
+        for(const el of document.querySelectorAll('body *')){
+          const cs=getComputedStyle(el,'::before');
+          if(cs.content==='none'||cs.content==='normal'||cs.display==='none'||cs.position!=='absolute')continue;
+          const h=parseFloat(cs.height),w=parseFloat(cs.width),top=parseFloat(cs.top);
+          if(!(h>0&&h<40&&w>0&&w<40)||Number.isNaN(top))continue;
+          const box=el.getBoundingClientRect();if(!box.height)continue;
+          const m=cs.transform.match(/matrix\(([^)]+)\)/);const ty=m?Number(m[1].split(',')[5]):0;
+          const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,{acceptNode:n=>n.textContent.trim()?1:3});
+          const text=walker.nextNode();if(!text)continue;
+          const range=document.createRange();range.setStart(text,0);range.setEnd(text,1);
+          const line=range.getClientRects()[0];if(!line)continue;
+          const d=box.top+top+ty+h/2-(line.top+line.bottom)/2;
+          if(Math.abs(d)>3)off.push(el.parentElement.className+' '+Math.round(d));
+        }
+        const statics=[...document.querySelectorAll('#lecture-overview .summary-list li,#lecture-practice .summary-tier:first-of-type .summary-list li')]
+          .map(li=>getComputedStyle(li,'::before').position).filter(p=>p!=='static');
+        return {off,statics};
+      });
+      expect(result.off,url+' @'+width+'/'+size).toEqual([]);
+      expect(result.statics,url).toEqual([]);
+    }
+    await context.close();
+  }
+});
+
 test('outline sheet lists sections and detail headings and closes on navigation',async({browser})=>{
   const context=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce'});
   const page=await context.newPage();
