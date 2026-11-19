@@ -978,3 +978,5 @@ html{scroll-padding-top:var(--anchor-offset,158px)}
 .outline-view .view-settings-panel{margin:0;padding:6px 0 0;border:0;background:transparent}
 .outline-view .accent-picker{margin-left:0}
 
+
+.editor-notes{margin-top:12px}.editor-notes h3{font-size:14px;margin:14px 0 4px;color:var(--ink)}.editor-notes .editor-list{margin:4px 0 12px;padding:0;list-style:none}.editor-notes .editor-list li{border:0;border-bottom:1px solid var(--line);padding:9px 0;font-size:13.5px;line-height:1.75;color:var(--muted)}.editor-notes .editor-list li:last-child{border-bottom:0}

@@ -12,9 +12,11 @@
 |---|---|
 | 강의 등록(최신순) | `lectures.json` → `python3 scripts/build_library.py` |
 | 한 문장·핵심 세 가지 | `data/mini_courses.json`의 `lead`·`three` |
-| 타임스탬프(김주환만)·상세 요약 `detail`·실천 포인트 `practice`(선택)·출처·옛 앵커 | `data/lecture_compact.json` → `python3 scripts/build_compact_lectures.py` |
+| 타임스탬프(김주환만)·상세 요약 `detail`·실천 포인트 `practice`(선택)·편집자 주 `editor`·출처·옛 앵커 | `data/lecture_compact.json` → `python3 scripts/build_compact_lectures.py` |
 | 화면 버전 | `build-info.json`의 `version` (보이는 변경마다 올리고 재생성) |
 | 원본 자막·근거 | `transcripts/`(가공 금지), `study-audits/<영상ID>.json` |
+
+- 본문에는 강의 내용만 쓴다. 한계·제약·`[보충]`·"대조하지 않았다" 같은 문장은 본문에 쓰지 않고 페이지 맨 끝 접힌 ‘편집자 주’(`editor`)에 모은다. 도식은 이해에 실제로 도움이 될 때만 쓴다(`편집규칙.md` 17절).
 
 ## 검증 (병합 전 모두 통과)
 ```
