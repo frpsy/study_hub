@@ -151,8 +151,8 @@ test('library identity and reading hierarchy stay consistent',async({browser})=>
   expect(compact.titleHeight).toBeLessThan(95);
   expect(compact.cardCount).toBe(expectedLibraryCount);
   await page.locator('[data-filter-for="topic"][data-value="명상"]').click();
-  await expect(page.locator('#count')).toHaveText('4개 강의');
-  await expect(page.locator('#lecture-list .lecture:visible')).toHaveCount(4);
+  await expect(page.locator('#count')).toHaveText('5개 강의');
+  await expect(page.locator('#lecture-list .lecture:visible')).toHaveCount(5);
   await page.locator('[data-filter-for="topic"][data-value="명상"]').click();  // 같은 주제를 다시 누르면 전체로 돌아간다.
   await expect(page.locator('#count')).toHaveText(expectedLibraryCount+'개 강의');
   await context.close();
