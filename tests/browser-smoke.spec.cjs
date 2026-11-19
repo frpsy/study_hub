@@ -467,13 +467,13 @@ test('view settings change text size and keep it on this device only',async({pag
   const size=()=>page.locator('.detail-body p').first().evaluate(el=>parseFloat(getComputedStyle(el).fontSize));
   const base=await size();
   await page.locator('.view-settings>summary').click();
-  await page.locator('.text-size[data-text-size="lg"]').click();
-  await expect(page.locator('.text-size[data-text-size="lg"]')).toHaveAttribute('aria-pressed','true');
+  await page.locator('.view-settings .text-size[data-text-size="lg"]').click();
+  await expect(page.locator('.view-settings .text-size[data-text-size="lg"]')).toHaveAttribute('aria-pressed','true');
   expect(await size()).toBeGreaterThan(base);
   await page.reload();
   expect(await size()).toBeGreaterThan(base);
   await page.locator('.view-settings>summary').click();
-  await page.locator('.text-size[data-text-size="md"]').click();
+  await page.locator('.view-settings .text-size[data-text-size="md"]').click();
   expect(await size()).toBe(base);
   expect(await page.evaluate(()=>localStorage.getItem('study-site-text-size'))).toBeNull();
 });
@@ -503,4 +503,20 @@ test('outline button is opaque so body text never shows through it',async({page}
   const bg=await page.locator('.outline-fab').evaluate(el=>getComputedStyle(el).backgroundColor);
   const alpha=/rgba\([^)]*,\s*([\d.]+)\)/.exec(bg);
   expect(alpha?Number(alpha[1]):1).toBe(1);
+});
+
+test('outline sheet also changes text size and stays in sync with the footer settings',async({browser})=>{
+  const context=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce'});
+  const page=await context.newPage();
+  await page.goto('/lectures/sAgj5V4Ewno.html');
+  await page.evaluate(()=>window.scrollTo({top:1400,behavior:'instant'}));
+  await page.locator('.outline-fab').click();
+  const sheet=page.locator('.outline-sheet');
+  await sheet.locator('.text-size[data-text-size="lg"]').click();
+  await expect(page.locator('html')).toHaveAttribute('data-text-size','lg');
+  await expect(page.locator('.site-footer .text-size[data-text-size="lg"]')).toHaveAttribute('aria-pressed','true');
+  await expect(sheet).toBeVisible();
+  await expect(page.locator('.site-header [data-theme-toggle]')).toHaveCount(0);
+  await page.evaluate(()=>localStorage.removeItem('study-site-text-size'));
+  await context.close();
 });

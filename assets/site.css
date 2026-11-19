@@ -972,3 +972,9 @@ body{background:var(--paper)}
 /* 앵커 위치는 스크립트가 잰 헤더·목차 높이(--anchor-offset)를 따른다. 스크립트가 없으면 예전 고정값을 쓴다. */
 html{scroll-padding-top:var(--anchor-offset,158px)}
 @media(max-width:780px){html{scroll-padding-top:var(--anchor-offset,136px)}}
+/* 목차 시트 안 보기 설정: 읽는 중에 글자 크기·강조 색을 바꾼다. */
+.outline-view{padding:14px 0 0}
+.outline-view>strong{display:block;margin-bottom:6px;font-size:13px;color:var(--muted)}
+.outline-view .view-settings-panel{margin:0;padding:6px 0 0;border:0;background:transparent}
+.outline-view .accent-picker{margin-left:0}
+
