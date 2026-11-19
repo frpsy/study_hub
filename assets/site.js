@@ -284,6 +284,14 @@
   const title=document.createElement('strong');title.textContent='목차';
   const close=document.createElement('button');close.type='button';close.className='outline-close';close.textContent='닫기';
   head.append(title,close);sheet.append(head,list);
+  // 읽는 중에도 글자 크기·강조 색을 바꿀 수 있게 푸터의 보기 설정을 시트에 한 벌 더 둔다.
+  // 같은 data 속성을 쓰므로 theme.js가 두 곳의 선택 상태를 함께 맞춘다. 화면 테마 버튼은 푸터에만 둔다.
+  const panel=document.querySelector('.site-footer .view-settings-panel');
+  if(panel){
+    const view=document.createElement('section');view.className='outline-view';view.setAttribute('aria-label','보기 설정');
+    const heading=document.createElement('strong');heading.textContent='보기 설정';
+    view.append(heading,panel.cloneNode(true));sheet.append(view);
+  }
   const button=document.createElement('button');
   button.type='button';button.className='outline-fab';button.setAttribute('aria-haspopup','dialog');
   const label=document.createElement('span');const prefix=document.createElement('b');prefix.textContent='목차';button.append(prefix,label);
