@@ -2,12 +2,16 @@
 (()=>{
   const header=document.querySelector('.site-header');
   const sidebar=document.querySelector('.sidebar');
+  const readingNav=document.querySelector('.reading-nav');
   function syncNavigationSize(){
     const headerHeight=header ? header.getBoundingClientRect().height : 0;
     const mobile=window.matchMedia('(max-width:780px)').matches;
     const sidebarHeight=mobile && sidebar ? sidebar.getBoundingClientRect().height : 0;
     document.documentElement.style.setProperty('--header-height',headerHeight+'px');
-    document.documentElement.style.setProperty('--anchor-offset',(headerHeight+sidebarHeight+16)+'px');
+    // 강의 페이지는 헤더 아래에 목차가 붙어 있다. 앵커로 이동하면 섹션의 위 선이 목차 아래 선과 겹치게 둔다.
+    const navHeight=readingNav ? readingNav.getBoundingClientRect().height : 0;
+    const offset=readingNav ? headerHeight+navHeight-1 : headerHeight+sidebarHeight+16;
+    document.documentElement.style.setProperty('--anchor-offset',offset+'px');
   }
   syncNavigationSize();
   window.addEventListener('resize',syncNavigationSize);
@@ -15,6 +19,7 @@
     const sizes=new ResizeObserver(syncNavigationSize);
     if(header)sizes.observe(header);
     if(sidebar)sizes.observe(sidebar);
+    if(readingNav)sizes.observe(readingNav);
   }
   function revealAnchor(){
     let id;try{id=decodeURIComponent(location.hash.slice(1))}catch{return}if(!id)return;
@@ -241,9 +246,11 @@
   let frame=0;
   const update=()=>{
     frame=0;
-    const edge=nav.getBoundingClientRect().bottom+32;
+    // 섹션 제목이 목차 바로 아래 읽는 영역(화면 위쪽 4분의 1)에 들어오면 그 섹션을 현재 위치로 본다.
+    const edge=nav.getBoundingClientRect().bottom+Math.max(32,innerHeight*.25);
     let active=0;
     sections.forEach((section,index)=>{if(section&&section.getBoundingClientRect().top<=edge)active=index});
+    if(innerHeight+scrollY>=document.documentElement.scrollHeight-2)active=sections.length-1;
     links.forEach((link,index)=>{if(index===active)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current')});
   };
   const schedule=()=>{if(!frame)frame=requestAnimationFrame(update)};

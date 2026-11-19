@@ -237,7 +237,8 @@ test('a lecture card opens a page with the key summary, practice points and time
   for(const removed of ['5분 요약','미니강좌','용어와 개념']){
     await expect(page.getByText(removed)).toHaveCount(0);
   }
-  await page.locator('.summary-links a').click();
+  await expect(page.locator('.summary-links')).toHaveCount(0);
+  await page.locator('.breadcrumb a').click();
   await expect(page).toHaveURL(/\/index\.html$/);
 });
 
@@ -475,4 +476,31 @@ test('view settings change text size and keep it on this device only',async({pag
   await page.locator('.text-size[data-text-size="md"]').click();
   expect(await size()).toBe(base);
   expect(await page.evaluate(()=>localStorage.getItem('study-site-text-size'))).toBeNull();
+});
+
+test('section anchors sit flush under the reading nav and the current section follows',async({browser})=>{
+  for(const width of [390,1280]){
+    const context=await browser.newContext({viewport:{width,height:844},reducedMotion:'reduce'});
+    const page=await context.newPage();
+    await page.goto('/lectures/ZCty0wvogDo.html');
+    const nav=page.getByRole('navigation',{name:'이 강의 목차'});
+    for(const [id,name] of [['lecture-practice','실천 포인트'],['lecture-detail','상세 요약'],['lecture-comment','타임스탬프']]){
+      await nav.getByRole('link',{name}).click();
+      await expect(nav.getByRole('link',{name})).toHaveAttribute('aria-current','location');
+      const g=await page.evaluate(id=>({section:document.getElementById(id).getBoundingClientRect().top,nav:document.querySelector('.reading-nav').getBoundingClientRect().bottom}),id);
+      // 섹션 위 선이 목차 아래 선과 겹친다. 두 선 사이 빈 띠가 없다.
+      expect(Math.abs(g.section-(g.nav-1))).toBeLessThanOrEqual(2);
+    }
+    await page.evaluate(()=>window.scrollTo({top:document.documentElement.scrollHeight,behavior:'instant'}));
+    await expect(nav.getByRole('link',{name:'참고 자료'})).toHaveAttribute('aria-current','location');
+    await context.close();
+  }
+});
+
+test('outline button is opaque so body text never shows through it',async({page})=>{
+  await page.setViewportSize({width:390,height:844});
+  await page.goto('/lectures/sAgj5V4Ewno.html');
+  const bg=await page.locator('.outline-fab').evaluate(el=>getComputedStyle(el).backgroundColor);
+  const alpha=/rgba\([^)]*,\s*([\d.]+)\)/.exec(bg);
+  expect(alpha?Number(alpha[1]):1).toBe(1);
 });
