@@ -79,3 +79,31 @@ class CompactCourseChecks(unittest.TestCase):
    self.assertTrue(all(str(x).endswith('다.') for x in item['three']),vid)
   self.assertFalse(build(check=True))
   self.assertEqual(validate(R),[])
+
+class EditorNoteChecks(unittest.TestCase):
+ """본문에는 강의 내용만 둔다. 한계·보충은 맨 끝 접힌 ‘편집자 주’에만 있다(편집규칙.md 17절)."""
+ BANNED=('[보충]','대조하지 않았','확인하지 못했','이 요약에서')
+ def test_body_has_no_limits_or_supplement_markers(self):
+  records=json.loads((R/'data/lecture_compact.json').read_text())
+  minis=json.loads((R/'data/mini_courses.json').read_text())
+  for vid,record in records.items():
+   self.assertNotIn('note',record,vid)
+   self.assertNotIn('note',record.get('practice',{}),vid)
+   body=[minis[vid]['lead'],*minis[vid]['three']]
+   for block in record.get('detail',[]):body+=[block['h'],*detail_texts(block)]
+   for step in record.get('practice',{}).get('steps',[]):body+=[step['h'],*step['b']]
+   body+=record.get('practice',{}).get('today',[])
+   for text in body:
+    for marker in self.BANNED:self.assertNotIn(marker,text,f'{vid}: {text[:40]}')
+ def test_editor_notes_render_as_closed_fold_at_page_end(self):
+  records=json.loads((R/'data/lecture_compact.json').read_text())
+  for vid,record in records.items():
+   source=(R/'lectures'/f'{vid}.html').read_text()
+   groups=record.get('editor')
+   self.assertTrue(groups,vid)
+   for group in groups:self.assertTrue(group['h'] and group['items'],vid)
+   self.assertEqual(source.count('id="lecture-editor"'),1,vid)
+   self.assertIn('<summary>편집자 주</summary>',source)
+   self.assertNotIn('<details class="source-disclosure editor-notes" id="lecture-editor" open',source)
+   self.assertLess(source.index('id="lecture-sources"'),source.index('id="lecture-editor"'),vid)
+   self.assertLess(source.index('id="lecture-editor"'),source.index('class="lecture-pager"'),vid)
