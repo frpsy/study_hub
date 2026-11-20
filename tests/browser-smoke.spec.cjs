@@ -224,7 +224,8 @@ test('a lecture card opens a page with the key summary, practice points and time
   await page.goto('/index.html');
   await page.locator('#lecture-list [data-video-id="affirmation-20261101"]').click();
   await expect(page).toHaveURL(/\/lectures\/affirmation-20261101\.html$/);
-  await expect(page.locator('main .lecture-section')).toHaveCount(3);
+  await expect(page.locator('main .lecture-section')).toHaveCount(4);
+  await expect(page.locator('#lecture-detail>h2')).toHaveText('상세 요약');
   await expect(page.locator('#lecture-overview>h2')).toHaveText('핵심 요약');
   await expect(page.locator('#lecture-practice>h2')).toHaveText('실천 포인트');
   await expect(page.locator('#lecture-practice .summary-list li')).toHaveCount(3);
