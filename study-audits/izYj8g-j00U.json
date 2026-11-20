@@ -119,5 +119,10 @@
     "limitations": [
       "Underlying lecture claims rely on the prior source review; this is not an independent re-audit of every original video."
     ]
+  },
+  "lead_quote": {
+    "text": "나쁜 기억을 지우려 애쓰지 마세요.",
+    "source": "transcripts/izYj8g-j00U.ko.txt 0:16:23~0:16:26",
+    "note": "2026-11-20 사용자 요청으로 한 문장을 강의자 워딩 그대로의 인용 하나로 바꿈. 문장 앞의 접속어 ‘그래서’를 뺌. 이 강의 자막(자동 자막 ko-orig)은 2026-11-20에 새로 확보해 저장함."
   }
 }
