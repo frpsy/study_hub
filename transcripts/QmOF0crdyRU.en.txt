@@ -1,0 +1,3498 @@
+[00:00:00] welcome to the huberman Lab podcast
+[00:00:02] where we discuss science and
+[00:00:03] science-based tools for everyday
+[00:00:05] [Music]
+[00:00:08] life I'm Andrew huberman and I'm a
+[00:00:10] professor of neurobiology and
+[00:00:12] Opthalmology at Stanford school of
+[00:00:14] medicine today we are going to talk all
+[00:00:16] about dopamine and what drives you to do
+[00:00:19] the things that you do we're going to
+[00:00:21] talk about motivation and desire and
+[00:00:24] craving but also how dopamine relates to
+[00:00:28] satisfaction and our feelings of
+[00:00:30] well-being and of course any discussion
+[00:00:32] about dopamine has to include a
+[00:00:34] discussion about the potential for
+[00:00:36] dopamine induced addiction indeed
+[00:00:39] dopamine lies at the heart of addiction
+[00:00:41] to all things but today we are mainly
+[00:00:44] going to focus on how what we do and how
+[00:00:48] we do it and how we conceptualize those
+[00:00:51] things leads to changes in this amazing
+[00:00:54] molecule in our brain and bodies that we
+[00:00:56] call dopamine I'm going to teach you
+[00:00:58] what dopamine is and what it is not
+[00:01:01] there are a lot of myths about the
+[00:01:03] molecule dopamine we often hear about
+[00:01:04] so-called dopamine hits today we are
+[00:01:07] going to dispel many common myths about
+[00:01:09] dopamine and we are going to talk about
+[00:01:11] how dopamine actually works we're going
+[00:01:13] to discuss the biology of dopamine the
+[00:01:15] psychology we will discuss some neural
+[00:01:17] circuits and a really exciting aspect of
+[00:01:20] dopamine biology are so-called dopamine
+[00:01:22] schedules in other words we are going to
+[00:01:24] discuss how things like food drugs
+[00:01:27] caffeine pornography even some plant
+[00:01:29] based compounds can change our Baseline
+[00:01:32] levels of dopamine and in doing so they
+[00:01:35] change how much dopamine we are capable
+[00:01:37] of experiencing from what could be very
+[00:01:40] satisfying events or events that make us
+[00:01:43] feel not so good because of things that
+[00:01:45] we did or took prior so I promise you
+[00:01:47] it's going to be a vast discussion but I
+[00:01:51] will structure it for you and you'll
+[00:01:52] come away with a deep understanding of
+[00:01:54] really what drives you you also Come
+[00:01:56] Away with a lot of tools how to leverage
+[00:01:59] dopamine
+[00:02:00] so that you can sustain energy drive and
+[00:02:02] motivation for the things that are
+[00:02:03] important to you over long periods of
+[00:02:05] time before we dive into the meat of
+[00:02:08] today's discussion I'd like to share
+[00:02:10] with you a fascinating result that
+[00:02:13] really underscores what dopamine is
+[00:02:15] capable of in our brains and bodies and
+[00:02:18] underscores the fact that just through
+[00:02:20] behaviors no drugs nothing of that sort
+[00:02:22] just through behaviors we can achieve
+[00:02:25] terrifically High increases in dopamine
+[00:02:27] that are very long and sustained in ways
+[00:02:30] that serve us this is a result that was
+[00:02:33] published in the European Journal of
+[00:02:34] physiology I'll go into it in more
+[00:02:36] detail later but essentially what it
+[00:02:38] involved is having human subjects get
+[00:02:41] into water of different temperatures so
+[00:02:44] it was warm water moderately cool water
+[00:02:47] and cold cold water had them stay in
+[00:02:50] that water for up to an hour and they
+[00:02:52] measured by way of blood draw things
+[00:02:55] like cortisol norepinephrine and
+[00:02:57] dopamine
+[00:03:00] what was fascinating is that cold water
+[00:03:02] exposure led to very rapid increases in
+[00:03:06] norepinephrine and epinephrine which is
+[00:03:08] also just called adrenaline it also led
+[00:03:11] to increases in dopamine and these
+[00:03:13] increases in dopamine were very
+[00:03:15] significant they kicked in around 10 or
+[00:03:18] 15 minutes after submersion into the
+[00:03:20] cold water and I should mention the head
+[00:03:22] wasn't below water it was just up to the
+[00:03:24] neck and the dopamine release continued
+[00:03:28] to to rise and R and rise and eventually
+[00:03:30] reached 250% above Baseline now what was
+[00:03:34] interesting is after subjects got out of
+[00:03:37] this cold water that dopamine increase
+[00:03:39] was sustained and I know nowadays many
+[00:03:42] people are interested in using cold
+[00:03:43] water therapy as a way to increase
+[00:03:46] metabolism and fat loss but also to
+[00:03:49] improve sense of well-being improve
+[00:03:52] cognition improve Clarity of mind you
+[00:03:54] know there's something really special
+[00:03:56] about this very alert but calm state of
+[00:03:58] mind that seems to be the one that's
+[00:04:00] optimal for pretty much everything
+[00:04:02] except sleep but for all aspects of work
+[00:04:05] and for social engagement and for sport
+[00:04:08] that highly alert but calm State of Mind
+[00:04:11] really is The Sweet Spot that I believe
+[00:04:13] most of us would like to achieve and
+[00:04:15] this cold water exposure done correctly
+[00:04:18] really can help people achieve that
+[00:04:20] State of Mind through these increases in
+[00:04:22] dopamine that last a very long time so I
+[00:04:25] will later detail the specifics of that
+[00:04:27] study what it entailed in terms of how
+[00:04:30] long the variations that different
+[00:04:32] subjects experienced as well as how to
+[00:04:34] limit the amount of stress hormone
+[00:04:36] cortisol that's released as a
+[00:04:37] consequence of the cold water and we
+[00:04:40] will also talk about compounds
+[00:04:41] supplements that people can take in
+[00:04:43] order to increase their levels of
+[00:04:45] dopamine should they choose before we
+[00:04:47] begin I'd like to emphasize that this
+[00:04:49] podcast is separate from my teaching and
+[00:04:51] research roles at Stanford it is however
+[00:04:53] part of my desire and effort to bring
+[00:04:55] zero cost to Consumer information about
+[00:04:57] science and science related tools to the
+[00:04:59] general public in keeping with that
+[00:05:01] theme I'd like to thank the sponsors of
+[00:05:03] today's podcast our first sponsor is Roa
+[00:05:06] Roa makes sunglasses and Eyeglasses that
+[00:05:08] are of the absolute highest quality I've
+[00:05:11] spent a lifetime working on the visual
+[00:05:12] system and I can tell you that the
+[00:05:14] visual system has to go through a lot of
+[00:05:15] work in order to main Clarity of what
+[00:05:17] you see when there are shadows when you
+[00:05:20] go into different types of indoor
+[00:05:21] lighting and so on and a lot of glasses
+[00:05:23] don't work well because you put them on
+[00:05:26] and then you're in bright light and you
+[00:05:27] can see fine but then you move into a
+[00:05:29] shadow and then have to take them off
+[00:05:30] and they don't adjust or they don't
+[00:05:31] adjust quickly enough with Roa their
+[00:05:33] eyeglasses and sunglasses are designed
+[00:05:36] with the visual system biology in mind
+[00:05:38] so you always see things with perfect
+[00:05:40] clarity the glasses are also terrific
+[00:05:41] because they're very lightweight and
+[00:05:43] they won't slip off your face if you're
+[00:05:45] exercising if you're running or biking
+[00:05:46] in fact they were designed for the
+[00:05:47] purpose of being able to be worn while
+[00:05:50] you're engaging in those sorts of
+[00:05:51] activities or simply working at your
+[00:05:53] desk I happen to wear readers at night
+[00:05:56] when I drive or when I work and I love
+[00:05:58] their sunglasses cuz I can wear them
+[00:06:00] anywhere and also the Aesthetics of
+[00:06:02] their sunglasses and Eyeglasses are
+[00:06:03] terrific unlike a lot of other
+[00:06:05] performance glasses that frankly make
+[00:06:07] people look like cyborgs the Aesthetics
+[00:06:09] on Ras are really terrific you could
+[00:06:10] wear them anywhere you'd like to go if
+[00:06:12] you'd like to try Roa glasses you can go
+[00:06:14] to roka.com that's
+[00:06:16] r.com and enter the code huberman to
+[00:06:19] save 20% off your first order that's Roa
+[00:06:22] r.com enter the code huberman at
+[00:06:24] checkout today's podcast is also brought
+[00:06:26] To Us by insid tracker inside tracker is
+[00:06:29] a personalized nutrition platform that
+[00:06:31] analyzes data from your blood and DNA to
+[00:06:33] help you better understand your body and
+[00:06:35] help you reach your health goals I'm a
+[00:06:38] big believer in getting regular blood
+[00:06:40] work done and now with the Advent of
+[00:06:41] modern DNA tests you can also analyze
+[00:06:43] your DNA to see what you ought to be
+[00:06:46] doing for your immediate and long-term
+[00:06:48] Health we hear a lot these days about
+[00:06:50] optimization optimizing hormones
+[00:06:52] optimizing your metabolism optimizing
+[00:06:53] this optimizing that but unless you know
+[00:06:56] the measurements of metabolic factors
+[00:06:57] hormones and other things that are your
+[00:06:59] blood and DNA you don't know what to
+[00:07:02] optimize with inside tracker it makes
+[00:07:04] all of that very easy they can come to
+[00:07:06] your house to take the blood and DNA
+[00:07:07] test or you can go to a nearby Clinic
+[00:07:10] they send you the information and you
+[00:07:12] take those results and unlike a lot of
+[00:07:14] Laboratories doing bloodwork out there
+[00:07:16] and DNA tests they have a simple
+[00:07:18] platform a dashboard that walks you
+[00:07:20] through your results and helps you
+[00:07:22] identify what sorts of nutritional or
+[00:07:24] Behavioral or other types of practices
+[00:07:26] you might want to incorporate into your
+[00:07:27] life in order to positively impact your
+[00:07:30] immediate and long-term Health it's a
+[00:07:32] very easy system to use and you will
+[00:07:33] gain a ton of information simply by
+[00:07:35] doing that test whether or not you end
+[00:07:36] up making changes to what you're doing
+[00:07:38] or not if you'd like to try insid
+[00:07:40] tracker you can go to insidetracker dcom
+[00:07:43] huberman to get 25% off any of insid
+[00:07:46] tracker plans just use the code huberman
+[00:07:48] at checkout today's episode is also
+[00:07:51] brought To Us by headspace headspace is
+[00:07:53] a meditation app backed by 25 published
+[00:07:55] studies and has over 600,000 five-star
+[00:07:58] reviews I've been meditating for a long
+[00:08:00] time but I confess sometimes I meditate
+[00:08:03] and sometimes I am very inconsistent
+[00:08:05] about my meditation ideally I would
+[00:08:07] meditate every day for 20 or 30 minutes
+[00:08:10] but what I found over the years is that
+[00:08:12] I'll start a meditation practice and
+[00:08:14] then as life gets more stressful or
+[00:08:16] busier which is exactly when I need to
+[00:08:18] meditate more I tend to meditate less
+[00:08:20] often switching over to heads space as a
+[00:08:23] meditation app really helped me stay
+[00:08:25] consistent with my meditation practice
+[00:08:27] and that's because they have a huge
+[00:08:29] range of meditations to select from some
+[00:08:31] are short some are longer and in general
+[00:08:34] I try and get 20 minutes of meditation
+[00:08:36] in every day but some days it's just
+[00:08:37] five minutes and they have some terrific
+[00:08:39] just five minute meditations the science
+[00:08:41] says that even a five- minute meditation
+[00:08:43] can be beneficial for different aspects
+[00:08:45] of our brain and body if you want to try
+[00:08:48] headspace you can go to headspace.com
+[00:08:50] slsp specialoffer and if you do that
+[00:08:52] you'll get one month as a free trial
+[00:08:54] with headspaces full library of
+[00:08:56] meditations that you can use in any
+[00:08:58] situation
+[00:08:59] this is the best deal offered by
+[00:09:01] headspace right now so if you're
+[00:09:02] interested go to headspace.com
+[00:09:04] specialoffer to get one free on month
+[00:09:07] trial with headspaces full library of
+[00:09:09] meditations I'd like to announce that
+[00:09:11] there's an event that some of you may
+[00:09:13] find very useful this is an event put on
+[00:09:15] by Logitech that I will be speaking at
+[00:09:18] it's called rethink education the
+[00:09:20] biology of learning reimagining learning
+[00:09:23] through neuroscience and at this event I
+[00:09:25] will be speaking there will be other
+[00:09:26] speakers as well and I will be talking
+[00:09:28] about neurop plasticity and its
+[00:09:30] applications for teaching and for
+[00:09:32] learning I will describe what I call the
+[00:09:34] plasticity super protocol that
+[00:09:36] incorporates all of what we know about
+[00:09:38] rapid learning efficient learning and
+[00:09:41] the best ways to teach and learn it's
+[00:09:43] geared towards educators of all kinds it
+[00:09:45] is zero cost so please feel free to sign
+[00:09:48] up the event is September 30th 2021 at
+[00:09:51] 300 p.m. Eastern you can find the
+[00:09:54] registration Link in the caption for
+[00:09:56] this episode so let's talk about
+[00:09:58] dopamine
+[00:09:59] most people have heard of dopamine and
+[00:10:01] we hear all the time now about dopamine
+[00:10:03] hits but actually there's no such thing
+[00:10:06] as a dopamine hit and actually the way
+[00:10:10] that your body uses dopamine is to have
+[00:10:13] a baseline level of dopamine meaning an
+[00:10:16] amount of dopamine that's circulating in
+[00:10:17] your brain and body all the time and
+[00:10:20] that turns out to be important for how
+[00:10:22] you feel generally whether or not you're
+[00:10:24] in a good mood motivated Etc and you
+[00:10:27] also can experience peaks in dopamine
+[00:10:29] above Baseline now this has a very
+[00:10:32] specific name in the neurobiology
+[00:10:34] literature so-called tonic and phasic
+[00:10:37] release of dopamine and I'll explain
+[00:10:39] what that means in a couple of minutes
+[00:10:41] but if you remember nothing else from
+[00:10:43] this episode please remember this that
+[00:10:46] when you experience something or you
+[00:10:48] crave something really desirable really
+[00:10:52] exciting to you very
+[00:10:54] pleasurable what happens afterwards is
+[00:10:57] your Baseline level of dopamine drops
+[00:11:00] okay so these peaks in
+[00:11:02] dopamine they influence how much
+[00:11:04] dopamine will generally be circulating
+[00:11:06] afterward and you might think oh a big
+[00:11:08] peak in dopamine after that I'm going to
+[00:11:10] feel even better because I just had this
+[00:11:12] great event not the case what actually
+[00:11:15] happens is that your Baseline level of
+[00:11:17] dopamine drops and I will explain the
+[00:11:19] precise mechanism for that okay in the
+[00:11:21] Neuroscience literature we refer to this
+[00:11:24] as tonic and phasic release of dopamine
+[00:11:29] iic being the lowlevel basine that's
+[00:11:32] always there circulating released into
+[00:11:35] your brain all the time and then phasic
+[00:11:38] these Peaks that ride above that
+[00:11:40] Baseline and those two things interact
+[00:11:43] and this is really important I'm going
+[00:11:45] to teach you the underlying neurobiology
+[00:11:46] but even if you have no background in
+[00:11:47] biology I promise to make it all clear
+[00:11:49] I'll explain the terms and what they
+[00:11:51] mean and I'm excited to teach you about
+[00:11:53] dopamine because dopamine has everything
+[00:11:55] to do with how you feel right now as
+[00:11:57] you're listening to this it has
+[00:11:59] everything to do with how you will feel
+[00:12:01] an hour from now has everything to do
+[00:12:03] with your level of motivation and your
+[00:12:05] level of desire and your willingness to
+[00:12:07] push through effort if ever you've
+[00:12:09] interacted with somebody who just
+[00:12:11] doesn't seem to have any Drive they've
+[00:12:13] given up or if you've interact with
+[00:12:15] somebody who seems to have endless drive
+[00:12:17] and energy what you are looking at there
+[00:12:20] in those two circumstances is without
+[00:12:23] question a difference in the level of
+[00:12:26] dopamine circulating in their system
+[00:12:28] there will be other factors too but the
+[00:12:31] level of dopamine is the primary
+[00:12:33] determinant of how motivated we are how
+[00:12:36] excited we are how outward facing we are
+[00:12:39] and how willing we are to lean into life
+[00:12:41] and pursue things dopamine is what we
+[00:12:43] call a neuromodulator neuromodulators
+[00:12:46] are different than neurotransmitters
+[00:12:48] neurotransmitters are involved in the
+[00:12:50] dialogue between neurons nerve cells and
+[00:12:53] neurotransmitters tend to mediate local
+[00:12:55] communication just imagine two people
+[00:12:57] talking to one another at a concert that
+[00:12:59] communication between them is analogous
+[00:13:01] to the communication carried out by
+[00:13:04] neurotransmitters whereas
+[00:13:06] neuromodulators influence the
+[00:13:07] communication of many neurons imagine a
+[00:13:10] bunch of people dancing where it's a
+[00:13:11] coordinated dance involving 10 or 20 or
+[00:13:14] hundreds of people neuromodulators are
+[00:13:16] coordinating that dance in the nervous
+[00:13:18] system what this means is that dopamine
+[00:13:21] release changes the probability that
+[00:13:23] certain neural circuits will be active
+[00:13:26] and that other neural circuits will be
+[00:13:28] inactive
+[00:13:29] okay so it modulates a bunch of things
+[00:13:32] all at once and that's why it's so
+[00:13:33] powerful at shifting not just our levels
+[00:13:35] of energy but also our mindset also our
+[00:13:39] feelings of whether or not we can or
+[00:13:41] cannot accomplish something so how does
+[00:13:44] dopamine work and what does it do well
+[00:13:46] first of all it is not just responsible
+[00:13:49] for pleasure it is responsible for
+[00:13:51] motivation and drive primarily at the
+[00:13:53] psychological level also for craving
+[00:13:55] those three things are sort of the same
+[00:13:57] motivation drive and craving it also
+[00:13:59] controls time perception and we will get
+[00:14:01] deep into how dopamine can modulate time
+[00:14:04] perception and how important it is that
+[00:14:07] everybody be able to access increases in
+[00:14:11] dopamine at different time scales this
+[00:14:13] turns out to be important to not end up
+[00:14:15] addicted to substances but it also turns
+[00:14:17] out to be very important to sustain
+[00:14:19] effort and be a happy person over long
+[00:14:21] periods of time which I think most
+[00:14:23] everybody wants it certainly is adaptive
+[00:14:25] in life to be able to do that dopamine
+[00:14:28] is also vital really important for
+[00:14:30] movement I'll explain the neural
+[00:14:32] circuits for dopamine and mindset and
+[00:14:35] dopamine in movement in a moment but in
+[00:14:38] diseases like Parkinson's or Louis
+[00:14:41] body's dementia which is similar to
+[00:14:44] Parkinson's in many ways there's a
+[00:14:46] depletion or death of dopamine neurons
+[00:14:48] at a particular location in the brain
+[00:14:50] which leads to shaky movements
+[00:14:53] challenges in speaking challenges in
+[00:14:55] particular in initiating movement and
+[00:14:58] because dopamine is is depleted
+[00:14:59] elsewhere too people with Parkinson's
+[00:15:02] and Louis and excuse me Louis body
+[00:15:04] dementia also experience drops in
+[00:15:07] motivation and affect meaning mood they
+[00:15:10] tend to get depressed and so on when
+[00:15:13] those people are properly treated they
+[00:15:16] can not always but they can recover some
+[00:15:18] fluidity of movement some ability to
+[00:15:21] initiate movement and almost without
+[00:15:23] question those people feel better
+[00:15:26] psychologically not just because they
+[00:15:27] can move but also because dopamine
+[00:15:29] impacts mood and motivation so what are
+[00:15:32] the underlying neural circuits for those
+[00:15:35] of you that are not interested in
+[00:15:37] biology and specific nomenclature you
+[00:15:39] can tune out now if you want but it's
+[00:15:41] actually pretty straightforward you have
+[00:15:42] two main neural circuits in the brain
+[00:15:45] that dopamine uses in order to exert all
+[00:15:49] its effects the first one is a pathway
+[00:15:52] that goes from this area in the What's
+[00:15:55] called the ventral tegmentum that's a
+[00:15:57] fancy but ventral just means bottom and
+[00:15:59] tegmentum actually means floor so it's
+[00:16:01] at the bottom of the brain and it's the
+[00:16:03] ventral part of the floor so it's really
+[00:16:05] low in the back of the brain the ventral
+[00:16:06] tegmentum and it goes from the ventral
+[00:16:10] tegmentum to What's called the ventral
+[00:16:13] striatum and the prefrontal cortex now
+[00:16:15] that's a lot of language but basically
+[00:16:17] what we call this is the misoc
+[00:16:18] corticolimbic pathway this is the
+[00:16:21] pathway by which dopamine influences
+[00:16:24] motivation drive and craving it involves
+[00:16:27] structures that some of you may have
+[00:16:28] heard of before things like nucleus
+[00:16:30] accumbens and the prefrontal cortex this
+[00:16:32] is the pathway that really gets
+[00:16:34] disrupted in addictions where in
+[00:16:38] particular drugs that influence the
+[00:16:40] release of dopamine like cocaine and
+[00:16:41] methamphetamine we'll talk about those
+[00:16:43] drugs today they tap into this pathway
+[00:16:45] but if you are pursuing a partner a
+[00:16:49] boyfriend or girlfriend if you're
+[00:16:50] pursuing a degree in school if you're
+[00:16:52] pursuing a Finish Line in a race you are
+[00:16:55] tapping into this so-called misoc
+[00:16:56] corticolimbic pathway this is the
+[00:16:58] classic reward pathway in all mammals
+[00:17:03] the other pathway emerges from an area
+[00:17:06] in the brain called the substanti
+[00:17:08] socalled because the cells in that area
+[00:17:12] are dark and the substantia
+[00:17:15] connects to an area of the brain called
+[00:17:17] the dorsal striatum this is not
+[00:17:19] surprisingly called the nigr striatal
+[00:17:22] pathway for those of you who have never
+[00:17:23] done any neuroanatomy I'm going to teach
+[00:17:24] you a little trick right now everything
+[00:17:26] in neuroanatomy the first part of a word
+[00:17:29] tells you where the neurons are and then
+[00:17:32] the second part tells you where they are
+[00:17:34] connecting to so when I say nigr
+[00:17:35] striatal pathway means that the neurons
+[00:17:38] are in substantial and they
+[00:17:39] connect to the striatum Nigro striatal
+[00:17:42] pathway so while it's a lot of language
+[00:17:44] there is some logic there okay so we've
+[00:17:46] got these two Pathways one mainly for
+[00:17:48] movement right this is the substantia
+[00:17:50] to Dorsal striatum and we've got
+[00:17:54] this other pathway the so-called misoc
+[00:17:56] cortical lyic pathway that's for reward
+[00:17:58] reinforcement and
+[00:18:00] motivation I want you to remember that
+[00:18:02] there are two Pathways if you don't
+[00:18:04] remember the two Pathways in detail
+[00:18:06] that's fine but please remember that
+[00:18:07] there are two Pathways because that
+[00:18:09] turns out to be important later now the
+[00:18:10] other thing to understand about dopamine
+[00:18:12] is that the way that dopamine is
+[00:18:15] released in the brain and body can
+[00:18:18] differ meaning it can be very local or
+[00:18:22] it can be more broad now most of you
+[00:18:25] have probably heard of synapses synapses
+[00:18:27] are the little space es between neurons
+[00:18:30] and basically neurons nerve cells
+[00:18:32] communicate with one another by making
+[00:18:34] each other electrically active or by
+[00:18:36] making each other less electrically
+[00:18:39] active so here's how this works you can
+[00:18:40] imagine one nerve cell and another nerve
+[00:18:42] cell with a little gap between them a
+[00:18:44] little synaps and the way that one nerve
+[00:18:47] cell causes the next nerve cell to fire
+[00:18:49] what we call fire really means to become
+[00:18:51] electrically active is that it vomits
+[00:18:53] out these little packets what we call
+[00:18:55] vesicles they're little bubbles filled
+[00:18:57] with a chemical when that chemical
+[00:19:00] enters the synapse it some of it docks
+[00:19:02] or parks on the other side in the other
+[00:19:05] neuron and by virtue of electrical
+[00:19:08] changes in the what we call the Post
+[00:19:11] synaptic neuron that chemical will make
+[00:19:13] that neuron more electrically active or
+[00:19:15] less electrically active dopamine can do
+[00:19:18] that like any other neurotransmitter or
+[00:19:21] neuromodulator so it can have one neuron
+[00:19:24] influence another neuron but dopamine
+[00:19:27] can also engage in what's called a
+[00:19:28] volumetric release volumetric release is
+[00:19:31] like a giant vomit that gets out to 50
+[00:19:35] or 100 or even thousands of cells so
+[00:19:37] there's local release what we call
+[00:19:39] synaptic release and then there's
+[00:19:40] volumetric release so volumetric release
+[00:19:43] is like dumping all this dopamine out
+[00:19:44] into the system so dopamine is
+[00:19:47] incredible because it can change the way
+[00:19:50] that our neural circuits work at a local
+[00:19:52] scale and at a very broad scale and for
+[00:19:55] those of you that are only interested in
+[00:19:56] tools like how do I get more dopamine
+[00:19:59] let me tell you this part is really
+[00:20:01] important because if you were to take a
+[00:20:03] drug or supplement that increases your
+[00:20:06] level of dopamine you are influencing
+[00:20:09] both the local release of dopamine and
+[00:20:12] volumetric release this relates back to
+[00:20:14] the Baseline of dopamine and the big
+[00:20:16] peak above Baseline and that turns out
+[00:20:19] to be important and I'll just allude to
+[00:20:21] why it's important many drugs and indeed
+[00:20:25] many supplements that increase dopamine
+[00:20:29] will actually make it harder for you to
+[00:20:31] sustain dopamine release over long
+[00:20:33] periods of time and to achieve those
+[00:20:35] Peaks that most of us are craving when
+[00:20:38] we are in pursuit of things why because
+[00:20:41] if you get both volumetric release The
+[00:20:43] Dumping out of dopamine everywhere and
+[00:20:45] you're getting local release what it
+[00:20:47] means is that the difference between the
+[00:20:49] peak and Baseline is likely to be
+[00:20:51] smaller and this is very important how
+[00:20:55] satisfying or exciting or pleasureful a
+[00:20:58] given experience is doesn't just depend
+[00:21:02] on the height of that Peak it depends on
+[00:21:04] the height of that Peak relative to the
+[00:21:07] Baseline so if you increase the
+[00:21:09] Baseline and you increase the peak
+[00:21:12] you're not going to achieve more and
+[00:21:14] more pleasure from things I'll talk
+[00:21:16] about how to leverage this information
+[00:21:18] in a little bit but just increasing your
+[00:21:22] dopamine yes it will make you excited
+[00:21:24] for all things it will make you feel
+[00:21:26] very motivated but it will also make
+[00:21:27] that motiv
+[00:21:29] very
+[00:21:30] shortlived so there's a better way to
+[00:21:33] increase your dopamine there's a better
+[00:21:35] way to optimize this peak to Baseline
+[00:21:37] ratio for now what we've talked about is
+[00:21:39] two main neural circuits one for
+[00:21:41] movement and one for motivation and
+[00:21:43] craving with dopamine and we've talked
+[00:21:45] about two main modes of communication
+[00:21:47] between neurons with dopamine one is
+[00:21:51] this local synaptic
+[00:21:52] release one is more volumetric release
+[00:21:56] and in the back of your mind you can
+[00:21:57] relate this back to again this Baseline
+[00:22:00] versus Peaks above Baseline so that's a
+[00:22:02] description of what we would call the
+[00:22:04] spatial effects or the spatial aspects
+[00:22:08] of dopamine I said this connects to that
+[00:22:10] that connects to this you can get local
+[00:22:11] or more broad volumetric release what
+[00:22:14] about the duration of release or the
+[00:22:16] duration of action for dopamine well
+[00:22:19] dopamine is unique among chemicals in
+[00:22:21] the brain because dopamine unlike a lot
+[00:22:25] of chemicals in the brain works through
+[00:22:27] what are called gr protein C receptors
+[00:22:29] and for those of you that are about to
+[00:22:30] pass out from the amount of detail just
+[00:22:32] hang in there with me it's really not
+[00:22:33] complicated there are two ways that
+[00:22:35] neurons can communicate or mainly two
+[00:22:39] ways there are a third and a fourth but
+[00:22:41] mostly neurons communicate by two modes
+[00:22:45] one are what we call fast electrical
+[00:22:48] synapses ionotropic conduction all right
+[00:22:51] you don't need to know what that means
+[00:22:52] but basically one
+[00:22:53] neuron activates another neuron and
+[00:22:56] little holes open up in that neuron and
+[00:22:59] ions rush in sodium is the main ion salt
+[00:23:03] by which one neuron influences the
+[00:23:05] electrical activity of another neuron
+[00:23:07] because sodium ions contain a charge
+[00:23:09] okay there are other things like
+[00:23:11] chloride and potassium if you're
+[00:23:12] interested in looking this up just look
+[00:23:14] up ionic conductance is in the action
+[00:23:16] potential or I could do a post on it
+[00:23:18] sometime and we could go into detail but
+[00:23:20] just understand that when neurons want
+[00:23:22] to influence each other they can do it
+[00:23:24] by way of this fast ionotropic
+[00:23:25] conduction this is a really quick way
+[00:23:28] for one neuron to influence the next
+[00:23:31] dopamine doesn't communicate that way
+[00:23:34] dopamine is slower it works through what
+[00:23:36] are called G protein coupled receptors
+[00:23:38] so what happens is dopamine is released
+[00:23:40] in these little vesicles that I
+[00:23:42] mentioned before get vomited out into
+[00:23:43] the synapse some of that dopamine will
+[00:23:46] bind to the so-called post- synaptic
+[00:23:49] neuron it'll bind to the next neuron and
+[00:23:51] then it sets off a Cascade it's kind of
+[00:23:53] like a Bucket Brigade of one thing
+[00:23:55] getting handed off to the next to the
+[00:23:56] next to the next it's G protein coupled
+[00:23:59] receptors and anytime you hear about
+[00:24:01] these gpcrs or G protein coupled
+[00:24:03] receptors pay attention because they're
+[00:24:05] really interesting they're slow but they
+[00:24:08] also can have multiple Cascades of
+[00:24:10] effects they can impact even gene
+[00:24:12] expression at some level they can change
+[00:24:14] what a cell actually becomes they can
+[00:24:17] change how well or how poorly that cell
+[00:24:20] will respond to the same signal in the
+[00:24:23] future so dopamine Works through this
+[00:24:25] slower process these G protein coupled
+[00:24:27] receptors and so its effects tend to
+[00:24:30] take a while in order to
+[00:24:33] occur this aspect of dopamine
+[00:24:36] transmission is important because it now
+[00:24:38] underscores two things one there's two
+[00:24:40] Pathways for dopamine to communicate one
+[00:24:42] for movement one for motivation and
+[00:24:44] craving there's two spatial scales at
+[00:24:46] which dopamine can operate synaptically
+[00:24:49] or volumetrically and dopamine can have
+[00:24:53] slow effects really slow effects or even
+[00:24:56] very long lasting effects and even can
+[00:24:59] control gene expression can actually
+[00:25:01] change the way that cells behave one
+[00:25:03] thing that's not often discussed about
+[00:25:05] dopamine but is extremely important to
+[00:25:07] know is that dopamine doesn't work on
+[00:25:09] its own neurons that release dopamine
+[00:25:13] co-release glutamate glutamate is a
+[00:25:17] neurotransmitter and it's a
+[00:25:18] neurotransmitter that is excitatory
+[00:25:21] meaning it stimulates neurons to be
+[00:25:23] electrically active so now even if you
+[00:25:26] don't know any cell biology should start
+[00:25:29] to gain a picture that dopamine is
+[00:25:31] responsible for movement motivation and
+[00:25:33] drive it does that through two Pathways
+[00:25:35] but also the dopamine stimulates action
+[00:25:39] in general because it releases this
+[00:25:40] excitatory neurotransmitter it tends to
+[00:25:42] make certain neurons that are nearby or
+[00:25:45] even that are far away because of
+[00:25:47] volumetric release it tends to make
+[00:25:48] those more active so dopamine is really
+[00:25:51] stimulating and indeed we say that
+[00:25:54] dopaminergic transmission or dopamine
+[00:25:57] tends to stimulate sympathetic arousal
+[00:26:00] sympathetic doesn't have anything to do
+[00:26:02] with sympathy it's just simply means
+[00:26:04] that it tends to increase our levels of
+[00:26:06] alertness it tends to bring an animal or
+[00:26:09] a human into a state of more alertness
+[00:26:12] Readiness and desire to pursue things
+[00:26:15] outside the confines of its skin so if I
+[00:26:17] were to just put a really
+[00:26:19] simple message around dopamine it would
+[00:26:22] be there's a molecule in your brain and
+[00:26:24] body that when released tends to make
+[00:26:26] you
+[00:26:28] look outside yourself pursue things
+[00:26:31] outside yourself and to Crave things
+[00:26:34] outside
+[00:26:35] yourself the pleasure that arrives from
+[00:26:38] achieving things also involves dopamine
+[00:26:40] but is mainly the consequence of other
+[00:26:42] molecules but if ever you felt lethargic
+[00:26:45] and like just lazy and you had no
+[00:26:47] motivation or drive that's a low
+[00:26:48] dopamine state if ever you felt really
+[00:26:51] excited motivated even if you're a
+[00:26:53] little scared to do something maybe you
+[00:26:55] did your first Skydive or you're about
+[00:26:57] to do your first sky Skydive or you're
+[00:26:59] about to do some public speaking and you
+[00:27:00] really don't want to screw it up you are
+[00:27:03] in a high dopamine State dopamine is a
+[00:27:06] universal currency in all mammals but
+[00:27:09] especially in humans for moving us
+[00:27:12] toward goals and how much dopamine is in
+[00:27:16] our system at any one time compared to
+[00:27:18] how much dopamine was in our system a
+[00:27:20] few minutes ago and how much we remember
+[00:27:24] enjoying a particular experience of the
+[00:27:26] past that dictates your so-called
+[00:27:29] quality of life and your desire to
+[00:27:31] pursue things this is really important
+[00:27:34] dopamine is a currency and it's the way
+[00:27:36] that you track pleasure it's the way
+[00:27:38] that you track success it's the way that
+[00:27:40] you track whether or not you are doing
+[00:27:43] well or doing poorly and that is
+[00:27:46] subjective but if your dopamine is too
+[00:27:49] low you will not feel motivated if your
+[00:27:52] dopamine is really high you will feel
+[00:27:54] motivated and if your dopamine is
+[00:27:56] somewhere in the middle how you feel
+[00:27:58] depends on whether or not you had higher
+[00:28:00] dopamine a few minutes ago or lower
+[00:28:03] dopamine this is important your
+[00:28:06] experience of life and your level of
+[00:28:08] motivation and drive depends on how much
+[00:28:12] dopamine you have relative to your
+[00:28:15] recent experience this is again
+[00:28:17] something that's just not accounted for
+[00:28:20] in the simple language of dopamine hits
+[00:28:23] okay a simple way to Envision dopamine
+[00:28:26] hits is every time you do something you
+[00:28:27] like like eat a piece of chocolate
+[00:28:29] dopamine hit you look at your Instagram
+[00:28:30] dopamine hit you see someone you like
+[00:28:32] dopamine hit you know all these things
+[00:28:35] described as dopamine hits neglect the
+[00:28:38] fact that if you scroll social media and
+[00:28:40] you see something you really like
+[00:28:42] dopamine hit sure there's an increase in
+[00:28:45] dopamine but then you get to something
+[00:28:46] else and you go not that interesting
+[00:28:49] however had you arrived at that second
+[00:28:52] thing first you might think that it was
+[00:28:54] really
+[00:28:55] interesting if you had arrived to that
+[00:28:58] second Instagram post 3 days later or 4
+[00:29:01] days later you might find it extremely
+[00:29:03] interesting again how much dopamine you
+[00:29:06] experience from something depends on
+[00:29:07] your Baseline level of dopamine when you
+[00:29:09] arrive there and your previous dopamine
+[00:29:13] Peaks okay that's super important to
+[00:29:16] understand and it's completely neglected
+[00:29:18] by the general language of dopamine hits
+[00:29:20] this is why when you repeatedly engage
+[00:29:22] in something that you enjoy your
+[00:29:25] threshold for enjoyment goes up and up
+[00:29:28] and up so I want to talk about that
+[00:29:30] process and I want to explain how that
+[00:29:32] process works because if you understand
+[00:29:34] that process and you understand some of
+[00:29:36] these schedules and kinetics as we call
+[00:29:38] them around dopamine you will be in a
+[00:29:39] terrific position to use any dopamine
+[00:29:42] enhancing tools that you decide to use
+[00:29:44] you'll be in an excellent position to
+[00:29:46] modulate and control your own dopamine
+[00:29:48] release for optimal motivation and drive
+[00:29:50] I realized that was a lot of information
+[00:29:53] about the biology of dopamine sort of
+[00:29:55] like trying to make you drink from the
+[00:29:57] fire hose of do dopamine biology however
+[00:29:59] I realize that some people probably want
+[00:30:01] even more information about the biology
+[00:30:03] of dopamine transmission if you're
+[00:30:05] interested in that I'll post a link to a
+[00:30:08] absolutely Stellar review that was
+[00:30:10] published in nature reviews Neuroscience
+[00:30:12] called spatial and temporal scales of
+[00:30:14] dopamine transmission it is quite
+[00:30:15] detailed but they have beautiful
+[00:30:17] diagrams and can walk you through all
+[00:30:19] the things that I just described and get
+[00:30:21] into even more detail we'll put a link
+[00:30:23] to that in the caption on
+[00:30:25] YouTube right now I want to share with
+[00:30:27] you two anecdotes one from my own life
+[00:30:30] and one from some fairly recent history
+[00:30:34] that illustrate some of the core biology
+[00:30:37] of dopamine and how profoundly it can
+[00:30:39] shape our experience the first one is a
+[00:30:43] really tragic situation that
+[00:30:46] occurred uh this was in the 80s there
+[00:30:49] was a outbreak of what looked like
+[00:30:53] parkinsonian symptoms in a young
+[00:30:55] population so many of you have heard of
+[00:30:57] Parkinson's dis dise Parkinson's disease
+[00:30:59] is a disease in which people uh
+[00:31:01] initially start to Quake uh can't
+[00:31:03] generate smooth movements they'll have
+[00:31:05] issues with speech sometimes cognition
+[00:31:07] as well there are examples like Michael
+[00:31:10] J fox which are kind of early onset
+[00:31:12] Parkinson's typically it hits people a
+[00:31:15] little bit later in life there's a
+[00:31:16] genetic component um but there is this
+[00:31:21] question and there's always been this
+[00:31:22] question whether or not certain
+[00:31:23] lifestyle factors can also create
+[00:31:26] Parkinson's and some years ago there was
+[00:31:31] a situation where Laboratories Street
+[00:31:33] Laboratories um illicit Laboratories
+[00:31:36] we're trying to make a drug called MPP
+[00:31:40] which is an opioid likee compound it's a
+[00:31:41] bit like heroin uh and heroin addicts
+[00:31:46] seeking heroin went out and bought what
+[00:31:48] they thought was
+[00:31:50] MPP
+[00:31:52] unfortunately it was not MPP I mean it
+[00:31:56] would have been tragic if it was anyway
+[00:31:58] because they were drug addicts but what
+[00:32:00] they ended up taking turned out to be a
+[00:32:01] lot worse what they ended up taking was
+[00:32:04] mptp and mptp can arise in the synthesis
+[00:32:09] of mppp so someone in a lab someplace
+[00:32:12] this was mainly in the Central Valley in
+[00:32:14] California but elsewhere as well
+[00:32:16] somebody created
+[00:32:19] mptp and what ended up happening was a
+[00:32:23] large number of young people who were
+[00:32:25] opioid addicts became completely
+[00:32:28] boxed in paralyzed couldn't speak
+[00:32:31] couldn't blink couldn't do anything
+[00:32:34] couldn't function couldn't move so
+[00:32:37] both aspects of dopamine transmission
+[00:32:40] were disrupted they had no motivation in
+[00:32:42] Drive they couldn't generate any
+[00:32:44] movement of any kind they were literally
+[00:32:46] locked in
+[00:32:47] Frozen and sadly this is irreversible
+[00:32:51] it's irreversible because what mptp does
+[00:32:54] is it kills the dopaminergic neuron of
+[00:32:58] the substantia that Nigro striatal
+[00:33:00] pathway that's involved in generating
+[00:33:01] movement and it kills the dopaminergic
+[00:33:04] neurons of the so-called misoc
+[00:33:06] corticolimbic pathway I was in college
+[00:33:08] when this whole mptp thing happened and
+[00:33:11] I remember hearing this story at the
+[00:33:13] time I had no understanding of what it
+[00:33:16] is to have very high levels of dopamine
+[00:33:18] or extremely depleted levels of dopamine
+[00:33:20] there was no reason why I should have
+[00:33:21] that understanding I mean of course I
+[00:33:23] had experienced different pleasures of
+[00:33:24] different kinds and I've had lows in my
+[00:33:27] life but but nothing to the extreme that
+[00:33:29] I'm about to
+[00:33:32] discuss I got
+[00:33:34] jaria and jaria is a stomach bug that if
+[00:33:38] any of you ever had it it is terrible
+[00:33:40] it's terrible diarrhea you end up very
+[00:33:42] dehydrated very quickly you drop a ton
+[00:33:44] of weight and it is extremely
+[00:33:47] unpleasant I ended up going to the
+[00:33:49] emergency
+[00:33:50] room and in the emergency room I begged
+[00:33:54] them for something to stop up my guts
+[00:33:56] and they gave it to me they put a saling
+[00:33:58] line in to rehydrate me and they
+[00:34:00] injected something into the saline bag
+[00:34:02] and within
+[00:34:05] minutes I felt more sadness more
+[00:34:09] overwhelming sense of
+[00:34:12] depression basically lower than I'd ever
+[00:34:14] felt in my entire life it was absolutely
+[00:34:18] profound I I was crying endlessly
+[00:34:21] without knowing why I was crying I was
+[00:34:24] miserable and I asked them what did you
+[00:34:26] inject and they said we injected thorine
+[00:34:28] thorine is an antipsychotic drug it's
+[00:34:31] actually used to block dopamine
+[00:34:33] receptors it's what's given to people
+[00:34:35] who have schizophrenia often it's given
+[00:34:38] to people who have schizophrenia because
+[00:34:40] schizophrenia involves among other
+[00:34:42] things elevated levels of
+[00:34:44] dopamine it was horrible the experience
+[00:34:48] of it was miserable unlike anything I'd
+[00:34:51] ever experienced and so I actually said
+[00:34:54] to them what did you give me they said
+[00:34:57] thorine and I said you have to give me
+[00:34:59] elopa you have to give me something to
+[00:35:01] get my dopamine levels back up again and
+[00:35:04] they did they gave me an injection of
+[00:35:06] elopa into the bag went straight into my
+[00:35:07] bloodstream and within minutes I felt
+[00:35:10] fine again it was incredible and it
+[00:35:13] really opened up my mind and my
+[00:35:15] experience to what it is to have
+[00:35:17] absolutely plummeted levels of dopamine
+[00:35:21] there's nothing more miserable than that
+[00:35:22] I'll tell you and these poor souls who
+[00:35:25] had this
+[00:35:26] mptp experience Unfortunately they
+[00:35:28] couldn't recover those cells people who
+[00:35:30] have severe Parkinson's are struggling
+[00:35:32] with this as well because in Parkinson's
+[00:35:34] and in Louis body dementia the
+[00:35:35] dopaminergic neurons often die it's not
+[00:35:38] just a problem with those neurons
+[00:35:39] releasing enough dopamine later we're
+[00:35:41] going to talk about some approaches to
+[00:35:43] maintaining dopaminergic neuron health
+[00:35:46] and things that we can all do for that
+[00:35:47] but I will tell you these dopamine
+[00:35:49] neurons that we all have are very
+[00:35:51] precious for movement and mood and
+[00:35:53] motivation having experienced what it is
+[00:35:56] to have very very low levels of dopamine
+[00:35:58] or to in this case to have my dopamine
+[00:36:00] receptors blocked uh from
+[00:36:03] thorine was eye opening to say the least
+[00:36:06] and has given me you know tremendous
+[00:36:08] sensitivity to the fact that dopamine is
+[00:36:11] perhaps one of the most powerful
+[00:36:13] molecules that any of us has inside of
+[00:36:16] us and the one that we ought to all
+[00:36:18] think very carefully about how we
+[00:36:19] leverage
+[00:36:21] because While most experiences and most
+[00:36:24] things that we do and take and eat and
+[00:36:26] Etc won't create enormous highs and
+[00:36:29] enormous lows in
+[00:36:30] dopamine even subtle fluctuations in
+[00:36:33] dopamine really shape our perception of
+[00:36:35] life and what we're capable of and how
+[00:36:37] we feel and so we want to guard those
+[00:36:39] and we want to understand them so let's
+[00:36:40] lean into that understanding about
+[00:36:42] dopamine and then let's talk about some
+[00:36:43] tools that we can all use to leverage
+[00:36:45] dopamine in order to keep that Baseline
+[00:36:48] in the appropriate healthy place and
+[00:36:50] still be able to access those peaks in
+[00:36:53] dopamine because those after all are
+[00:36:55] some of what makes life rich and
+[00:36:57] worthless living so let's talk about the
+[00:36:59] Baseline of dopamine that we all have
+[00:37:02] and the peaks in dopamine that we all
+[00:37:04] can achieve through different activities
+[00:37:07] and things that we
+[00:37:09] ingest all of us have different Baseline
+[00:37:12] levels of dopamine some of this is sure
+[00:37:14] to be
+[00:37:16] genetic some people just simply ride at
+[00:37:19] a level a little bit higher they're a
+[00:37:21] little bit more excited they're a little
+[00:37:23] bit more motivated or maybe they're a
+[00:37:25] lot more excited or a lot more motivated
+[00:37:28] some people are a little mellower some
+[00:37:30] people are a little less excitable and
+[00:37:32] some of that has to do with the fact
+[00:37:34] that dopamine doesn't act alone dopamine
+[00:37:38] has close cousins or friends in the
+[00:37:40] nervous system and I'll just name off a
+[00:37:42] few of those close cousins and
+[00:37:44] Friends epinephrine also called
+[00:37:47] adrenaline is the main chemical driver
+[00:37:50] of energy we can't do anything anything
+[00:37:54] at all unless we have some level of
+[00:37:56] epinephrine in our brain and body it's
+[00:37:58] released from the adrenal glands which r
+[00:38:00] at top our kidneys it's released from an
+[00:38:02] area of the brain stem called Locus
+[00:38:04] cerius and its release tends to wake up
+[00:38:07] neural circuits in the brain and wake up
+[00:38:10] various aspects of our body's physiology
+[00:38:13] and give us a Readiness so it should
+[00:38:16] come as no surprise that dopamine and
+[00:38:18] epinephrine AKA adrenaline hang out
+[00:38:21] together in fact epinephrine and
+[00:38:24] adrenaline are actually manufactured
+[00:38:26] from dopamine
+[00:38:28] there's a biochemical pathway involving
+[00:38:29] dopamine which is just a beautiful
+[00:38:31] pathway if ever uh you want to look it
+[00:38:33] up you could just look up biochemistry
+[00:38:35] of dopamine but what you'll find is that
+[00:38:38] lopa is converted into
+[00:38:42] dopamine dopamine is converted into
+[00:38:46] noradrenaline nor epinephrine it's also
+[00:38:48] called and nor adrenaline norepinephrine
+[00:38:52] is converted into adrenaline so not only
+[00:38:55] are dopamine and epinephrine AK
+[00:38:58] adrenaline close cousins they are
+[00:39:00] actually family members okay they're
+[00:39:02] closely related I'm not going to get too
+[00:39:04] deep into epinephrine today I'm not
+[00:39:06] going to talk too much about those
+[00:39:07] Pathways but anytime I'm talking about
+[00:39:09] dopaminergic transmission or that you
+[00:39:11] have a peak in dopamine inevitably that
+[00:39:13] means that you have a peak and release
+[00:39:15] of epinephrine as well what dopamine
+[00:39:18] does is dopamine really colors the
+[00:39:22] subjective experience of an activity to
+[00:39:24] make it more pleasureful to make it
+[00:39:26] something that you want more of
+[00:39:28] epinephrine is more about energy
+[00:39:30] epinephrine alone can be fear paralysis
+[00:39:34] trauma not physical paralysis but mental
+[00:39:37] paralysis you know Frozen in fear or
+[00:39:39] being traumatized or scared but the
+[00:39:43] addition of dopamine to that chemical
+[00:39:45] cocktail if dopamine was released in the
+[00:39:47] brain well then that epinephrine becomes
+[00:39:50] one of excitement okay I'm using a broad
+[00:39:54] brush here but essentially what you need
+[00:39:55] to know is that dopamine and epinephrine
+[00:39:58] AK adrenaline are family members and
+[00:40:00] they tend to work together like a little
+[00:40:02] gang to make you seek out certain things
+[00:40:06] so what sorts of activities what sorts
+[00:40:08] of things increase
+[00:40:10] dopamine and how much do they increase
+[00:40:13] dopamine well let's take a look at some
+[00:40:16] typical things that people do out there
+[00:40:19] or ingest out there that are known to
+[00:40:22] increase dopamine so let's recall that
+[00:40:24] you have a baseline level of dopamine
+[00:40:26] and that everybody does does and even
+[00:40:28] within a family you might have family
+[00:40:30] members who are very excitable happy and
+[00:40:32] motivated and others who are less
+[00:40:34] excitable happy and motivated
+[00:40:36] but your level of dopamine has
+[00:40:40] everything to do with those genetics but
+[00:40:42] also with what you've experienced in the
+[00:40:43] previous days and the previous months
+[00:40:45] and so
+[00:40:47] on when you do or ingest certain things
+[00:40:50] your levels of dopamine will rise above
+[00:40:52] baseline
+[00:40:54] transiently And depending on what you do
+[00:40:56] or iny Gest it will rise either more or
+[00:40:59] less and it will be very brief or it'll
+[00:41:02] last a long time so let's take a look at
+[00:41:04] some of the typical things that people
+[00:41:06] take and do and eat some are good for us
+[00:41:09] some are not good for
+[00:41:11] us and let's ask how much dopamine is
+[00:41:13] increased above Baseline now of course
+[00:41:16] these are averages but these are
+[00:41:17] averages that have been measured in
+[00:41:19] so-called microdialysis studies in
+[00:41:21] animals so actually extracting from
+[00:41:23] particular brain areas how much dopamine
+[00:41:24] is released or from measuring the serum
+[00:41:27] the the circulating levels of dopamine
+[00:41:29] in
+[00:41:31] humans
+[00:41:32] chocolate they didn't look at milk
+[00:41:34] versus dark chocolate but chocolate will
+[00:41:36] increase your Baseline level of dopamine
+[00:41:39] 1.5 times okay so it's a pretty
+[00:41:42] substantial increase in dopamine it's
+[00:41:44] transient it goes away after a few
+[00:41:47] minutes or even a few seconds I'll
+[00:41:50] explain what determines the duration in
+[00:41:52] a minute but 1.5 times for
+[00:41:55] chocolate sex
+[00:41:57] both the pursuit of Sex and the act of
+[00:42:01] sex increases
+[00:42:04] dopamine two times so it's a doubling
+[00:42:07] above Baseline now of course there's
+[00:42:09] going to be variation there but that's
+[00:42:11] the average increase in Baseline
+[00:42:15] dopamine caused by
+[00:42:17] sex later I will talk about how the
+[00:42:20] different aspects of the so-called
+[00:42:23] arousal Arc the different aspects of sex
+[00:42:25] believe it or not have a differential
+[00:42:26] imp act on dopamine but for now as a
+[00:42:30] general theme or activity sex doubles
+[00:42:34] the amount of dopamine circulating in
+[00:42:36] Your
+[00:42:38] Blood nicotine in particular nicotine
+[00:42:41] that is smoked like cigarettes and so
+[00:42:44] forth increases dopamine two and a half
+[00:42:47] times above Baseline so there's a peak
+[00:42:51] that goes up above Baseline two and a
+[00:42:54] half times
+[00:42:56] higher it is very
+[00:42:58] short-lived anyone who's ever been a
+[00:43:00] chain smoker or observed a chain smoker
+[00:43:03] understands that the increase in
+[00:43:04] dopamine from nicotine is very
+[00:43:08] short-lived cocaine will increase the
+[00:43:11] level of dopamine in the bloodstream 2
+[00:43:13] and a half times above
+[00:43:15] Baseline and
+[00:43:17] amphetamine another drug that increases
+[00:43:20] dopamine will
+[00:43:22] increase the amount of dopamine in the
+[00:43:24] bloodstream 10 times above Baseline a
+[00:43:27] tremendous increase in dopamine exercise
+[00:43:31] now exercise will have a different
+[00:43:34] impact on the levels of dopamine
+[00:43:35] depending on how much somebody
+[00:43:37] subjectively enjoys that exercise so if
+[00:43:40] you're somebody who loves
+[00:43:42] running chances are it's going to
+[00:43:44] increase your levels of dopamine two
+[00:43:47] times above your Baseline not unlike
+[00:43:52] sex people who dislike exercise will
+[00:43:55] achieve less dopamine increase inre or
+[00:43:57] no increase in dopamine from exercise
+[00:44:00] and if you like other forms of exercise
+[00:44:02] like yoga or weightlifting or swimming
+[00:44:04] or what have you again it's going to
+[00:44:06] vary by your subjective experience of
+[00:44:08] whether or not you enjoy that activity
+[00:44:11] this is important and it brings us back
+[00:44:13] to something that we talked about
+[00:44:14] earlier remember that misoc
+[00:44:17] corticolimbic pathway well the cortical
+[00:44:20] part is important the cortical part
+[00:44:23] actually has a very specific part which
+[00:44:25] is your prefrontal cortex the area of
+[00:44:28] your forebrain that's involved in
+[00:44:29] thinking and planning and involved in
+[00:44:33] assigning a rational explanation to
+[00:44:35] something and involved in assigning a
+[00:44:38] subjective experience to something all
+[00:44:40] right so for instance the pen that I'm
+[00:44:42] holding right now it's one of these
+[00:44:43] pilot v5s I love these pilot v5s they
+[00:44:45] don't sponsor the podcast I just Haven
+[00:44:47] to like them I like the way that they
+[00:44:48] write how they
+[00:44:49] feel if I spent enough time thinking
+[00:44:52] about it or talking about it I could
+[00:44:53] probably get a dopamine increase just
+[00:44:54] talking about this pilot V5 and that's
+[00:44:56] not because I have the propensity to
+[00:44:58] releasee dopamine easily it's that as we
+[00:45:01] start to engage with something more and
+[00:45:03] more and what we say about it and what
+[00:45:05] we encourage oursel to think about it
+[00:45:08] has a profound impact on its rewarding
+[00:45:11] or non-rewarding properties now it's not
+[00:45:13] simply the case that you can lie to
+[00:45:15] yourself and you can tell yourself I
+[00:45:16] love something and when you don't really
+[00:45:18] love it and it will increase dopamine
+[00:45:20] but what's been found over and over
+[00:45:22] again is that if people Journal about
+[00:45:24] something or they practice uh some form
+[00:45:26] of appreci for something or they think
+[00:45:28] of some aspect of something that they
+[00:45:30] enjoy the amount of dopamine that that
+[00:45:33] behavior will evoke tends to go up so
+[00:45:37] for people that hate exercise you can
+[00:45:38] think about some aspect of exercise that
+[00:45:41] you really enjoy however I will caution
+[00:45:44] you
+[00:45:45] against saying to yourself I hate
+[00:45:48] exercise or I hate studying or I hate
+[00:45:51] this person but I love the reward I give
+[00:45:54] myself afterward later we're going to
+[00:45:56] talk about how rewards given a afterward
+[00:45:59] actually make the situation worse they
+[00:46:01] won't make you like exercise more or
+[00:46:03] studying more they actually will
+[00:46:05] undermine the dopamine release that
+[00:46:07] would otherwise occur for that activity
+[00:46:09] so certain things chemicals have a
+[00:46:12] universal effect they make everybody's
+[00:46:14] dopamine go up so some people like
+[00:46:16] chocolate some people don't of course
+[00:46:19] but in general it make has causes this
+[00:46:21] increase in dopamine but sex nicotine
+[00:46:24] cocaine amphetamine those things cause
+[00:46:27] increases in dopamine in everybody that
+[00:46:28] takes
+[00:46:29] them things like exercise studying hard
+[00:46:32] work working through a challenge in a
+[00:46:34] relationship or working through
+[00:46:36] something hard of any kind that is going
+[00:46:38] to be subjective as to how much dopamine
+[00:46:41] will be released and we will return to
+[00:46:43] that subjective component in a little
+[00:46:45] bit but now you have a sense
+[00:46:48] of how much dopamine can be evoked by
+[00:46:51] different activities and by different
+[00:46:53] substances one that you might be
+[00:46:55] wondering about is caffeine
+[00:46:57] I'm certainly drinking my caffeine today
+[00:46:59] and I do enjoy caffeine in uh limited uh
+[00:47:02] quantities I drink yerbamate and I drink
+[00:47:05] coffee and I love it does it increase
+[00:47:09] dopamine well a little bit caffeine will
+[00:47:12] increase dopamine to some extent but it
+[00:47:14] is pretty modest compared to the other
+[00:47:17] things that I described chocolate sex
+[00:47:19] nicotine cocaine amphetamine and so
+[00:47:21] on however there's a really interesting
+[00:47:25] paper published in 2015 this is vulca at
+[00:47:27] all you can look it up it's very easy to
+[00:47:29] find that showed that regular ingestion
+[00:47:32] of caffeine whether or not it's from
+[00:47:34] coffee or otherwise increases
+[00:47:37] upregulation of certain dopamine
+[00:47:40] receptors so caffeine actually makes you
+[00:47:43] able to experience more of dopamine's
+[00:47:47] effects because as I mentioned before
+[00:47:49] dopamine is vomited out into the cnaps
+[00:47:51] or it's released volumetrically but then
+[00:47:52] it has to bind someplace and Trigger
+[00:47:54] those G protein coupled receptors and
+[00:47:57] caffeine increases the number the
+[00:47:59] density of those G protein coupled
+[00:48:02] receptors now sitting back and thinking
+[00:48:05] about that you might think oh yeah you
+[00:48:07] know sometimes I'll notice people at
+[00:48:09] least in the old days that it used to be
+[00:48:11] a cigarette and a cup of coffee or when
+[00:48:13] people drink alcohol often times they'll
+[00:48:15] smoke and it's well known that different
+[00:48:18] compounds like alcohol and nicotine or
+[00:48:21] caffeine and nicotine or certain
+[00:48:23] behaviors and certain drugs can
+[00:48:25] synergize to give bigger dopamine
+[00:48:27] increases and this is not terribly
+[00:48:29] uncommon there are a lot of people
+[00:48:31] nowadays who for instance take
+[00:48:33] pre-workout energy drinks they'll drink
+[00:48:35] a I won't name names but they'll drink
+[00:48:37] uh a canned energy drink or they'll
+[00:48:38] drink a pre-workout and they'll try and
+[00:48:41] get that big stimulation that stimulant
+[00:48:43] effect for the dopamine the
+[00:48:44] norepinephrine that family molecules
+[00:48:46] that works together to make you
+[00:48:48] motivated and then they'll also exercise
+[00:48:50] to try and get even more of a
+[00:48:52] dopaminergic experience out of that
+[00:48:54] workout sometimes it's also to perform
+[00:48:56] better
+[00:48:57] as well of course but as we'll talk
+[00:49:00] about in a few minutes that aspect or
+[00:49:03] that approach rather of trying to just
+[00:49:04] get your dopamine as high as you
+[00:49:06] possibly can in order to get the most
+[00:49:08] out of an experience turns out to not be
+[00:49:10] the best approach and what you'll find
+[00:49:13] as we talk about dopamine schedules is
+[00:49:16] that layering together multiple things
+[00:49:19] substances and activities that lead to
+[00:49:22] Big increases in dopamine actually can
+[00:49:24] create pretty severe issues with
+[00:49:27] motivation and energy right after those
+[00:49:29] experiences and even a couple days later
+[00:49:32] so I'm not saying that people shouldn't
+[00:49:33] take the occasional pre-workout if
+[00:49:35] that's your thing or drink a cup of
+[00:49:36] coffee or two before working out now and
+[00:49:38] again some people really enjoy that I
+[00:49:40] certainly do that every once in a while
+[00:49:42] but if you do it too often what you'll
+[00:49:44] find is that your capacity to release
+[00:49:47] dopamine and your level of motivation
+[00:49:49] and drive and energy overall will take a
+[00:49:51] serious hit now I've been alluding to
+[00:49:54] this dopamine Peaks versus dopamine
+[00:49:56] Baseline thing since the beginning of
+[00:49:58] the episode talked about tonic and
+[00:50:00] phasic release and so forth but now
+[00:50:02] let's really drill into what this means
+[00:50:04] and how to leverage it for our own
+[00:50:06] purposes in order to do that let's take
+[00:50:09] a step back and ask why would we have a
+[00:50:11] dopamine system like this why would we
+[00:50:13] have a dopamine system at all well we
+[00:50:15] have to
+[00:50:16] remember what our species primary
+[00:50:19] interest is our species like all species
+[00:50:23] has a main interest and that's to make
+[00:50:25] more of itself it's not just about sex
+[00:50:27] and reproduction it's about forging for
+[00:50:30] resources resources can be food it can
+[00:50:32] be water it can be salt can be shelter
+[00:50:36] can be social
+[00:50:38] connection dopamine is the universal
+[00:50:41] currency of foraging and seeking right
+[00:50:44] we call sometimes talk about motivation
+[00:50:46] and craving but what we mean in The
+[00:50:47] evolutionary adaptive context what we
+[00:50:49] mean as forging and seeking seeking
+[00:50:51] water seeking food seeking mates seeking
+[00:50:55] things that make us feel good and avoid
+[00:50:56] in things that don't make us feel good
+[00:50:58] but in particular seeking things that
+[00:51:00] will provide sustenance and pleasure in
+[00:51:02] the short term and will extend the
+[00:51:05] species in the long term once we
+[00:51:08] understand that dopamine is a driver for
+[00:51:10] us to seek things it makes perfect sense
+[00:51:13] as to why it would have a baseline level
+[00:51:15] and it would have Peaks and that the
+[00:51:18] Baseline and Peaks would be related in
+[00:51:20] some sort of direct way here's what I
+[00:51:22] mean by that let's say that you were not
+[00:51:25] alive now but you were alive 10,000
+[00:51:27] years ago and you woke up and you looked
+[00:51:31] and you realized you had minimal water
+[00:51:33] and you had minimal food left maybe you
+[00:51:36] have a child maybe you have a partner
+[00:51:38] maybe you're in an entire Village but
+[00:51:40] you realize that you need some you need
+[00:51:41] things
+[00:51:44] okay you need to be able to generate the
+[00:51:46] energy to go seek those things and
+[00:51:49] chances are there were dangers in
+[00:51:51] seeking those things yes it could be
+[00:51:52] saber-tooth tigers and things of that
+[00:51:54] sort but there are other dangers too
+[00:51:56] there's the danger of a cut to your skin
+[00:51:58] that could lead to infection there's the
+[00:51:59] danger of storms there's the danger of
+[00:52:01] cold there's the danger of leaving your
+[00:52:02] loved ones behind so you go out and
+[00:52:06] forage right you could be hunting you
+[00:52:08] could be gathering or you could be doing
+[00:52:09] both the going out and foraging process
+[00:52:14] was we are certain driven by dopamine I
+[00:52:16] mean there's no fossil record of the
+[00:52:18] brain but these circuits have existed we
+[00:52:20] know for tens of thousands if not
+[00:52:22] hundreds of thousands of years and they
+[00:52:23] are present in every animal not just
+[00:52:26] mammals but even in little worms like
+[00:52:28] celegans the same process is mediated by
+[00:52:31] dopamine so dopamine drives you to go
+[00:52:33] out and look for things and then let's
+[00:52:35] say you find a couple berries these ones
+[00:52:37] are rotten these ones are good maybe you
+[00:52:40] hunt an animal and kill it or you find
+[00:52:42] an animal that was recently killed and
+[00:52:43] you decide to take the
+[00:52:45] meat you are going to achieve or I
+[00:52:48] should say experience some sort of
+[00:52:50] dopamine release you found the reward
+[00:52:52] that's great but then it needs to return
+[00:52:55] to some lower level why well because if
+[00:52:58] you just stayed there you would never
+[00:53:01] continue to forage for more it doesn't
+[00:53:04] just increase your Baseline and then
+[00:53:06] stay there it goes back down and what's
+[00:53:08] very important to understand is that it
+[00:53:10] doesn't just go back down to the level
+[00:53:11] it was before it goes down to a level
+[00:53:15] below what it was before you went out
+[00:53:17] seeking that thing now this is
+[00:53:19] counterintuitive we often think oh okay
+[00:53:22] I'm going to pursue the win right let's
+[00:53:24] let's move this to modern day I'm going
+[00:53:26] to I'm going to run this Marathon I'm
+[00:53:28] going to train for this Marathon then
+[00:53:29] you run the marathon and you finish you
+[00:53:32] cross the finish line you feel great and
+[00:53:34] you would think okay now I'm set for the
+[00:53:36] entire year I'm going to feel so much
+[00:53:37] better I'm going to feel this
+[00:53:39] accomplishment in my body it's going to
+[00:53:40] be so great but that's not what happens
+[00:53:42] you might feel some of those things but
+[00:53:44] your level of dopamine has actually
+[00:53:46] dropped below Baseline now eventually it
+[00:53:49] will ratchet back up but two things are
+[00:53:52] really important first of all the extent
+[00:53:54] to which it drops below Baseline is
+[00:53:56] proportion
+[00:53:57] to how high the peak was so if you cross
+[00:53:59] the finish line pretty happy it won't
+[00:54:03] drop that much below Baseline afterward
+[00:54:06] if you cross the finish line
+[00:54:08] ecstatic well a day or two later you're
+[00:54:10] going to feel quite a bit lower than you
+[00:54:12] would otherwise you might not be
+[00:54:13] depressed because it depends on where
+[00:54:15] that Baseline was to begin with but the
+[00:54:17] so-called postpartum depression that
+[00:54:19] people experience after giving birth or
+[00:54:23] after some big win a graduation or any
+[00:54:26] of Celebration that postpartum drop in
+[00:54:29] mood and affect and motivation is the
+[00:54:32] drop in Baseline dopamine this is very
+[00:54:35] important to understand because this
+[00:54:36] happens on very rapid time scales and it
+[00:54:39] can last quite a long time it also
+[00:54:42] explains the behavior that most of us
+[00:54:45] are familiar with of engaging in
+[00:54:46] something that we really enjoy going to
+[00:54:48] a restaurant that we absolutely love or
+[00:54:51] engaging in some way with some person
+[00:54:53] that we really really enjoy but if we
+[00:54:55] continue to engage Eng in that behavior
+[00:54:57] over and over again it kind of loses its
+[00:55:00] Edge it starts to kind of feel less
+[00:55:04] exciting to us some of us experience
+[00:55:08] that drop in excitement more quickly and
+[00:55:11] more severely than others but everyone
+[00:55:13] experiences that to some extent and this
+[00:55:16] has direct roots in these evolutionarily
+[00:55:20] conserved circuits some of you may be
+[00:55:22] hearing this and think no no no no
+[00:55:24] that's not how it works for me I'm just
+[00:55:25] riding higher and higher all the time I
+[00:55:27] love my kids I love my job I love school
+[00:55:30] I love wins I I don't want losses I
+[00:55:34] agree we all feel good when we are
+[00:55:36] achieving things but often times we are
+[00:55:39] feeling good because we are layering in
+[00:55:41] different aspects of Life consuming
+[00:55:44] things and doing things that increase
+[00:55:45] our dopamine we're getting those Peaks
+[00:55:48] but afterward the drop in Baseline
+[00:55:51] occurs and it always takes a little
+[00:55:54] while to get back to our
+[00:55:56] stable Baseline we really all have a
+[00:55:59] sort of dopamine set point and if we
+[00:56:02] continue to indulge in the same
+[00:56:04] behaviors or even different behaviors
+[00:56:05] that increase our dopamine in these big
+[00:56:07] Peaks over and over and over again we
+[00:56:10] won't experience the same level of Joy
+[00:56:12] from those
+[00:56:13] behaviors or from anything at all now
+[00:56:16] that has a name it's called addiction
+[00:56:18] but even for people who aren't addicted
+[00:56:21] even for people don't have an attachment
+[00:56:23] to any specific substance or behavior
+[00:56:26] this drop in ba below Baseline after any
+[00:56:28] peak in dopamine is substantial and it
+[00:56:32] governs whether or not we are going to
+[00:56:33] feel motivated to continue to pursue
+[00:56:35] other things fortunately there's a way
+[00:56:38] to work with this such that we can
+[00:56:40] constantly stay motivated but also keep
+[00:56:43] that Baseline of dopamine at an
+[00:56:44] appropriate healthy level a previous
+[00:56:46] guest on the hubman Lab podcast was Dr
+[00:56:49] Anna lmy she's head of the addiction
+[00:56:51] dual diagnosis clinic at Stanford has
+[00:56:53] this amazing book dopamine Nation
+[00:56:56] finding balance in the age of indulgence
+[00:56:58] if you haven't read the book I highly
+[00:56:59] encourage you uh to check it out it's
+[00:57:01] fantastic the other terrific book about
+[00:57:03] dopamine is the molecule of more which
+[00:57:06] is uh similar in some regard but isn't
+[00:57:08] so much about addiction it's more about
+[00:57:09] other types of behaviors both books
+[00:57:12] really focus on these dopamine schedules
+[00:57:15] and the relationship between these Peaks
+[00:57:17] and baselines of
+[00:57:19] dopamine in Dr ly's book and when she
+[00:57:21] was on the hberman Lab podcast and
+[00:57:23] another podcast she's talked about this
+[00:57:24] pleasure pain balance that when we seek
+[00:57:27] something that we really like or we
+[00:57:28] indulge in it like eating a little piece
+[00:57:30] of chocolate if we really like chocolate
+[00:57:32] there's some pleasure but then there's a
+[00:57:35] little bit of pain that exceeds the
+[00:57:37] amount of pleasure and it's subtle and
+[00:57:40] we experience it as wanting more of that
+[00:57:43] thing okay so there's a pleasure pain
+[00:57:45] balance and I'm telling you that the
+[00:57:47] pleasure and the pain are governed by
+[00:57:49] dopamine to some extent well how could
+[00:57:51] that be right I said before when you
+[00:57:53] engage in an activity or when you ingest
+[00:57:55] something that increases dopamine the
+[00:57:57] dopamine levels go up you know to
+[00:57:59] substantial degree with all the things I
+[00:58:01] listed
+[00:58:03] off where's the pain coming from well
+[00:58:06] the pain is coming from the lack of
+[00:58:08] dopamine that
+[00:58:10] follows and you now know what that lack
+[00:58:13] of dopamine reflects how do you know
+[00:58:17] well earlier we were talking about how
+[00:58:19] dopamine is released between neurons and
+[00:58:22] I mentioned two ways one is into the
+[00:58:23] synapse where it can activate the post
+[00:58:25] synapse aptic neuron and the other was
+[00:58:27] what I called volumetric release where
+[00:58:28] it is distributed more broadly it's
+[00:58:31] released out over a bunch of
+[00:58:34] neurons in both cases it's released from
+[00:58:37] these things we call synaptic vesicles
+[00:58:39] literally little bubbles tiny tiny
+[00:58:41] little bubbles that contain dopamine
+[00:58:43] they get vomited out into the area or
+[00:58:45] into the synapse well those vesicles get
+[00:58:50] depleted for the synaptic physiologists
+[00:58:53] out there we call this the readily
+[00:58:55] released able pool of dopamine we can
+[00:58:59] only deploy dopamine that is ready to be
+[00:59:02] deployed that's packaged in those little
+[00:59:04] vesicles and ready to go it's like when
+[00:59:05] you order a product and they say out of
+[00:59:08] stock until two months from now well
+[00:59:10] it's not ready to be released same thing
+[00:59:12] with dopamine there's a pool of dopamine
+[00:59:14] that's
+[00:59:15] synthesized and you can only release the
+[00:59:19] dopamine that's been synthesized it's
+[00:59:21] the readily releasable pool the pleasure
+[00:59:24] pain balance doesn't only only hinge on
+[00:59:27] the readily releasable pool of dopamine
+[00:59:29] but a big part of the pleasure pain
+[00:59:32] balance hinges on how much dopamine is
+[00:59:35] there and how much is ready and capable
+[00:59:38] of being released into the
+[00:59:40] system so now we've given some meat to
+[00:59:44] this thing that we call the pleasure
+[00:59:45] pain balance and now it should make
+[00:59:48] perfect sense why if you take something
+[00:59:51] or do something that leads to huge
+[00:59:53] increases in dopamine after afterward
+[00:59:56] your Baseline should drop because there
+[00:59:58] isn't a lot of dopamine around to keep
+[01:00:01] your Baseline
+[01:00:03] going fortunately most people do not
+[01:00:06] experience or pursue enormous increases
+[01:00:09] in dopamine leading to these severe
+[01:00:11] drops in
+[01:00:13] Baseline many people do however and
+[01:00:15] that's what we call addiction when
+[01:00:18] somebody pursues a drug or an activity
+[01:00:20] that leads to huge increases in dopamine
+[01:00:22] and now you understand that afterward
+[01:00:24] the Baseline of dopamine drops DRS
+[01:00:26] because of depletion of dopamine the
+[01:00:28] readily releasable pool the dopamine is
+[01:00:31] literally not around to be released and
+[01:00:33] so people feel pretty lousy and many
+[01:00:36] people make the mistake of then going
+[01:00:38] and pursuing the dopamine evoking the
+[01:00:41] dopamine releasing activity or substance
+[01:00:43] again thinking mistakenly that it's
+[01:00:46] going to bring up their Baseline it's
+[01:00:48] going to give them that Peak again not
+[01:00:50] only does it not give them a peak their
+[01:00:52] Baseline gets lower and lower because
+[01:00:54] they're depleting dopamine more and more
+[01:00:56] and more and we've seen this over and
+[01:00:58] over again when people get addicted to
+[01:01:00] something then they're not achieving
+[01:01:02] much pleasure at
+[01:01:04] all you can even see this with video
+[01:01:07] games people will play a video game they
+[01:01:10] love it it's super exciting to them and
+[01:01:12] then they'll keep playing and playing
+[01:01:13] and playing and either one of two things
+[01:01:17] happens typically both first of all I
+[01:01:20] always say addiction is a progressive
+[01:01:23] narrowing of the things that bring you
+[01:01:24] pleasure so oftentimes what will happen
+[01:01:26] is the person only has excitement and
+[01:01:28] can achieve dopamine release to the same
+[01:01:32] extent doing that behavior and not other
+[01:01:34] behaviors and so they start losing
+[01:01:36] interest in school they start losing
+[01:01:38] interest in relationships they start
+[01:01:40] losing interest in Fitness and wellbe
+[01:01:42] and depletes their life and eventually
+[01:01:45] what typically happens is they will stop
+[01:01:48] getting dopamine release from that
+[01:01:50] activity as well and then they drop into
+[01:01:53] a pretty serious depression and this can
+[01:01:55] get very severe and people have commit
+[01:01:57] suicide from these sorts of patterns of
+[01:02:00] activity but what about the more typical
+[01:02:03] scenario what about the scenario of
+[01:02:06] somebody who is really good at working
+[01:02:09] during the week they exercise during the
+[01:02:11] week they drink on the weekends well
+[01:02:14] that person is only consuming alcohol
+[01:02:16] maybe one or two nights a week but
+[01:02:19] oftentimes that same person will be
+[01:02:21] spiking their dopamine with food during
+[01:02:24] the middle of the week now we all have
+[01:02:25] to eat and it's nice to eat foods that
+[01:02:27] we enjoy I certainly do that I love food
+[01:02:30] in fact but let's say they're eating
+[01:02:33] foods that really evoke a lot of
+[01:02:35] dopamine release in the middle of the
+[01:02:36] week they're drinking one or two days on
+[01:02:38] the weekend they are one of these work
+[01:02:41] hard play hard type so they're swimming
+[01:02:43] a couple miles in the ocean in the
+[01:02:45] middle of the week as well uh they're
+[01:02:48] going out dancing once on the weekend
+[01:02:49] sounds like a pretty pretty Balanced
+[01:02:51] Life as I describe it well here's the
+[01:02:54] problem the problem is that dopamine is
+[01:02:59] not just evoked by one of these
+[01:03:01] activities dopamine is evoked by all of
+[01:03:02] these activities and dopamine is one
+[01:03:06] currency of craving motivation and
+[01:03:09] desire and pleasure there's only one
+[01:03:12] currency so even though if you look at
+[01:03:14] the
+[01:03:15] activities you'd say well it's just on
+[01:03:17] the weekends or this thing is only a
+[01:03:19] couple times a week if you looked at
+[01:03:22] dopamine simply as a function as a
+[01:03:24] chemical function of Peaks and B line it
+[01:03:27] might make sense why this person after
+[01:03:28] several years of work hard to play hard
+[01:03:31] would say yeah you know I'm feeling kind
+[01:03:33] of burnt out I'm just not feeling like I
+[01:03:35] have the same energy that I did a few
+[01:03:36] years ago and of course there are age
+[01:03:38] related reasons why people can
+[01:03:40] experience drops in energy but often
+[01:03:43] times what's happening is not some sort
+[01:03:45] of depletion and cellular metabolism
+[01:03:48] that's related to aging what's happening
+[01:03:49] is they're spiking their dopamine
+[01:03:51] through so many different activities
+[01:03:53] throughout the week that their Baseline
+[01:03:55] is progressively dropping and in this
+[01:03:57] case it can be very subtle it can be
+[01:04:00] very very subtle and that's actually a
+[01:04:02] very
+[01:04:03] Sinister function of dopamine we we
+[01:04:06] could say which is that it can often
+[01:04:08] drop in imperceptible ways but then it
+[01:04:11] once it reaches a threshold of low
+[01:04:14] dopamine we just feel like H we can't
+[01:04:16] really get pleasure from anything
+[01:04:17] anymore what used to work doesn't work
+[01:04:19] anymore so it starts to look a lot like
+[01:04:21] the more severe addictions or the more
+[01:04:23] acute addictions to things like ca and
+[01:04:26] amphetamine which lead to these big
+[01:04:27] increases these big spikes in dopamine
+[01:04:29] and then these very severe drops in the
+[01:04:32] Baseline now of course we all should
+[01:04:35] engage in activities that we enjoy I
+[01:04:38] certainly do everybody should a huge
+[01:04:40] part of life is pursuing activities and
+[01:04:42] and things that we enjoy the key thing
+[01:04:45] is to understand this relationship
+[01:04:47] between the Peaks and the Baseline and
+[01:04:48] to understand how they influence one
+[01:04:50] another because once you do that you can
+[01:04:52] start to make really good choices in the
+[01:04:54] short run and in the the long run to
+[01:04:56] maintain your level of dopamine based
+[01:04:58] line maybe even raise that level of
+[01:05:01] dopamine based line and still get those
+[01:05:03] Peaks and still achieve those feelings
+[01:05:06] of elevated motivation elevated desire
+[01:05:09] and craving because again those Peaks
+[01:05:12] and having a s a sufficiently healthy
+[01:05:15] high level of dopamine Baseline are what
+[01:05:17] drove the evolution of our species and
+[01:05:19] they're really what Drive the evolution
+[01:05:20] of anyone's life progression too so
+[01:05:22] they're a good thing dopamine is a good
+[01:05:24] thing just for briefly because it was
+[01:05:26] also covered in the interview episode I
+[01:05:28] did with Anna
+[01:05:30] lmy about addiction some of you might be
+[01:05:33] asking what should I do if I experience
+[01:05:35] a drop in my Baseline level of dopamine
+[01:05:38] because of Engagement with some activity
+[01:05:41] or some substance that led to Big Peaks
+[01:05:44] uh just to put some color an example on
+[01:05:47] this a few episodes ago I talked about a
+[01:05:50] friend who I've known a long time this
+[01:05:52] is actually the child of a friend who
+[01:05:55] has basically become addicted to video
+[01:05:57] games he decided actually after seeing
+[01:05:59] that episode with Anna to do a 30-day
+[01:06:02] complete fast from phone from video
+[01:06:04] games and from social media of all kinds
+[01:06:07] he's now at day 29 he's really
+[01:06:09] accomplished this not incidentally his
+[01:06:12] levels of concentration his overall mood
+[01:06:14] are up he's doing far far better what he
+[01:06:17] did is hard in particular the first 14
+[01:06:19] days is really hard but the way that you
+[01:06:21] replenish the releasable pool of
+[01:06:24] dopamine is to not engage in these
+[01:06:26] dopaminergic seeking behaviors because
+[01:06:29] remember typically people arrive at a
+[01:06:31] place where they want to stop engaging
+[01:06:33] in these behaviors or ingesting
+[01:06:34] substances when that dopamine is
+[01:06:36] depleted when they're not getting the
+[01:06:38] same lift in his case he was feeling
+[01:06:39] depressed he thought he had ADHD they
+[01:06:41] were starting to treat it as as ADHD and
+[01:06:44] certainly there are people out there who
+[01:06:46] have ADHD but what he found was that his
+[01:06:48] levels of concentration are back he does
+[01:06:50] not need to be treated for ADHD and
+[01:06:52] actually the psychiatrist wondered if he
+[01:06:54] did prior to this video game social
+[01:06:56] media fast he's feeling good he's
+[01:06:59] exercising again I'm not making this up
+[01:07:01] this is really a very specific but very
+[01:07:06] relevant example of how the dopamine
+[01:07:08] system can replenish itself of course if
+[01:07:10] there's a clinical need for ADHD
+[01:07:12] treatment by all means pursue that but I
+[01:07:14] think a lot of ADHD does go misdiagnosed
+[01:07:19] because of this depletion and dopamine
+[01:07:21] that occurs because of overindulgence in
+[01:07:23] other activities in the drop in Baseline
+[01:07:25] so for anyone that's experienced a real
+[01:07:27] drop in Baseline who has addictive
+[01:07:30] Tendencies whether or not their
+[01:07:31] behaviors or substances that is always
+[01:07:33] going to be the path forward is going to
+[01:07:37] be either cold turkey or through some
+[01:07:39] sort of tapering to limit interactions
+[01:07:42] with the what would otherwise be the
+[01:07:44] dopamine evoking Behavior or substance
+[01:07:47] so let's talk about the optimal way to
+[01:07:49] engage in activities or to consume
+[01:07:53] things that evoke dopamine and by no
+[01:07:56] means am I encouraging people to take
+[01:07:57] drugs of abuse I would not do that I am
+[01:07:59] not doing that but some of the things on
+[01:08:02] these lists of dopamine evoking
+[01:08:04] activities are things like chocolate
+[01:08:07] coffee even if it's indirect um sex and
+[01:08:11] reproduction provided it's healthy
+[01:08:13] consensual context appropriate age
+[01:08:15] appropriate species appropriate of
+[01:08:16] course is Central to our Evolution and
+[01:08:20] progression as a species so certain
+[01:08:22] things like cocaine amphetamine I will
+[01:08:24] put in the classification of bad I'm
+[01:08:26] willing to do that and other things are
+[01:08:28] part of life food exercise if that
+[01:08:31] evokes your dopamine how are we supposed
+[01:08:33] to engage with these dopamine evoking
+[01:08:35] activities and ways that are healthy and
+[01:08:37] beneficial for us how do we achieve
+[01:08:39] these Peaks which are so Central to our
+[01:08:41] wellbeing and experience of life without
+[01:08:43] dropping our Baseline and the key lies
+[01:08:46] in intermittent release of dopamine the
+[01:08:50] real key is to not expect or chase high
+[01:08:55] levels of dopamine release every time we
+[01:08:57] engage in these
+[01:09:00] activities intermittent reward schedules
+[01:09:03] are the Central schedule by which
+[01:09:06] casinos keep you gambling the Central
+[01:09:09] schedule by which elusive Partners or
+[01:09:12] potential Partners keep you texting and
+[01:09:15] pursuing on either side of the
+[01:09:17] relationship intermittent schedules are
+[01:09:20] the way that the internet and social
+[01:09:22] media and all high engaging activities
+[01:09:27] keep you motivated and pursuing and we
+[01:09:31] can take this back to our evolutionary
+[01:09:34] adaptive scenario where you are out
+[01:09:37] there looking for water looking for food
+[01:09:40] not every Trail not every Pursuit not
+[01:09:43] every hunch about where the animals will
+[01:09:46] be where the food will be where the
+[01:09:48] berries will be not every single one of
+[01:09:50] those played
+[01:09:53] out there's something called dopamine
+[01:09:55] reward prediction error when we expect
+[01:09:57] something to happen we are highly
+[01:09:59] motivated to pursue it if it happens
+[01:10:02] great we get the reward the reward comes
+[01:10:05] in various chemical forms including
+[01:10:07] dopamine and we are more likely to
+[01:10:09] engage in that behavior again this is
+[01:10:11] the basis of casino gambling this is how
+[01:10:13] they keep you going back again and again
+[01:10:15] and again even though on average the
+[01:10:17] house really does
+[01:10:19] win you can transplant that example to
+[01:10:22] any number of different pleasureful
+[01:10:24] activities if you're not a gambler and
+[01:10:25] that doesn't appeal to you I have to
+[01:10:27] imagine there's something that appeals
+[01:10:28] to you something that you do repeatedly
+[01:10:30] because you enjoy it and almost
+[01:10:32] inevitably it's because there's an
+[01:10:34] intermittent
+[01:10:36] schedule there's a intermittent schedule
+[01:10:39] by which dopamine sometimes arrives
+[01:10:41] sometimes a little bit sometimes a lot
+[01:10:43] sometimes a medium amount okay that
+[01:10:46] intermittent reinforcement schedule is
+[01:10:48] actually the best schedule to export to
+[01:10:52] other activities how do you do that well
+[01:10:55] first of
+[01:10:56] all if you are engaged in activities
+[01:10:59] School sport relationship Etc where you
+[01:11:02] experience a win you should be very
+[01:11:04] careful about allowing yourself to
+[01:11:07] experience huge peaks in dopamine unless
+[01:11:09] you're willing to suffer the the crash
+[01:11:11] that
+[01:11:12] follows and waiting a period of time for
+[01:11:14] it to come back up what would this look
+[01:11:17] like in the practical sense well let's
+[01:11:19] say you are somebody who really does
+[01:11:20] enjoy exercise or let's say you're
+[01:11:22] somebody who kind of likes exercise but
+[01:11:24] forces yourself to do it but you make it
+[01:11:26] pleasureful by giving yourself your
+[01:11:28] favorite cup of coffee first or maybe
+[01:11:31] taking a pre-workout drink or taking an
+[01:11:33] energy drink or listening to your
+[01:11:34] favorite music and then you're in the
+[01:11:36] gym and you're listening to your music
+[01:11:37] that all sounds great right well it is
+[01:11:40] great except that by layering together
+[01:11:42] all these things to try and Achieve that
+[01:11:43] dopamine release and by getting a big
+[01:11:45] peak in dopamine you're actually
+[01:11:48] increasing the number of conditions
+[01:11:50] required to achieve pleasure from that
+[01:11:52] activity again and so there is a form of
+[01:11:55] this where sometimes you do all the
+[01:11:57] things that you love to get the optimal
+[01:11:58] workout you listen to your favorite
+[01:12:00] music you go at your favorite time of
+[01:12:01] day you have your pre-workout drink if
+[01:12:03] that's your thing you do all the things
+[01:12:05] that give you that best experience of
+[01:12:08] the workout for
+[01:12:10] you but there's also a version of this
+[01:12:12] where sometimes you don't do the
+[01:12:15] dopamine enhancing activities you don't
+[01:12:17] ingest anything to increase your
+[01:12:18] dopamine you just do the exercise you
+[01:12:23] don't do the exercise
+[01:12:25] and expect dopamine to arrive through
+[01:12:27] some what we call exogenous source as
+[01:12:29] well you might think well that sounds
+[01:12:31] lame I want to continue to enjoy
+[01:12:34] exercising Ah that's exactly the point
+[01:12:37] if you want to maintain motivation for
+[01:12:39] school exercise relationships or
+[01:12:41] Pursuits of any duration in kind the key
+[01:12:44] thing is to make sure that the peak in
+[01:12:46] dopamine if it's very high doesn't occur
+[01:12:49] too often and if something does occur
+[01:12:53] very often that you vary how much
+[01:12:55] dopamine you
+[01:12:56] experience with each engagement in that
+[01:12:59] activity now some activities naturally
+[01:13:02] have this intermittent property woven
+[01:13:04] into them right we sometimes have
+[01:13:07] classes that we like and other classes
+[01:13:08] we don't like we don't always get
+[01:13:10] straight A's sometimes we don't get
+[01:13:12] rewarded with the outcome that we would
+[01:13:14] like we don't always have the perfect
+[01:13:16] relationship outcome but understand that
+[01:13:19] your ability to experience motivation
+[01:13:21] and pleasure for what comes next is
+[01:13:23] dictated by how much motiv ation and
+[01:13:25] pleasure and dopamine you experienced
+[01:13:28] prior the reason I can't give a very
+[01:13:31] specific protocol like delete dopamine
+[01:13:33] or lower dopamine every third time is
+[01:13:36] that that wouldn't be intermittent the
+[01:13:38] whole basis of intermittent
+[01:13:39] reinforcement is that you don't really
+[01:13:42] have a specific schedule of when
+[01:13:45] dopamine is going to be high and when
+[01:13:46] dopamine is going to be low and when
+[01:13:48] dopamine is going to be medium that's a
+[01:13:50] predictable schedule not a random
+[01:13:52] intermittent schedule so do like the
+[01:13:54] casinos do certainly works for them and
+[01:13:57] four activities that you would like to
+[01:13:59] continue to engage in over time whatever
+[01:14:02] those happen to be start paying
+[01:14:04] attention to the amount of dopamine and
+[01:14:07] excitement and pleasure that you achieve
+[01:14:08] with those and start modulating that
+[01:14:10] somewhat at random that might be
+[01:14:13] removing some of the dopamine releasing
+[01:14:15] chemicals that you might take prior
+[01:14:18] maybe you remove them every time but
+[01:14:21] then every once in a while you introduce
+[01:14:22] them maybe it involves
+[01:14:25] sometimes doing things socially that you
+[01:14:27] enjoy doing socially sometimes doing the
+[01:14:29] same thing but
+[01:14:30] alone there are a lot of different ways
+[01:14:33] to do this there are a lot of different
+[01:14:34] ways to approach this but now knowing
+[01:14:37] what you know about Peaks and baselines
+[01:14:39] in dopamine and understanding how
+[01:14:41] important it is not just to achieve
+[01:14:43] Peaks but to maintain that Baseline at a
+[01:14:45] healthy level it should be
+[01:14:46] straightforward for you to implement
+[01:14:48] these intermittent
+[01:14:49] schedules for those of you that are
+[01:14:51] begging for more
+[01:14:53] specificity we can give you a tool one
+[01:14:56] would be you can flip a coin before
+[01:14:58] engaging in any of these types of
+[01:15:00] activities and decide whether or not you
+[01:15:02] are going to allow other dopamine
+[01:15:05] supportive elements to go for instance
+[01:15:08] into the gym with you are you going to
+[01:15:09] listen to music or not if you enjoy
+[01:15:11] listening to music well then flip a coin
+[01:15:13] and if it comes up heads bring the music
+[01:15:15] in if it comes up Tails don't okay
+[01:15:17] sounds like you're undercutting your own
+[01:15:19] progress but actually you are serving
+[01:15:22] your own progress both shortterm and
+[01:15:24] longterm by doing that now the
+[01:15:26] smartphone is a very interesting tool
+[01:15:28] for dopamine in light of all this it's
+[01:15:32] extremely common nowadays to see people
+[01:15:34] texting and doing selfies and
+[01:15:37] communicating in various ways listening
+[01:15:39] to podcasts listening to music doing all
+[01:15:41] sorts of things while they engage in
+[01:15:43] other activities or going to dinner and
+[01:15:45] texting other people or making plans
+[01:15:47] sharing information that's all wonderful
+[01:15:49] it gives depth and richness and color to
+[01:15:51] life but it isn't just about our
+[01:15:55] distracted nature when we're engaging
+[01:15:57] with the phone it's also a way of
+[01:16:00] layering in dopamine and it's no
+[01:16:04] surprise that levels of depression and
+[01:16:06] lack of motivation are really on the
+[01:16:10] increase everything that we've talked
+[01:16:12] about until
+[01:16:13] now sets up an explanation or an
+[01:16:16] interpretation of why interacting with
+[01:16:20] digital technology can potentially lead
+[01:16:22] to disruptions or lowering in Baseline
+[01:16:25] levels of
+[01:16:27] dopamine I can use a personal example
+[01:16:30] for this I happen to really enjoy
+[01:16:31] working out I've always really enjoyed
+[01:16:33] it but in recent years I noticed that if
+[01:16:37] I was bringing my phone to my workouts
+[01:16:39] then Not only was I a little bit more
+[01:16:41] distracted and not focusing on what I
+[01:16:43] was doing as much as I could have or
+[01:16:44] should have but also I started to lose
+[01:16:48] interest in what I was doing it wasn't
+[01:16:49] as pleasureful I would feel like it just
+[01:16:52] didn't have the same kind of oomph and I
+[01:16:53] was beginning to question my
+[01:16:55] motivation as I started learning more
+[01:16:58] about this relationship between the
+[01:17:00] Peaks and the baselines and dopamine
+[01:17:02] what I realized was that some time ago I
+[01:17:04] probably experienced a incredible
+[01:17:07] increase in the amount of dopamine
+[01:17:08] during one of my workouts because I
+[01:17:11] enjoy working out and I enjoy listening
+[01:17:13] to music I also enjoy listening to
+[01:17:14] podcast I also enjoy communicating with
+[01:17:17] people those are all wonderful Pursuits
+[01:17:18] but I had layered in too many of them
+[01:17:20] too many times and then it essentially
+[01:17:24] was isn't working for me anymore much in
+[01:17:26] the same way a drug wouldn't work for
+[01:17:27] somebody who takes it repeatedly because
+[01:17:29] their Baseline of dopamine is dropping
+[01:17:31] so at least for this calendar year I've
+[01:17:33] made a rule for myself which is I don't
+[01:17:36] allow my phone into my workouts at all
+[01:17:40] no music at least not from the phone it
+[01:17:42] can be in the
+[01:17:43] room I might listen to a podcast in the
+[01:17:46] room but I don't listen to anything or
+[01:17:49] engaging anything on my phone no texting
+[01:17:51] whatsoever and most of the time I just
+[01:17:52] don't even bring it with me for that
+[01:17:53] period of time it's only short period of
+[01:17:55] time I'm not training that
+[01:17:58] often this is something that I think has
+[01:18:01] been
+[01:18:03] misinterpreted as people can't be alone
+[01:18:05] now people talk about oh you know they
+[01:18:08] can't walk across the street or they
+[01:18:10] can't go anywhere ride the bus can't be
+[01:18:13] on the plane without being in contact
+[01:18:15] they can't handle just their thoughts I
+[01:18:17] don't think that's really what's going
+[01:18:18] on I think what's happened is that we
+[01:18:21] achieved the great dopamine increase
+[01:18:23] that comes from this incredible thing
+[01:18:25] which I personally enjoy being able to
+[01:18:27] communicate by phone by text and
+[01:18:29] exchange pictures and send links and
+[01:18:31] these kinds of things social media but
+[01:18:33] then what happens is it doesn't have
+[01:18:36] that same fulfilling aspect to it and it
+[01:18:39] tends to remove the excitement and the
+[01:18:41] pleasure of the very activities that we
+[01:18:43] are engaged in so I know this is a hard
+[01:18:46] one for many people but I do invite you
+[01:18:47] to try removing multiple sources of
+[01:18:51] dopamine release or what used to be
+[01:18:53] multiple sources of dopamine release
+[01:18:56] from activities that you want to
+[01:18:57] continue to enjoy or that you want to
+[01:18:59] enjoy more and now you understand the
+[01:19:01] biological mechanisms that would underly
+[01:19:03] a statement like that it takes a little
+[01:19:06] bit of working with I know it can be
+[01:19:08] challenging in the first week or so of
+[01:19:11] not engaging with the phone during any
+[01:19:13] kind of workout that actually was really
+[01:19:15] tough but now I'm back to a place where
+[01:19:17] I enjoy it that much more I also feel as
+[01:19:19] if I conquered something in terms of the
+[01:19:21] circuitry related to dopamine I Now
+[01:19:24] understand why something that I enjoyed
+[01:19:26] so much had become less pleasureful for
+[01:19:28] me and there's a deep deep satisfaction
+[01:19:31] that comes from understanding okay there
+[01:19:32] wasn't anything wrong with me or the
+[01:19:35] what I was doing or anything at all it
+[01:19:38] was just a there was something wrong
+[01:19:40] with the approach I was taking which was
+[01:19:41] layering in all these sources of
+[01:19:43] dopamine and dropping my Baseline for
+[01:19:45] this very same reason I caution people
+[01:19:48] against using stimulants every time they
+[01:19:51] study or every time they work out or
+[01:19:55] every time that they do anything that
+[01:19:57] they would like to continue to enjoy and
+[01:19:59] be motivated at there's one exception
+[01:20:01] which is caffeine because I mentioned
+[01:20:03] before if you like caffeine that
+[01:20:06] actually could be a good thing for your
+[01:20:07] dopamine system because it does
+[01:20:09] upregulate these d23 receptor so it
+[01:20:12] actually makes whatever dopamine is
+[01:20:14] released by that activity more
+[01:20:16] accessible or more functional within the
+[01:20:19] biochemistry and the pathways of your
+[01:20:21] brain and
+[01:20:22] body however number of energy drinks and
+[01:20:25] in particular pre-workouts contain
+[01:20:27] things that are precursors to dopamine
+[01:20:30] and on their own even if you didn't
+[01:20:32] engage in the activity would cause the
+[01:20:34] release of dopamine to a substantial
+[01:20:36] degree they do cause the release of
+[01:20:38] dopamine to a substantial degree and
+[01:20:40] over time that will deplete your
+[01:20:43] dopamine so energy drinks pre-workout
+[01:20:47] drinks drugs of various kinds that
+[01:20:50] people take to study and pay attention
+[01:20:51] we talked about some of these for the
+[01:20:52] ADHD episode things like Aderall rlin
+[01:20:56] armodafinil modafanil taken repeatedly
+[01:20:59] over time will reduce the level of
+[01:21:02] satisfaction and joy that you get from
+[01:21:04] the activities you engage in while under
+[01:21:07] the influence of those compounds I'm not
+[01:21:10] trying to demonize those compounds for
+[01:21:11] their clinical use what I'm saying is
+[01:21:13] taking stimulants and then engaging in
+[01:21:15] activities that you would like to
+[01:21:17] continue to feel pleasureful is
+[01:21:19] undercutting the process and inevitably
+[01:21:22] might not happen tomorrow might not
+[01:21:23] happen in a month but inevitably you
+[01:21:26] will have challenges with motivation and
+[01:21:28] drive related to those activities now
+[01:21:30] some people can keep it right in check
+[01:21:32] they can just do the one can of the
+[01:21:34] energy drink or they only do their
+[01:21:35] pre-workout before really hard days for
+[01:21:38] instance more power to
+[01:21:41] you I actually do that sometimes frankly
+[01:21:44] but people who are trying to get into
+[01:21:46] that Peak super motivated driven driven
+[01:21:49] State really focused every time they
+[01:21:51] engage in an activity you are absolutely
+[01:21:53] undercutting the process and you are
+[01:21:55] undermining your ability to stay
+[01:21:57] motivated and focused so just as we
+[01:22:00] talked about intermittent reward
+[01:22:01] schedules a moment
+[01:22:04] ago intermittent spiking of dopamine if
+[01:22:07] you do it at all is definitely the way
+[01:22:09] to go and chronically trying to spike
+[01:22:11] your dopamine in order to enhance your
+[01:22:14] motivation focus and drive will
+[01:22:16] absolutely undermine your motivation
+[01:22:18] focus and drive in the long run
+[01:22:20] ingestion of caffeine is somewhat of an
+[01:22:23] exception among the other examples of
+[01:22:26] things I've mentioned to avoid before
+[01:22:28] what would otherwise be dopamine
+[01:22:30] increasing activities because again
+[01:22:34] caffeine can increase the density and
+[01:22:37] the efficacy of these dopamine
+[01:22:40] receptors turns out that the source of
+[01:22:42] caffeine could also matter while coffee
+[01:22:46] or tea or other forms of caffeine will
+[01:22:49] have this effect of increasing dopamine
+[01:22:51] receptors yerbamate something I've
+[01:22:54] talked about before on this podcast has
+[01:22:56] some interesting properties first of all
+[01:22:58] it contains caffeine it's also high in
+[01:23:00] antioxidants it also contain something
+[01:23:03] called glp1 which is favorable for
+[01:23:05] management of blood sugar
+[01:23:09] levels yamate it turns out has also been
+[01:23:12] shown to be neuroprotective specifically
+[01:23:15] for dopaminergic neurons now I should
+[01:23:18] mention this is just a couple of studies
+[01:23:20] so we don't want to conclude too much
+[01:23:22] from these studies more needs to be done
+[01:23:24] but they showed that in a model of
+[01:23:26] damage to dopamine neurons ingestion of
+[01:23:30] yerbamate and some of the compounds
+[01:23:32] within yuram mate can actually serve to
+[01:23:34] preserve the survival of dopamine
+[01:23:36] neurons in both the movement related
+[01:23:38] pathway and the motivation pathway so
+[01:23:41] perhaps you need that incentive in order
+[01:23:44] to ingest y Bon tea perhaps you don't
+[01:23:47] need any incentive in my case I don't
+[01:23:48] need any incentive I already enjoy
+[01:23:50] yamate as my principal source of
+[01:23:52] caffeine although I do drink coffee as
+[01:23:54] well well but if one were going to
+[01:23:56] consume caffeine you might consider
+[01:23:58] consuming that caffeine in the form of Y
+[01:24:01] bate both for sake of upregulating
+[01:24:03] dopamine receptors and getting more of a
+[01:24:06] dopamine increase and of course for the
+[01:24:08] simulate properties of caffeine if
+[01:24:10] that's what you're seeking and in
+[01:24:13] addition to that because yamate does
+[01:24:15] appear to have some sort of
+[01:24:17] neuroprotective and a particular
+[01:24:19] dopamine neuron protective properties
+[01:24:22] now that doesn't mean that caffeine is
+[01:24:23] always beneficial and actually there's
+[01:24:25] one instance related to dopamine where
+[01:24:27] caffeine can be particularly dangerous
+[01:24:30] this relates to MDMA so-called ecstasy
+[01:24:33] MDMA is under investigation in various
+[01:24:36] clinical trials for its potential to
+[01:24:38] treat trauma and
+[01:24:40] depression it's also of course a drug
+[01:24:43] that's used recreationally it's still
+[01:24:45] illegal at least in the United
+[01:24:48] States whether or not MDMA is neurotoxic
+[01:24:52] has been very controversial early on was
+[01:24:54] thought that it is neurotoxic that it
+[01:24:56] can destroy serotonergic
+[01:24:58] neurons there were other papers that
+[01:25:01] came out which argued that's not the
+[01:25:04] case and that's in particular because
+[01:25:06] one of the early papers published in
+[01:25:08] Science magazine claiming that MDMA was
+[01:25:12] neurotoxic that paper was retracted it
+[01:25:14] turns out that that study had mistakenly
+[01:25:17] used methampetamine instead and
+[01:25:19] methamphetamine is known to be
+[01:25:22] neurotoxic I think most of the data a
+[01:25:24] point to the idea that MDMA might not be
+[01:25:27] neurotoxic but in any case caffeine has
+[01:25:30] been shown to increase the toxicity of
+[01:25:33] MDMA receptors and you might say well
+[01:25:35] how could that be well now you
+[01:25:38] understand why that could be caffeine
+[01:25:40] increases the density and efficacy of
+[01:25:42] these dopamine receptors the D2 and D3
+[01:25:44] receptors MDMA is a
+[01:25:47] potent drug for increasing
+[01:25:49] concentrations of dopamine as well as
+[01:25:51] serotonin and other neuromodulators and
+[01:25:54] it appears that caffeine ingestion by
+[01:25:56] upregulating these receptors can lead to
+[01:25:58] more toxicity of MDMA so caffeine can be
+[01:26:03] a beneficial substance in one context
+[01:26:06] and actually can be a detrimental if not
+[01:26:09] dangerous substance in another context
+[01:26:11] two substances that greatly increase
+[01:26:13] dopamine namely amphetamine and cocaine
+[01:26:17] can cause long-term problems with the
+[01:26:20] dopaminergic pathways and this is
+[01:26:23] largely based on a study that was
+[01:26:25] published some years ago 2003 but still
+[01:26:28] holds a lot of Merit this is a paper
+[01:26:30] published in proceedings to the National
+[01:26:32] Academy of Sciences a very high tier
+[01:26:35] stringent Journal first author is col
+[01:26:37] Kolb and the title of the paper pretty
+[01:26:41] much tells the story amphetamine or
+[01:26:43] cocaine limits the ability of later
+[01:26:45] experien to promote structural
+[01:26:46] plasticity in the neocortex and nucleus
+[01:26:49] accumbens neocortex is the outer shell
+[01:26:51] of the brain uh more or less and the
+[01:26:54] nucleus accumbens as part of that molic
+[01:26:57] uh dopamine pathway for motivation drive
+[01:26:59] and reinforcement neuroplasticity of
+[01:27:02] course is the brain's ability to change
+[01:27:04] in response to experience and
+[01:27:05] neuroplasticity is the basis of learning
+[01:27:08] and memory and essentially remodeling of
+[01:27:12] our neural circuitry in positive ways of
+[01:27:14] all kinds and this study was really one
+[01:27:17] of the first to show that ingesting
+[01:27:20] amphetamine and cocaine because of the
+[01:27:23] high peak in dopamine that it creates
+[01:27:26] and the low dopamine State the Baseline
+[01:27:29] drop that it creates afterwards limits
+[01:27:32] plasticity and learning subsequent to
+[01:27:34] taking amphetamine and cocaine it was at
+[01:27:37] least in this study shown to be a long
+[01:27:39] lasting effect I doubt it's a permanent
+[01:27:41] effect but this should serve as a
+[01:27:43] serious cautionary note that amphetamine
+[01:27:46] and cocaine not only can cause a drop in
+[01:27:48] Baseline dopamine but can actually put
+[01:27:50] the brain into a state in which it
+[01:27:52] cannot learn and modif itself to get
+[01:27:55] better at least for some period of time
+[01:27:57] in a previous episode on ADHD I talked
+[01:28:00] about the widespread use of drugs like
+[01:28:02] adol rlin modafinil and armodafinil all
+[01:28:05] of which lead to very large increases in
+[01:28:07] dopamine and for people with ADHD can
+[01:28:09] really improve their symptoms but of
+[01:28:12] course there's a lot of non-prescription
+[01:28:15] non-clinical use of those compounds as
+[01:28:17] well and it stands to reason that the
+[01:28:19] use of those substances to increase
+[01:28:21] dopamine could very well provide the
+[01:28:25] same sort of blockade of neuroplasticity
+[01:28:27] that cocaine and amphetamine do because
+[01:28:28] when you look at the amount of dopamine
+[01:28:31] increase that's triggered by those
+[01:28:32] compounds it's really comparable so
+[01:28:36] again a cautionary note against spiking
+[01:28:38] one's dopamine too much on a regular
+[01:28:40] basis unless there's a valid clinical
+[01:28:43] need for doing that so we've been
+[01:28:45] focusing a lot for the last few minutes
+[01:28:48] on the kind of darker side of dopamine
+[01:28:50] and how getting big peaks in dopamine
+[01:28:52] can be detrimental
+[01:28:54] but I want to acknowledge the truth
+[01:28:56] which is that dopamine feels great being
+[01:28:59] in Pursuit and motivated and craving
+[01:29:01] things feels wonderful and I don't want
+[01:29:03] to demonize dopamine what I'm trying to
+[01:29:05] do today is to illustrate how dopamine
+[01:29:08] works in your brain so that you can
+[01:29:09] continue to engage in
+[01:29:13] dopamine evoking activities and
+[01:29:15] certainly there is a place for ingesting
+[01:29:17] things that can increase dopamine
+[01:29:19] provided that they are safe for us in
+[01:29:22] the short and long term
+[01:29:25] there are activities that we can do that
+[01:29:28] will give us healthy sustained increases
+[01:29:30] in dopamine both the Peaks when they
+[01:29:33] happen and to maintain or even increase
+[01:29:36] our Baseline levels of dopamine so how
+[01:29:37] do we do that what are some of these
+[01:29:40] activities well in recent years there's
+[01:29:43] been a trend toward more people doing
+[01:29:45] so-called cold exposure in part this was
+[01:29:48] popularized by Vim Hoff the so-called
+[01:29:51] Iceman getting into cold showers taking
+[01:29:54] ice baths exposing oneself to cold water
+[01:29:57] of various kinds can in fact increase
+[01:30:00] our levels of dopamine as well as the
+[01:30:02] neuromodulator neuro
+[01:30:04] nephrine this is not a new
+[01:30:07] phenomenon in the 1920s a guy by the
+[01:30:10] name of Vincent priset was one of the
+[01:30:12] first people to popularize and formalize
+[01:30:15] cold water therapies he was an advocate
+[01:30:18] of cold water exposure in order to boost
+[01:30:21] the immune system and increase feelings
+[01:30:23] of wealth being and actually this
+[01:30:25] practice dates back long before Vinson
+[01:30:28] uh popularized it and Vim Hoff is the
+[01:30:31] more recent iteration of this first of
+[01:30:33] all some of the safety parameters let's
+[01:30:35] let's establish those first getting into
+[01:30:37] very very cold water you know 30°
+[01:30:39] Fahrenheit or even low 40° Fahrenheit
+[01:30:42] can put somebody into a state of cold
+[01:30:44] water shock I mean people can die doing
+[01:30:46] that so obviously you want to approach
+[01:30:48] this uh with some caution but for most
+[01:30:50] people getting into 60° water or 50°
+[01:30:53] water or if you're acclimated and
+[01:30:55] comfortable with it uh you know 40°
+[01:30:58] water or 45 degree water can have
+[01:31:00] tremendously beneficial results on your
+[01:31:03] neuromodulator systems including
+[01:31:06] dopamine what temperature of water you
+[01:31:09] can tolerate will depend on how cold
+[01:31:11] water adapted you are and how familiar
+[01:31:13] you are with the experience of getting
+[01:31:15] into cold water and when I say
+[01:31:18] comfortable with I should mention there
+[01:31:19] is never a case in which getting into
+[01:31:22] cold water does not evoke a release of
+[01:31:26] epinephrine so the quickening of the
+[01:31:28] breath the widening of the eyes the the
+[01:31:30] the feeling as if you can't catch your
+[01:31:32] breath and even some physical pain at
+[01:31:34] the level of the skin that happens
+[01:31:36] almost every time or every time that you
+[01:31:38] get into cold water even if you're cold
+[01:31:40] water adapted what almost everybody
+[01:31:42] knows and understands is that that wall
+[01:31:45] as I like to refer to it is coming
+[01:31:47] that's always the first experience of
+[01:31:48] getting into cold water there's no real
+[01:31:51] way around that now this study that I
+[01:31:53] mentioned men earlier human
+[01:31:55] physiological responses to immersion
+[01:31:57] into water of different temperatures
+[01:31:59] really interesting study that was done
+[01:32:01] and published in the University of uh
+[01:32:03] excuse me the European Journal of
+[01:32:05] Applied physiology I can provide a link
+[01:32:06] to that study in the in the show caption
+[01:32:09] it's a really interesting study they
+[01:32:11] looked at people getting exposed to
+[01:32:14] water that was warm moderately cold or
+[01:32:16] very cold it was 32 de Celsius 20° C or
+[01:32:19] 14° C you can just put those online and
+[01:32:22] do the conversion or you can do the
+[01:32:23] conversion to Fahrenheit if you like but
+[01:32:25] in any case what they looked at were the
+[01:32:28] concentrations of things like
+[01:32:31] epinephrine and
+[01:32:32] dopamine and so on and what they found
+[01:32:34] was really interesting first of
+[01:32:37] all upon getting into cold water the
+[01:32:42] changes in Adrenaline and
+[01:32:45] noradrenaline epinephrine and
+[01:32:47] norepinephrine were immediate and fast
+[01:32:49] and these were huge increases so that's
+[01:32:52] the getting into the cold water that
+[01:32:54] everybody experiences these huge
+[01:32:55] increases in Adrenaline but then what
+[01:32:57] was interesting is they observed that
+[01:32:59] dopamine levels started to rise somewhat
+[01:33:02] slowly and then continue to rise and
+[01:33:05] reach levels as high as 2.5 times above
+[01:33:09] Baseline that's a remarkably High
+[01:33:12] increase remember if we go back to our
+[01:33:14] examples of
+[01:33:15] chocolate sex a doubling above Baseline
+[01:33:19] nicotine two and a half times above
+[01:33:21] Baseline
+[01:33:22] cocaine the in increase in dopamine from
+[01:33:25] cold water exposure of this kind was
+[01:33:28] comparable to what one sees from cocaine
+[01:33:31] except except in this case it wasn't a
+[01:33:34] rise and crash it was actually a
+[01:33:37] sustained rise in dopamine that took a
+[01:33:40] very long time up to 3 hours to come
+[01:33:42] back down to Baseline which is really
+[01:33:45] remarkable and I think this explains
+[01:33:47] some of the positive mental and physical
+[01:33:51] effects that people report subjectively
+[01:33:53] after doing cold water exposure one
+[01:33:55] question that many of you are probably
+[01:33:56] asking is just how cold should the water
+[01:33:58] be well you could mimic what was done in
+[01:34:01] this study and do 14° c but for some
+[01:34:04] people that won't be cold enough for
+[01:34:05] some people that will be too cold they
+[01:34:07] did look at the release of stress
+[01:34:09] hormones like cortisol in addition to
+[01:34:11] the release of things like epinephrine
+[01:34:12] and adrenaline and it's interesting that
+[01:34:15] they noted that in all cases but
+[01:34:17] especially at that coldest temperature
+[01:34:19] there was an increase in cortisol but
+[01:34:20] that it was transient that eventually
+[01:34:23] people's cortisol all the stress hormone
+[01:34:25] subsided a bit there are basically two
+[01:34:27] different approaches to remaining in the
+[01:34:30] cold when it's uncomfortable one is to
+[01:34:32] try and relax yourself to try and
+[01:34:35] practice slow breathing to try and
+[01:34:37] dilate your gaze I've talked about this
+[01:34:38] before in previous podcast to go into
+[01:34:40] panoramic Vision to essentially try and
+[01:34:41] calm yourself so that it's not as
+[01:34:44] stressful in the cold other people
+[01:34:47] however take the approach of trying to
+[01:34:50] ramp up their level of internal
+[01:34:52] autonomic arousal meaning to get really
+[01:34:55] energized and kind of lean into the
+[01:34:57] friction of the cold and they find that
+[01:34:59] easier other people distract themselves
+[01:35:01] they recite the alphabet or they do
+[01:35:03] something anything to try and distract
+[01:35:05] themselves from the discomfort to be
+[01:35:08] totally honest it does not matter for
+[01:35:10] sake of dopamine release because the
+[01:35:12] dopamine release is triggered and then
+[01:35:14] continues even after you get out of the
+[01:35:16] cold water now in this study it was long
+[01:35:20] exposure to cold water it was an hour
+[01:35:24] that's a long period of time and I do
+[01:35:26] warn you against getting into cold water
+[01:35:29] that's so cold that it will make your
+[01:35:31] temperature drop and make you
+[01:35:32] hypothermic for an hour that actually
+[01:35:34] could be dangerous for a lot of people
+[01:35:35] you might have a hard time reheating and
+[01:35:37] hypothermia is not a good thing they had
+[01:35:40] people monitoring subjects in these
+[01:35:42] studies and paying attention to their
+[01:35:43] core body temperature they were able to
+[01:35:45] reheat them
+[01:35:46] afterwards it's well established now
+[01:35:49] that getting into cold water whether not
+[01:35:51] it's a shower an ice bath circulating
+[01:35:53] cold water a stream
+[01:35:55] Etc that can evoke the norepinephrine
+[01:35:58] release immediately and the long Arc of
+[01:36:00] that dopamine release why would that be
+[01:36:02] good up until now I've basically said
+[01:36:04] getting increases in dopamine are
+[01:36:07] detrimental to your Baseline well this
+[01:36:10] does appear to raise the Baseline of
+[01:36:11] dopamine for substantial periods of time
+[01:36:14] and most people report feeling a
+[01:36:17] heightened level of calm and focus after
+[01:36:20] getting out of cold water so cold water
+[01:36:22] exposure turns out to be a very potent
+[01:36:24] stimulus for Shifting the entire milu
+[01:36:27] the entire environment of our brain and
+[01:36:30] body and allowing many people to feel
+[01:36:33] much much better for a substantial
+[01:36:35] period of time after getting out of the
+[01:36:37] ice bath or cold water of any kind than
+[01:36:40] they did before now you might ask how
+[01:36:43] often to do this some people do this
+[01:36:45] every day it can be very stimulating so
+[01:36:47] typically doing it early in the day it's
+[01:36:50] going to be better I don't necessarily
+[01:36:51] recommend doing it right before sleep
+[01:36:53] but some people do it in the afternoon
+[01:36:55] and some people will indeed do that
+[01:36:57] seven days a week other people three
+[01:36:59] days a week other people every once in a
+[01:37:00] while what I can say is once you become
+[01:37:03] cold water adapted once it no longer has
+[01:37:06] the same impact of novelty and feeling a
+[01:37:09] bit like a I don't want to say a shock
+[01:37:11] to your system because you don't want to
+[01:37:12] go into cold water shock but once it is
+[01:37:16] comfortable for you then it will no
+[01:37:18] longer evoke this release there really
+[01:37:20] does seem to be something in the pathway
+[01:37:22] from cold water EXP exposure through the
+[01:37:24] norepinephrine pathway and into the
+[01:37:25] mimic brain stem that causes this
+[01:37:28] release in dopamine but nonetheless it's
+[01:37:30] a basically zero cost I mean you need
+[01:37:33] access to water of some sort cold water
+[01:37:34] shower Etc but basically zero cost way
+[01:37:37] of triggering a long- lasting increase
+[01:37:39] in dopamine without ingesting anything
+[01:37:41] no pharmacology whatsoever please again
+[01:37:43] approach it with uh safety and caution
+[01:37:45] in mind but it is a very potent stimulus
+[01:37:47] again
+[01:37:49] 250% rise in Baseline two and a half
+[01:37:52] times rise in Baseline rival
+[01:37:53] that of cocaine which is really
+[01:37:55] remarkable now I'd like to talk about
+[01:37:57] the positive aspects of rewards for our
+[01:37:59] Behavior and the negative aspects of
+[01:38:01] rewards for our behavior and from that I
+[01:38:04] will suggest a protocol by which you can
+[01:38:07] achieve a better relationship to your
+[01:38:09] activities and to your dopamine system
+[01:38:12] in fact it will help tune up your
+[01:38:13] dopamine system for
+[01:38:15] discipline hard work and
+[01:38:19] motivation hard work is hard generally
+[01:38:23] most people don't like working hard some
+[01:38:26] people do but most people work hard in
+[01:38:29] order to achieve some end
+[01:38:31] goal end goals are terrific and rewards
+[01:38:34] are terrific whether or not they are
+[01:38:35] monetary social or any
+[01:38:39] kind
+[01:38:40] however because of the way that dopamine
+[01:38:43] relates to our perception of
+[01:38:45] time working hard at something for sake
+[01:38:49] of a reward that comes afterward can
+[01:38:52] make the hard work much more challenging
+[01:38:55] and make us much less likely to lean
+[01:38:58] into hard work in the future let me give
+[01:39:00] you a couple examples by way of data and
+[01:39:02] experiments there's a classic experiment
+[01:39:05] done actually at Stanford many years ago
+[01:39:08] in which children in Nursery School and
+[01:39:12] kindergarten Drew pictures and they drew
+[01:39:15] pictures because they like to
+[01:39:16] draw the researchers took kids that like
+[01:39:19] to draw and they started giving them a
+[01:39:22] reward for drawing the reward generally
+[01:39:24] was a gold star or something that a
+[01:39:26] young child would find
+[01:39:29] rewarding then they stopped giving them
+[01:39:31] the gold star and what they found is the
+[01:39:34] children had a much lower tendency to
+[01:39:38] draw on their own no reward now remember
+[01:39:43] this was an activity that prior to
+[01:39:45] receiving a reward the children
+[01:39:46] intrinsically enjoyed and selected to do
+[01:39:50] no one was telling them to draw what
+[01:39:52] this relates to is so-called intrinsic
+[01:39:54] versus extrinsic reinforcement when we
+[01:39:57] receive rewards even if we give
+[01:39:59] ourselves rewards for something we tend
+[01:40:02] to associate less pleasure with the
+[01:40:04] actual activity itself that evoked the
+[01:40:07] reward now that might seem
+[01:40:08] counterintuitive but that's just way the
+[01:40:10] way that these dopamine energic circuits
+[01:40:12] work and now understanding these Peaks
+[01:40:14] and baselines in dopamine which I won't
+[01:40:17] review again this should make sense if
+[01:40:20] you get a peak in dopamine from a reward
+[01:40:24] it's going to lower your Baseline and
+[01:40:26] the cognitive
+[01:40:28] interpretation is that you didn't really
+[01:40:30] do the activity because you enjoyed the
+[01:40:32] activity you did it for the reward now
+[01:40:34] this doesn't mean all rewards of all
+[01:40:36] kinds are bad but it's also important to
+[01:40:39] understand that dopamine controls our
+[01:40:41] perception of time when and how much
+[01:40:43] dopamine we experience is the way that
+[01:40:47] we carve up what we call our experience
+[01:40:49] of time when we engage in an activity
+[01:40:52] let's say School or hard work of any
+[01:40:54] kind or
+[01:40:56] exercise because of the reward we are
+[01:40:58] going to give ourselves or receive at
+[01:40:59] the end the trophy the Sunday the meal
+[01:41:03] whatever it happens to
+[01:41:05] be we actually are extending the time
+[01:41:10] bin over which we are analyzing or
+[01:41:13] perceiving that
+[01:41:15] experience and because the reward comes
+[01:41:17] at the
+[01:41:18] end we start to dissociate the neural
+[01:41:22] circuits for dop mean a reward that
+[01:41:24] would have normally been active during
+[01:41:26] the
+[01:41:27] activity and because it all arrives at
+[01:41:30] the end over time we have the experience
+[01:41:34] of less and less pleasure from that
+[01:41:36] particular activity while we're doing it
+[01:41:39] now this is the antithesis of growth
+[01:41:42] mindset my colleague at Stanford Carol
+[01:41:44] dck as many of you know has come up with
+[01:41:46] this
+[01:41:47] incredible Theory and principle and it
+[01:41:49] actually goes beyond Theory and
+[01:41:50] principle called growth mindset which is
+[01:41:52] this strive ding to be better to be in
+[01:41:54] this mindset of I'm not there yet but
+[01:41:57] striving itself is the end goal and that
+[01:42:01] of course delivers you to tremendous
+[01:42:02] performance it's been observed over and
+[01:42:04] over and over again that people that
+[01:42:05] have growth mindset kids that have
+[01:42:07] growth mindset end up performing very
+[01:42:09] well because they're focused on the
+[01:42:10] effort itself and all of us can
+[01:42:13] cultivate growth mindset the neural
+[01:42:16] mechanism of cultivating growth mindset
+[01:42:18] involves learning to access the rewards
+[01:42:21] from effort and doing
+[01:42:23] and that's hard to do because you have
+[01:42:26] to engage this prefrontal component of
+[01:42:29] the Miso liic circuit you have to tell
+[01:42:30] yourself okay this effort is great this
+[01:42:33] effort is pleasureful even though you
+[01:42:35] might actually be in a state of physical
+[01:42:37] pain from the exercise or I can recall
+[01:42:39] this from college just feeling like I
+[01:42:41] wanted to get up from my desk but
+[01:42:42] forcing myself to study forcing myself
+[01:42:44] and forcing myself what you find over
+[01:42:45] time is that you can start to associate
+[01:42:48] dopamine release you can evoke dopamine
+[01:42:50] release from the friction and the
+[01:42:53] challenge that you happen to be in you
+[01:42:56] completely eliminate the ability to
+[01:42:58] generate those circuits and that
+[01:43:00] rewarding process of being able to
+[01:43:02] reward friction while in effort if you
+[01:43:06] are focused only on the goal that comes
+[01:43:08] at the end because of the way that
+[01:43:10] dopamine marks time so if you say oh I'm
+[01:43:13] going to do this very hard thing and I'm
+[01:43:15] going to push and push and push and push
+[01:43:17] for that end goal that comes
+[01:43:19] later not only do you enjoy the process
+[01:43:23] of what you're doing less you actually
+[01:43:25] make it more painful while you're
+[01:43:27] engaging in it you make yourself less
+[01:43:29] efficient at it because if you were able
+[01:43:31] to access dopamine while in effort
+[01:43:33] dopamine has all these incredible
+[01:43:34] properties of increasing the amount of
+[01:43:36] energy in our body and in our mind our
+[01:43:38] ability to focus by way of dopamine's
+[01:43:41] conversion into epinephrine but also you
+[01:43:44] are undermining your ability to lean
+[01:43:46] back into that activity the next time
+[01:43:48] the next time you need twice as much
+[01:43:51] coffee and three times as much music and
+[01:43:53] four times as much energy drink and the
+[01:43:56] social connection just to get out the
+[01:43:57] door in order to do the run or to study
+[01:44:00] so what's more beneficial in fact can
+[01:44:04] serve as a tremendous amplifier on all
+[01:44:07] Endeavors that you engage in especially
+[01:44:09] hard Endeavors is to a not start
+[01:44:13] layering in other sources of dopamine in
+[01:44:15] order to get to the starting line not
+[01:44:18] layering in other sources of dopamine in
+[01:44:20] order to be able to continue but rather
+[01:44:22] to objectively start to attach the
+[01:44:24] feeling of friction and effort to an
+[01:44:28] internally generated reward system and
+[01:44:30] this is not meant to be vague this is a
+[01:44:33] system that exists in your mind that
+[01:44:35] exists in the minds of humans for
+[01:44:37] hundreds of thousands of years by which
+[01:44:40] you're not just pursuing the things that
+[01:44:41] are innately pleasureful food sex warmth
+[01:44:46] water when you're thirsty but the beauty
+[01:44:49] of this misic reward pathway that I
+[01:44:51] talked about earlier is that that it
+[01:44:53] includes the forbrain so you can tell
+[01:44:56] yourself the effort part is the good
+[01:44:58] part I know it's painful I know this
+[01:45:00] doesn't feel good but I'm focused on
+[01:45:02] this I'm going to start to access the
+[01:45:04] reward you will find the rewards meaning
+[01:45:07] the dopamine release inside of effort if
+[01:45:10] you repeat this over and over again and
+[01:45:12] what's beautiful about it is that it
+[01:45:14] starts to become reflexive for all types
+[01:45:16] of effort when we focus only on the
+[01:45:18] trophy only on the grade only on the win
+[01:45:21] as the reward you undermine that entire
+[01:45:24] process so how do you do this you do
+[01:45:27] this in those moments of the most
+[01:45:30] intense friction you tell yourself this
+[01:45:33] is very painful and because it's painful
+[01:45:36] it will evoke an increase in dopamine
+[01:45:39] release later meaning it will increase
+[01:45:42] my Baseline in dopamine but you also
+[01:45:45] have to tell yourself that in that
+[01:45:47] moment you are doing it by choice and
+[01:45:50] you're doing it because you love it and
+[01:45:53] I know that sounds like lying to
+[01:45:55] yourself and in some ways it is lying to
+[01:45:57] yourself but it's lying to yourself in
+[01:46:00] the context of a truth which is that you
+[01:46:03] want it to feel better you want it to
+[01:46:05] feel even pleasureful now this is very
+[01:46:09] far and away different from thinking
+[01:46:12] about the reward that comes at the end
+[01:46:14] the hot fudge Sunday for after you cross
+[01:46:16] the finish line and you can replace hot
+[01:46:17] fudge Sunday with whatever reward
+[01:46:19] happens to to be appealing to you we
+[01:46:22] rever people who are capable of doing
+[01:46:23] what I'm describing David Goggins comes
+[01:46:26] to mind as a really good example many of
+[01:46:28] you are probably familiar with David
+[01:46:29] gogins former Navy SEAL who essentially
+[01:46:32] has made a postmilitary career career
+[01:46:36] out of explaining and sharing his
+[01:46:39] process of turning the effort into the
+[01:46:41] reward there are many other examples of
+[01:46:44] this too of
+[01:46:45] course throughout evolutionary history
+[01:46:48] there's no question that we revered
+[01:46:50] people who were willing to go out and
+[01:46:52] Forge and hunt and gather and
+[01:46:54] caretake in ways that other members of
+[01:46:57] our species probably found exhausting
+[01:47:00] and probably would have preferred to
+[01:47:01] just put their feet up or soak them in a
+[01:47:03] cool stream rather than continue to
+[01:47:05] forage the ability to access this
+[01:47:08] pleasure from
+[01:47:09] effort aspect of our dopaminergic
+[01:47:12] circuitry is without question the most
+[01:47:15] powerful aspect of dopamine and our
+[01:47:17] biology of dopamine and the beautiful
+[01:47:20] thing is it's accessible to all of us
+[01:47:23] but just to highlight the things that
+[01:47:24] can interfere with and prevent you from
+[01:47:27] getting dopamine release from effort
+[01:47:31] itself don't Spike dopamine prior to
+[01:47:33] engaging an effort and don't Spike
+[01:47:36] dopamine after engaging an effort learn
+[01:47:39] to spike your dopamine from effort
+[01:47:42] itself one straightforward example of
+[01:47:45] learning to attach dopamine to effort
+[01:47:48] and strain as opposed to a process or a
+[01:47:52] reward that naturally evokes dopamine
+[01:47:54] release is so-called intermittent
+[01:47:56] fasting I know this is very popular
+[01:47:58] nowadays some people like to do
+[01:48:00] intermittent fasting some people don't
+[01:48:02] some people have a 12-hour feeding
+[01:48:03] window every 24 hours some people do
+[01:48:05] long fasts of two to three days even I
+[01:48:08] personally don't monitor a feeding
+[01:48:10] window with a lot of precision I tend to
+[01:48:13] skip one meal a day either breakfast or
+[01:48:14] lunch and then I eat the other two meals
+[01:48:16] of the day depending on which meal I
+[01:48:17] skip so it's either breakfast lunch and
+[01:48:20] maybe a little something in the evening
+[01:48:22] or skip breakfast and do lunch and
+[01:48:24] dinner and so on many people are now
+[01:48:26] eating this way in part because many
+[01:48:29] people find it easier to not eat at all
+[01:48:33] than to eat a smaller portion of some
+[01:48:35] food and that has everything to do with
+[01:48:37] the dopamine reward evoking properties
+[01:48:40] of food when we ingest food or when we
+[01:48:43] are about to ingest food our dopamine
+[01:48:46] levels go up and typically when we
+[01:48:48] ingest food if it evokes some dopamine
+[01:48:50] release then we tend to want even more
+[01:48:52] food remember dopamine's main role is
+[01:48:54] one of motivation and seeking and what
+[01:48:57] dopamine always wants more of is more
+[01:49:00] dopamine more activity or thing that
+[01:49:03] evokes more dopamine release well let's
+[01:49:06] just look at fasting from the
+[01:49:08] perspective of dopamine schedules and
+[01:49:11] dopamine release and Peaks and
+[01:49:13] baselines typically when we eat we get
+[01:49:17] dopamine release especially when we eat
+[01:49:20] after being very hungry if you've ever
+[01:49:21] gone camping or you're very very hungry
+[01:49:24] the food tastes that much better and
+[01:49:26] that's actually because of the way that
+[01:49:28] deprivation States increase the way that
+[01:49:32] dopaminergic circuits work our
+[01:49:35] perception of dopamine is heightened
+[01:49:38] when The receptors for dopamine have not
+[01:49:40] seen much dopamine lately they haven't
+[01:49:42] bound much dopamine so when you fast
+[01:49:44] fast fast fast fast and then you finally
+[01:49:46] eat it evokes more dopamine release so
+[01:49:49] this is the big reward that comes at the
+[01:49:51] end even bigger because you deprived
+[01:49:55] yourself this is true for all rewarding
+[01:49:57] behaviors and activities by the way the
+[01:50:00] longer you restrict yourself from that
+[01:50:02] activity the greater the dopamine
+[01:50:04] experience when the dopamine is finally
+[01:50:06] released because of an upregulation of
+[01:50:08] The receptors for
+[01:50:09] dopamine but I just spent five minutes
+[01:50:12] or more telling you that you should
+[01:50:14] avoid too much reward at the end and you
+[01:50:16] should actually focus on the dopamine
+[01:50:20] that you can consciously evoke from the
+[01:50:23] deprivation strain and effort and in
+[01:50:25] fact this is what happens for many
+[01:50:27] people that start doing fasting and take
+[01:50:30] a liking to it many people say that
+[01:50:32] their state of mind when they fast is
+[01:50:35] clearer that they actually start to
+[01:50:36] enjoy the period of fasting in fact some
+[01:50:39] people start pushing out their eating
+[01:50:41] window or skipping entire days of eating
+[01:50:43] more and more in order to get deeper
+[01:50:45] into that State of Mind where surely
+[01:50:49] it's not just dopamine but dopamine is
+[01:50:51] released they will track back their
+[01:50:53] clock oh I've been fasting 12 hours 16
+[01:50:55] hours Etc they are starting to attach
+[01:50:57] dopamine release or create dopamine
+[01:50:59] release from the deprivation not from
+[01:51:02] the food reward itself and this I think
+[01:51:04] makes it an interesting practice and one
+[01:51:06] that certainly has been uh practiced by
+[01:51:09] for centuries in different cultures and
+[01:51:11] different religions of deliberately
+[01:51:12] restricting food not just to increase
+[01:51:15] the rewarding properties of food itself
+[01:51:18] but also to increase the rewarding
+[01:51:20] properties of deprivation and I should
+[01:51:22] EMP EMP asiz that a lot of the
+[01:51:23] subjective aspects of the knowledge of
+[01:51:26] the benefits of fasting serve as
+[01:51:28] reinforcing dopamine
+[01:51:31] amplifying aspects to fasting meaning if
+[01:51:34] somebody does intermittent fasting and
+[01:51:36] they are deep into their fast and
+[01:51:38] they're telling themselves oh my blood
+[01:51:40] lipid profiles are probably improving
+[01:51:41] and my glucose management is probably
+[01:51:44] improving my insulin sensitivity is
+[01:51:45] going up and I'm going to live longer
+[01:51:47] all these things that have some basis
+[01:51:49] from animal studies and some basis or
+[01:51:52] not from Human studies it's all kind of
+[01:51:54] still an emerging literature but it does
+[01:51:56] seem to be pointing in that direction
+[01:51:57] that fasting can encourage things like
+[01:52:00] autoag the engulfment of dead cells and
+[01:52:02] things of that sort well as people tell
+[01:52:06] themselves these things they are
+[01:52:08] enhancing the rewarding properties of
+[01:52:11] the behavior of fasting and so this is a
+[01:52:13] Salient example of where knowledge of
+[01:52:16] knowledge can actually help us change
+[01:52:19] these deep primitive circuits related to
+[01:52:22] dop amine and this illustrates how the
+[01:52:24] forbrain which carries knowledge and
+[01:52:27] Carries interpretation and rational
+[01:52:28] thought can be used to shape the very
+[01:52:31] circuits that are involved in generating
+[01:52:34] reward for what would otherwise just be
+[01:52:36] kind of primitive behaviors hardwired
+[01:52:38] behaviors and that's the beauty of these
+[01:52:40] dopamine circuits that's the beauty of
+[01:52:41] dopamine it's not just attached to the
+[01:52:44] more primitive behaviors of food sex
+[01:52:47] heat Etc it's also attached to the
+[01:52:51] things that we decide are good for us
+[01:52:53] and are important for us so telling
+[01:52:55] yourself that exercise or fasting or
+[01:52:57] studying or listening better or any kind
+[01:53:00] of behavior is good for you will
+[01:53:02] actually reinforce the extent to which
+[01:53:04] it is good for you at a chemical level
+[01:53:07] and a somewhat Eerie example of what I
+[01:53:10] just mentioned was a study that was
+[01:53:12] published last year in the journal
+[01:53:14] neuron self Press Journal excellent
+[01:53:15] Journal that showed
+[01:53:18] that hearing something that reinforces
+[01:53:21] one's prior belief
+[01:53:23] actually can evoke dopamine release so
+[01:53:25] the dopamine pathway is so vulnerable to
+[01:53:28] subjective
+[01:53:29] interpretation that it actually makes it
+[01:53:31] such that when we see something or hear
+[01:53:34] something that validates a belief that
+[01:53:35] we already have that itself can increase
+[01:53:38] dopamine release along the lines of how
+[01:53:42] dopamine and dopamine schedules and our
+[01:53:44] perception of things can shape the way
+[01:53:46] that we experience things as pleasureful
+[01:53:48] or not there are beautiful studies
+[01:53:51] mainly looking at sugar appetite and our
+[01:53:53] sense of pleasure from sweet things but
+[01:53:56] also for Savory Foods Etc and
+[01:53:58] essentially the results that come out of
+[01:54:00] this are the following if you ingest
+[01:54:02] something that you like it tastes good
+[01:54:04] to you but then you ingest something
+[01:54:06] that's even sweeter or even more Savory
+[01:54:09] and then you go back to the food that
+[01:54:11] you ate previously well you don't like
+[01:54:14] it as much and that might seem like a
+[01:54:16] duh obviously but that shift in
+[01:54:20] perception can be blocked by blocking
+[01:54:23] the shift in dopamine and so this really
+[01:54:26] speaks to these Peaks and valleys in
+[01:54:28] dopamine that I mentioned before and how
+[01:54:29] your experience of anything is going to
+[01:54:32] depend on your prior experience of other
+[01:54:35] things that evoke dopamine big dopamine
+[01:54:37] release makes it more challenging to
+[01:54:40] experience more big dopamine release so
+[01:54:43] dopamine is one of those things that you
+[01:54:44] don't want too high or too low for too
+[01:54:47] long it's all about staying in that
+[01:54:49] dynamic range and that's going to be
+[01:54:50] different for everybody so for the very
+[01:54:54] Savory Foods that are now everywhere
+[01:54:57] those highly Savory Foods or I think
+[01:54:59] they call them highly palatable foods
+[01:55:02] are making more bland Foods Whole Foods
+[01:55:05] meaning foods that aren't processed it's
+[01:55:07] making those taste less good at least
+[01:55:09] for a while and all it takes is a short
+[01:55:11] period of time even just days two days
+[01:55:13] or so of not consuming any highly
+[01:55:16] palatable foods and
+[01:55:19] suddenly broccoli with just a little bit
+[01:55:21] of seasoning taste delicious to you all
+[01:55:23] right so again this just speaks to the
+[01:55:26] fact that dopamine is this universal
+[01:55:28] currency it establishes value based on
+[01:55:31] not just what you're experiencing in the
+[01:55:32] moment but what you experienced in the
+[01:55:34] days and minutes before now that you
+[01:55:37] understand how your previous level of
+[01:55:39] dopamine relates to your current level
+[01:55:41] of dopamine and how your current level
+[01:55:44] of dopamine will influence your future
+[01:55:46] level of dopamine it should become
+[01:55:49] obvious why things like pornography not
+[01:55:52] just the accessibility of pornography
+[01:55:54] but the intensity of pornography can
+[01:55:58] negatively shape real world romantic and
+[01:56:01] sexual interactions this is a serious
+[01:56:03] concern the discussion is happening now
+[01:56:06] the underlying neurobiological
+[01:56:07] mechanisms You Now understand and this
+[01:56:10] isn't to pass judgment on whether or not
+[01:56:12] people like or don't like pornography
+[01:56:14] that's an ethical discussion it's a
+[01:56:16] moral discussion that has to be decided
+[01:56:17] for each individual by virtue of age Etc
+[01:56:22] but again any activity that evokes a lot
+[01:56:26] of dopamine release will make it
+[01:56:28] harder to achieve the same level and
+[01:56:32] certainly the greater level of dopamine
+[01:56:34] through a subsequent interaction so yes
+[01:56:37] indeed many people are addicted to
+[01:56:39] pornography and yes indeed many people
+[01:56:42] who regularly indulge in pornography
+[01:56:45] experience challenges in real world
+[01:56:47] romantic interactions You Now understand
+[01:56:49] the mechanisms behind what I'm telling
+[01:56:51] you now there are circumstances in which
+[01:56:54] increasing levels of dopamine is
+[01:56:56] desirable and advantageous and
+[01:56:58] clinically helpful good example of this
+[01:57:00] would be the drug Wellbutrin also called
+[01:57:02] Bryon which increases dopamine and
+[01:57:05] norepinephrine Wellbutrin Bryon was
+[01:57:07] developed as an alternative treatment
+[01:57:08] for depression because some people who
+[01:57:11] take the so-called SSRI selective
+[01:57:13] serotonin reuptake Inhibitors which as
+[01:57:15] the name suggest increased serotonin
+[01:57:17] suffer from serotonin related side
+[01:57:20] effects things like
+[01:57:22] decreased appetite decreased libido or
+[01:57:25] sometimes increased appetite or other
+[01:57:28] side effects that they don't want and
+[01:57:30] while Butrin seems to avoid the sexual
+[01:57:33] side effects it can blunt a appetite and
+[01:57:37] these sorts of things because of the
+[01:57:39] increase in norepinephrine and dopamine
+[01:57:41] increases levels of motivation and
+[01:57:44] craving but also can create a state of
+[01:57:47] elevated alertness that can sometimes
+[01:57:50] get in the way of healthy eating and
+[01:57:52] things of that sort so one has to work
+[01:57:53] with their clinician as psychiatrist it
+[01:57:56] is a prescription drug in order to find
+[01:57:58] the dosage of Wellbutrin that's correct
+[01:58:00] for them in addition things like wbin
+[01:58:03] Bryon can increase anxiety because of
+[01:58:06] the way that dopamine and norepinephrine
+[01:58:08] are stimulating and tend to place people
+[01:58:10] into heightened levels of alertness
+[01:58:11] nonetheless many people have gained
+[01:58:13] terrific relief from depression from
+[01:58:15] wellb pyone and many of those same
+[01:58:18] people had serious trouble with some of
+[01:58:20] the ssris so does seem to be a very
+[01:58:22] useful drug in certain context both for
+[01:58:24] depression and for the treatment of
+[01:58:26] smoking for people Desiring to quit
+[01:58:28] smoking and of course there are a lot of
+[01:58:30] people out there who are seeking to
+[01:58:31] increase their Baseline levels of
+[01:58:33] dopamine without taking any prescription
+[01:58:36] pharmaceutical compounds and nowadays
+[01:58:39] there exist a lot of supplements to do
+[01:58:41] that the two most common ones that are
+[01:58:44] directly within the dopamine pathway are
+[01:58:46] Muna purines which is actually a velvety
+[01:58:49] Bean whose contents are L Doopa believe
+[01:58:54] it or not the content of this be is the
+[01:58:56] precursor to dopamine so Muna pin is
+[01:58:59] sold over the counter at least in the
+[01:59:01] United States and it literally is the
+[01:59:05] precursor to dopamine meaning if you
+[01:59:07] take it you will experience very large
+[01:59:09] increases in dopamine those increases
+[01:59:11] are transient and very very intense and
+[01:59:14] in fact if you look at the constellation
+[01:59:16] of effects of Muna Pines what you find
+[01:59:20] is that they're pretty striking and they
+[01:59:21] look a lot like if not identical to
+[01:59:24] elopa the most obvious of those is in
+[01:59:27] the context of Parkinson's disease there
+[01:59:29] are at least five studies that have
+[01:59:31] shown that Muna purines can reduce the
+[01:59:34] symptoms of Parkinson's disease much in
+[01:59:36] the same way that alopa can reduce the
+[01:59:39] symptoms of Parkinson's disease and that
+[01:59:41] shouldn't come as any surprise given
+[01:59:43] what I just told you that Muno Pines is
+[01:59:45] essentially alopa it also can reduce a
+[01:59:48] particular hormone called prolactin
+[01:59:50] dopamine and prolactin tend to be in
+[01:59:52] somewhat pushpull fashion when dopamine
+[01:59:54] is up prolactin is down and vice versa
+[01:59:57] prolactin is involved in milk let down
+[01:59:59] in women it's involved in setting the
+[02:00:00] refractory period for uh sex after
+[02:00:04] ejaculation in males the reason mating
+[02:00:07] can occur and then not occur after
+[02:00:08] ejaculation is because of an increase in
+[02:00:10] prolactin Muna Pines is often used to
+[02:00:12] brunt blunt prolactin and they're
+[02:00:15] actually a couple of studies showing
+[02:00:17] that it can indeed do that munan has a
+[02:00:20] number of other effects that lie in the
+[02:00:22] sort of sex and reproduction pathway
+[02:00:24] that are worth
+[02:00:26] noting sperm concentration sperm quality
+[02:00:29] is actually greatly increased by Muna
+[02:00:32] Pines these are kind of curious effects
+[02:00:33] until you understand a little bit more
+[02:00:34] about the biology of dopamine which I'll
+[02:00:36] mention in a moment but there are
+[02:00:39] several studies four in fact that
+[02:00:42] describe how Muna Pines can increase
+[02:00:46] sperm count sperm quality and sperm
+[02:00:48] motility so for those of you seeking to
+[02:00:50] conceive children uh Muna Pines might be
+[02:00:53] an interesting choice if you're
+[02:00:55] interested in exploring non-prescription
+[02:00:57] compounds however I should mention that
+[02:01:01] anytime you consume a substance that
+[02:01:04] increases dopamine by mimicking dopamine
+[02:01:07] or acting as a direct precursor to
+[02:01:09] dopamine there's almost inevitably a
+[02:01:12] crash or a reduction in the Baseline in
+[02:01:16] dopamine that we referred to previously
+[02:01:18] so many people who take Muna Pines feel
+[02:01:21] really elevated really motivated really
+[02:01:23] alert all the sorts of things that one
+[02:01:25] would expect from a dopaminergic drug
+[02:01:28] which Muna Pines is and then they feel a
+[02:01:31] low or a reduction in drive and
+[02:01:34] excitement and enthusiasm after the drug
+[02:01:37] wears off just like they would with any
+[02:01:39] other dopamine increasing compound for
+[02:01:42] that
+[02:01:43] reason many people have turned to the
+[02:01:45] use of el tyrosine el tyrosine is an
+[02:01:48] amino acid precursor to elopa so it lies
+[02:01:51] further up the dopamine synthesis
+[02:01:53] pathway and nowadays it's very common
+[02:01:55] because El tyrosine is sold over the
+[02:01:58] counter in the United States that people
+[02:02:00] will take El tyrosine as a way to get
+[02:02:03] more energized alert and focused and
+[02:02:06] indeed there are data that El tyrosine
+[02:02:08] will accomplish that El tyrosine is
+[02:02:11] typically taken in capsule form or
+[02:02:13] powder form anywhere from 500 to 750 to
+[02:02:16] 1,000 milligrams it is a potent stimulus
+[02:02:19] for increasing dopamine and the time
+[02:02:22] scale for increasing dopamine is about
+[02:02:24] 30 to 45 minutes after ingestion
+[02:02:26] dopamine levels start to Peak the
+[02:02:28] classic study that really nailed down
+[02:02:31] the fact that tyrosine has this effect
+[02:02:34] was published way back in 1983 Journal
+[02:02:37] clinical endocrinology and Metabolism
+[02:02:39] that directly compared El tyrosine
+[02:02:42] supplementation with tryptophan
+[02:02:44] ingestion on plasma dopamine and and
+[02:02:47] serotonin tryptophan being a precursor
+[02:02:49] to
+[02:02:50] serotonin and indeed what they found is
+[02:02:53] that ingestion of Al tyrosine can
+[02:02:55] increase the amount of dopamine
+[02:02:57] circulating in the blood and in the
+[02:02:59] brain too of
+[02:03:00] course the tyrosine ingestion induced
+[02:03:03] dopamine increases within 45 minutes and
+[02:03:06] they were shortl lasting after about 30
+[02:03:08] minutes the effect had dissipated
+[02:03:10] meaning the levels of dopamine had
+[02:03:12] dropped down to baseline And even though
+[02:03:14] they didn't look at levels of Baseline
+[02:03:16] dopamine past that time point the
+[02:03:19] expectation based on everything we know
+[02:03:21] about dopamine biology is that it would
+[02:03:23] then drop below Baseline due to the
+[02:03:26] depletion of the readily reservable pool
+[02:03:28] of dopamine vesicles that we talked
+[02:03:30] about way back at the beginning of this
+[02:03:32] episode the nice thing about this study
+[02:03:34] is it does show specificity of effect
+[02:03:36] because ingestion of tryptophan did not
+[02:03:39] increase dopamine instead it increased
+[02:03:41] serotonin so there's really specificity
+[02:03:43] of these Pathways that rule out any
+[02:03:45] Placebo type
+[02:03:47] effects I'm not suggesting that anybody
+[02:03:50] everybody increase their dopamine levels
+[02:03:52] by way of tyrosine or Mur Muna purin uh
+[02:03:55] for those of you that are seeking to
+[02:03:57] increase your dopamine levels without
+[02:03:58] prescription drugs those are the most
+[02:04:00] direct root to that of course if you
+[02:04:02] have a pre-existing dopaminergic
+[02:04:04] condition so schizophrenia or psychosis
+[02:04:07] of any kind bipolar anxiety things like
+[02:04:12] munin and Al tyrosine will not be good
+[02:04:15] for you and if you don't you should just
+[02:04:18] understand and expect that it's going to
+[02:04:20] lead to an increase in dopamine you'll
+[02:04:23] certainly feel an elevated state for
+[02:04:25] some of you that might be agitating for
+[02:04:27] some of you that might be really
+[02:04:28] pleasureful and then you will feel a
+[02:04:30] crash afterwards how deep is that crash
+[02:04:33] will really depend on your biology and
+[02:04:35] where your dopamine Baseline began so I
+[02:04:38] personally am not a fan of using things
+[02:04:41] like Muna pins at all for myself for the
+[02:04:43] reasons I mentioned earlier just too
+[02:04:46] intense and too much of a crash I do use
+[02:04:48] Al tyrosine from time to time for
+[02:04:50] enhancing Focus motivation but I want to
+[02:04:53] emphasize from time to time so I might
+[02:04:55] use it once a week occasionally twice a
+[02:04:57] week but I've never been one to take El
+[02:05:00] tyrosine regularly in order to focus or
+[02:05:02] train or do any kind of mental work I
+[02:05:04] just don't want to rely on any exogenous
+[02:05:08] substance in order to get my dopamine
+[02:05:10] circuits activated and I don't want to
+[02:05:13] experience the drop in dopamine that
+[02:05:15] inevitably occurs some period of time
+[02:05:17] afterwards I should also mention things
+[02:05:20] that can reduce your levels of Baseline
+[02:05:23] dopamine one that is rarely discussed is
+[02:05:26] melatonin I have talked before on this
+[02:05:29] podcast about melatonin why I am not a
+[02:05:31] fan of using melatonin in order to
+[02:05:34] enhance sleep it can help one get to
+[02:05:36] sleep but not stay asleep Dr Matt Walker
+[02:05:38] sleep expert from University of
+[02:05:39] California Berkeley I think I don't want
+[02:05:42] to put words in his mouth but in our
+[02:05:44] discussion about melatonin on this
+[02:05:48] podcast when Matt was a guest and in his
+[02:05:50] book and on other podcasts Matt
+[02:05:52] has generally stated that the use of
+[02:05:54] melatonin except for treatment of jet
+[02:05:55] lag is generally not a good idea and I I
+[02:05:58] agree I think that melatonin is not
+[02:06:02] often thought about as impacting the
+[02:06:03] dopamine pathway but there's at least
+[02:06:05] one study um published in 2001 first
+[02:06:08] author is
+[02:06:10] nishiyama just as it sounds he it's
+[02:06:12] spelled just as it sounds acute effects
+[02:06:15] of melatonin Administration on
+[02:06:16] cardiovascular autonomic regulation in
+[02:06:18] healthy men so the study wasn't
+[02:06:19] specifically about dopam but they looked
+[02:06:22] at norepinephrine in dopamine levels and
+[02:06:24] they found a significant statistically
+[02:06:27] significant decrease in dopamine 60
+[02:06:30] minutes after melatonin Administration
+[02:06:32] I've talked before about how viewing
+[02:06:34] Bright Lights between the hours of 10
+[02:06:37] p.m. and 4 a. has been shown in Studies
+[02:06:39] by Dr Samar hatar David Bon excellent
+[02:06:41] circadian
+[02:06:43] scientists to reduce levels of dopamine
+[02:06:45] for several days after that light
+[02:06:47] exposure so dim the lights at night if
+[02:06:50] you can avoid exogenous melatonin
+[02:06:53] meaning if you don't have to take
+[02:06:55] melatonin and you can find a better
+[02:06:57] alternative that would be a good idea if
+[02:06:58] you want to maintain healthy levels of
+[02:07:00] dopamine now there is one compound that
+[02:07:03] you are all familiar with and you've
+[02:07:04] probably actually taken without
+[02:07:06] realizing it that increases dopamine and
+[02:07:08] that's something called pea for phenol
+[02:07:12] ethylamine technically beta phenol
+[02:07:15] ethylamine and pea is found in various
+[02:07:18] Foods chocolate just happens to be one
+[02:07:20] in in Rich in pea and can increase
+[02:07:24] synaptic levels of
+[02:07:25] dopamine I personally take Pea from time
+[02:07:28] to time as a focus and work Aid in order
+[02:07:33] to do intense bouts of work again I
+[02:07:35] don't do that too often this might be
+[02:07:37] once a week or once every two weeks I
+[02:07:39] might use it for training but typically
+[02:07:40] I I don't it's usually for mental work
+[02:07:43] and I will take 500 milligrams of pea
+[02:07:46] and I'll take 300 milligrams of alpha
+[02:07:48] GPC that's something that I personally
+[02:07:50] do that's what's right for me it's
+[02:07:52] within my margins of safety for my
+[02:07:53] health again you have to check with your
+[02:07:55] doctor and decide what's right for you
+[02:07:57] it leads to a sharp but very transient
+[02:08:00] increase in dopamine that lasts about 30
+[02:08:03] to 45 minutes and at least in my system
+[02:08:06] I found to be much more uh regulated and
+[02:08:10] kind of even than something like El
+[02:08:12] tyrosine and certainly much more
+[02:08:14] regulated and even and lower dopamine
+[02:08:16] release than something like Muna purines
+[02:08:20] one of the Lesser talked about compounds
+[02:08:22] that's out there but that's gaining
+[02:08:24] popularity for increasing dopamine and
+[02:08:26] as a so-called neut Tropic is something
+[02:08:28] called Hooper a Hooper a is a compound
+[02:08:32] sold over the- counter at least in the
+[02:08:34] United States that can increase
+[02:08:36] acetycholine transmission a different
+[02:08:38] neurom modulator entirely but what's
+[02:08:40] interesting is that Hooper a somehow by
+[02:08:43] way of interactions between the coleric
+[02:08:45] system and the dopaminergic system leads
+[02:08:48] to increases in dopamine in the med
+[02:08:51] prefrontal cortex and hippocampus
+[02:08:53] hippocampus of course being an area of
+[02:08:55] the brain associated with learning and
+[02:08:56] memory and prefrontal cortex being
+[02:08:58] associated with the misol limic pathway
+[02:09:00] decision-making Focus Etc and so I think
+[02:09:03] the reason why we're seeing an increase
+[02:09:04] in popularity of companies including
+[02:09:07] hoine a and neutop compounds is both for
+[02:09:10] the colonic stimulating properties but
+[02:09:12] also for stimulating dopamine release I
+[02:09:15] personally have never tried hoopera you
+[02:09:17] can go to examine.com or put hoopera
+[02:09:20] into PubMed if you'd like to search
+[02:09:22] around and see some of the science
+[02:09:23] behind it again I'm not recommending
+[02:09:25] anyone take these things in fact I
+[02:09:26] recommend against anyone just diving in
+[02:09:28] and starting to consume things without
+[02:09:30] gaining knowledge about how they
+[02:09:31] function and whether or not they're
+[02:09:32] right for you but nonetheless I think in
+[02:09:35] the years to come we are going to see a
+[02:09:36] lot more of el tyrosine pea pheno
+[02:09:40] ethylamine and hoine as a way of tapping
+[02:09:43] into the dopaminergic and coleric
+[02:09:45] circuits certainly along with things
+[02:09:47] like Alpha GPC as nonprescription
+[02:09:49] short-lived somewhat milder alternatives
+[02:09:53] to things that really Spike dopamine
+[02:09:56] things like adderal rlin modafanil arm
+[02:09:58] modaal and similar and I can't help but
+[02:10:01] share with you one more result it's not
+[02:10:03] related to pharmacology it's related to
+[02:10:05] behaviors and social interactions and
+[02:10:08] that's the very interesting and I would
+[02:10:10] say important finding that was made a
+[02:10:12] few years ago by my colleague Rob
+[02:10:14] malenka who's our department of
+[02:10:15] Psychiatry at Stanford showing that
+[02:10:18] oxytocin and social connection is
+[02:10:21] actually directly stimulating the
+[02:10:23] dopamine pathway I think for many years
+[02:10:26] all of us including me would hear and
+[02:10:29] thought that oxytocin was in the
+[02:10:32] serotonergic pathway that it was about
+[02:10:34] parir bonding and it was about some of
+[02:10:36] these neuromodulators that were more
+[02:10:37] associated with things related to
+[02:10:40] feeling good with what we have in the
+[02:10:42] present moment that's typically what we
+[02:10:44] think of when we think of the opioid
+[02:10:45] system or the serotonergic system the
+[02:10:48] dopamine system is really about seeking
+[02:10:49] and reward but in a paper published in
+[02:10:52] 2017 in the journal science excellent
+[02:10:55] Journal paper's titled gating of social
+[02:10:57] reward by oxytocin toin excuse me in the
+[02:11:00] ventral tegmental area you now know what
+[02:11:03] the ventral tegmental area it's that
+[02:11:04] area of the molic pathway what this
+[02:11:06] paper essentially showed is that
+[02:11:09] oxytocin social connection and parab
+[02:11:11] bonding itself triggers dopamine release
+[02:11:15] and as everyone read this result we all
+[02:11:17] realized ah this makes total sense that
+[02:11:20] for the evolution of our species indeed
+[02:11:22] for any species where social connections
+[02:11:25] are important it's also important to go
+[02:11:27] seek social connections and so while
+[02:11:29] it's fun to think about pharmacology and
+[02:11:31] underlying neural circuitry and cold
+[02:11:34] water baths and all these different
+[02:11:36] things related to dopamine schedules and
+[02:11:38] reward mechanisms and attaching reward
+[02:11:40] to effort and all the various things
+[02:11:42] that we've talked about today in terms
+[02:11:43] of science and tools and
+[02:11:45] protocols I'd be remiss if I didn't
+[02:11:47] include description of this result and
+[02:11:50] just emphasize that
+[02:11:52] social connections close social
+[02:11:54] Connections in particular that evoke
+[02:11:56] oxytocin release so those are romantic
+[02:11:58] type those are parent child type those
+[02:12:01] are friendship related and those can
+[02:12:03] even be just friends at a distance
+[02:12:05] related right it doesn't actually
+[02:12:07] require skin contact to get oxytocin
+[02:12:10] release but oxytocin release is Central
+[02:12:13] to stimulating the dopamine Pathways so
+[02:12:16] the take-home message there is quite
+[02:12:18] simple engage in pursue quality healthy
+[02:12:22] social interactions I know I've covered
+[02:12:24] a lot of material today I've really
+[02:12:26] tried hard to focus on things that lie
+[02:12:28] directly within the dopamine pathway and
+[02:12:31] circuitries as well as things that
+[02:12:33] directly stimulate those Pathways and
+[02:12:35] circuitries what I haven't talked about
+[02:12:38] are all the things that indirectly serve
+[02:12:41] the dopamine Pathways and out there on
+[02:12:43] the internet and indeed in the
+[02:12:45] scientific literature you will find for
+[02:12:47] instance that things like Macar root can
+[02:12:49] increase dopamine things like the gut
+[02:12:51] microbiome can influence dopamine and
+[02:12:53] indeed they can but they do that through
+[02:12:55] indirect mechanisms by creating an
+[02:12:58] environment a milu in which dopamine and
+[02:13:01] dopamine circuits can flourish Maca is a
+[02:13:03] good example of that it will reduce
+[02:13:05] cortisol and through some indirect
+[02:13:07] Pathways related to cortisol can
+[02:13:09] increase dopamine but it's not a direct
+[02:13:11] increase in dopamine and so as a
+[02:13:13] consequence it's rather subtle compared
+[02:13:15] to the various compounds and behaviors
+[02:13:17] that I talked about today indeed cold
+[02:13:19] water exposure leads to to in huge
+[02:13:22] increases in dopamine as we talked about
+[02:13:25] before and very sustained ones at that I
+[02:13:28] realize in giving you a lot of
+[02:13:30] information about science and mechanism
+[02:13:32] all the way from psychological and
+[02:13:34] biological to circuitry and synaptic
+[02:13:35] transmission volumetric transmission and
+[02:13:38] so forth that it might seem overwhelming
+[02:13:40] the most important things to understand
+[02:13:42] are that these dopamine Pathways really
+[02:13:44] are under your control and the locus of
+[02:13:47] control resides in the fact that your
+[02:13:49] previous levels of dopamine are
+[02:13:51] influencing your levels of dopamine
+[02:13:53] right now and your current levels of
+[02:13:55] dopamine and where you take them next
+[02:13:56] will influence your dopamine levels in
+[02:13:58] the next days and weeks to come so I
+[02:14:00] hope both with the mechanisms that you
+[02:14:02] now have in hand plus some of the tools
+[02:14:04] to tap into the dopaminergic system both
+[02:14:06] behavioral pharmacologic prescription
+[02:14:09] and non-prescription Etc that you'll
+[02:14:10] feel that you have more control over
+[02:14:12] your dopamine system and certainly that
+[02:14:14] you have a better understanding of your
+[02:14:15] dopamine system so that you can modulate
+[02:14:18] and adjust your levels of dopamine in
+[02:14:19] the ways that serve you best if you're
+[02:14:22] learning from Andor enjoying this
+[02:14:24] podcast please subscribe to our YouTube
+[02:14:27] channel that's a terrific way to support
+[02:14:28] us in addition please leave us a comment
+[02:14:31] or a suggestion for a guest you'd like
+[02:14:33] us to interview or a topic you'd like us
+[02:14:35] to cover in addition please subscribe to
+[02:14:38] us on Apple and Spotify and on Apple you
+[02:14:41] have the opportunity to leave us up to a
+[02:14:43] five-star review and to leave us a
+[02:14:45] comment there as well please also check
+[02:14:47] out the sponsors mentioned at the
+[02:14:49] beginning of today's podcast that's
+[02:14:51] that's a terrific way to support us in
+[02:14:53] addition if you'd like to support the
+[02:14:54] hubman lab and research at Stanford on
+[02:14:56] stress stress mitigation and Human
+[02:14:58] Performance you can do that by going to
+[02:15:00] huberman lab. stanford.edu
+[02:15:04] giving and there you can make a tax
+[02:15:06] deductible donation to the research in
+[02:15:08] my laboratory in addition we have a
+[02:15:10] patreon it's
+[02:15:12] patreon.com Andrew huberman and there
+[02:15:15] you can support the podcast at any level
+[02:15:17] that you like today and on previous
+[02:15:19] podcast episodes we talked about about
+[02:15:21] supplements supplements certainly aren't
+[02:15:23] necessary but many people find them
+[02:15:25] beneficial for things like adjusting
+[02:15:26] their levels of dopamine or for other
+[02:15:28] purposes if you're going to use
+[02:15:30] supplements it's very important that the
+[02:15:32] supplements you use be of very high
+[02:15:34] quality and that the quantity of
+[02:15:36] ingredients that are on the label match
+[02:15:38] what's actually in those bottles for
+[02:15:39] that reason we've partnered with Thorn
+[02:15:41] th h o r n e because Thorn has the
+[02:15:43] highest levels of stringency with
+[02:15:45] respect to Quality and how much of each
+[02:15:47] supplement they put in the products that
+[02:15:50] they sell if you'd like to see the
+[02:15:51] supplements that I take you can go to
+[02:15:53] Thorn t h r ne.com thelet / huberman and
+[02:15:58] there you can see what I take you can
+[02:15:59] get 20% off any of those supplements and
+[02:16:02] if you navigate into the thorn site
+[02:16:04] through that portal then you can get 20%
+[02:16:06] off any of the supplements that thorn
+[02:16:08] makes if you're not already following us
+[02:16:10] on Instagram at hubman laab please do so
+[02:16:12] there I teach Neuroscience tools and
+[02:16:14] information oftentimes it's tools and
+[02:16:17] information that I don't cover on the
+[02:16:19] podcast we're also on Twitter also at
+[02:16:21] huberman lab and last but certainly not
+[02:16:23] least thank you for your interest in
+[02:16:25] science
+[02:16:29] [Music]
