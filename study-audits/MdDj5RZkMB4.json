@@ -1,0 +1,42 @@
+{
+  "video_id": "MdDj5RZkMB4",
+  "layout": "compact",
+  "duration_seconds": 7142,
+  "image_count": 0,
+  "review_basis": "2026-11-20 유튜브 한국어 자동 자막(0:00~1:58:52, 2233줄)을 5분 단위로 처음부터 끝까지 읽고 타임스탬프·상세 요약·실천 포인트를 대조했다. 영상 화면(엑셀·표)은 대조하지 못했다.",
+  "units": [],
+  "transcript": {
+    "path": "transcripts/MdDj5RZkMB4.ko.txt",
+    "raw_json3": "transcripts/MdDj5RZkMB4.ytdlp.ko-orig.json3",
+    "status": "yt-dlp ko-orig json3를 원본 그대로 보존하고 같은 내용을 시각이 붙은 txt로 옮겨 저장.",
+    "coverage": "0:00~1:58:52"
+  },
+  "content_id": "MdDj5RZkMB4",
+  "source_title": "우리를 힘들게 하는 것과 우리를 낫게 하는 것",
+  "creator": "김주환",
+  "published_date": "2024-12-29",
+  "caption_type": "YouTube Korean auto-generated captions (ko-orig); manual captions not available",
+  "caption_first": "0:00",
+  "caption_last": "1:58:52",
+  "source_video_id": "MdDj5RZkMB4",
+  "source_url": "https://www.youtube.com/watch?v=MdDj5RZkMB4",
+  "source_url_verified": true,
+  "source_verification_method": "yt-dlp 메타데이터: 제목, 업로드일 20241229, 길이 1:59:02(7142초) 확인. 사용자가 준 주소는 https://www.youtube.com/live/MdDj5RZkMB4",
+  "description_file": "transcripts/MdDj5RZkMB4.description.txt",
+  "description_check": "2026-11-20 yt-dlp로 설명란 전문을 받아 원문 그대로 저장. 336개 사연 분석, 루퍼트 스파이라 발췌문, 해시태그(경험자아·기억자아·배경자아)를 상세 요약과 대조함. 스파이라 이야기는 방송에서 다음 시간으로 미뤄 정리에 넣지 않음.",
+  "checks": {
+    "subtitle": "자막 전체를 순서대로 읽음. 오인식은 문맥과 설명란으로 교정함(배경자·기억자·경험자→배경자아·기억자아·경험자아, 존트→존2, 데이빗 보험→데이비드 봄, 메이어 클리닉→메이요 클리닉).",
+    "timeline": "타임스탬프는 자막에서 발언이 시작되는 줄의 시각을 grep으로 찾아 적음. 핵심 세션 5개, 상세 74개, 모두 오름차순.",
+    "numbers": "336·475·483(댓글 수), 94·66·29(어려움 인원), 149·121·17(좋아요·답글), 27세, 1~2%, 18~20세를 자막 시각과 대조함.",
+    "research": "NBC뉴스 기사를 열어 사고 날짜·공항·기종·사망자 수를 확인함.",
+    "raw_transcript": "원본 json3와 시각 텍스트를 transcripts/에 저장."
+  },
+  "unverified": [
+    "메이요 클리닉 용서 안내문(접속 403)과 케티 등 조현병 입양 연구 원문(접속 불가)",
+    "미국 서전 제너럴의 공개 사과문 존재와 시기",
+    "프로이트 평가, 한국 정신과 치료 현실·수입 구조, 과잉 행위 사회 진단(강연자의 견해)",
+    "도움이 된 것 3위 이하의 순위와 인원수(화면 표를 말로 읽은 내용)",
+    "영상 화면(엑셀·표)"
+  ],
+  "follow_up": "인용 연구 원문 대조와 영상 화면 대조는 하지 못함."
+}
