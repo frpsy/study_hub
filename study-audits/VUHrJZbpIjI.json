@@ -38,5 +38,10 @@
     "강의가 소개한 연구(먼로 1967, MSLT, 3P 모델 비율, 유전율, 154명 무작위 대조 연구)의 원문 수치",
     "설명란이 소개한 Riemann 2010, Stepanski 1988, Bonnet & Arand 1995, Baron 2017, Broomfield & Espie 2005, Frankl 1960, Ansfield 1996, Harvey 2003, Harvey & Payne 2002 원문",
     "평균율의 수면 효과는 강연자가 실험하지 않았다고 밝힌 이론적 추론"
-  ]
+  ],
+  "lead_quote": {
+    "text": "잠은 내가 만들어낼 수가 없어요.",
+    "source": "transcripts/VUHrJZbpIjI.ko.txt 0:02:11~0:02:15",
+    "note": "2026-11-20 사용자 요청으로 한 문장을 강의자 워딩 그대로의 인용 하나로 바꿈. ‘만들어 낼’의 띄어쓰기만 붙임."
+  }
 }

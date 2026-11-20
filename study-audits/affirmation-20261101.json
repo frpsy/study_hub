@@ -26,5 +26,10 @@
     "summaries/affirmation-20261101.html"
   ],
   "source_url": "https://www.youtube.com/watch?v=oD5-nTDCKPg",
-  "source_verification_method": "yt-dlp official YouTube channel /streams title and video ID (2026-11-02)"
+  "source_verification_method": "yt-dlp official YouTube channel /streams title and video ID (2026-11-02)",
+  "lead_quote": {
+    "text": "내가 나 자신에게 진실로 진짜로 그렇게 생각해서 이야기하는 그 이야기는 적어도 나 자신에 대해서는 즉각적이고도 절대적이고도 매우 강력한 힘이 있다는 거죠.",
+    "source": "transcripts/oD5-nTDCKPg.ko.txt 1:31:35~1:31:52",
+    "note": "2026-11-20 사용자 요청으로 한 문장을 강의자 워딩 그대로의 인용 하나로 바꿈. 낱말 그대로, 구두점만 맞춤. 이 강의 자막(자동 자막 ko-orig)은 2026-11-20에 새로 확보해 저장함."
+  }
 }
