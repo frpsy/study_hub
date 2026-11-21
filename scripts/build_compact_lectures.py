@@ -4,8 +4,11 @@ import html,json,re,sys
 from build_library import page,R
 E=html.escape
 def block_html(t):
- """A detail item is a paragraph (str) or a labelled list ({"list": [{"l": label, "t": text}, ...]})."""
+ """A detail item is a paragraph (str), a labelled list ({"list": [{"l": label, "t": text}, ...]}) or an inline image ({"image": {"src","alt","width","height","caption"}})."""
  if isinstance(t,str):return '<p>'+E(t)+'</p>'
+ if 'image' in t:
+  g=t['image'];cap=('<figcaption>'+E(g['caption'])+'</figcaption>') if g.get('caption') else ''
+  return f'<figure class="detail-figure"><img src="../{E(g["src"],quote=True)}" width="{int(g["width"])}" height="{int(g["height"])}" alt="{E(g["alt"],quote=True)}" loading="lazy" decoding="async">{cap}</figure>'
  return '<ul class="detail-points">'+''.join('<li><strong>'+E(i['l'])+'</strong>. '+E(i['t'])+'</li>' for i in t['list'])+'</ul>'
 
 def editor_html(groups):

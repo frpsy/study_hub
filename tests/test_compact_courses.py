@@ -9,6 +9,7 @@ def detail_texts(block):
  """Yield every sentence group of a detail block: paragraphs and labelled-list items."""
  for item in block['p']:
   if isinstance(item,str):yield item
+  elif 'image' in item:continue
   else:
    assert item['list'],block['h']
    for point in item['list']:
@@ -30,10 +31,11 @@ class CompactCourseChecks(unittest.TestCase):
     self.assertNotIn(gone,source)
    self.assertIn(html.escape("\n".join(record["timeline"].splitlines()[:3])),source)
    self.assertNotIn('class="timeline-preview"',source)
-   # 본문 이미지는 대표 이미지(figure.lecture-hero) 한 장만 허용한다. 나머지 강의는 이미지가 없다.
+   # 본문 이미지는 대표 이미지(figure.lecture-hero) 한 장과 상세 요약 안 이미지(figure.detail-figure, 최대 3장)만 허용한다.
    main_html=source[source.index('<main id="main"'):]
-   self.assertEqual(main_html.count('<img '),main_html.count('<figure class="lecture-hero"><img '))
-   self.assertLessEqual(main_html.count('<img '),1)
+   hero=main_html.count('<figure class="lecture-hero"><img ');inline=main_html.count('<figure class="detail-figure"><img ')
+   self.assertEqual(main_html.count('<img '),hero+inline)
+   self.assertLessEqual(hero,1);self.assertLessEqual(inline,3)
  def test_only_kim_lectures_have_timestamps_others_have_detailed_summary(self):
   rows=json.loads((R/'lectures.json').read_text());records=json.loads((R/'data/lecture_compact.json').read_text())
   for row in rows:
