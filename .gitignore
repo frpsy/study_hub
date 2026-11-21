@@ -12,3 +12,4 @@ data/subtitles.db
 node_modules/
 test-results/
 playwright-report/
+webkit-deps.log
