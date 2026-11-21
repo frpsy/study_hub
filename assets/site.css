@@ -1008,3 +1008,9 @@ html{scroll-padding-top:var(--anchor-offset,158px)}
 pre,pre *{word-break:keep-all!important}
 /* 조작 요소(목차 탭·버튼·칩·머리·푸터)는 글자 중간에서 끊지 않는다. */
 .reading-nav a,.sidebar a,button,.btn,summary,.eyebrow,.meta,.breadcrumb,.site-header *,.site-footer *,.detail-toc a,.outline-sheet *,.pager-link span,.card-topic{word-break:keep-all!important}
+
+/* 조회수순 정렬 / 2026-11-21: 조회수는 '조회수순'을 고른 때만 카드에 보인다. */
+.lecture .views{display:none}
+#lecture-list[data-sort-mode="views"] .lecture .views{display:inline}
+.views-note{margin:0 0 10px;font-size:12px;line-height:1.6;color:var(--muted)}
+.views-note[hidden]{display:none}

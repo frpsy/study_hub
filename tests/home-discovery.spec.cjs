@@ -61,3 +61,24 @@ test('home sort toggle orders by lecture date or by when it was added',async({pa
   expect(await ids()).toEqual(latest);
   await expect(page).not.toHaveURL(/sort=/);
 });
+
+test('home sort toggle can order by YouTube view count and shows the count only then',async({page})=>{
+  await page.goto('/index.html');
+  const views=()=>page.locator('#lecture-list .lecture').evaluateAll(cards=>cards.map(card=>Number(card.dataset.views)));
+  await expect(page.locator('#lecture-list .lecture .views').first()).toBeHidden();
+  await expect(page.locator('#views-note')).toBeHidden();
+  await page.locator('[data-sort="views"]').click();
+  await expect(page.locator('[data-sort="views"]')).toHaveAttribute('aria-pressed','true');
+  const counts=await views();
+  expect(counts.length).toBeGreaterThan(1);
+  expect(counts).toEqual([...counts].sort((a,b)=>b-a));
+  await expect(page.locator('#lecture-list .lecture .views').first()).toBeVisible();
+  await expect(page.locator('#lecture-list .lecture .views').first()).toContainText('조회수');
+  await expect(page.locator('#views-note')).toBeVisible();
+  await expect(page).toHaveURL(/[?&]sort=views/);
+  await page.reload();
+  await expect(page.locator('[data-sort="views"]')).toHaveAttribute('aria-pressed','true');
+  await page.locator('[data-sort="latest"]').click();
+  await expect(page.locator('#lecture-list .lecture .views').first()).toBeHidden();
+  await expect(page.locator('#views-note')).toBeHidden();
+});

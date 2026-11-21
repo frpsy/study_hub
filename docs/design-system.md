@@ -151,3 +151,8 @@
 - 본문·제목·목록 모두 `word-break:break-all`로 글자 단위 줄바꿈을 허용해 줄이 화면 폭을 꽉 채운다. 단어가 중간에서 끊길 수 있다(사용자 요청, iPhone 실측에서 단어 단위 줄바꿈이 오른쪽 여백을 크게 남겼다).
 - `text-wrap:pretty·balance`는 줄을 짧게 만들 수 있어 `text-wrap-style:auto`로 끈다. `text-wrap:wrap`은 `white-space:nowrap`까지 덮어 쓰므로 쓰지 않는다.
 - 타임스탬프·댓글 원문(`pre`)은 이전처럼 `keep-all`이라 원문과 복사 결과는 그대로다.
+
+## 조회수순 정렬 / v2026.11.21.2
+- 홈 정렬 버튼에 `조회수순`을 더했다(최신순·추가된순·조회수순). `lectures.json`의 `views`(정수)·`views_checked`(확인일)를 생성기가 `data-views`로 내보내고, 값이 없는 자료는 맨 뒤로 간다.
+- 카드의 `조회수 5.4만회`는 조회수순일 때만 보이고, 그때 목록 위에 `조회수는 YYYY.MM.DD 기준…` 안내가 나온다. 선택은 `?sort=views`·localStorage로 유지한다.
+- 조회수 갱신: `python3 scripts/update_views.py` 후 `python3 scripts/build_library.py`. 조회수는 returnyoutubedislikeapi.com의 공개 응답을 쓰며 가져오지 못한 영상은 기존 값을 유지한다. 정적 사이트라 갱신 전까지는 확인일 기준 값이다.
