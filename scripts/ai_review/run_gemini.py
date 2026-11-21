@@ -2,17 +2,13 @@
 
 import json
 import os
-import time
-import urllib.request
+
+try:
+    from .gemini_client import GeminiError, generate
+except ImportError:  # 스크립트로 직접 실행할 때
+    from gemini_client import GeminiError, generate
 
 ENV_PATH = "/Users/home/Claude/ai-orchestrator/.env"
-MODELS = [
-    "gemini-3.5-flash",
-    "gemini-flash-latest",
-    "gemini-3-flash-preview",
-    "gemini-3.1-pro-preview",
-]
-URL = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
 
 
 def _key(env_path: str):
@@ -38,29 +34,16 @@ def run_gemini(prompt: str, out_dir: str, env_path: str = ENV_PATH) -> bool:
     if not key:
         _write_status(out_dir, "failed", "no key: GEMINI_API_KEY를 찾지 못했다")
         return False
-    body = json.dumps({
-        "contents": [{"parts": [{"text": prompt}]}],
-        "generationConfig": {"responseMimeType": "application/json"},
-    }).encode("utf-8")
-    last_error = ""
-    for model in MODELS:
-        try:
-            req = urllib.request.Request(
-                URL.format(model=model), body,
-                {"x-goog-api-key": key, "Content-Type": "application/json"},
-            )
-            with urllib.request.urlopen(req, timeout=420) as resp:
-                data = json.load(resp)
-            text = data["candidates"][0]["content"]["parts"][0]["text"]
-            items = json.loads(text)
-            if not isinstance(items, list):
-                raise ValueError("응답이 JSON 배열이 아니다")
-            with open(os.path.join(out_dir, "gemini.json"), "w", encoding="utf-8") as f:
-                json.dump(items, f, ensure_ascii=False, indent=1)
-            _write_status(out_dir, "ok", model=model)
-            return True
-        except Exception as e:  # 모델별 실패는 다음 모델로 넘긴다
-            last_error = f"{model}: {str(e)[:200]}"
-            time.sleep(3)
-    _write_status(out_dir, "failed", last_error)
-    return False
+    try:
+        # 모델 체인·재시도·경로 이중화는 gemini_client가 맡는다(429·503·빈 404 같은 간헐 오류 대응).
+        r = generate(prompt, json_mode=True, timeout=420, key=key)
+        items = json.loads(r.text)
+        if not isinstance(items, list):
+            raise ValueError("응답이 JSON 배열이 아니다")
+    except (GeminiError, ValueError) as e:
+        _write_status(out_dir, "failed", str(e)[:400])
+        return False
+    with open(os.path.join(out_dir, "gemini.json"), "w", encoding="utf-8") as f:
+        json.dump(items, f, ensure_ascii=False, indent=1)
+    _write_status(out_dir, "ok", model=r.model)
+    return True
