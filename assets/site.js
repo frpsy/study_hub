@@ -3,6 +3,7 @@
   const header=document.querySelector('.site-header');
   const sidebar=document.querySelector('.sidebar');
   const readingNav=document.querySelector('.reading-nav');
+  let headerHidden=false;
   function syncNavigationSize(){
     const headerHeight=header ? header.getBoundingClientRect().height : 0;
     const mobile=window.matchMedia('(max-width:780px)').matches;
@@ -10,7 +11,7 @@
     document.documentElement.style.setProperty('--header-height',headerHeight+'px');
     // 강의 페이지는 헤더 아래에 목차가 붙어 있다. 앵커로 이동하면 섹션의 위 선이 목차 아래 선과 겹치게 둔다.
     const navHeight=readingNav ? readingNav.getBoundingClientRect().height : 0;
-    const shownHeader=document.documentElement.classList.contains('header-hidden') ? 0 : headerHeight;
+    const shownHeader=headerHidden ? 0 : headerHeight;
     const offset=readingNav ? shownHeader+navHeight-1 : shownHeader+sidebarHeight+16;
     document.documentElement.style.setProperty('--anchor-offset',offset+'px');
   }
@@ -26,7 +27,7 @@
   if(header){
     const root=document.documentElement;
     let lastY=window.scrollY,ticking=false,lockUntil=0;
-    const setHidden=hidden=>{if(root.classList.contains('header-hidden')!==hidden){root.classList.toggle('header-hidden',hidden);syncNavigationSize()}};
+    const setHidden=hidden=>{if(headerHidden!==hidden){headerHidden=hidden;root.classList.toggle('header-hidden',hidden);syncNavigationSize()}};
     function updateHeaderVisibility(){
       ticking=false;
       const y=Math.max(0,window.scrollY);
