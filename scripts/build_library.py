@@ -24,6 +24,15 @@ def page(title,body,base='',description=None,path=''):
 def topic_of(row):
     # 홈의 주제 묶음. 등록부의 topic이 우선이고, 없으면 첫 태그를 쓴다.
     return row.get('topic') or row.get('filter_tag') or row['tags'][0]
+def views_text(count):
+    # 1만 미만은 쉼표 숫자, 이상은 '5.4만회'처럼 줄여 쓴다.
+    if count<10000:return f'{count:,}회'
+    if count<100000000:
+        man=count/10000
+        if man>=100:return f'{round(man):,}만회'
+        man=round(man,1)
+        return (f'{man:.0f}' if man==int(man) else f'{man:.1f}')+'만회'
+    return f'{count/100000000:.1f}억회'
 def render(rows, materials=None, leads=None):
     materials=materials or [];leads=leads or {}
     # 기본 목록 순서는 레지스트리 배열 순서(최신순)이다. 화면의 정렬 버튼은 data-date(강의 날짜)·data-added(사이트에 추가한 시각)로 다시 정렬한다. 날짜가 없는 강의에는 임의의 공개일을 만들지 않는다.
@@ -40,7 +49,7 @@ def render(rows, materials=None, leads=None):
         searchable=html.escape(" ".join([row['title'],row.get('description',''),row.get('creator',''),topic_of(row)]+row['tags']),quote=True)
         lead=leads.get(row['id'])
         text=f'<p class="card-lead">{html.escape(lead)}</p>' if lead else f'<p>{html.escape(row["description"])}</p>'
-        cards+=f'<a class="lecture" data-video-id="{row["id"]}" data-kind="lecture" data-topic="{topic}" data-date="{row.get("date","")}" data-added="{row.get("added","")}" data-creator="{html.escape(row.get("creator",""),quote=True)}" data-search="{searchable}" href="lectures/{row["id"]}.html"><div class="meta"><span class="card-topic">{topic}</span>'+(f'<time datetime="{row["date"]}">{row["date"].replace("-",".")}</time>' if row.get("date") else '')+f'<span>{html.escape(row["duration"])}</span><span class="creator">{creator}</span></div><h2>{html.escape(row["title"])}</h2>{text}</a>'
+        cards+=f'<a class="lecture" data-video-id="{row["id"]}" data-kind="lecture" data-topic="{topic}" data-date="{row.get("date","")}" data-added="{row.get("added","")}"'+(f' data-views="{row["views"]}"' if isinstance(row.get("views"),int) else '')+f' data-creator="{html.escape(row.get("creator",""),quote=True)}" data-search="{searchable}" href="lectures/{row["id"]}.html"><div class="meta"><span class="card-topic">{topic}</span>'+(f'<time datetime="{row["date"]}">{row["date"].replace("-",".")}</time>' if row.get("date") else '')+f'<span>{html.escape(row["duration"])}</span><span class="creator">{creator}</span>'+(f'<span class="views">조회수 {views_text(row["views"])}</span>' if isinstance(row.get("views"),int) else '')+f'</div><h2>{html.escape(row["title"])}</h2>{text}</a>'
     # Other material types have their own pages and are not assumed to have a YouTube ID.
     type_names={'book':'책','paper':'연구','article':'글','note':'학습 노트'}
     for item in materials:
@@ -54,13 +63,17 @@ def render(rows, materials=None, leads=None):
         searchable=html.escape(" ".join([item['title'],item.get('description',''),item.get('creator',''),kind]+item['tags']),quote=True)
         cards+=f'<a class="lecture" data-kind="{kind}" data-topic="{html.escape(topic_of(item),quote=True)}" data-search="{searchable}" href="{html.escape(url,quote=True)}"><div class="meta"><span>{type_names[kind]}</span><span class="creator">{creator}</span></div><h2>{html.escape(item["title"])}</h2><p>{html.escape(item.get("description",""))}</p><div class="tags">{tags}</div><span class="read">자료 읽기 →</span></a>'
     total=len(rows)+len(materials)
+    viewed=[r for r in rows if isinstance(r.get('views'),int)]
+    checked=max((r.get('views_checked','') for r in viewed),default='')
+    views_button='<button type="button" data-sort="views" aria-pressed="false">조회수순</button>' if viewed else ''
+    views_note=f'<p class="views-note" id="views-note" hidden>유튜브 조회수는 {checked.replace("-",".")} 기준이며 이후 달라질 수 있습니다.</p>' if viewed and checked else ''
     noun='자료' if materials else '강의'
     # 오늘의 한 문장: 가장 최근 강의의 한 문장 핵심을 첫 화면에 둔다.
     feature=''
     first=next((r for r in rows if leads.get(r['id'])),None)
     if first:
         feature=f'<a class="today-line" href="lectures/{first["id"]}.html"><span class="eyebrow">오늘의 한 문장</span><blockquote>{html.escape(leads[first["id"]])}</blockquote><span class="today-source">{html.escape(first["title"])} · {html.escape(first.get("creator",""))}</span></a>'
-    body=f'''<div class="site-shell"><main id="main" class="home-main"><section id="lectures"><div id="home-catalog"><h1 class="home-title">강의 요약</h1><p class="catalog-intro">한 문장에서 시작해 깊이 읽는 강의 서재</p>{feature}<div class="search-panel"><label for="search">{noun} 검색</label><div class="search-controls"><input class="search" id="search" type="search" placeholder="제목, 강연자, 주제로 검색" data-filter-input="#home-catalog" data-count="count" data-empty="empty" data-noun="{noun}" data-persist-query="true"><button type="button" class="btn secondary" data-clear-for="search" hidden>초기화</button></div><div class="filter-chips" role="group" aria-label="주제">{chips}</div><p class="search-summary" id="count" aria-live="polite">{total}개 {noun}</p></div><div class="catalog-order"><span>모든 {noun}</span><div class="sort-toggle" role="group" aria-label="정렬"><button type="button" data-sort="latest" aria-pressed="true">최신순</button><button type="button" data-sort="added" aria-pressed="false">추가된순</button></div></div><div class="lecture-grid" id="lecture-list">{cards}</div></div><p class="empty" id="empty" hidden>검색 결과가 없습니다. 다른 단어로 찾거나 ‘전체’를 선택해 주세요.</p></section></main></div>'''
+    body=f'''<div class="site-shell"><main id="main" class="home-main"><section id="lectures"><div id="home-catalog"><h1 class="home-title">강의 요약</h1><p class="catalog-intro">한 문장에서 시작해 깊이 읽는 강의 서재</p>{feature}<div class="search-panel"><label for="search">{noun} 검색</label><div class="search-controls"><input class="search" id="search" type="search" placeholder="제목, 강연자, 주제로 검색" data-filter-input="#home-catalog" data-count="count" data-empty="empty" data-noun="{noun}" data-persist-query="true"><button type="button" class="btn secondary" data-clear-for="search" hidden>초기화</button></div><div class="filter-chips" role="group" aria-label="주제">{chips}</div><p class="search-summary" id="count" aria-live="polite">{total}개 {noun}</p></div><div class="catalog-order"><span>모든 {noun}</span><div class="sort-toggle" role="group" aria-label="정렬"><button type="button" data-sort="latest" aria-pressed="true">최신순</button><button type="button" data-sort="added" aria-pressed="false">추가된순</button>{views_button}</div></div>{views_note}<div class="lecture-grid" id="lecture-list">{cards}</div></div><p class="empty" id="empty" hidden>검색 결과가 없습니다. 다른 단어로 찾거나 ‘전체’를 선택해 주세요.</p></section></main></div>'''
     return page('강의 요약',body)
 
 def load_leads(root=R):

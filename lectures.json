@@ -16,7 +16,9 @@
     "topic": "명상",
     "creator": "김주환",
     "kind": "lecture",
-    "video_url": "https://www.youtube.com/watch?v=sAgj5V4Ewno"
+    "video_url": "https://www.youtube.com/watch?v=sAgj5V4Ewno",
+    "views": 54240,
+    "views_checked": "2026-11-21"
   },
   {
     "id": "VUHrJZbpIjI",
@@ -34,7 +36,9 @@
     "topic": "몸과 수면",
     "creator": "김주환",
     "kind": "lecture",
-    "video_url": "https://www.youtube.com/watch?v=VUHrJZbpIjI"
+    "video_url": "https://www.youtube.com/watch?v=VUHrJZbpIjI",
+    "views": 90709,
+    "views_checked": "2026-11-21"
   },
   {
     "id": "affirmation-20261101",
@@ -51,7 +55,9 @@
     "topic": "명상",
     "creator": "김주환",
     "kind": "lecture",
-    "video_url": "https://www.youtube.com/watch?v=oD5-nTDCKPg"
+    "video_url": "https://www.youtube.com/watch?v=oD5-nTDCKPg",
+    "views": 113755,
+    "views_checked": "2026-11-21"
   },
   {
     "id": "izYj8g-j00U",
@@ -67,7 +73,9 @@
     ],
     "topic": "감정과 뇌",
     "creator": "김주환",
-    "kind": "lecture"
+    "kind": "lecture",
+    "views": 123691,
+    "views_checked": "2026-11-21"
   },
   {
     "id": "vHuZh8xLcDc",
@@ -85,7 +93,9 @@
     ],
     "topic": "명상",
     "creator": "김주환",
-    "kind": "lecture"
+    "kind": "lecture",
+    "views": 88436,
+    "views_checked": "2026-11-21"
   },
   {
     "id": "KHd-luu3M8s",
@@ -103,7 +113,9 @@
     "topic": "감정과 뇌",
     "creator": "Arthur Brooks",
     "kind": "lecture",
-    "video_url": "https://www.youtube.com/watch?v=KHd-luu3M8s"
+    "video_url": "https://www.youtube.com/watch?v=KHd-luu3M8s",
+    "views": 8693778,
+    "views_checked": "2026-11-21"
   },
   {
     "id": "peaceful-life-live",
@@ -120,7 +132,9 @@
     "kind": "lecture",
     "video_url": "https://www.youtube.com/watch?v=_Q3yyZvwH1o",
     "date": "2026-05-24",
-    "added": "2026-11-11T21:21:33+09:00"
+    "added": "2026-11-11T21:21:33+09:00",
+    "views": 233363,
+    "views_checked": "2026-11-21"
   },
   {
     "id": "a2SVP-H_wPY",
@@ -138,7 +152,9 @@
     "topic": "감정과 뇌",
     "creator": "김주환",
     "kind": "lecture",
-    "video_url": "https://www.youtube.com/watch?v=a2SVP-H_wPY"
+    "video_url": "https://www.youtube.com/watch?v=a2SVP-H_wPY",
+    "views": 158505,
+    "views_checked": "2026-11-21"
   },
   {
     "id": "R9O1OowpEuE",
@@ -157,7 +173,9 @@
     "topic": "명상",
     "creator": "김주환",
     "kind": "lecture",
-    "video_url": "https://www.youtube.com/watch?v=R9O1OowpEuE"
+    "video_url": "https://www.youtube.com/watch?v=R9O1OowpEuE",
+    "views": 93225,
+    "views_checked": "2026-11-21"
   },
   {
     "id": "MdDj5RZkMB4",
@@ -176,7 +194,9 @@
     "topic": "감정과 뇌",
     "creator": "김주환",
     "kind": "lecture",
-    "video_url": "https://www.youtube.com/watch?v=MdDj5RZkMB4"
+    "video_url": "https://www.youtube.com/watch?v=MdDj5RZkMB4",
+    "views": 111604,
+    "views_checked": "2026-11-21"
   },
   {
     "id": "xA-4G4z-1MM",
@@ -193,7 +213,9 @@
     ],
     "topic": "감정과 뇌",
     "creator": "김주환",
-    "kind": "lecture"
+    "kind": "lecture",
+    "views": 586659,
+    "views_checked": "2026-11-21"
   },
   {
     "id": "7R3-3HR6-u4",
@@ -211,7 +233,9 @@
     "topic": "몸과 수면",
     "creator": "Satchin Panda",
     "kind": "lecture",
-    "video_url": "https://www.youtube.com/watch?v=7R3-3HR6-u4"
+    "video_url": "https://www.youtube.com/watch?v=7R3-3HR6-u4",
+    "views": 1129175,
+    "views_checked": "2026-11-21"
   },
   {
     "id": "kLizfh-5vuE",
@@ -229,7 +253,9 @@
     ],
     "topic": "마음근력",
     "creator": "김주환",
-    "kind": "lecture"
+    "kind": "lecture",
+    "views": 926448,
+    "views_checked": "2026-11-21"
   },
   {
     "id": "2VTv6WW8Kn8",
@@ -246,7 +272,9 @@
     ],
     "topic": "마음근력",
     "creator": "김주환",
-    "kind": "lecture"
+    "kind": "lecture",
+    "views": 550367,
+    "views_checked": "2026-11-21"
   },
   {
     "id": "ZCty0wvogDo",
@@ -263,7 +291,9 @@
     ],
     "topic": "마음근력",
     "creator": "김주환",
-    "kind": "lecture"
+    "kind": "lecture",
+    "views": 613951,
+    "views_checked": "2026-11-21"
   },
   {
     "id": "vNqK0GhTP6s",
@@ -280,7 +310,9 @@
     ],
     "topic": "마음근력",
     "creator": "김주환",
-    "kind": "lecture"
+    "kind": "lecture",
+    "views": 549905,
+    "views_checked": "2026-11-21"
   },
   {
     "id": "ENm40KZM1_g",
@@ -297,7 +329,9 @@
     ],
     "topic": "마음근력",
     "creator": "김주환",
-    "kind": "lecture"
+    "kind": "lecture",
+    "views": 1200933,
+    "views_checked": "2026-11-21"
   },
   {
     "id": "hw4_kLaHOMg",
@@ -314,7 +348,9 @@
     ],
     "topic": "마음근력",
     "creator": "김주환",
-    "kind": "lecture"
+    "kind": "lecture",
+    "views": 554551,
+    "views_checked": "2026-11-21"
   },
   {
     "id": "9tRohh0gErM",
@@ -332,7 +368,9 @@
     "topic": "몸과 수면",
     "creator": "Andrew Huberman",
     "kind": "lecture",
-    "video_url": "https://www.youtube.com/watch?v=9tRohh0gErM"
+    "video_url": "https://www.youtube.com/watch?v=9tRohh0gErM",
+    "views": 7505985,
+    "views_checked": "2026-11-21"
   },
   {
     "id": "QmOF0crdyRU",
@@ -350,6 +388,8 @@
     ],
     "topic": "감정과 뇌",
     "creator": "Andrew Huberman",
-    "kind": "lecture"
+    "kind": "lecture",
+    "views": 12565905,
+    "views_checked": "2026-11-21"
   }
 ]

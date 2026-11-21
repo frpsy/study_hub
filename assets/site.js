@@ -107,11 +107,16 @@
     const original=new Map(cards.map((card,index)=>[card,index]));
     const buttons=[...group.querySelectorAll('[data-sort]')];
     const stamp=(card,key)=>{const value=Date.parse(card.dataset[key]||'');return Number.isNaN(value)?-Infinity:value};
+    const views=card=>{const raw=card.dataset.views;const value=raw===undefined||raw===''?NaN:Number(raw);return Number.isNaN(value)?-Infinity:value};
+    const note=document.getElementById('views-note');
     const apply=(mode,save)=>{
       if(!buttons.some(button=>button.dataset.sort===mode))mode='latest';
       const key=mode==='added'?'added':'date';
+      const value=mode==='views'?views:card=>stamp(card,key);
       // 같은 값이면 등록 순서(최신순)를 유지하고, 값이 없는 자료는 맨 뒤로 보낸다.
-      [...cards].sort((a,b)=>stamp(b,key)-stamp(a,key)||original.get(a)-original.get(b)).forEach(card=>list.appendChild(card));
+      [...cards].sort((a,b)=>value(b)-value(a)||original.get(a)-original.get(b)).forEach(card=>list.appendChild(card));
+      list.dataset.sortMode=mode;
+      if(note)note.hidden=mode!=='views';
       buttons.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.sort===mode)));
       if(save){
         try{localStorage.setItem('study-hub-sort',mode)}catch{}
