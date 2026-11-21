@@ -4,12 +4,11 @@ from pathlib import Path
 import json,html,sys
 R=Path(__file__).resolve().parents[1]
 SITE_NAME='내면의 서재'
-SITE_DESCRIPTOR='개인 학습 서재'
-SITE_DESCRIPTION='강의별 핵심 요약과 타임스탬프·상세 요약을 모은 개인 학습 서재'
+SITE_DESCRIPTION='강의별 핵심 요약과 타임스탬프·상세 요약을 모은 서재'
 SITE_URL='https://frpsy.github.io/study_hub/'
 ASSET_VERSION=json.loads((R/'build-info.json').read_text(encoding='utf-8'))['version']
 def header(base=''):
-    return f'<a class="skip-link" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="site-header-inner"><a class="site-brand" href="{base}index.html"><img class="brand-symbol" src="{base}assets/icon.svg" width="32" height="32" alt="" aria-hidden="true"><span class="brand-name">{SITE_NAME}<small>{SITE_DESCRIPTOR}</small></span></a></div></header>'
+    return f'<a class="skip-link" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="site-header-inner"><a class="site-brand" href="{base}index.html"><img class="brand-symbol" src="{base}assets/icon.svg" width="32" height="32" alt="" aria-hidden="true"><span class="brand-name">{SITE_NAME}</span></a></div></header>'
 def footer(base=''):
     # 화면 테마 버튼은 늘 보이게 두고, 강조 색·글자 크기는 보기 설정 패널에 모은다. 값은 이 기기에만 저장하고 학습 기록은 남기지 않는다.
     swatches=''.join(f'<button type="button" class="accent-swatch" data-accent="{k}" aria-label="강조 색 {n}" aria-pressed="{str(k=="red").lower()}"></button>' for k,n in (('red','레드'),('blue','블루'),('green','그린')))
