@@ -999,3 +999,12 @@ html{scroll-padding-top:var(--anchor-offset,158px)}
  .catalog-intro{margin-bottom:10px}
  .home-main .search-panel{margin-bottom:4px}
 }
+
+/* 줄 채움 / 2026-11-21
+   - 한글을 단어 단위로만 줄바꿈하면 오른쪽이 들쭉날쭉하고 줄이 짧아진다(iPhone 실측).
+     화면 폭을 꽉 채우도록 모든 글자에서 줄바꿈을 허용하고, 줄 길이를 고르게 맞추는 text-wrap(pretty·balance)은 끈다.
+   - 타임스탬프·댓글 원문(pre)은 원문 유지를 위해 이전 규칙 그대로 둔다. */
+*{word-break:break-all!important;text-wrap-style:auto!important}
+pre,pre *{word-break:keep-all!important}
+/* 조작 요소(목차 탭·버튼·칩·머리·푸터)는 글자 중간에서 끊지 않는다. */
+.reading-nav a,.sidebar a,button,.btn,summary,.eyebrow,.meta,.breadcrumb,.site-header *,.site-footer *,.detail-toc a,.outline-sheet *,.pager-link span,.card-topic{word-break:keep-all!important}
