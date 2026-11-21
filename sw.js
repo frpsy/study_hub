@@ -44,6 +44,9 @@ self.addEventListener('install', event => {
         const rows=await response.json();
         pages=rows.filter(row=>typeof row.id==='string' && /^[a-zA-Z0-9_-]+$/.test(row.id))
           .map(row=>'./lectures/'+row.id+'.html');
+        // 대표 이미지가 있는 강의는 이미지도 함께 저장한다.
+        pages.push(...rows.filter(row=>row.image && typeof row.image.src==='string' && /^assets\/lectures\/[a-zA-Z0-9_-]+\.jpg$/.test(row.image.src))
+          .map(row=>'./'+row.image.src));
       }
     }catch{}
     await Promise.allSettled([...CORE,...pages].map(path=>update(cache,new Request(new URL(path,root),{cache:'reload'}))));
