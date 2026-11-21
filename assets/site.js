@@ -3,6 +3,7 @@
   const header=document.querySelector('.site-header');
   const sidebar=document.querySelector('.sidebar');
   const readingNav=document.querySelector('.reading-nav');
+  let headerHidden=false;
   function syncNavigationSize(){
     const headerHeight=header ? header.getBoundingClientRect().height : 0;
     const mobile=window.matchMedia('(max-width:780px)').matches;
@@ -10,7 +11,8 @@
     document.documentElement.style.setProperty('--header-height',headerHeight+'px');
     // 강의 페이지는 헤더 아래에 목차가 붙어 있다. 앵커로 이동하면 섹션의 위 선이 목차 아래 선과 겹치게 둔다.
     const navHeight=readingNav ? readingNav.getBoundingClientRect().height : 0;
-    const offset=readingNav ? headerHeight+navHeight-1 : headerHeight+sidebarHeight+16;
+    const shownHeader=headerHidden ? 0 : headerHeight;
+    const offset=readingNav ? shownHeader+navHeight-1 : shownHeader+sidebarHeight+16;
     document.documentElement.style.setProperty('--anchor-offset',offset+'px');
   }
   syncNavigationSize();
@@ -20,6 +22,36 @@
     if(header)sizes.observe(header);
     if(sidebar)sizes.observe(sidebar);
     if(readingNav)sizes.observe(readingNav);
+  }
+  // 본문을 내려 읽을 때는 헤더를 숨기고, 올리면 다시 보인다. 맨 위 근처와 헤더 안 초점 이동 중에는 항상 보인다.
+  if(header){
+    const root=document.documentElement;
+    let lastY=window.scrollY,ticking=false,lockUntil=0;
+    const setHidden=hidden=>{if(headerHidden!==hidden){headerHidden=hidden;root.classList.toggle('header-hidden',hidden);syncNavigationSize()}};
+    function updateHeaderVisibility(){
+      ticking=false;
+      const y=Math.max(0,window.scrollY);
+      if(performance.now()<lockUntil){lastY=y;return}
+      const delta=y-lastY;
+      const limit=header.getBoundingClientRect().height+60;
+      if(y<=limit||delta<-6)setHidden(false);
+      else if(delta>6&&!header.contains(document.activeElement))setHidden(true);
+      if(Math.abs(delta)>6||y<=limit)lastY=y;
+    }
+    window.addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(updateHeaderVisibility)}},{passive:true});
+    header.addEventListener('focusin',()=>setHidden(false));
+    // 페이지 안 링크로 이동할 때는 도착 방향에 맞춰 헤더 상태를 먼저 정하고, 도착 위치가 목차와 맞도록 한다.
+    document.addEventListener('click',event=>{
+      const link=event.target.closest&&event.target.closest('a[href^="#"]');
+      if(!link||link.getAttribute('href').length<2)return;
+      let id;try{id=decodeURIComponent(link.getAttribute('href').slice(1))}catch{return}
+      const target=document.getElementById(id);
+      if(!target)return;
+      const top=target.getBoundingClientRect().top;
+      const arrivalY=window.scrollY+top;
+      lockUntil=performance.now()+900;
+      setHidden(top>0&&arrivalY>header.getBoundingClientRect().height+60);
+    },true);
   }
   function revealAnchor(){
     let id;try{id=decodeURIComponent(location.hash.slice(1))}catch{return}if(!id)return;

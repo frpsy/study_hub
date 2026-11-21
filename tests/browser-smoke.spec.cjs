@@ -355,7 +355,15 @@ for(const width of [390,1280]){
   await page.goto('/lectures/VUHrJZbpIjI.html');
   await page.evaluate(()=>window.scrollTo({top:800,behavior:'instant'}));
   const bar=page.locator('.site-header>.read-progress');
+  // 아래로 읽으면 헤더가 숨고, 진행 막대는 화면 맨 위에 남는다.
+  await expect(page.locator('html')).toHaveClass(/header-hidden/);
   await expect(bar).toBeVisible();
+  await expect.poll(()=>bar.evaluate(el=>Math.round(el.getBoundingClientRect().top))).toBeGreaterThanOrEqual(0);
+  await expect.poll(()=>bar.evaluate(el=>el.getBoundingClientRect().bottom)).toBeLessThanOrEqual(4);
+  // 위로 올리면 헤더가 다시 보이고, 진행 막대는 헤더 아래에 붙는다.
+  await page.evaluate(()=>window.scrollTo({top:700,behavior:'instant'}));
+  await expect(page.locator('html')).not.toHaveClass(/header-hidden/);
+  await expect.poll(()=>page.locator('.site-header').evaluate(el=>Math.round(el.getBoundingClientRect().top))).toBe(0);
   await expect.poll(()=>bar.evaluate(el=>Number(el.style.getPropertyValue('--p')))).toBeGreaterThan(0);
   const box=await bar.evaluate(el=>{
    const rect=el.getBoundingClientRect(),head=el.parentElement.getBoundingClientRect(),style=getComputedStyle(el,'::before');
