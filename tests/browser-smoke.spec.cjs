@@ -264,7 +264,7 @@ test('lecture summary keeps a clear type hierarchy and readable width',async({br
     expect(m.h3).toBeGreaterThanOrEqual(m.list);
     expect(m.list).toBeLessThanOrEqual(16);
     expect(m.lead).toBeLessThanOrEqual(17);
-    expect(m.width).toBeLessThanOrEqual(width<=780 ? width-24 : 761);
+    expect(m.width).toBeLessThanOrEqual(width<=780 ? width-24 : 1041);
     expect(m.left).toBeGreaterThanOrEqual(width<=780 ? 12 : -1);
     expect(Math.abs(m.left-m.brand)).toBeLessThanOrEqual(1);
     expect(m.overflow).toBeLessThanOrEqual(1);

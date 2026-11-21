@@ -1047,3 +1047,12 @@ html.header-hidden .sidebar{top:12px}
 .detail-figure figcaption{margin:8px 2px 0;font-size:13px;line-height:1.7;color:var(--muted)}
 @media(max-width:780px){.detail-figure img{max-height:240px}}
 @media print{.detail-figure{break-inside:avoid}.detail-figure img{max-height:none}}
+
+/* 좌우 여백 최소화 / 2026-11-22 사용자 요청: 모든 글이 화면 좌우 여백에 가능한 한 꽉 차게 놓인다.
+   여백은 모바일 14px, PC 24px만 두고, 본문 폭 상한은 1040px로 올린다(이전 760px). */
+:root{--gutter:24px;--reading-measure:1040px;--site-max-width:1040px}
+@media(max-width:780px){:root{--gutter:14px}}
+.site-shell,.site-header-inner,.site-footer-inner{max-width:none;width:min(var(--site-max-width),100% - 2*var(--gutter));margin-inline:auto}
+.compact-lecture,.summary-page{max-width:none;width:100%}
+.compact-lecture .lecture-section,.compact-lecture .summary-tier,.compact-lecture .lecture-hero,.compact-lecture .source-disclosure,.compact-lecture .editor-notes{max-width:none}
+.compact-lecture .lecture-section .detail-body p,.compact-lecture .lecture-section .detail-body h3,.compact-lecture .lecture-section .detail-body .detail-points li{max-width:none}
