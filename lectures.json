@@ -417,6 +417,12 @@
     "creator": "Andrew Huberman",
     "kind": "lecture",
     "views": 12565905,
-    "views_checked": "2026-11-21"
+    "views_checked": "2026-11-21",
+    "image": {
+      "src": "assets/lectures/QmOF0crdyRU.jpg",
+      "alt": "햇빛이 드는 나무 책상 위에 펼친 노트와 연필, 식어 가는 찻잔",
+      "width": 1600,
+      "height": 1066
+    }
   }
 ]
