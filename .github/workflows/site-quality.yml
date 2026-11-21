@@ -64,10 +64,14 @@ jobs:
         run: |
           npm install --no-save --no-audit --no-fund --prefer-offline @playwright/test@1.56.1
           npx playwright install chromium webkit
-          npx playwright install-deps chromium webkit
+          npx playwright install-deps chromium
       - name: Check phone and desktop layouts and clipboard
         run: |
+          # 웹킷용 시스템 패키지는 크로미움 테스트가 도는 동안 함께 설치한다.
+          npx playwright install-deps webkit > webkit-deps.log 2>&1 &
+          DEPS_PID=$!
           npx playwright test --config=tests/playwright.config.cjs
+          wait $DEPS_PID || { cat webkit-deps.log; exit 1; }
           BROWSER_NAME=webkit npx playwright test --config=tests/playwright.config.cjs tests/pwa.spec.cjs
       - name: Upload browser failure evidence
         if: failure()
