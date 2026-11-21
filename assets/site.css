@@ -1027,7 +1027,7 @@ pre,pre *{word-break:keep-all!important}
 .site-header{transition:transform .22s ease}
 .reading-nav,.sidebar{transition:top .22s ease}
 html.header-hidden .site-header{transform:translateY(-100%)}
-html.header-hidden .site-header>.read-progress{transform:translateY(2px)}
+html.header-hidden .site-header>.read-progress{transform:translateY(3px)}
 html.header-hidden .reading-nav{top:0}
 html.header-hidden .sidebar{top:12px}
 @media(max-width:780px){html.header-hidden .sidebar{top:0}}
