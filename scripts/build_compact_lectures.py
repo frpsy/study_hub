@@ -109,7 +109,11 @@ def render(row,record,mini,prev=None,nxt=None):
  section_nav='<nav class="reading-nav" aria-label="이 강의 목차">'+''.join(f'<a href="#{target}">{label}</a>' for target,label in sections)+'</nav>'
  body=f'''<div class="site-shell"><nav class="breadcrumb" aria-label="현재 위치"><a href="../index.html">강의 목록</a><span aria-hidden="true">/</span><span>{title}</span></nav><main id="main" class="compact-lecture" data-layout="compact"><header class="summary-head"><h1>{title}</h1><p class="meta">{date_info}{E(row['duration'])} · {E(row.get("creator","출처 미기재"))} · {source_info}</p><div class="actions">{action}</div></header>{old}<section id="lecture-overview" class="lecture-section"><span id="overview"></span><h2>핵심 요약</h2><div class="summary-tier"><span class="eyebrow">한 문장</span><p class="summary-lead">{E(mini['lead'])}</p></div><div class="summary-tier"><h3>핵심 세 가지</h3><ol class="summary-list">{''.join('<li>'+E(t)+'</li>' for t in mini['three'])}</ol></div></section>{practice_html}{second}<details class="source-disclosure"><summary>원본과 참고 자료</summary><ul>{sources}</ul></details>{editor}{pager(prev,nxt)}</main></div>'''
  body=body.replace('<div class="actions">'+action+'</div>','')
- body=body.replace('</header>'+old,'</header>'+section_nav+old)
+ img=row.get('image')
+ hero=''
+ if img:
+  hero=f'<figure class="lecture-hero"><img src="../{E(img["src"],quote=True)}" width="{int(img["width"])}" height="{int(img["height"])}" alt="{E(img["alt"],quote=True)}" decoding="async" fetchpriority="high"></figure>'
+ body=body.replace('</header>'+old,'</header>'+hero+section_nav+old)
  body=body.replace('<details class="source-disclosure">','<details class="source-disclosure" id="lecture-sources">')
  return page(row['title'],body,base='../',description=mini['lead'],path=f'lectures/{vid}.html')
 def build(check=False):

@@ -1,4 +1,7 @@
 const {test,expect}=require('@playwright/test');
+const studyLectures=require('../lectures.json');
+const meditationCount=studyLectures.filter(x=>x.topic==='명상').length;
+const latestAddedId=[...studyLectures].sort((a,b)=>Date.parse(b.added)-Date.parse(a.added))[0].id;
 
 // Measures actual browser geometry before and after the catalog intro adjustment.
 for(const viewport of [{width:390,height:844},{width:1280,height:800}]){
@@ -26,7 +29,7 @@ for(const viewport of [{width:390,height:844},{width:1280,height:800}]){
     await expect(page).toHaveURL(/\/lectures\/.*\.html$/);
     await page.goto('/index.html');
     await page.locator('[data-filter-for="topic"][data-value="명상"]').click();
-    await expect(page.locator('#lecture-list .lecture:visible')).toHaveCount(5);
+    await expect(page.locator('#lecture-list .lecture:visible')).toHaveCount(meditationCount);
     await page.locator('#lecture-list .lecture:visible').first().click(); // Filter + card: two taps.
     await expect(page.locator('#lecture-overview')).toBeVisible();
     await page.goto('/index.html');
@@ -53,7 +56,7 @@ test('home sort toggle orders by lecture date or by when it was added',async({pa
   const added=await page.locator('#lecture-list .lecture').evaluateAll(cards=>cards.map(card=>Date.parse(card.dataset.added)));
   expect(added).toEqual([...added].sort((a,b)=>b-a));
   expect(await ids()).not.toEqual(latest);
-  expect((await ids())[0]).toBe('MdDj5RZkMB4');
+  expect((await ids())[0]).toBe(latestAddedId);
   await expect(page).toHaveURL(/[?&]sort=added/);
   await page.reload();  // The choice survives a reload.
   await expect(page.locator('[data-sort="added"]')).toHaveAttribute('aria-pressed','true');

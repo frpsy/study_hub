@@ -30,7 +30,10 @@ class CompactCourseChecks(unittest.TestCase):
     self.assertNotIn(gone,source)
    self.assertIn(html.escape("\n".join(record["timeline"].splitlines()[:3])),source)
    self.assertNotIn('class="timeline-preview"',source)
-   self.assertNotIn('<img ',source[source.index('<main id="main"'):])
+   # 본문 이미지는 대표 이미지(figure.lecture-hero) 한 장만 허용한다. 나머지 강의는 이미지가 없다.
+   main_html=source[source.index('<main id="main"'):]
+   self.assertEqual(main_html.count('<img '),main_html.count('<figure class="lecture-hero"><img '))
+   self.assertLessEqual(main_html.count('<img '),1)
  def test_only_kim_lectures_have_timestamps_others_have_detailed_summary(self):
   rows=json.loads((R/'lectures.json').read_text());records=json.loads((R/'data/lecture_compact.json').read_text())
   for row in rows:

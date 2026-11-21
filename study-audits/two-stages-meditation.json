@@ -1,0 +1,55 @@
+{
+  "content_id": "two-stages-meditation",
+  "source_title": "명상의 두 단계 - 나는 어디에 있는가?",
+  "creator": "김주환",
+  "published_date": "2025-03-09",
+  "published_date_note": "yt-dlp 메타데이터의 업로드일(20250309)로 확인했다.",
+  "caption_type": "YouTube Korean auto-generated captions (ko-orig); manual captions not available",
+  "caption_first": "0:01",
+  "caption_last": "1:23:08",
+  "main_lecture_start": "14:16",
+  "source_video_id": "Zway8Ol0D9U",
+  "source_url": "https://www.youtube.com/watch?v=Zway8Ol0D9U",
+  "source_url_verified": true,
+  "checks": {
+    "review_basis": "2026-11-21 유튜브 한국어 자동 자막(0:01~1:23:08, 1666줄)을 처음부터 끝까지 읽고 타임스탬프·상세 요약·실천 포인트를 대조했다. 영상 화면(책 쪽수·판서)은 대조하지 못했다. Gemini가 만든 초안은 상세 요약이 얕아 쓰지 않고, 인용문 후보(31:41)만 자막과 대조해 채택했다.",
+    "subtitle": "자막 전체를 순서대로 읽음. 오인식은 문맥과 설명란으로 교정함(배경자·기억자·경험자→배경자아·기억자아·경험자아, 스파이어→루퍼트 스파이라, DIR pa→직접적인 길(Direct Path), 안았다→무아로 추정).",
+    "timeline": "타임스탬프는 자막에서 발언이 시작되는 줄의 시각과 정확히 일치하는지 스크립트로 대조함. 핵심 세션 5개, 상세 56개(중복 포함), 모두 오름차순.",
+    "quote": "한 문장 인용 ‘명상은 삶의 문제를 해결해 주지 않습니다’는 자막 31:41~31:47에서 그대로 가져왔다.",
+    "research": "리디북스 『알아차림에 대한 알아차림』, Hachette UK Being Aware of Being Aware, 교보문고 『아이엠』 페이지를 열어 번역자·출판사·직접적인 길 설명을 확인함.",
+    "raw_transcript": "원본 json3와 시각 텍스트를 transcripts/에 저장.",
+    "review": "Gemini(gemini-3.5-flash)가 상세 요약을 자막과 대조해 1차 검수했고 지적은 0건이었다. 지적이 없다는 결과만 믿지 않고 Claude가 문체(합니다체·금지어·끝맺음), 120자 넘는 문장, 서술어 반복을 직접 점검해 ‘말한다·답한다’ 13곳을 고쳤다. 사실 관계는 자막 시각과 하나씩 다시 대조했다. 휴머나이저 스킬은 따로 실행하지 않았다."
+  },
+  "unverified": [
+    "알랭 드 보통의 책에서 세습 계급 사회의 하층이 스트레스를 덜 받는다는 설명(강의의 설명만 확인)",
+    "‘I am at peace’와 ‘I am peace’의 출처(강연자도 확실하지 않다고 밝힘)",
+    "‘자신을 섬으로 삼으라’(아따디빠)가 『대반열반경』의 구절이라는 점(원문을 열지 못함)",
+    "제법무아·아트만·불성에 대한 풀이(강연자의 해석)와 자막 ‘안았다’ 표기의 정확한 뜻",
+    "한국어판과 영문판 스파이라 책의 번역 관계(제목으로 짐작)",
+    "영상 화면(책 쪽수·판서)"
+  ],
+  "video_duration": "1:23:16",
+  "video_duration_note": "yt-dlp 메타데이터의 길이 4996초.",
+  "source_verification_method": "yt-dlp 메타데이터: 제목, 업로드일 20250309, 길이 1:23:16(4996초), was_live 확인. 사용자가 준 주소는 https://www.youtube.com/live/Zway8Ol0D9U",
+  "description_file": "transcripts/Zway8Ol0D9U.description.txt",
+  "description_check": "2026-11-21 yt-dlp로 설명란 전문을 받아 원문 그대로 저장. 질문(참된 행복은 내면에서 찾아야 한다는 사실에는 공감하지만 알아차림으로 모든 것이 해결된다는 것은 이해하기 힘들다)과 루퍼트 스파이라의 두 책 소개를 상세 요약과 대조함.",
+  "transcript": {
+    "path": "transcripts/Zway8Ol0D9U.ko.txt",
+    "raw_json3": "transcripts/Zway8Ol0D9U.ytdlp.ko-orig.json3",
+    "status": "yt-dlp ko-orig json3를 원본 그대로 보존하고 같은 내용을 시각이 붙은 txt로 옮겨 저장.",
+    "coverage": "0:01~1:23:08"
+  },
+  "follow_up": "사물의 투명성(두 번째 단계) 강의가 올라오면 이 강의와 이어서 정리한다.",
+  "lead_quote": {
+    "text": "명상은 삶의 문제를 해결해 주지 않습니다.",
+    "source": "transcripts/Zway8Ol0D9U.ko.txt 0:31:41~0:31:47",
+    "note": "2026-11-21 강의자 워딩 그대로의 인용 하나를 한 문장으로 사용. 구두점만 정리함."
+  },
+  "site_version": "2026.11.21.4",
+  "site_routes": [
+    "lectures/two-stages-meditation.html"
+  ],
+  "thumbnail_title": "명상의 두 단계 - 나는 어디에 있는가?",
+  "editorial_title": "영상 제목과 같다.",
+  "image": "assets/lectures/two-stages-meditation.jpg: ChatGPT(Codex) 이미지 도구로 생성한 실내 사진 느낌의 이미지. 강의 내용(방 안의 공간 비유)에서 장면을 골랐고 글자와 인물은 넣지 않았다."
+}

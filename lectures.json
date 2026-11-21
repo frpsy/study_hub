@@ -178,6 +178,33 @@
     "views_checked": "2026-11-21"
   },
   {
+    "id": "two-stages-meditation",
+    "date": "2025-03-09",
+    "added": "2026-11-21T23:10:00+09:00",
+    "title": "명상의 두 단계 - 나는 어디에 있는가?",
+    "duration": "1시간 23분 16초",
+    "description": "내신 상대평가와 부모의 대응, 명상으로 현실의 문제를 해결할 수 있는가, 배경자아와 스크린 비유, 명상의 두 단계, 내 것과 나 자신의 구별",
+    "tags": [
+      "명상의 두 단계",
+      "배경자아",
+      "루퍼트 스파이라",
+      "알아차림",
+      "내면소통"
+    ],
+    "topic": "명상",
+    "creator": "김주환",
+    "kind": "lecture",
+    "video_url": "https://www.youtube.com/watch?v=Zway8Ol0D9U",
+    "views": 75436,
+    "views_checked": "2026-11-21",
+    "image": {
+      "src": "assets/lectures/two-stages-meditation.jpg",
+      "alt": "아침 햇빛이 들어오는 창가에 의자 하나만 놓인 비어 있는 방",
+      "width": 1600,
+      "height": 1066
+    }
+  },
+  {
     "id": "MdDj5RZkMB4",
     "date": "2024-12-29",
     "added": "2026-11-20T18:12:32+09:00",

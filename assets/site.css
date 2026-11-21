@@ -1034,3 +1034,9 @@ html.header-hidden .sidebar{top:12px}
 .site-header:focus-within{transform:none!important}
 @media(prefers-reduced-motion:reduce){.site-header,.reading-nav,.sidebar{transition:none}}
 @media print{html.header-hidden .site-header{transform:none}}
+
+/* 강의 대표 이미지 / 2026-11-21 사용자 요청: lectures.json에 image가 있는 강의만 헤더 아래에 한 장을 둔다. */
+.lecture-hero{margin:0 0 20px}
+.lecture-hero img{display:block;width:100%;height:auto;max-height:420px;object-fit:cover;border-radius:var(--radius-card);background:var(--tint)}
+@media(max-width:780px){.lecture-hero{margin-bottom:16px}.lecture-hero img{max-height:260px}}
+@media print{.lecture-hero img{max-height:none;break-inside:avoid}}
