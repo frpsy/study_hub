@@ -1014,3 +1014,23 @@ pre,pre *{word-break:keep-all!important}
 #lecture-list[data-sort-mode="views"] .lecture .views{display:inline}
 .views-note{margin:0 0 10px;font-size:12px;line-height:1.6;color:var(--muted)}
 .views-note[hidden]{display:none}
+
+/* 헤더 낮춤·스크롤 자동 숨김 / 2026-11-21: 맥북에서 헤더가 커 보여 PC 헤더를 한 줄 52px로 줄이고,
+   본문을 내려 읽을 때는 숨기고 올릴 때 다시 보인다. 목차·사이드바는 헤더가 숨으면 화면 맨 위에 붙는다. */
+@media(min-width:781px){
+  html .site-header .site-header-inner{min-height:0;padding-block:8px}
+  html .site-header .site-brand{display:flex;align-items:center;gap:10px}
+  html .site-header .site-brand img.brand-symbol{width:28px;height:28px;flex-basis:28px;border-radius:7px}
+  html .site-header .site-brand .brand-name{display:flex;align-items:baseline;gap:10px;font-size:16px;line-height:1.2}
+  html .site-header .site-brand .brand-name small{display:inline;font-size:12px;letter-spacing:0}
+}
+.site-header{transition:transform .22s ease}
+.reading-nav,.sidebar{transition:top .22s ease}
+html.header-hidden .site-header{transform:translateY(-100%)}
+html.header-hidden .site-header>.read-progress{transform:translateY(2px)}
+html.header-hidden .reading-nav{top:0}
+html.header-hidden .sidebar{top:12px}
+@media(max-width:780px){html.header-hidden .sidebar{top:0}}
+.site-header:focus-within{transform:none!important}
+@media(prefers-reduced-motion:reduce){.site-header,.reading-nav,.sidebar{transition:none}}
+@media print{html.header-hidden .site-header{transform:none}}

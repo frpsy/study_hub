@@ -21,6 +21,22 @@
     if(sidebar)sizes.observe(sidebar);
     if(readingNav)sizes.observe(readingNav);
   }
+  // 본문을 내려 읽을 때는 헤더를 숨기고, 올리면 다시 보인다. 맨 위 근처와 헤더 안 초점 이동 중에는 항상 보인다.
+  if(header){
+    const root=document.documentElement;
+    let lastY=window.scrollY,ticking=false;
+    function updateHeaderVisibility(){
+      ticking=false;
+      const y=Math.max(0,window.scrollY);
+      const delta=y-lastY;
+      const limit=header.getBoundingClientRect().height+60;
+      if(y<=limit||delta<-6)root.classList.remove('header-hidden');
+      else if(delta>6&&!header.contains(document.activeElement))root.classList.add('header-hidden');
+      if(Math.abs(delta)>6||y<=limit)lastY=y;
+    }
+    window.addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(updateHeaderVisibility)}},{passive:true});
+    header.addEventListener('focusin',()=>root.classList.remove('header-hidden'));
+  }
   function revealAnchor(){
     let id;try{id=decodeURIComponent(location.hash.slice(1))}catch{return}if(!id)return;
     const target=document.getElementById(id);if(!target)return;
