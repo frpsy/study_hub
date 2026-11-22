@@ -10,7 +10,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 
 from ai_review.apply import apply_edit
 from ai_review.batches import make_batches
-from ai_review.mech_check import check_lead, check_three, check_forbidden
+from ai_review.mech_check import check_lead, check_three, check_forbidden, check_intro_field
+from ai_review.prompt import _fields
 from ai_review.merge import merge
 from ai_review.prompt import build_prompt
 from ai_review.run_chatgpt import run_chatgpt
@@ -298,3 +299,48 @@ class TestApply(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+# ---- intro(도입) ----
+def _intro_data():
+    mini = {"L": {"lead": "“한 문장이다.”"}}  # 도입으로 옮긴 강의에는 three가 없다
+    compact = {"L": {"intro": [
+        {"kind": "points", "h": "핵심", "items": ["첫째 주장이다.", {"l": "라벨", "t": "둘째 주장이다."}]},
+        {"kind": "practice", "h": "해볼 일", "items": [
+            {"when": "화가 날 때", "do": "숨을 고른다.", "check": "몸이 풀렸는지 본다.", "t": "1:05", "quote": "숨을 고르세요"}]},
+        {"kind": "steps", "h": "순서", "items": [{"h": "1단계", "t": "2:00", "b": ["먼저 한다."]}]}]}}
+    return mini, compact
+
+
+class TestIntro(unittest.TestCase):
+    def test_fields_cover_intro_but_not_quotes(self):
+        mini, compact = _intro_data()
+        names = [f for f, _ in _fields(mini, compact, "L")]
+        for want in ("intro[0].items[0]", "intro[0].items[1].t", "intro[1].items[0].when",
+                     "intro[1].items[0].do", "intro[1].items[0].check", "intro[2].items[0].b[0]"):
+            self.assertIn(want, names)
+        self.assertFalse([n for n in names if "quote" in n])  # 인용은 검수하지 않는다
+        self.assertFalse([n for n in names if n.startswith("three")])
+
+    def test_apply_edit_reaches_intro_cells(self):
+        mini, compact = _intro_data()
+        apply_edit(mini, compact, "L", "intro[1].items[0].do", "고른다.", "가다듬는다.")
+        self.assertEqual(compact["L"]["intro"][1]["items"][0]["do"], "숨을 가다듬는다.")
+        apply_edit(mini, compact, "L", "intro[0].items[0]", "주장", "말")
+        self.assertEqual(compact["L"]["intro"][0]["items"][0], "첫째 말이다.")
+        apply_edit(mini, compact, "L", "intro[0].items[1].t", "둘째", "두 번째")
+        self.assertEqual(compact["L"]["intro"][0]["items"][1]["t"], "두 번째 주장이다.")
+        with self.assertRaises(ValueError):  # 인용은 고칠 수 없다
+            apply_edit(mini, compact, "L", "intro[1].items[0].quote", "숨", "호흡")
+
+    def test_intro_format_checks(self):
+        self.assertEqual(check_intro_field("intro[0].items[0]", "짧은 주장이다."), [])
+        self.assertTrue(check_intro_field("intro[0].items[0]", "끝이 어색하다"))
+        self.assertTrue(check_intro_field("intro[0].items[0]", "가" * 91 + "다."))
+        self.assertTrue(check_intro_field("intro[1].items[0].when", "화가 날 때."))
+        self.assertEqual(check_intro_field("intro[1].items[0].when", "화가 날 때"), [])
+        self.assertTrue(check_intro_field("intro[1].items[0].do", "숨을 고른다"))
+        self.assertEqual(check_intro_field("lead", "아무 문장"), [])  # 다른 필드는 건드리지 않는다
+        for field in ("intro[0].h", "intro[0].items[0].l", "intro[2].items[0].b[0]", "intro[1].items[0].do"):
+            self.assertTrue(check_intro_field(field, " "), field)  # 빈 제안은 통과하지 못한다
+

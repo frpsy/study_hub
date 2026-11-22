@@ -3,7 +3,7 @@
 > 강의 원고의 문장을 Gemini·ChatGPT·Claude가 나눠 검수할 때 읽는다. 2026-11-22 첫 전체 검수(21편)에서 정한 규칙이다. 문장 기준 자체는 `편집규칙.md` 2·3·5절과 `docs/kimjuhwan-style.md`가 원본이다. 이 문서는 **누가, 어떤 순서로, 무엇을 기준으로 판정하는지**만 정한다.
 
 ## 1. 범위
-- 대상: `data/mini_courses.json`의 `lead`·`three`, `data/lecture_compact.json`의 `practice`·`detail`.
+- 대상: `data/mini_courses.json`의 `lead`·`three`(옛 형식), `data/lecture_compact.json`의 `intro`(핵심 문장·해볼 일의 세 칸·단계)·`practice`(옛 형식)·`detail`. 도입의 `quote`는 강연자의 말이므로 검수 대상이 아니다(고칠 수 없다).
 - 하는 일: 사실을 그대로 두고 문장을 자연스럽게 다듬는다.
 - 하지 않는 일: 자막 재추출, 학술 주장 재검증, 타임스탬프 수정, 화면 문구 수정, 생성 HTML 직접 편집.
 
@@ -27,7 +27,7 @@ PYTHONPATH=scripts python3 -m ai_review.run_batch 1   # 1–7
 ```
 
 배치 하나는 다음 순서로 돈다.
-1. 기계 점검: `lead`·`three` 형식, 김주환 강의의 ‘강사는’ 금지어.
+1. 기계 점검: `lead`·`three`·`intro` 형식, 김주환 강의의 ‘강사는’ 금지어.
 2. Gemini 검수 → ChatGPT 검수. 같은 프롬프트(`scripts/ai_review/review_prompt.md`)를 쓴다.
 3. 형식 검증: JSON 배열인지, 필수 키와 허용 값인지, `original`이 원문에 실제로 있는지.
 4. 자동 반려(4절).
@@ -40,7 +40,7 @@ PYTHONPATH=scripts python3 -m ai_review.run_batch 1   # 1–7
 - 원문과 제안이 같다.
 - 인용형 `lead`(큰따옴표로 감싼 발언)를 고친다. 인용은 자막 낱말을 유지하고, 다듬기는 Claude가 최소 범위로 한다(편집규칙 2절).
 - 제안이 원문에 없던 번역투(‘에 대한’, ‘를 통해’, ‘을 통해’, ‘에 의해’)를 더한다.
-- 고친 뒤의 `lead`·`three`가 길이·쉼표·문장 끝 기준을 어긴다.
+- 고친 뒤의 `lead`·`three`·`intro` 칸이 길이·쉼표·문장 끝 기준을 어긴다.
 
 ## 5. 판정 기준 (Claude)
 **채택**: 뜻이 같고 문장이 확실히 나아진다.

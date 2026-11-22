@@ -1,5 +1,7 @@
 """기계 점검: 길이, 쉼표, 문장 끝, 금지어. 판단이 아니라 형식만 본다."""
 
+import re
+
 
 KIM_FORBIDDEN = ("강사는", "강사의", "강사가")
 
@@ -45,6 +47,34 @@ def check_three_item(i: int, item: str) -> list[str]:
         errors.append(f"three[{i}] 길이 {len(item)}자는 최대 90자를 넘는다")
     if item.count(",") > 1:
         errors.append(f"three[{i}] 쉼표는 1개 이하여야 한다")
+    return errors
+
+
+def check_intro_field(field: str, text: str) -> list[str]:
+    """도입(intro) 필드 형식. 핵심 문장은 three와 같은 기준, 해볼 일의 칸은 길이와 끝맺음을 본다."""
+    if re.fullmatch(r"intro\[\d+\](\.h|\.items\[\d+\](\.\w+|\.b\[\d+\])?)", field) and not text.strip():
+        return [f"{field}가 비어 있다"]
+    if re.fullmatch(r"intro\[\d+\]\.h", field):
+        return [f"{field} 길이 {len(text)}자는 최대 24자를 넘는다"] if len(text) > 24 else []
+    m = re.fullmatch(r"intro\[\d+\]\.items\[\d+\](?:\.(\w+))?", field)
+    if not m:
+        return []
+    key, errors = m.group(1), []
+    if key in (None, "t"):
+        if not text.endswith("다."):
+            errors.append(f"{field}는 ‘-다.’로 끝나야 한다")
+        if len(text) > 90:
+            errors.append(f"{field} 길이 {len(text)}자는 최대 90자를 넘는다")
+        if text.count(",") > 1:
+            errors.append(f"{field} 쉼표는 1개 이하여야 한다")
+    elif key in ("do", "check"):
+        if not text.endswith("다."):
+            errors.append(f"{field}는 ‘-다.’로 끝나야 한다")
+        if len(text) > 80:
+            errors.append(f"{field} 길이 {len(text)}자는 최대 80자를 넘는다")
+    elif key == "when":
+        if len(text) > 45 or text.endswith("."):
+            errors.append(f"{field}는 마침표 없는 45자 이내의 구여야 한다")
     return errors
 
 

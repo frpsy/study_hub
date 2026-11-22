@@ -5,7 +5,7 @@
 
 import re
 
-from .mech_check import check_lead, check_three_item
+from .mech_check import check_intro_field, check_lead, check_three_item
 
 TRANSLATIONESE = ("에 대한", "를 통해", "을 통해", "에 의해")
 # 『』 책 제목과 「」 강의 제목은 원문 그대로 인용하는 것이라 번역투 검사에서 뺀다.
@@ -50,7 +50,7 @@ def screen_item(item: dict, field_text: str):
         errs = check_lead(new_text)
     else:
         m = re.fullmatch(r"three\[(\d)\]", field)
-        errs = check_three_item(int(m.group(1)), new_text) if m else []
+        errs = check_three_item(int(m.group(1)), new_text) if m else check_intro_field(field, new_text)
     if errs:
         return "기계 점검 위반: " + "; ".join(errs)
     return None

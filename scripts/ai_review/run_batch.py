@@ -9,7 +9,7 @@ import os
 import sys
 
 from .batches import make_batches
-from .mech_check import check_forbidden, check_lead, check_three
+from .mech_check import check_forbidden, check_intro_field, check_lead, check_three
 from .merge import merge
 from .prompt import _creators, _fields, _load, build_prompt
 from .run_chatgpt import run_chatgpt
@@ -36,9 +36,11 @@ def mechanical(ids: list[str]) -> dict:
     for lid in ids:
         errs = []
         errs += check_lead(mini[lid]["lead"])
-        errs += check_three(mini[lid]["three"])
+        if "three" in mini[lid]:  # 도입(intro)으로 옮긴 강의에는 three가 없다
+            errs += check_three(mini[lid]["three"])
         for field, text in _fields(mini, compact, lid):
             errs += check_forbidden(text, creators.get(lid, ""))
+            errs += check_intro_field(field, text)
         report[lid] = errs
     return report
 

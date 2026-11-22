@@ -4,7 +4,7 @@
 
 - **웹:** https://frpsy.github.io/study_hub/
 - **공개 경로:** `index.html`(강의 목록), `lectures/<id>.html`(강의 페이지), `offline.html`
-- **기능:** 오늘의 한 문장, 강의 검색·주제 필터, 한 문장 핵심, 핵심 세 가지, 실천 카드, 타임라인 막대, 깊이 목차, 원본 YouTube 링크, 타임스탬프 복사, 정적 오프라인 캐시, 시스템·라이트·다크 화면, 강조 색·글자 크기 보기 설정
+- **기능:** 오늘의 한 문장, 강의 검색·주제 필터, 한 문장 핵심, 도입(핵심 주장·해볼 일·단계, 내용에 따라 구성), 타임라인 막대, 깊이 목차, 원본 YouTube 링크, 타임스탬프 복사, 정적 오프라인 캐시, 시스템·라이트·다크 화면, 강조 색·글자 크기 보기 설정
 - **보존만 하는 원고:** 5분 요약(`data/summaries.json`), 미니강좌 해설(`data/mini_courses.json`), 용어집(`용어집.md`)은 게시하지 않습니다.
 - **없는 기능:** 사용자 로그인, 개인 학습 기록 저장, 학습 완료 상태, 학습 이력, Firebase 연결
 
@@ -14,7 +14,7 @@
 | --- | --- |
 | `lectures.json` | 강의 ID·제목·출처·길이·태그 |
 | `materials.json` | 향후 책·논문·글·노트 목록 |
-| `data/mini_courses.json` | **한 문장 핵심(`lead`)과 핵심 세 가지(`three`)의 단일 원본**, 미니강좌 원고(비공개) |
+| `data/mini_courses.json` | **한 문장 핵심(`lead`)의 단일 원본**(옛 형식 강의는 핵심 세 가지 `three`도), 미니강좌 원고(비공개). 도입 블록은 `data/lecture_compact.json`의 `intro` |
 | `data/summaries.json` | 5분 요약 원고(비공개 보존, 한 문장 핵심 중복 저장 금지) |
 | `data/lecture_compact.json` | 타임스탬프 원문과 출처 링크 |
 | `scripts/content_registry.py` | 소스 검증과 요약 데이터 결합 |
@@ -47,7 +47,7 @@ node --test tests/test_*.cjs
 ## 강의 추가
 
 1. 실제 자막 및 원본 영상 ID·URL을 검증하고 `lectures.json`에 안정적인 콘텐츠 ID를 추가합니다. 영상 ID가 불확실하면 임의의 11자리 ID를 만들지 않습니다.
-2. `data/mini_courses.json`에 한 문장 핵심과 핵심 세 가지를 작성합니다.
+2. `data/mini_courses.json`에 한 문장 핵심을 작성합니다. 핵심 주장과 해볼 일은 3단계의 `intro`에 씁니다(`편집규칙.md` 19절).
 3. `data/lecture_compact.json`에 **실제 자막에 맞춘** 타임스탬프(김주환 강의) 또는 상세 요약 `detail`(그 외 강연자)과 출처를 등록합니다.
 4. 위 생성·검증 명령을 실행하고 GitHub Pages 공개 URL까지 확인합니다. 한 문장 핵심과 타임스탬프는 임의로 생성·추측하지 않습니다.
 

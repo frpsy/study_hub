@@ -1,4 +1,4 @@
-"""Generate lecture pages: a key summary (one sentence, three points) plus timestamps (김주환 lectures) or a detailed summary (other creators)."""
+"""Generate lecture pages: an intro (one sentence + content-driven blocks; legacy pages: key summary + practice) plus timestamps (김주환 lectures) or a detailed summary (other creators)."""
 from pathlib import Path
 import html,json,re,sys
 from build_library import page,R
@@ -21,18 +21,52 @@ def seconds(stamp):
  total=0
  for part in stamp.split(':'):total=total*60+int(part)
  return total
-def practice_step(step, record, youtube_url):
- # Keep disclosure and source navigation separate: opening an explanation never
+def source_link(step, record, youtube_url):
+ # Source navigation is separate from any disclosure: opening an explanation never
  # launches a video. Non-Kim lectures link to a real summary section, not a time.
  stamp=step.get('t')
- label=(' <small>('+E(stamp)+')</small>') if stamp else ''
- source=''
  if stamp and youtube_url:
-  source=f'<a class="practice-source" href="{E(youtube_url,quote=True)}&amp;t={seconds(stamp)}s" target="_blank" rel="noopener">영상에서 {E(stamp)} 보기 ↗</a>'
- elif 'detail_index' in step:
+  return f'<a class="practice-source" href="{E(youtube_url,quote=True)}&amp;t={seconds(stamp)}s" target="_blank" rel="noopener">영상에서 {E(stamp)} 보기 ↗</a>'
+ if 'detail_index' in step:
   index=step['detail_index']
-  source=f'<a class="practice-source" href="#detail-{index+1}">관련 해설 · {E(record["detail"][index]["h"])}</a>'
- return '<details><summary>'+E(step['h'])+label+'</summary><ul>'+''.join('<li>'+E(t)+'</li>' for t in step['b'])+'</ul>'+source+'</details>'
+  return f'<a class="practice-source" href="#detail-{index+1}">관련 해설 · {E(record["detail"][index]["h"])}</a>'
+ return ''
+def practice_step(step, record, youtube_url):
+ stamp=step.get('t')
+ label=(' <small>('+E(stamp)+')</small>') if stamp else ''
+ return '<details><summary>'+E(step['h'])+label+'</summary><ul>'+''.join('<li>'+E(t)+'</li>' for t in step['b'])+'</ul>'+source_link(step,record,youtube_url)+'</details>'
+INTRO_KINDS=('points','practice','steps')
+def check_intro(vid, record):
+ """Refuse data the intro cannot render faithfully. Editorial limits (counts, lengths, quotes) are checked by tests."""
+ intro=record['intro']
+ if not isinstance(intro,list) or not intro:raise ValueError(f'{vid}: intro must be a non-empty list of blocks')
+ if 'practice' in record:raise ValueError(f'{vid}: intro and practice must not be used together')
+ kinds=[b.get('kind') for b in intro]
+ if len(set(kinds))!=len(kinds) or not set(kinds)<=set(INTRO_KINDS):raise ValueError(f'{vid}: intro kinds must be unique and one of {INTRO_KINDS}: {kinds}')
+ for b in intro:
+  if not b.get('h') or not b.get('items'):raise ValueError(f'{vid}: every intro block needs a heading and items')
+  for item in b['items']:
+   if b['kind']=='practice' and not all(item.get(k) for k in ('when','do','check')):raise ValueError(f'{vid}: practice items need when, do and check')
+   if 'detail_index' in item and not 0<=item['detail_index']<len(record.get('detail',[])):raise ValueError(f'{vid}: detail_index out of range')
+def point_html(item):
+ """A point is a sentence (str) or a labelled sentence ({"l": label, "t": sentence})."""
+ if isinstance(item,str):return '<li>'+E(item)+'</li>'
+ return '<li><strong>'+E(item['l'])+'</strong>. '+E(item['t'])+'</li>'
+def action_html(item, record, youtube_url):
+ """One thing to try: when / what to do / how to check, the lecturer's own words and a link to the moment."""
+ cells=''.join(f'<div><dt>{label}</dt><dd>{E(item[key])}</dd></div>' for key,label in (('when','언제'),('do','할 일'),('check','확인')))
+ quote=('<blockquote class="practice-quote"><p>“'+E(item['quote'])+'”</p></blockquote>') if item.get('quote') else ''
+ return '<li><dl class="practice-cells">'+cells+'</dl>'+quote+source_link(item,record,youtube_url)+'</li>'
+def intro_block_html(block, record, youtube_url):
+ kind=block['kind'];head='<h3>'+E(block['h'])+'</h3>'
+ if kind=='points':body='<ul class="summary-list">'+''.join(point_html(i) for i in block['items'])+'</ul>'
+ elif kind=='practice':body='<ol class="practice-list">'+''.join(action_html(i,record,youtube_url) for i in block['items'])+'</ol>'
+ else:body=''.join(practice_step(i,record,youtube_url) for i in block['items'])
+ return f'<div class="summary-tier intro-block intro-{kind}">{head}{body}</div>'
+def intro_html(mini, record, youtube_url):
+ """The lecture's opening section: the one-sentence lead, then only the blocks this lecture's content calls for."""
+ blocks=''.join(intro_block_html(b,record,youtube_url) for b in record['intro'])
+ return f'<section id="lecture-overview" class="lecture-section"><span id="overview"></span><h2>도입</h2><div class="summary-tier"><span class="eyebrow">한 문장</span><p class="summary-lead">{E(mini["lead"])}</p></div>{blocks}</section>'
 def duration_seconds(text):
  # "2시간 4분 2초" 형식. 읽지 못하면 None을 돌려주고 마지막 시각을 길이로 쓴다.
  m=re.fullmatch(r'\s*(?:(\d+)시간)?\s*(?:(\d+)분)?\s*(?:(\d+)초)?\s*',text or '')
@@ -80,7 +114,11 @@ def render(row,record,mini,prev=None,nxt=None):
  date_info=(f'<time datetime="{E(row["date"],quote=True)}">{E(row["date"]).replace("-",".")}</time> · ' if row.get("date") else '')
  source_info=(f'<a href="{E(youtube_url,quote=True)}" target="_blank" rel="noopener">원본 영상 ↗</a>' if youtube_url else '<span>원본 영상 주소 확인 중</span>')
  practice=record.get('practice')
+ intro=record['intro'] if 'intro' in record else None
+ if intro is not None:check_intro(vid,record)
  aliases=set(record['aliases'])-{'lecture-overview','overview','lecture-comment','timeline','lecture-detail','lecture-sources'}-({'lecture-practice'} if practice else set())
+ # Old links to #lecture-practice keep landing on the page now that practice lives inside the intro.
+ if intro is not None:aliases|={'lecture-practice'}
  old=''.join(f'<span id="{E(a)}" class="legacy-anchor" aria-hidden="true"></span>' for a in sorted(aliases))
  editor=editor_html(record.get('editor'))
  timed='timeline' in record
@@ -108,9 +146,11 @@ def render(row,record,mini,prev=None,nxt=None):
   today=''.join('<li>'+E(t)+'</li>' for t in practice['today'])
   practice_html='<section id="lecture-practice" class="lecture-section"><h2>실천 포인트</h2><div class="summary-tier"><h3>오늘의 실천 세 가지</h3><ol class="summary-list">'+today+'</ol></div><div class="summary-tier"><h3>'+E(practice.get('steps_title','단계별 따라 하기'))+'</h3>'+steps+'</div></section>'
  sources=''.join(f'<li><a href="{E(s["url"],quote=True)}" target="_blank" rel="noopener">{E(s["label"])}</a></li>' for s in record['sources'])
- sections=[('lecture-overview','핵심 요약')]+([('lecture-practice','실천 포인트')] if practice else [])+([('lecture-detail','상세 요약')] if detailed else [])+([('lecture-comment','타임스탬프')] if timed else [])+[('lecture-sources','참고 자료')]
+ sections=[('lecture-overview','도입' if intro is not None else '핵심 요약')]+([('lecture-practice','실천 포인트')] if practice else [])+([('lecture-detail','상세 요약')] if detailed else [])+([('lecture-comment','타임스탬프')] if timed else [])+[('lecture-sources','참고 자료')]
  section_nav='<nav class="reading-nav" aria-label="이 강의 목차">'+''.join(f'<a href="#{target}">{label}</a>' for target,label in sections)+'</nav>'
- body=f'''<div class="site-shell"><nav class="breadcrumb" aria-label="현재 위치"><a href="../index.html">강의 목록</a><span aria-hidden="true">/</span><span>{title}</span></nav><main id="main" class="compact-lecture" data-layout="compact"><header class="summary-head"><h1>{title}</h1><p class="meta">{date_info}{E(row['duration'])} · {E(row.get("creator","출처 미기재"))} · {source_info}</p><div class="actions">{action}</div></header>{old}<section id="lecture-overview" class="lecture-section"><span id="overview"></span><h2>핵심 요약</h2><div class="summary-tier"><span class="eyebrow">한 문장</span><p class="summary-lead">{E(mini['lead'])}</p></div><div class="summary-tier"><h3>핵심 세 가지</h3><ol class="summary-list">{''.join('<li>'+E(t)+'</li>' for t in mini['three'])}</ol></div></section>{practice_html}{second}<details class="source-disclosure"><summary>원본과 참고 자료</summary><ul>{sources}</ul></details>{editor}{pager(prev,nxt)}</main></div>'''
+ # Pages with `intro` open with one merged section; pages not yet migrated keep the key summary + practice layout.
+ overview_html=intro_html(mini,record,youtube_url) if intro is not None else f'''<section id="lecture-overview" class="lecture-section"><span id="overview"></span><h2>핵심 요약</h2><div class="summary-tier"><span class="eyebrow">한 문장</span><p class="summary-lead">{E(mini['lead'])}</p></div><div class="summary-tier"><h3>핵심 세 가지</h3><ol class="summary-list">{''.join('<li>'+E(t)+'</li>' for t in mini['three'])}</ol></div></section>'''
+ body=f'''<div class="site-shell"><nav class="breadcrumb" aria-label="현재 위치"><a href="../index.html">강의 목록</a><span aria-hidden="true">/</span><span>{title}</span></nav><main id="main" class="compact-lecture" data-layout="compact"><header class="summary-head"><h1>{title}</h1><p class="meta">{date_info}{E(row['duration'])} · {E(row.get("creator","출처 미기재"))} · {source_info}</p><div class="actions">{action}</div></header>{old}{overview_html}{practice_html}{second}<details class="source-disclosure"><summary>원본과 참고 자료</summary><ul>{sources}</ul></details>{editor}{pager(prev,nxt)}</main></div>'''
  body=body.replace('<div class="actions">'+action+'</div>','')
  img=row.get('image')
  hero=''

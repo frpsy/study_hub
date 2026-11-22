@@ -4,18 +4,19 @@
 
 ## 사이트
 - 개인 학습 사이트 「내면의 서재」: 강의별 핵심 요약과 타임스탬프(김주환 강의) 또는 상세 요약(그 외 강연자). 공개 주소 https://frpsy.github.io/study_hub/ (GitHub Pages, main 머지 후 자동 배포).
-- 화면은 홈(강의 목록, H1 ‘강의 요약’)과 강의 페이지뿐. 강의 페이지 = 한 문장 + 핵심 세 가지 + 실천 포인트 + 상세 요약(출처 포함; 김주환 강의는 새 강의부터 필수) + 타임스탬프(김주환 강의만) + 접힌 ‘원본과 참고 자료’ + 더 최근/지난 강의 이동. 상단 메뉴 없음.
+- 화면은 홈(강의 목록, H1 ‘강의 요약’)과 강의 페이지뿐. 강의 페이지 = 도입(한 문장 + 내용이 정하는 블록: 핵심 주장·해볼 일·단계) + 상세 요약(출처 포함; 김주환 강의는 새 강의부터 필수) + 타임스탬프(김주환 강의만) + 접힌 ‘원본과 참고 자료’ + 더 최근/지난 강의 이동. 상단 메뉴 없음.
 - 로그인·학습 기록·5분 요약·미니강좌·용어 화면은 되살리지 않는다.
 
 ## 데이터와 생성 (생성 HTML은 손으로 고치지 않는다)
 | 무엇 | 원본 |
 |---|---|
 | 강의 등록(최신순) | `lectures.json` → `python3 scripts/build_library.py` |
-| 한 문장·핵심 세 가지 | `data/mini_courses.json`의 `lead`·`three` |
-| 타임스탬프(김주환만)·상세 요약 `detail`·실천 포인트 `practice`(선택)·편집자 주 `editor`·출처·옛 앵커 | `data/lecture_compact.json` → `python3 scripts/build_compact_lectures.py` |
+| 한 문장(옛 형식은 핵심 세 가지도) | `data/mini_courses.json`의 `lead`(옛 형식 `three`) |
+| 타임스탬프(김주환만)·도입 블록 `intro`·상세 요약 `detail`·편집자 주 `editor`·출처·옛 앵커. 옛 형식 `practice`는 아직 `intro`로 옮기지 않은 강의에만 있다 | `data/lecture_compact.json` → `python3 scripts/build_compact_lectures.py` |
 | 화면 버전 | `build-info.json`의 `version` (보이는 변경마다 올리고 재생성) |
 | 원본 자막·근거 | `transcripts/`(가공 금지), `study-audits/<영상ID>.json` |
 
+- **도입(2026-11-22):** 핵심 세 가지와 실천 포인트를 합쳐 첫 섹션 ‘도입’으로 만들었다. 3개씩 맞추지 않고 강의가 실제로 말한 것만 쓴다. 해볼 일은 강연자가 직접 권한 대목만 ‘언제·할 일·확인’ 세 칸과 자막 인용·시각으로 쓴다. 새 강의는 `intro`를 쓰고, 옛 형식은 강의를 고칠 때 옮긴다(`편집규칙.md` 19절).
 - 본문에는 강의 내용만 쓴다. 한계·제약·`[보충]`·"대조하지 않았다" 같은 문장은 본문에 쓰지 않고 페이지 맨 끝 접힌 ‘편집자 주’(`editor`)에 모은다. 도식은 이해에 실제로 도움이 될 때만 쓴다(`편집규칙.md` 17절).
 
 ## 검증 (병합 전 모두 통과)
@@ -36,7 +37,7 @@ PR 본문에는 `## 변경 범위` `## 영향 기능` `## 검증 증거` `## 남
 ## 작업별 문서 (해당 작업 때만 읽기)
 | 작업 | 문서 |
 |---|---|
-| 강의 추가·요약·타임스탬프·상세 요약 수정, 자막 확보 | `편집규칙.md` → `.agents/skills/lecture-study/SKILL.md` (김주환 문체: `docs/kimjuhwan-style.md`) |
+| 강의 추가·요약·도입·타임스탬프·상세 요약 수정, 자막 확보 | `편집규칙.md` → `.agents/skills/lecture-study/SKILL.md` (김주환 문체: `docs/kimjuhwan-style.md`) |
 | 여러 AI(Gemini·ChatGPT)로 문장 검수 | `docs/ai-review-workflow.md` (도구: `scripts/ai_review/`) |
 | 자막 오인식 점검(용어집·AI 순서) | `편집규칙.md` 18절, `용어집.md` |
 | 강의 이미지(대표·본문) | `docs/design-system.md`의 ‘강의 대표 이미지’·‘상세 요약 안 이미지’ |

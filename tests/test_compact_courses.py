@@ -15,6 +15,25 @@ def detail_texts(block):
    for point in item['list']:
     assert re.match(r'^[가-힣A-Za-z0-9].*[가-힣A-Za-z0-9]$|^[가-힣A-Za-z0-9]$',point['l']),point['l']
     yield point['t']
+def intro_texts(record):
+ """Every visible sentence of an intro: block headings, points, practice cells and quotes, step headings and bodies."""
+ for block in record.get('intro',[]):
+  yield block['h']
+  for item in block['items']:
+   if block['kind']=='points':
+    yield from ((item,) if isinstance(item,str) else (item['l'],item['t']))
+   elif block['kind']=='practice':
+    yield from (item[k] for k in ('when','do','check','quote') if k in item)
+   else:
+    yield item['h'];yield from item['b']
+def video_key(row):
+ m=re.search(r'[?&]v=([A-Za-z0-9_-]{11})',row.get('video_url') or '')
+ return m.group(1) if m else row['id']
+def stamp_seconds(stamp):
+ total=0
+ for part in stamp.split(':'):total=total*60+int(part)
+ return total
+STAMP=r'^(\d+:[0-5]\d|\d+:[0-5]\d:[0-5]\d)$'   # 분·초는 59 이하
 class CompactCourseChecks(unittest.TestCase):
  def test_timeline_text_is_preserved_and_copy_has_single_target(self):
   records=json.loads((R/'data/lecture_compact.json').read_text())
@@ -75,12 +94,16 @@ class CompactCourseChecks(unittest.TestCase):
     self.assertNotIn('강사',json.dumps(item,ensure_ascii=False),f'{name}:{vid}')
  def test_course_coverage_and_tiers(self):
   rows=json.loads((R/'lectures.json').read_text());courses=json.loads((R/'data/mini_courses.json').read_text())
+  records=json.loads((R/'data/lecture_compact.json').read_text())
   self.assertEqual({r['id'] for r in rows},set(courses))
   for vid,item in courses.items():
-   self.assertEqual(len(item['three']),3)
    self.assertTrue(item['sections'])
-   self.assertFalse(any(str(x).startswith(('핵심 원리:', '훈련의 구분:', '실천 방향:')) for x in item['three']),vid)
    self.assertTrue(item['question'] and item['answer'])
+   if 'intro' in records[vid]:
+    # 핵심 세 가지의 원본은 intro 하나뿐이다(두 곳에 같은 내용을 두지 않는다).
+    self.assertNotIn('three',item,vid);continue
+   self.assertEqual(len(item['three']),3)
+   self.assertFalse(any(str(x).startswith(('핵심 원리:', '훈련의 구분:', '실천 방향:')) for x in item['three']),vid)
    self.assertTrue(all(str(x).endswith('다.') for x in item['three']),vid)
   self.assertFalse(build(check=True))
   self.assertEqual(validate(R),[])
@@ -94,7 +117,7 @@ class EditorNoteChecks(unittest.TestCase):
   for vid,record in records.items():
    self.assertNotIn('note',record,vid)
    self.assertNotIn('note',record.get('practice',{}),vid)
-   body=[minis[vid]['lead'],*minis[vid]['three']]
+   body=[minis[vid]['lead'],*minis[vid].get('three',[]),*intro_texts(record)]
    for block in record.get('detail',[]):body+=[block['h'],*detail_texts(block)]
    for step in record.get('practice',{}).get('steps',[]):body+=[step['h'],*step['b']]
    body+=record.get('practice',{}).get('today',[])
@@ -112,3 +135,117 @@ class EditorNoteChecks(unittest.TestCase):
    self.assertNotIn('<details class="source-disclosure editor-notes" id="lecture-editor" open',source)
    self.assertLess(source.index('id="lecture-sources"'),source.index('id="lecture-editor"'),vid)
    self.assertLess(source.index('id="lecture-editor"'),source.index('class="lecture-pager"'),vid)
+
+# 2026-11-22 현재 아직 옛 형식(핵심 세 가지 + 실천 포인트)인 강의. 이 밖의 강의는 모두 intro를 써야 한다. 옮기면 이 목록에서 지워도 된다.
+LEGACY_FORMAT=frozenset(['2VTv6WW8Kn8', '7R3-3HR6-u4', '9tRohh0gErM', 'ENm40KZM1_g', 'KHd-luu3M8s', 'MdDj5RZkMB4', 'QmOF0crdyRU', 'R9O1OowpEuE', 'VUHrJZbpIjI', 'ZCty0wvogDo', 'a2SVP-H_wPY', 'affirmation-20261101', 'izYj8g-j00U', 'kLizfh-5vuE', 'peaceful-life-live', 'sAgj5V4Ewno', 'two-stages-meditation', 'vHuZh8xLcDc', 'vNqK0GhTP6s'])
+class IntroChecks(unittest.TestCase):
+ """도입 섹션: 핵심 세 가지와 실천 포인트를 하나로 합친 구조. 개수와 블록은 강의 내용이 정하고, 강의에 없는 말은 막는다(편집규칙.md 19절)."""
+ def intro_lectures(self):
+  rows={r['id']:r for r in json.loads((R/'lectures.json').read_text())}
+  records=json.loads((R/'data/lecture_compact.json').read_text())
+  return [(rows[v],r) for v,r in records.items() if 'intro' in r]
+ def test_new_lectures_use_intro_not_the_old_format(self):
+  records=json.loads((R/'data/lecture_compact.json').read_text())
+  self.assertTrue(LEGACY_FORMAT<=set(records))
+  for vid,record in records.items():
+   if vid not in LEGACY_FORMAT:self.assertIn('intro',record,vid+': 새 강의는 intro를 쓴다(편집규칙 19절)')
+ def test_intro_replaces_key_summary_and_practice_sections(self):
+  found=self.intro_lectures();self.assertTrue(found)
+  for row,record in found:
+   vid=row['id'];source=(R/'lectures'/f'{vid}.html').read_text()
+   self.assertNotIn('practice',record,vid)
+   self.assertEqual(source.count('id="lecture-overview"'),1,vid)
+   self.assertIn('<h2>도입</h2>',source,vid)
+   self.assertNotIn('<h2>핵심 요약</h2>',source,vid);self.assertNotIn('<h2>실천 포인트</h2>',source,vid)
+   self.assertNotIn('핵심 세 가지',source,vid);self.assertNotIn('오늘의 실천 세 가지',source,vid)
+   self.assertNotIn('<section id="lecture-practice"',source,vid)
+   self.assertEqual(source.count('id="lecture-practice"'),1,vid)   # 옛 #lecture-practice 링크가 이 페이지에 도착하도록 남긴 빈 앵커
+   self.assertIn('<a href="#lecture-overview">도입</a>',source,vid);self.assertNotIn('>실천 포인트</a>',source,vid)
+ def test_intro_blocks_follow_the_lecture_content(self):
+  for row,record in self.intro_lectures():
+   vid=row['id'];kim=row.get('creator')=='김주환';blocks=record['intro']
+   self.assertTrue(1<=len(blocks)<=3,vid)
+   kinds=[b['kind'] for b in blocks]
+   self.assertEqual(len(kinds),len(set(kinds)),vid)               # 같은 종류의 블록을 두 번 쓰지 않는다
+   self.assertTrue(set(kinds)<=set(('points','practice','steps')),vid)
+   self.assertIn('points',kinds,vid)                              # 강의가 무엇을 말하는지는 항상 있어야 한다
+   for block in blocks:
+    self.assertTrue(block['h'] and len(block['h'])<=24 and not re.search(r'(한|두|세|네|다섯|여섯|일곱|여덟|아홉|열|\d+)\s*가지',block['h']),vid+': '+block['h'])   # 제목에 개수를 못 박지 않는다
+    items=block['items'];kind=block['kind']
+    if kind=='points':
+     self.assertTrue(1<=len(items)<=4,vid)
+     for item in items:
+      text=item if isinstance(item,str) else item['t']
+      if not isinstance(item,str):self.assertTrue(item['l'] and set(item)=={'l','t'},vid)
+      self.assertTrue(text.endswith('다.') and len(text)<=90 and text.count(',')<=1,vid+': '+text)
+    elif kind=='practice':
+     self.assertTrue(1<=len(items)<=3,vid)
+     for item in items:
+      self.assertTrue(set(item)>={'when','do','check'},vid)
+      self.assertTrue(set(item)<={'when','do','check','quote','t','detail_index'},vid)
+      self.assertTrue(item['when'] and len(item['when'])<=45 and not item['when'].endswith('.'),vid+': '+item['when'])
+      for key in ('do','check'):self.assertTrue(item[key].endswith('다.') and len(item[key])<=80,vid+': '+item[key])
+      if kim:
+       self.assertRegex(item['t'],STAMP,vid);self.assertNotIn('detail_index',item,vid)
+       self.assertTrue(15<=len(item['quote'])<=170,vid+': '+item['quote'])   # 김주환 강의는 강연자의 말을 인용으로 남긴다
+      else:
+       self.assertNotIn('t',item,vid);self.assertNotIn('quote',item,vid);self.assertIn(item['detail_index'],range(len(record['detail'])),vid)
+    else:
+     self.assertTrue(2<=len(items)<=7,vid)
+     for item in items:
+      self.assertTrue(item['h'] and item['b'] and all(isinstance(x,str) and x.strip() for x in item['b']),vid)
+      if kim:self.assertRegex(item['t'],STAMP,vid)
+      else:self.assertNotIn('t',item,vid);self.assertIn(item['detail_index'],range(len(record['detail'])),vid)
+ def test_practice_quotes_are_the_lecturers_words(self):
+  """인용의 낱말이 인용 시각 근처의 원본 자막에 같은 순서로 있어야 한다. 군더더기·오인식 교정과 띄어쓰기 차이는 허용한다."""
+  norm=lambda x:re.sub(r'[^0-9A-Za-z가-힣]','',x)
+  for row,record in self.intro_lectures():
+   if row.get('creator')!='김주환':continue
+   path=R/'transcripts'/f'{video_key(row)}.ko.txt';self.assertTrue(path.exists(),str(path))
+   lines=[(int(m[1])*3600+int(m[2])*60+int(m[3]),m[4]) for m in (re.match(r'\[(\d+):(\d+):(\d+)\] (.*)',l) for l in path.read_text(encoding='utf-8').splitlines()) if m]
+   for block in record['intro']:
+    if block['kind']!='practice':continue
+    for item in block['items']:
+     t=stamp_seconds(item['t']);window=''.join(norm(x) for sec,x in lines if t-3<=sec<=t+75)
+     self.assertTrue(window,row['id']+' '+item['t'])
+     self.assertGreaterEqual(len(norm(item['quote'])),10,row['id']+' '+item['t'])
+     pos=0   # 낱말은 자막과 같은 순서로 나와야 한다(순서가 뒤집히거나 먼 말을 이어 붙인 인용을 막는다)
+     for fragment in item['quote'].split('…'):
+      for word in fragment.split():
+       token=norm(word)
+       if not token:continue
+       found=window.find(token,pos)
+       self.assertGreaterEqual(found,0,f"{row['id']} {item['t']}: ‘{word}’가 그 시각의 자막에 없거나 순서가 다르다")
+       pos=found+len(token)
+ def test_every_block_kind_renders(self):
+  """합성 기록으로 세 블록이 모두 기대한 HTML이 되는지 본다(실제 강의에는 블록이 일부만 있다)."""
+  from build_compact_lectures import render
+  row={'id':'abcdefghijk','title':'시험 강의','duration':'10분','creator':'김주환','date':'2026-11-22'}
+  record={'aliases':[],'sources':[{'label':'원본','url':'https://example.com/'}],'editor':[],'timeline':'■ 핵심 세션\n0:00 시작',
+   'intro':[{'kind':'points','h':'핵심','items':['첫째 주장이다.',{'l':'라벨','t':'둘째 주장이다.'}]},
+    {'kind':'practice','h':'해볼 일','items':[{'when':'화가 날 때','do':'숨을 고른다.','check':'몸이 풀렸는지 본다.','t':'1:05','quote':'숨을 고르세요'}]},
+    {'kind':'steps','h':'순서','items':[{'h':'1단계','t':'2:00','b':['먼저 한다.']},{'h':'2단계','t':'3:00','b':['다음에 한다.']}]}]}
+  html_=render(row,record,{'lead':'“한 문장이다.”'})
+  self.assertEqual(html_.count('class="practice-cells"'),1)
+  for label in ('<dt>언제</dt>','<dt>할 일</dt>','<dt>확인</dt>'):self.assertIn(label,html_)
+  self.assertIn('<blockquote class="practice-quote"><p>“숨을 고르세요”</p></blockquote>',html_)
+  self.assertIn('v=abcdefghijk&amp;t=65s',html_)
+  self.assertIn('<li><strong>라벨</strong>. 둘째 주장이다.</li>',html_)
+  self.assertEqual(html_.count('<details><summary>'),2)
+  self.assertEqual(html_.count('class="summary-tier intro-block'),3)
+  only=dict(record,intro=record['intro'][:1]);short=render(row,only,{'lead':'“한 문장이다.”'})
+  self.assertNotIn('practice-cells',short);self.assertNotIn('<details>',short);self.assertIn('<h2>도입</h2>',short)
+ def test_generator_refuses_data_it_cannot_render(self):
+  from build_compact_lectures import render
+  row={'id':'abcdefghijk','title':'시험 강의','duration':'10분','creator':'김주환'}
+  base={'aliases':[],'sources':[],'editor':[],'timeline':'■ 핵심 세션\n0:00 시작'}
+  points={'kind':'points','h':'핵심','items':['주장이다.']}
+  mini={'lead':'“한 문장이다.”'}
+  bad={'알 수 없는 종류':[points,{'kind':'video','h':'영상','items':[{'h':'x','b':['y.']}]}],
+   '같은 종류 두 번':[points,points],'빈 목록':[],
+   '해볼 일에 칸이 빠짐':[points,{'kind':'practice','h':'해볼 일','items':[{'when':'화날 때','do':'숨을 고른다.'}]}],
+   'detail_index 범위 밖':[points,{'kind':'steps','h':'순서','items':[{'h':'1','b':['가.'],'detail_index':5}]}]}
+  for label,intro in bad.items():
+   with self.assertRaises(ValueError,msg=label):render(row,dict(base,intro=intro),mini)
+  with self.assertRaises(ValueError):render(row,dict(base,intro=[points],practice={'today':[],'steps':[]}),mini)
+

@@ -25,10 +25,31 @@ def _creators() -> dict[str, str]:
     return {r["id"]: r.get("creator", "") for r in rows}
 
 
+def _intro_fields(blocks: list) -> list[tuple[str, str]]:
+    """도입(intro) 블록의 검수 대상. 해볼 일의 인용(quote)은 강연자 발언이라 넣지 않는다."""
+    out = []
+    for b, block in enumerate(blocks):
+        out.append((f"intro[{b}].h", block.get("h", "")))
+        for i, item in enumerate(block.get("items", [])):
+            base = f"intro[{b}].items[{i}]"
+            if block["kind"] == "points":
+                if isinstance(item, str):
+                    out.append((base, item))
+                else:
+                    out += [(f"{base}.l", item["l"]), (f"{base}.t", item["t"])]
+            elif block["kind"] == "practice":
+                out += [(f"{base}.{k}", item[k]) for k in ("when", "do", "check")]
+            else:
+                out.append((f"{base}.h", item.get("h", "")))
+                out += [(f"{base}.b[{j}]", t) for j, t in enumerate(item.get("b", []))]
+    return out
+
+
 def _fields(mini: dict, compact: dict, lid: str) -> list[tuple[str, str]]:
     out = [("lead", mini[lid]["lead"])]
-    out += [(f"three[{i}]", t) for i, t in enumerate(mini[lid]["three"])]
+    out += [(f"three[{i}]", t) for i, t in enumerate(mini[lid].get("three", []))]
     c = compact.get(lid, {})
+    out += _intro_fields(c.get("intro") or [])
     practice = c.get("practice") or {}
     for i, t in enumerate(practice.get("today", [])):
         out.append((f"practice.today[{i}]", t))
