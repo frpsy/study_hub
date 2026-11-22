@@ -210,6 +210,9 @@ class TestPilotPromptRules(unittest.TestCase):
     def test_prompt_forbids_translationese_in_suggestion(self):
         self.assertIn("제안 문장에도", self.p)
 
+    def test_prompt_requires_minimal_original(self):
+        self.assertIn("최소 구절", self.p)
+
 
 class TestScreen(unittest.TestCase):
     def test_quoted_lead_rewrite_rejected(self):
@@ -235,6 +238,21 @@ class TestScreen(unittest.TestCase):
     def test_plain_good_suggestion_passes(self):
         src = "샐리가 어디부터 찾을지 묻는다."
         self.assertIsNone(screen_item(_it("detail[4].p[0]", "어디부터", "어디에서부터"), src))
+
+
+    def test_duplicate_full_sentence_rewrite_rejected(self):
+        # 원문 일부만 바꾸라는 제안이 문장 전체를 다시 쓰면 같은 구절이 두 번 나온다.
+        src = "앞 문장이다. 『알아차림에 대한 알아차림』 역자 서문에 따르면 두 단계는 방향이다."
+        sug = "『알아차림에 대한 알아차림』 역자 서문에 따르면 두 단계는 높낮이가 아니라 방향이다."
+        self.assertIn("중복 생성", screen_item(_it("detail[5].p[0]", "두 단계는 방향이다.", sug), src))
+
+    def test_title_quote_not_counted_as_translationese(self):
+        src = "책 제목을 알려 준다."
+        self.assertIsNone(screen_item(_it("detail[5].p[0]", "책 제목을 알려 준다.", "『알아차림에 대한 알아차림』을 알려 준다."), src))
+
+    def test_minimal_substring_edit_passes(self):
+        src = "앞 문장이다. 이 울음의 원인을 제도에서 찾는다."
+        self.assertIsNone(screen_item(_it("detail[0].p[0]", "제도에서 찾는다.", "제도에 있다고 짚는다."), src))
 
 
 # ---- apply ----
