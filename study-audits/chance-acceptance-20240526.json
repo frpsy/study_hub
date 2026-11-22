@@ -1,0 +1,44 @@
+{
+  "video_id": "v_sYkBdUwxU",
+  "layout": "compact",
+  "duration_seconds": 5055,
+  "image_count": 0,
+  "review_basis": "2026-11-22 유튜브 한국어 자동 자막(1700구간, 0:09~1:24:08)을 처음부터 끝까지 읽고 타임스탬프·상세 요약·실천 포인트를 대조했다. 설명란 전문을 받아 상세 요약과 대조했다. 영상 화면(슬라이드)은 대조하지 못했다.",
+  "units": [],
+  "transcript": {
+    "path": "transcripts/v_sYkBdUwxU.ko.txt",
+    "raw_json3": "transcripts/v_sYkBdUwxU.ytdlp.ko-orig.json3",
+    "status": "yt-dlp 기본 클라이언트로 ko 자동 자막 확보, 시각이 붙은 txt로 저장. 원본 json3는 ko-orig로 따로 받아 그대로 보존.",
+    "coverage": "0:09~1:24:08 (1700구간, 60초 이상 공백 없음)"
+  },
+  "content_id": "chance-acceptance-20240526",
+  "source_title": "불안감을 근본적으로 떨쳐버리는 방법 - 우연의 수용",
+  "creator": "김주환",
+  "published_date": "2024-05-26",
+  "caption_type": "YouTube Korean auto-generated captions; manual captions not available",
+  "caption_segments": 1700,
+  "caption_first": "0:09",
+  "caption_last": "1:24:08",
+  "source_video_id": "v_sYkBdUwxU",
+  "source_url": "https://www.youtube.com/watch?v=v_sYkBdUwxU",
+  "source_url_verified": true,
+  "source_verification_method": "yt-dlp 메타데이터: 제목, 업로드일 20240526, 길이 1:24:15(5055초), 지난 라이브(was_live) 확인. 사용자가 준 주소는 https://www.youtube.com/live/v_sYkBdUwxU",
+  "description_file": "transcripts/v_sYkBdUwxU.description.txt",
+  "description_check": "2026-11-22 yt-dlp로 설명란 전문을 받아 원문 그대로 저장. 책 629~636쪽 발췌문의 하라리 설명, 우연의 정의, 오유지족, 해시태그를 상세 요약과 대조함.",
+  "lead_quote": {
+    "text": "우연히 펼쳐지는 나의 삶의 모든 면들 모든 조건들을 있는 그대로 알아차리고 받아들이는 것 그게 명상 수행의 핵심입니다",
+    "source": "transcripts/v_sYkBdUwxU.ko.txt 0:35:05~0:35:20",
+    "note": "한 문장을 강의자 워딩 그대로의 인용 하나로 둠. 낱말 그대로, 구두점(쉼표 두 개)만 맞춤."
+  },
+  "checks": {
+    "subtitle": "자막 전체를 순서대로 읽음. 자동 자막 오인식은 문맥으로 교정함(작금 문어·작그 문노→자크 모노, 메로 뽕띠→메를로퐁티, 로버트 세포 키→로버트 세폴스키, 배경 자→배경자아, 롤랑 바르스→롤랑 바르트, 요르→호르헤).",
+    "timeline": "시각은 자막 구간 시작 시각에서 가져옴. Codex의 시각 대조 지적 중 자막으로 확인된 항목(19:42, 22:21, 38:17, 38:27, 42:00, 43:41, 44:27, 57:15, 1:18:37, 1:20:35, 1:21:03)을 반영하고 핵심 세션 5의 시각을 1:00:43으로 옮김.",
+    "ai_collaboration": "1차 Gemini(agy, 주제 전환·핵심 주장·오인식 의심 목록), 2차 Codex(타임라인 시각 검수). Gemini의 ‘염산 유종주’·‘정좌법’·‘바흐친’ 추정은 자막과 맞지 않거나 확인할 수 없어 채택하지 않음.",
+    "sentence_review": "Gemini(사실 대조, 3단계 대체: agy 시간 초과→flash 503 두 번→gemini-3.6-flash)는 자막과 모순되는 문장을 찾지 못하고 자막 오인식(농협 혁명, 요르, 박진, 세포 키, 교회를 같이)만 지적함. 설명란 내용(오유지족 등)은 자막에 없는 것이 맞고 본문에서 ‘설명란’으로 구분함. Codex(가독성)가 12건을 제안했고 뜻을 바꾸지 않는 문장 분리 12건을 채택함. 최종 판정은 Claude가 자막과 대조해 수행. 직접 대조 중 ‘자기 직전’(잠들기 직전의 말실수)을 ‘잠들기 직전’으로 고침."
+  },
+  "unverified": [
+    "하라리·모노·쿤데라·에코·세폴스키 인용의 원문 대조",
+    "자막 ‘정주법’·‘접산’·‘바진’의 정확한 표기와 인물",
+    "『휴머니즘과 테러』·『장미의 이름』 속 호르헤 해석은 자막 발음에서 추정"
+  ]
+}
