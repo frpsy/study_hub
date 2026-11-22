@@ -276,6 +276,30 @@ test('every lecture offers practice and valid source navigation',async({page})=>
   test.setTimeout(90000);
   for(const row of studyLectures){
     await page.goto('/lectures/'+row.id+'.html');
+    if(await page.locator('#lecture-overview .intro-block').count()){
+      // 도입 형식: 블록의 종류와 개수는 강의 내용이 정한다. 구조와 출처 링크만 본다.
+      await expect(page.locator('#lecture-overview>h2')).toHaveText('도입');
+      await expect(page.locator('#lecture-overview .intro-points li').first()).toBeVisible();
+      await expect(page.locator('#lecture-practice')).toHaveCount(1);
+      await expect(page.locator('section#lecture-practice')).toHaveCount(0);
+      const items=page.locator('#lecture-overview .practice-list>li');
+      const count=await items.count();
+      expect(count).toBeLessThanOrEqual(3);
+      for(let i=0;i<count;i++){
+        const item=items.nth(i);
+        await expect(item.locator('.practice-cells dt')).toHaveText(['언제','할 일','확인']);
+        const source=item.locator('.practice-source');
+        await expect(source).toBeVisible();
+        if(row.creator==='김주환'){
+          const expectedVideo=row.video_url||'https://www.youtube.com/watch?v='+row.id;
+          const href=await source.getAttribute('href');
+          expect(href).toContain(expectedVideo+'&t=');
+          expect(href).toMatch(/&t=\d+s$/);
+          await expect(item.locator('.practice-quote')).toBeVisible();
+        }
+      }
+      continue;
+    }
     await expect(page.locator('#lecture-practice .summary-list li')).toHaveCount(3);
     const steps=page.locator('#lecture-practice details');
     expect(await steps.count()).toBeGreaterThanOrEqual(3);
@@ -414,10 +438,9 @@ test('time map and practice links play the lecture inside the page from that tim
   await expect(frame).toHaveCount(1);
   expect(await frame.getAttribute('src')).toContain('embed/xA-4G4z-1MM?start='+start+'&');
   expect(page.context().pages().length).toBe(1);
-  const practice=page.locator('#lecture-practice details').first();
-  await practice.locator('summary').click();
+  const practice=page.locator('#lecture-overview .practice-list>li').first();
   await practice.locator('.practice-source').click();
-  expect(await frame.getAttribute('src')).toContain('start=1889&');
+  expect(await frame.getAttribute('src')).toContain('start=1473&');
   await expect(page.locator('.video-embed iframe')).toHaveCount(1);
 });
 
@@ -530,3 +553,37 @@ test('outline sheet also changes text size and stays in sync with the footer set
   await page.evaluate(()=>localStorage.removeItem('study-site-text-size'));
   await context.close();
 });
+
+test('intro section merges key points and practice and fits small screens',async({browser})=>{
+  for(const width of [320,390,1280]){
+    const context=await browser.newContext({viewport:{width,height:844},reducedMotion:'reduce'});
+    const page=await context.newPage();
+    await page.goto('/lectures/chance-acceptance-20240526.html');
+    await expect(page.locator('main .lecture-section').first().locator('h2')).toHaveText('도입');
+    await expect(page.locator('#lecture-overview h3')).toHaveText(['우연을 받아들인다는 것','해볼 만한 일']);
+    await expect(page.getByRole('navigation',{name:'이 강의 목차'}).getByRole('link',{name:'도입'})).toBeVisible();
+    await expect(page.getByRole('navigation',{name:'이 강의 목차'}).getByRole('link',{name:'실천 포인트'})).toHaveCount(0);
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(1);
+    const m=await page.evaluate(()=>{
+      const size=s=>parseFloat(getComputedStyle(document.querySelector(s)).fontSize);
+      const card=document.querySelector('.practice-list>li').getBoundingClientRect();
+      const dd=document.querySelector('.practice-cells dd').getBoundingClientRect();
+      return {h1:size('h1'),h2:size('#lecture-overview>h2'),h3:size('#lecture-overview .intro-block>h3'),dd:size('.practice-cells dd'),
+        ddInside:dd.left>=card.left&&dd.right<=card.right};
+    });
+    expect(m.h1).toBeGreaterThan(m.h2);expect(m.h2).toBeGreaterThan(m.h3);expect(m.dd).toBeLessThanOrEqual(16);expect(m.ddInside).toBe(true);
+    await context.close();
+  }
+});
+
+test('intro practice links open the player at the quoted moment',async({page})=>{
+  await page.route(/youtube(-nocookie)?\.com/,route=>route.abort());
+  await page.goto('/lectures/chance-acceptance-20240526.html');
+  await expect(page.locator('.video-embed iframe')).toHaveCount(0);
+  const source=page.locator('#lecture-overview .practice-source').first();
+  expect(await source.getAttribute('href')).toContain('&t=4844s');
+  await source.click();
+  await expect(page.locator('.video-embed iframe')).toHaveCount(1);
+  expect(await page.locator('.video-embed iframe').getAttribute('src')).toContain('start=4844&');
+});
+
