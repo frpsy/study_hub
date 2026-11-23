@@ -16,7 +16,7 @@ class DepthLibrary(unittest.TestCase):
     def test_cards_lead_with_the_key_sentence(self):
         for row in self.rows:
             with self.subTest(id=row['id']):
-                card=re.search(r'<a class="lecture" data-video-id="'+re.escape(row['id'])+r'".*?</a>',self.home,re.S).group(0)
+                card=re.search(r'<article class="lecture-card lecture" data-video-id="'+re.escape(row['id'])+r'".*?</article>',self.home,re.S).group(0)
                 self.assertIn('class="card-lead"',card)
                 self.assertIn(f'data-topic="{row["topic"]}"',card)
     def test_lecture_pages_share_their_own_sentence(self):

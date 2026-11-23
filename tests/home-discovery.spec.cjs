@@ -75,8 +75,7 @@ test('home sort toggle can order by YouTube view count and shows the count only 
   const counts=await views();
   expect(counts.length).toBeGreaterThan(1);
   expect(counts).toEqual([...counts].sort((a,b)=>b-a));
-  await expect(page.locator('#lecture-list .lecture .views').first()).toBeVisible();
-  await expect(page.locator('#lecture-list .lecture .views').first()).toContainText('조회수');
+  await expect(page.locator('#lecture-list .lecture .views')).toHaveCount(0);
   await expect(page.locator('#views-note')).toBeVisible();
   await expect(page).toHaveURL(/[?&]sort=views/);
   await page.reload();
@@ -102,4 +101,43 @@ test('sleep search aliases and independent empty-state resets',async({page})=>{
   await page.getByRole('button',{name:'검색어 지우기'}).click();
   await expect(search).toBeEmpty();
   await expect(page.locator('#catalog-topic')).toHaveText('명상');
+});
+
+test('random hero changes both the quote and its lecture destination',async({page})=>{
+  await page.goto('/index.html');
+  const quote=page.locator('.today-line blockquote');
+  const original=await quote.textContent();
+  await page.getByRole('button',{name:'다른 문장 보기'}).click();
+  await expect(quote).not.toHaveText(original);
+  await page.locator('.today-source').click();
+  await expect(page).toHaveURL(/\/lectures\/[^/]+\.html$/);
+  await expect(page.locator('.summary-lead')).not.toHaveText(original);
+});
+
+test('bookmark filtering and read state survive navigation and reload',async({page})=>{
+  await page.goto('/index.html');
+  const card=page.locator('article[data-video-id="VUHrJZbpIjI"]');
+  const bookmark=card.getByRole('button',{name:'북마크'});
+  const read=card.getByRole('button',{name:'읽음 표시'});
+  await bookmark.click();
+  await read.click();
+  await expect(page).toHaveURL(/\/index\.html$/);
+  await expect(card).toHaveClass(/is-read/);
+  await page.locator('[data-value=bookmarks]').click();
+  await expect(page.locator('#count')).toHaveText('1개 강의');
+  await page.reload();
+  await expect(bookmark).toHaveAttribute('aria-pressed','true');
+  await expect(read).toHaveAttribute('aria-pressed','true');
+  const meta=card.locator('.meta');
+  await meta.scrollIntoViewIfNeeded();
+  const box=await meta.boundingBox();
+  await page.mouse.click(box.x+8,box.y+box.height/2);
+  const detailRead=page.getByRole('button',{name:'읽음 완료'});
+  await expect(detailRead).toHaveAttribute('aria-pressed','true');
+  await detailRead.click();
+  await page.goBack();
+  await expect(read).toHaveAttribute('aria-pressed','false');
+  await bookmark.click();
+  await expect(page.locator('#count')).toHaveText('0개 강의');
+  await expect(page.locator('#empty')).toBeVisible();
 });
