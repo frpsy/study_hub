@@ -137,7 +137,7 @@ class EditorNoteChecks(unittest.TestCase):
    self.assertLess(source.index('id="lecture-editor"'),source.index('class="lecture-pager"'),vid)
 
 # 2026-11-22 현재 아직 옛 형식(핵심 세 가지 + 실천 포인트)인 강의. 이 밖의 강의는 모두 intro를 써야 한다. 옮기면 이 목록에서 지워도 된다.
-LEGACY_FORMAT=frozenset(['2VTv6WW8Kn8', '7R3-3HR6-u4', '9tRohh0gErM', 'ENm40KZM1_g', 'KHd-luu3M8s', 'MdDj5RZkMB4', 'QmOF0crdyRU', 'R9O1OowpEuE', 'VUHrJZbpIjI', 'ZCty0wvogDo', 'a2SVP-H_wPY', 'affirmation-20261101', 'izYj8g-j00U', 'kLizfh-5vuE', 'peaceful-life-live', 'sAgj5V4Ewno', 'two-stages-meditation', 'vHuZh8xLcDc', 'vNqK0GhTP6s'])
+LEGACY_FORMAT=frozenset(['2VTv6WW8Kn8', '7R3-3HR6-u4', '9tRohh0gErM', 'ENm40KZM1_g', 'KHd-luu3M8s', 'MdDj5RZkMB4', 'QmOF0crdyRU', 'R9O1OowpEuE', 'a2SVP-H_wPY', 'affirmation-20261101', 'kLizfh-5vuE', 'peaceful-life-live', 'two-stages-meditation', 'vHuZh8xLcDc', 'vNqK0GhTP6s'])
 class IntroChecks(unittest.TestCase):
  """도입 섹션: 핵심 세 가지와 실천 포인트를 하나로 합친 구조. 개수와 블록은 강의 내용이 정하고, 강의에 없는 말은 막는다(편집규칙.md 19절)."""
  def intro_lectures(self):
