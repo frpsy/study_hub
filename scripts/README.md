@@ -65,3 +65,19 @@ python scripts/get_youtube_urls.py "<채널/재생목록 URL>" -o "authors/Jooha
 
 위 스크립트들이 공유하는 공용 모듈입니다 (yt-dlp 호출 방식 탐색, 쿠키 옵션, 파일명 정리,
 VTT → 텍스트 변환, 영상 ID 추출). 직접 실행하는 파일이 아닙니다.
+
+## build_all.py (생성·버전·검증을 한 명령으로)
+```bash
+python3 scripts/build_all.py --bump "변경 설명" --check --tests
+```
+홈과 강의 페이지를 다시 만들고(선택: 화면 버전 올림), design·site 검증과 `--check`, 단위·노드 테스트를 돈다. Playwright는 포함하지 않는다.
+
+## intro_candidates.py (도입 해볼 일 후보, 탐색 전용)
+```bash
+python3 scripts/intro_candidates.py <강의 id> [--gap 20] [--limit 80] [--json]
+```
+자막에서 강연자가 권한 듯한 대목(권유형 문장)을 시각과 맥락으로 뽑는다. 판정이 아니므로 사람이 자막을 읽고 고른다. 한 문장과 겹치는 후보와 이미 쓴 후보는 표시한다.
+
+## quote_check.py (인용 대조 모듈)
+테스트와 위 도구가 함께 쓴다. 인용의 낱말이 인용 시각 앞 3초~뒤 75초의 자막에 같은 순서로 있는지 본다(`tests/test_quote_check.py`가 기준 동작을 고정한다).
+

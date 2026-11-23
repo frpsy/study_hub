@@ -4,6 +4,7 @@ R=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(R/'scripts'))
 from build_compact_lectures import build
 from validate_site import validate
+from quote_check import load_transcript,quote_problems,stamp_seconds,transcript_path
 
 def detail_texts(block):
  """Yield every sentence group of a detail block: paragraphs and labelled-list items."""
@@ -26,13 +27,6 @@ def intro_texts(record):
     yield from (item[k] for k in ('when','do','check','quote') if k in item)
    else:
     yield item['h'];yield from item['b']
-def video_key(row):
- m=re.search(r'[?&]v=([A-Za-z0-9_-]{11})',row.get('video_url') or '')
- return m.group(1) if m else row['id']
-def stamp_seconds(stamp):
- total=0
- for part in stamp.split(':'):total=total*60+int(part)
- return total
 STAMP=r'^(\d+:[0-5]\d|\d+:[0-5]\d:[0-5]\d)$'   # 분·초는 59 이하
 class CompactCourseChecks(unittest.TestCase):
  def test_timeline_text_is_preserved_and_copy_has_single_target(self):
@@ -198,26 +192,16 @@ class IntroChecks(unittest.TestCase):
       if kim:self.assertRegex(item['t'],STAMP,vid)
       else:self.assertNotIn('t',item,vid);self.assertIn(item['detail_index'],range(len(record['detail'])),vid)
  def test_practice_quotes_are_the_lecturers_words(self):
-  """인용의 낱말이 인용 시각 근처의 원본 자막에 같은 순서로 있어야 한다. 군더더기·오인식 교정과 띄어쓰기 차이는 허용한다."""
-  norm=lambda x:re.sub(r'[^0-9A-Za-z가-힣]','',x)
+  """인용의 낱말이 인용 시각 근처의 원본 자막에 같은 순서로 있어야 한다(scripts/quote_check.py). 군더더기·오인식 교정과 띄어쓰기 차이는 허용한다."""
   for row,record in self.intro_lectures():
    if row.get('creator')!='김주환':continue
-   path=R/'transcripts'/f'{video_key(row)}.ko.txt';self.assertTrue(path.exists(),str(path))
-   lines=[(int(m[1])*3600+int(m[2])*60+int(m[3]),m[4]) for m in (re.match(r'\[(\d+):(\d+):(\d+)\] (.*)',l) for l in path.read_text(encoding='utf-8').splitlines()) if m]
+   path=transcript_path(R,row);self.assertIsNotNone(path,row['id']+': 자막 파일이 없다')
+   lines=load_transcript(path)
    for block in record['intro']:
     if block['kind']!='practice':continue
     for item in block['items']:
-     t=stamp_seconds(item['t']);window=''.join(norm(x) for sec,x in lines if t-3<=sec<=t+75)
-     self.assertTrue(window,row['id']+' '+item['t'])
-     self.assertGreaterEqual(len(norm(item['quote'])),10,row['id']+' '+item['t'])
-     pos=0   # 낱말은 자막과 같은 순서로 나와야 한다(순서가 뒤집히거나 먼 말을 이어 붙인 인용을 막는다)
-     for fragment in item['quote'].split('…'):
-      for word in fragment.split():
-       token=norm(word)
-       if not token:continue
-       found=window.find(token,pos)
-       self.assertGreaterEqual(found,0,f"{row['id']} {item['t']}: ‘{word}’가 그 시각의 자막에 없거나 순서가 다르다")
-       pos=found+len(token)
+     problems=quote_problems(item['quote'],lines,stamp_seconds(item['t']))
+     self.assertEqual(problems,[],f"{row['id']} {item['t']}: {problems}")
  def test_practice_quotes_do_not_repeat_the_lead(self):
   """도입에서 같은 말을 두 번 보이지 않는다: 한 문장(lead)과 12자 이상 겹치는 인용은 쓰지 않는다."""
   norm=lambda x:re.sub(r'[^0-9A-Za-z가-힣]','',x)
