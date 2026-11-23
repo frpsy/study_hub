@@ -5,7 +5,6 @@
   const media=matchMedia('(prefers-color-scheme: dark)');
   const controls=[
     {selector:'[data-theme-choice]', field:'themeMode', option:'themeChoice', key:'study-site-appearance', fallback:'auto'},
-    {selector:'.accent-swatch', field:'accent', option:'accent', key:'study-site-accent', fallback:'red'},
     {selector:'.text-size', field:'textSize', option:'textSize', key:'study-site-text-size', fallback:'md'}
   ];
   const apply=()=>{

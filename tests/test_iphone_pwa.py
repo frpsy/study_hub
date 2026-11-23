@@ -31,7 +31,7 @@ class IPhonePWAContract(unittest.TestCase):
                 self.assertIn('meta name="theme-color"',html)
                 self.assertIn('apple-mobile-web-app-capable',html)
                 self.assertEqual(html.count('class="appearance-toggle"'),1)
-                self.assertRegex(html,r'<head><meta charset="utf-8"><script>[^<]+study-site-appearance[^<]+study-site-accent[^<]+study-site-text-size')
+                self.assertRegex(html,r'<head><meta charset="utf-8"><script>[^<]+study-site-appearance[^<]+study-site-text-size')
                 base='../' if page.parent.name=='lectures' else ''
                 self.assertIn(f'src="{base}assets/theme.js',html)
                 self.assertIn(f'href="{base}assets/site.css',html)

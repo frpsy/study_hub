@@ -81,7 +81,11 @@
       const selected=library[kind].has(lecture.dataset.videoId);
       button.setAttribute('aria-pressed',String(selected));
       if(kind==='bookmarks')button.firstElementChild.textContent=selected?'★':'☆';
-      else lecture.classList.toggle('is-read',selected);
+      else{
+        lecture.classList.toggle('is-read',selected);
+        const label=button.querySelector('[data-read-label]');
+        if(label)label.textContent=selected?'읽음 완료':'읽음 표시';
+      }
     });
   };
   const restoreLibrary=()=>{
@@ -124,6 +128,9 @@
     const persist=input.dataset.persistQuery==='true';
     const emptySearch=empty?.querySelector('[data-clear-search]');
     const emptyTopic=empty?.querySelector('[data-clear-topic]');
+    const emptyMessage=empty?.querySelector('[data-empty-message]');
+    const emptyBookmarks=empty?.querySelector('[data-clear-bookmarks]');
+    const searchEmptyMessage=emptyMessage?.textContent;
     let topic='',bookmarkedOnly=false;
     const filter=(saveURL=false)=>{
       const words=input.value.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);let shown=0;
@@ -139,6 +146,12 @@
       bookmarkFilter?.setAttribute('aria-pressed',String(bookmarkedOnly));
       if(count)count.textContent=shown+'개 '+input.dataset.noun;
       if(empty)empty.hidden=shown!==0;
+      if(emptyMessage){
+        emptyMessage.textContent=bookmarkedOnly
+          ? (library.bookmarks.size?'조건에 맞는 북마크가 없습니다.':'북마크한 강의가 없습니다.')
+          : searchEmptyMessage;
+      }
+      if(emptyBookmarks)emptyBookmarks.hidden=!bookmarkedOnly;
       if(clearButton)clearButton.hidden=!input.value;
       if(emptySearch)emptySearch.hidden=!words.length;
       if(emptyTopic)emptyTopic.hidden=!topic;
@@ -176,6 +189,7 @@
     clearButton?.addEventListener('click',clearSearch);
     emptySearch?.addEventListener('click',clearSearch);
     emptyTopic?.addEventListener('click',()=>{topic='';filter(true);chips.find(button=>!button.dataset.value)?.focus()});
+    emptyBookmarks?.addEventListener('click',()=>{bookmarkedOnly=false;filter(true);bookmarkFilter?.focus()});
     chips.forEach(button=>button.addEventListener('click',()=>{
       const value=button.dataset.value||'';
       topic=topic===value?'':value;

@@ -660,17 +660,6 @@ a{color:var(--ink);text-decoration-color:var(--accent);text-decoration-thickness
 @media print{.lecture-pager{display:none}}
 
 /* Accent choice (settings in footer): red is the default token set above; blue and green override only the accent family. */
-.accent-picker{display:inline-flex;align-items:center;gap:4px;margin-left:auto}
-.accent-swatch{width:44px;height:44px;padding:0;border:0;background:transparent;border-radius:50%;position:relative;min-width:0}
-.accent-swatch::before{content:"";position:absolute;inset:11px;border-radius:50%;background:var(--sw);border:2px solid transparent;box-shadow:0 0 0 1px var(--line)}
-.accent-swatch[aria-pressed="true"]::before{box-shadow:0 0 0 2px var(--surface),0 0 0 4px var(--sw)}
-.accent-swatch[data-accent="red"]{--sw:#c8102e}.accent-swatch[data-accent="blue"]{--sw:#1f4fd8}.accent-swatch[data-accent="green"]{--sw:#0e7a4b}
-:root[data-theme="dark"] .accent-swatch[data-accent="red"]{--sw:#ff4d63}:root[data-theme="dark"] .accent-swatch[data-accent="blue"]{--sw:#7aa5ff}:root[data-theme="dark"] .accent-swatch[data-accent="green"]{--sw:#46d391}
-:root[data-accent="blue"]{--accent:#1f4fd8;--focus-color:#1f4fd8;--glow:rgba(31,79,216,.085)}
-:root[data-accent="green"]{--accent:#0e7a4b;--focus-color:#0e7a4b;--glow:rgba(14,122,75,.085)}
-:root[data-accent="blue"][data-theme="dark"]{--accent:#7aa5ff;--focus-color:#7aa5ff;--glow:rgba(122,165,255,.16)}
-:root[data-accent="green"][data-theme="dark"]{--accent:#46d391;--focus-color:#46d391;--glow:rgba(70,211,145,.16)}
-:root[data-accent] .lecture:hover{box-shadow:0 14px 32px -16px color-mix(in srgb,var(--accent) 45%,transparent)}
 
 /* Home catalog discovery: retain the existing theme tokens and card geometry. */
 .home-main .catalog-intro{margin:0 0 var(--space-3);max-width:68ch;font-size:var(--font-ui-size);line-height:1.6;color:var(--muted);overflow-wrap:break-word}
@@ -846,7 +835,7 @@ html{scroll-padding-top:158px}
 .outline-sheet ol ol a{font-size:14px;font-weight:500;color:var(--muted);min-height:40px}
 @media(min-width:781px){.outline-sheet{margin:auto;border-bottom:1px solid var(--line);border-radius:var(--radius-card)}}
 @media print{.outline-fab,.outline-sheet{display:none!important}}
-/* 보기 설정: 화면·강조 색·글자 크기를 한 패널에 */
+/* 보기 설정: 화면·글자 크기를 한 패널에 */
 .view-settings{order:54;margin-left:auto;border:0}
 .view-settings[open]{flex-basis:100%;order:58}
 .view-settings[open]>summary{color:var(--ink)}
@@ -856,7 +845,6 @@ html{scroll-padding-top:158px}
 .view-settings[open]>summary::after{content:"▴"}
 .view-settings-panel{display:grid;gap:4px;margin:4px 0 8px;padding:10px 14px;border:1px solid var(--line);border-radius:var(--radius-card);background:var(--surface)}
 .view-row{display:flex;align-items:center;justify-content:space-between;gap:16px;font-size:12px;color:var(--muted)}
-.view-settings .accent-picker{margin-left:0}
 .text-size-picker{display:inline-flex;gap:2px;padding:2px;border:1px solid var(--line);border-radius:6px}
 .text-size{min-height:36px;padding:4px 10px;border:0;border-radius:4px;background:transparent;color:var(--muted);font-size:12px}
 .text-size[aria-pressed="true"]{background:var(--tint);color:var(--ink);font-weight:700}
@@ -938,7 +926,6 @@ html{scroll-padding-top:var(--anchor-offset,158px)}
 .outline-view{padding:14px 0 0}
 .outline-view>strong{display:block;margin-bottom:6px;font-size:13px;color:var(--muted)}
 .outline-view .view-settings-panel{margin:0;padding:6px 0 0;border:0;background:transparent}
-.outline-view .accent-picker{margin-left:0}
 
 
 .editor-notes{margin-top:12px}.editor-notes h3{font-size:14px;margin:14px 0 4px;color:var(--ink)}.editor-notes .editor-list{margin:4px 0 12px;padding:0;list-style:none}.editor-notes .editor-list li{border:0;border-bottom:1px solid var(--line);padding:9px 0;font-size:13.5px;line-height:1.75;color:var(--muted)}.editor-notes .editor-list li:last-child{border-bottom:0}
@@ -1112,11 +1099,11 @@ html.header-hidden .sidebar{top:12px}
 .site-header-inner{display:flex;align-items:center;justify-content:space-between}
 .header-settings{position:relative;margin-inline-start:auto;flex:none}
 .header-settings .view-settings-panel{position:absolute;inset-inline-end:0;inset-block-start:100%;width:min(320px,calc(100vw - 32px));box-sizing:border-box;margin-top:6px;background:var(--surface);box-shadow:0 6px 18px var(--shadow-color,rgba(0,0,0,.18))}
-.header-settings .accent-picker{margin-left:0}
 .header-settings [data-theme-choice]{min-height:var(--tap-target);padding:0 8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:var(--radius-control);font:inherit}
 .header-settings [data-theme-choice][aria-pressed="true"]{border-color:var(--accent);color:var(--accent);background:var(--tint)}
 .header-settings [hidden],.today-random[hidden],.detail-read[hidden],.card-actions button[hidden],.filter-chips button[hidden]{display:none}
-.detail-read{margin-top:8px}
+.detail-meta-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0 12px}
+.detail-read{display:inline-flex;align-items:center;gap:6px;padding-inline:8px;background:transparent;border:0;white-space:nowrap}
 @media(max-width:780px){
  .today-line{margin:4px 0 16px;padding-bottom:12px}
  .today-line blockquote{font-size:17px}
@@ -1151,13 +1138,23 @@ html.header-hidden .sidebar{top:12px}
 .bookmark-filter[aria-pressed="true"]{background:var(--tint);color:var(--accent)}
 .lecture-card .card-actions{gap:4px}
 .lecture-card .card-actions button{width:var(--tap-target);height:var(--tap-target)}
-.lecture-card .card-actions .read-mark{display:inline-grid;place-items:center;width:17px;height:17px;box-sizing:border-box;border:1.5px solid currentColor;border-radius:50%;vertical-align:middle}
+.read-mark{display:inline-grid;place-items:center;width:17px;height:17px;box-sizing:border-box;border:1.5px solid currentColor;border-radius:50%;vertical-align:middle}
 .lecture-card [data-library-toggle="read"][aria-pressed="true"]{background:transparent}
-.lecture-card [data-library-toggle="read"][aria-pressed="true"] .read-mark{border-color:transparent;background:var(--accent);color:var(--on-accent)}
-.lecture-card [data-library-toggle="read"][aria-pressed="true"] .read-mark::before{content:"✓";font-size:11px;line-height:1}
+[data-library-toggle="read"][aria-pressed="true"] .read-mark{border-color:transparent;background:var(--accent);color:var(--on-accent)}
+[data-library-toggle="read"][aria-pressed="true"] .read-mark::before{content:"✓";font-size:11px;line-height:1}
 .lecture-card .meta-dot{color:var(--muted)}
 @media(max-width:780px){
  .home-main .home-title{margin-top:21px}
  .home-main .catalog-intro{margin-bottom:10px}
  .today-line{padding:0 12px 12px}
+}
+
+
+/* Keep Korean words together in the reading text, with a fallback for long tokens. */
+@media(max-width:780px){
+ .compact-lecture :is(.summary-head h1,.lecture-section h2,.lecture-section h3),
+ .compact-lecture :is(#lecture-overview,#lecture-detail) :is(p,li,h4,blockquote,p *,li *){
+  word-break:keep-all!important;
+  overflow-wrap:anywhere;
+ }
 }
