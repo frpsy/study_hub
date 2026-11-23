@@ -173,7 +173,7 @@ class TestRunnerFailures(unittest.TestCase):
     # Review Focus 5: 키나 도구가 없으면 조용히 넘어가지 않고 failed로 기록한다
     def test_gemini_missing_key_records_failed(self):
         with tempfile.TemporaryDirectory() as out:
-            ok = run_gemini("x", out, env_path=os.path.join(out, "no-such.env"))
+            ok = run_gemini("x", out, env_path=os.path.join(out, "no-such.env"), wrapper="/nonexistent/ai-gemini.sh")
             self.assertFalse(ok)
             with open(os.path.join(out, "status.json"), encoding="utf-8") as f:
                 status = json.load(f)
