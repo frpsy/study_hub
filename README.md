@@ -5,7 +5,7 @@
 - **웹:** https://frpsy.github.io/study_hub/
 - **공개 경로:** `index.html`(강의 목록), `lectures/<id>.html`(강의 페이지), `offline.html`
 - **기능:** 오늘의 한 문장, 강의 검색·주제 필터, 한 문장 핵심, 도입(핵심 주장·해볼 일·단계, 내용에 따라 구성), 깊이 목차, 원본 YouTube 링크, 타임스탬프 복사, 정적 오프라인 캐시, 시스템·라이트·다크 화면, 강조 색·글자 크기 보기 설정
-- **보존만 하는 원고:** 5분 요약(`data/summaries.json`), 미니강좌 해설(`data/mini_courses.json`), 용어집(`용어집.md`)은 게시하지 않습니다.
+- **보존만 하는 원고:** 5분 요약과 미니강좌 해설(`docs/archive/manuscripts/`), 용어집(`용어집.md`)은 게시하지 않습니다.
 - **없는 기능:** 사용자 로그인, 개인 학습 기록 저장, 학습 완료 상태, 학습 이력, Firebase 연결
 
 ## 코드와 데이터의 역할
@@ -15,7 +15,7 @@
 | `lectures.json` | 강의 ID·제목·출처·길이·태그 |
 | `materials.json` | 향후 책·논문·글·노트 목록 |
 | `data/mini_courses.json` | **한 문장 핵심(`lead`)의 단일 원본**(옛 형식 강의는 핵심 세 가지 `three`도), 미니강좌 원고(비공개). 도입 블록은 `data/lecture_compact.json`의 `intro` |
-| `data/summaries.json` | 5분 요약 원고(비공개 보존, 한 문장 핵심 중복 저장 금지) |
+| `docs/archive/manuscripts/` | 옛 5분 요약·미니강좌 원고(화면에 안 나가는 보존본, 어떤 검사도 읽지 않음) |
 | `data/lecture_compact.json` | 타임스탬프 원문과 출처 링크 |
 | `scripts/content_registry.py` | 소스 검증과 요약 데이터 결합 |
 | `scripts/build_library.py` | 홈과 공통 레이아웃, `build-info.json` 버전의 정적 자산 URL |
