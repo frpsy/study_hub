@@ -11,12 +11,12 @@
 | 무엇 | 원본 |
 |---|---|
 | 강의 등록(최신순) | `lectures.json` → `python3 scripts/build_library.py` |
-| 한 문장(옛 형식은 핵심 세 가지도) | `data/mini_courses.json`의 `lead`(옛 형식 `three`) |
-| 타임스탬프(김주환만)·도입 블록 `intro`·상세 요약 `detail`·편집자 주 `editor`·출처·옛 앵커. 옛 형식 `practice`는 아직 `intro`로 옮기지 않은 강의에만 있다 | `data/lecture_compact.json` → `python3 scripts/build_compact_lectures.py` |
+| 한 문장 | `data/mini_courses.json`의 `lead` |
+| 타임스탬프(김주환만)·도입 블록 `intro`·상세 요약 `detail`·편집자 주 `editor`·출처·옛 앵커 | `data/lecture_compact.json` → `python3 scripts/build_compact_lectures.py` |
 | 화면 버전 | `build-info.json`의 `version` (보이는 변경마다 올리고 재생성) |
 | 원본 자막·근거 | `transcripts/`(가공 금지), `study-audits/<영상ID>.json` |
 
-- **도입(2026-11-22):** 핵심 세 가지와 실천 포인트를 합쳐 첫 섹션 ‘도입’으로 만들었다. 3개씩 맞추지 않고 강의가 실제로 말한 것만 쓴다. 해볼 일은 강연자가 직접 권한 대목만 ‘언제·할 일’(확인은 강연자가 점검 기준을 말한 경우에만)과 자막 인용·시각으로 쓴다. 새 강의는 `intro`를 쓰고, 옛 형식은 강의를 고칠 때 옮긴다(`편집규칙.md` 19절).
+- **도입(2026-11-22):** 핵심 세 가지와 실천 포인트를 합쳐 첫 섹션 ‘도입’으로 만들었다. 3개씩 맞추지 않고 강의가 실제로 말한 것만 쓴다. 해볼 일은 강연자가 직접 권한 대목만 ‘언제·할 일’(확인은 강연자가 점검 기준을 말한 경우에만)과 자막 인용·시각으로 쓴다. 모든 강의(22편, 2026-11-23 이관 완료)가 `intro`를 쓰며, 생성기와 테스트가 `three`·`practice`를 거부한다(`편집규칙.md` 19절).
 - 본문에는 강의 내용만 쓴다. 한계·제약·`[보충]`·"대조하지 않았다" 같은 문장은 본문에 쓰지 않고 페이지 맨 끝 접힌 ‘출처와 편집자 주’ 안의 ‘편집자 주’(`editor`)에 모은다. 도식은 이해에 실제로 도움이 될 때만 쓴다(`편집규칙.md` 17절).
 
 ## 검증 (병합 전 모두 통과)

@@ -65,21 +65,6 @@ class CompactCourseChecks(unittest.TestCase):
     for block in record['detail']:
      self.assertTrue(block['h'] and block['p'],vid)
      for text in detail_texts(block):self.assertRegex(text,r'[.)]$',vid+': '+text[:30])
- def test_practice_section_renders_once_with_expandable_steps(self):
-  records=json.loads((R/'data/lecture_compact.json').read_text())
-  for vid,record in records.items():
-   source=(R/'lectures'/f'{vid}.html').read_text()
-   if 'practice' not in record:continue
-   self.assertEqual(source.count('id="lecture-practice"'),1,vid)
-   self.assertEqual(source.count('<details><summary>'),len(record['practice']['steps']),vid)
-   self.assertEqual(len(record['practice']['today']),3,vid)
-   for step in record['practice']['steps']:
-    self.assertTrue(step['b'],vid)
-    if 'timeline' in record:
-     self.assertRegex(step['t'],r'^\d+:\d\d(:\d\d)?$',vid)
-    else:
-     self.assertNotIn('t',step,vid)
-     self.assertIn(step['detail_index'],range(len(record['detail'])),vid)
  def test_kim_lectures_do_not_use_instructor_subject_phrasing(self):
   rows={r['id']:r for r in json.loads((R/'lectures.json').read_text(encoding='utf-8'))}
   for name in ('mini_courses','summaries','lecture_compact'):
@@ -93,12 +78,8 @@ class CompactCourseChecks(unittest.TestCase):
   for vid,item in courses.items():
    self.assertTrue(item['sections'])
    self.assertTrue(item['question'] and item['answer'])
-   if 'intro' in records[vid]:
-    # 핵심 세 가지의 원본은 intro 하나뿐이다(두 곳에 같은 내용을 두지 않는다).
-    self.assertNotIn('three',item,vid);continue
-   self.assertEqual(len(item['three']),3)
-   self.assertFalse(any(str(x).startswith(('핵심 원리:', '훈련의 구분:', '실천 방향:')) for x in item['three']),vid)
-   self.assertTrue(all(str(x).endswith('다.') for x in item['three']),vid)
+   # 핵심 주장의 원본은 intro 하나뿐이다(두 곳에 같은 내용을 두지 않는다).
+   self.assertIn('intro',records[vid],vid);self.assertNotIn('three',item,vid)
   self.assertFalse(build(check=True))
   self.assertEqual(validate(R),[])
 
@@ -110,11 +91,8 @@ class EditorNoteChecks(unittest.TestCase):
   minis=json.loads((R/'data/mini_courses.json').read_text())
   for vid,record in records.items():
    self.assertNotIn('note',record,vid)
-   self.assertNotIn('note',record.get('practice',{}),vid)
-   body=[minis[vid]['lead'],*minis[vid].get('three',[]),*intro_texts(record)]
+   body=[minis[vid]['lead'],*intro_texts(record)]
    for block in record.get('detail',[]):body+=[block['h'],*detail_texts(block)]
-   for step in record.get('practice',{}).get('steps',[]):body+=[step['h'],*step['b']]
-   body+=record.get('practice',{}).get('today',[])
    for text in body:
     for marker in self.BANNED:self.assertNotIn(marker,text,f'{vid}: {text[:40]}')
  def test_editor_notes_render_as_closed_fold_at_page_end(self):
@@ -134,18 +112,15 @@ class EditorNoteChecks(unittest.TestCase):
    self.assertLess(source.index('id="lecture-editor"'),source.index('class="lecture-pager"'),vid)
 
 # 2026-11-22 현재 아직 옛 형식(핵심 세 가지 + 실천 포인트)인 강의. 이 밖의 강의는 모두 intro를 써야 한다. 옮기면 이 목록에서 지워도 된다.
-LEGACY_FORMAT=frozenset([])
 class IntroChecks(unittest.TestCase):
  """도입 섹션: 핵심 세 가지와 실천 포인트를 하나로 합친 구조. 개수와 블록은 강의 내용이 정하고, 강의에 없는 말은 막는다(편집규칙.md 19절)."""
  def intro_lectures(self):
   rows={r['id']:r for r in json.loads((R/'lectures.json').read_text())}
   records=json.loads((R/'data/lecture_compact.json').read_text())
   return [(rows[v],r) for v,r in records.items() if 'intro' in r]
- def test_new_lectures_use_intro_not_the_old_format(self):
+ def test_every_lecture_uses_intro(self):
   records=json.loads((R/'data/lecture_compact.json').read_text())
-  self.assertTrue(LEGACY_FORMAT<=set(records))
-  for vid,record in records.items():
-   if vid not in LEGACY_FORMAT:self.assertIn('intro',record,vid+': 새 강의는 intro를 쓴다(편집규칙 19절)')
+  for vid,record in records.items():self.assertIn('intro',record,vid+': 모든 강의는 intro를 쓴다(편집규칙 19절)')
  def test_intro_replaces_key_summary_and_practice_sections(self):
   found=self.intro_lectures();self.assertTrue(found)
   for row,record in found:

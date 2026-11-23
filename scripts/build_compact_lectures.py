@@ -1,4 +1,4 @@
-"""Generate lecture pages: an intro (one sentence + content-driven blocks; legacy pages: key summary + practice) plus timestamps (김주환 lectures) or a detailed summary (other creators)."""
+"""Generate lecture pages: an intro (one sentence + content-driven blocks) plus timestamps (김주환 lectures) or a detailed summary (other creators)."""
 from pathlib import Path
 import html,json,re,sys
 from build_library import page,R
@@ -78,12 +78,12 @@ def render(row,record,mini,prev=None,nxt=None):
  youtube_url=row.get('video_url') or (f'https://www.youtube.com/watch?v={vid}' if len(vid)==11 and all(c.isascii() and (c.isalnum() or c in '-_') for c in vid) else None)
  date_info=(f'<time datetime="{E(row["date"],quote=True)}">{E(row["date"]).replace("-",".")}</time> · ' if row.get("date") else '')
  source_info=(f'<a href="{E(youtube_url,quote=True)}" target="_blank" rel="noopener">원본 영상 ↗</a>' if youtube_url else '<span>원본 영상 주소 확인 중</span>')
- practice=record.get('practice')
- intro=record['intro'] if 'intro' in record else None
- if intro is not None:check_intro(vid,record)
- aliases=set(record['aliases'])-{'lecture-overview','overview','lecture-comment','timeline','lecture-detail','lecture-sources'}-({'lecture-practice'} if practice else set())
+ if 'intro' not in record:raise ValueError(f'{vid}: every lecture needs an intro (편집규칙 19절)')
+ if 'three' in mini:raise ValueError(f'{vid}: three is gone; the intro holds the key points')
+ check_intro(vid,record)
+ aliases=set(record['aliases'])-{'lecture-overview','overview','lecture-comment','timeline','lecture-detail','lecture-sources'}
  # Old links to #lecture-practice keep landing on the page now that practice lives inside the intro.
- if intro is not None:aliases|={'lecture-practice'}
+ aliases|={'lecture-practice'}
  old=''.join(f'<span id="{E(a)}" class="legacy-anchor" aria-hidden="true"></span>' for a in sorted(aliases))
  editor=editor_html(record.get('editor'))
  timed='timeline' in record
@@ -100,17 +100,11 @@ def render(row,record,mini,prev=None,nxt=None):
   actions.append('<a class="btn secondary" href="#lecture-comment">타임스탬프로 이동</a>')
   second+=f'<section id="lecture-comment" class="lecture-section"><span id="timeline"></span><h2>타임스탬프</h2><div class="actions"><button id="copy" data-copy-target="comment" type="button">타임스탬프 복사</button><span id="status" role="status" aria-live="polite"></span></div><input type="checkbox" id="timeline-toggle" class="timeline-toggle" aria-label="타임스탬프 전체 펼치기"><label class="timeline-box" for="timeline-toggle"><pre id="comment" tabindex="0"><code>{timeline_text}</code></pre></label></section>'
  action=''.join(actions)
- practice_html=''
- if practice:
-  steps=''.join(practice_step(x,record,youtube_url) for x in practice['steps'])
-  today=''.join('<li>'+E(t)+'</li>' for t in practice['today'])
-  practice_html='<section id="lecture-practice" class="lecture-section"><h2>실천 포인트</h2><div class="summary-tier"><h3>오늘의 실천 세 가지</h3><ol class="summary-list">'+today+'</ol></div><div class="summary-tier"><h3>'+E(practice.get('steps_title','단계별 따라 하기'))+'</h3>'+steps+'</div></section>'
  sources=''.join(f'<li><a href="{E(s["url"],quote=True)}" target="_blank" rel="noopener">{E(s["label"])}</a></li>' for s in record['sources'])
- sections=[('lecture-overview','도입' if intro is not None else '핵심 요약')]+([('lecture-practice','실천 포인트')] if practice else [])+([('lecture-detail','상세 요약')] if detailed else [])+([('lecture-comment','타임스탬프')] if timed else [])+[('lecture-sources','출처')]
+ sections=[('lecture-overview','도입')]+([('lecture-detail','상세 요약')] if detailed else [])+([('lecture-comment','타임스탬프')] if timed else [])+[('lecture-sources','출처')]
  section_nav='<nav class="reading-nav" aria-label="이 강의 목차">'+''.join(f'<a href="#{target}">{label}</a>' for target,label in sections)+'</nav>'
- # Pages with `intro` open with one merged section; pages not yet migrated keep the key summary + practice layout.
- overview_html=intro_html(mini,record,youtube_url) if intro is not None else f'''<section id="lecture-overview" class="lecture-section"><span id="overview"></span><h2>핵심 요약</h2><div class="summary-tier"><span class="eyebrow">한 문장</span><p class="summary-lead">{E(mini['lead'])}</p></div><div class="summary-tier"><h3>핵심 세 가지</h3><ol class="summary-list">{''.join('<li>'+E(t)+'</li>' for t in mini['three'])}</ol></div></section>'''
- body=f'''<div class="site-shell"><nav class="breadcrumb" aria-label="현재 위치"><a href="../index.html">강의 목록</a><span aria-hidden="true">/</span><span>{title}</span></nav><main id="main" class="compact-lecture" data-layout="compact"><header class="summary-head"><h1>{title}</h1><p class="meta">{date_info}{E(row['duration'])} · {E(row.get("creator","출처 미기재"))} · {source_info}</p><div class="actions">{action}</div></header>{old}{overview_html}{practice_html}{second}<details class="source-disclosure" id="lecture-sources"><summary>출처와 편집자 주</summary><div class="notes-block"><h3>원본과 참고 자료</h3><ul>{sources}</ul></div>{editor}</details>{pager(prev,nxt)}</main></div>'''
+ overview_html=intro_html(mini,record,youtube_url)
+ body=f'''<div class="site-shell"><nav class="breadcrumb" aria-label="현재 위치"><a href="../index.html">강의 목록</a><span aria-hidden="true">/</span><span>{title}</span></nav><main id="main" class="compact-lecture" data-layout="compact"><header class="summary-head"><h1>{title}</h1><p class="meta">{date_info}{E(row['duration'])} · {E(row.get("creator","출처 미기재"))} · {source_info}</p><div class="actions">{action}</div></header>{old}{overview_html}{second}<details class="source-disclosure" id="lecture-sources"><summary>출처와 편집자 주</summary><div class="notes-block"><h3>원본과 참고 자료</h3><ul>{sources}</ul></div>{editor}</details>{pager(prev,nxt)}</main></div>'''
  body=body.replace('<div class="actions">'+action+'</div>','')
  img=row.get('image')
  hero=''
