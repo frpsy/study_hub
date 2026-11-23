@@ -85,3 +85,21 @@ test('home sort toggle can order by YouTube view count and shows the count only 
   await expect(page.locator('#lecture-list .lecture .views').first()).toBeHidden();
   await expect(page.locator('#views-note')).toBeHidden();
 });
+
+test('sleep search aliases and independent empty-state resets',async({page})=>{
+  await page.goto('/index.html');
+  const search=page.locator('#search');
+  await search.fill('불면증');
+  await expect(page.locator('[data-video-id="VUHrJZbpIjI"]')).toBeVisible();
+  await search.fill('잠이 안 와요');
+  await expect(page.locator('[data-video-id="VUHrJZbpIjI"]')).toBeVisible();
+  await page.locator('[data-value="명상"]').click();
+  await expect(page.locator('#empty')).toBeVisible();
+  await page.getByRole('button',{name:'주제 필터 해제'}).click();
+  await expect(search).toHaveValue('잠이 안 와요');
+  await expect(page.locator('[data-video-id="VUHrJZbpIjI"]')).toBeVisible();
+  await page.locator('[data-value="명상"]').click();
+  await page.getByRole('button',{name:'검색어 지우기'}).click();
+  await expect(search).toBeEmpty();
+  await expect(page.locator('#catalog-topic')).toHaveText('명상');
+});

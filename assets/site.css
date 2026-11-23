@@ -162,13 +162,6 @@ html{scroll-padding-top:var(--anchor-offset,100px)}
   
   .lecture{padding:16px}}
 
-/* Compact timeline preview, full text preserved for copying. */
-
-.lecture-section .timeline-toggle{min-height:var(--tap-target);border:1px solid var(--line);border-radius:var(--radius-control);padding:9px 14px;background:transparent;color:var(--accent);font-size:14px}
-@media(max-width:780px){.lecture-section .timeline-toggle{font-size:13px;padding:9px 12px}}
-
-/* Native closed details: a collapsed timeline never reserves the long pre height. */
-
 /* Small release information; no extra panels or fixed overlays. */
 .site-version{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
 .site-version a{color:var(--accent);margin-left:3px;text-decoration:underline}
@@ -609,13 +602,19 @@ a{color:var(--ink);text-decoration-color:var(--accent);text-decoration-thickness
 @media(max-width:780px){.site-footer-inner .theme-toggle{margin-left:0}}
 .source-disclosure ul{list-style:none;padding:0;margin:6px 0 14px}.source-disclosure li{border-bottom:1px solid var(--line)}.source-disclosure li a{display:block;padding:12px 0;line-height:1.7;overflow-wrap:anywhere}
 #lecture-comment{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:12px}#lecture-comment>*{grid-column:1/-1}#lecture-comment>#timeline{position:absolute;width:0;height:0}#lecture-comment>h2{grid-column:1;grid-row:1;margin:0}#lecture-comment>.actions{grid-column:2;grid-row:1;display:flex;flex-direction:row-reverse;align-items:center;gap:8px;margin:0}#lecture-comment .actions #status{margin:0;font-size:12px;white-space:nowrap}#lecture-comment .actions #copy{min-width:0;min-height:var(--tap-target);padding:0 14px;font-size:13px;font-weight:600;line-height:1;letter-spacing:.01em;color:var(--on-accent);background:var(--accent);border-color:var(--accent);border-radius:var(--radius-control);white-space:nowrap;transition:filter .15s ease,transform .15s ease}#lecture-comment .actions #copy:active{transform:scale(.97)}@media(hover:hover) and (pointer:fine){#lecture-comment .actions #copy:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent);filter:brightness(1.08)}}#lecture-comment .actions #copy:focus-visible{outline:2px solid var(--focus-color);outline-offset:2px}#lecture-comment>.timeline-box{grid-row:2;margin-top:14px}
-.lecture-section .timeline-box{display:block;position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.lecture-section .timeline-box>pre{margin:0;line-height:1.75;max-height:calc(1.75em*6 + 28px);overflow:hidden}
-.lecture-section .timeline-box::after{content:"눌러서 전체 보기  ▾";display:block;padding:10px 0 0;text-align:center;font-family:system-ui,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;font-size:13px;font-weight:600;line-height:1.4;color:var(--accent)}
-.lecture-section .timeline-toggle:checked+.timeline-box>pre{max-height:none;overflow:visible}
-.lecture-section .timeline-toggle:checked+.timeline-box::after{content:"눌러서 접기  ▴"}
-.lecture-section .timeline-toggle:focus-visible+.timeline-box{outline:2px solid var(--focus-color);outline-offset:4px;border-radius:12px}
-.lecture-section .timeline-toggle{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
+.lecture-section .timeline-box>summary{display:block;padding:0 0 8px;cursor:pointer;text-align:center;color:var(--accent);font-size:13px;font-weight:600;line-height:1.5}
+.lecture-section .timeline-box>summary::-webkit-details-marker{display:none}
+.lecture-section .timeline-box>summary::marker{content:""}
+.lecture-section .timeline-box>summary::after{display:none}
+.lecture-section .timeline-box>summary .timeline-preview{display:block;margin-bottom:8px;text-align:start;white-space:pre-wrap;color:var(--ink);font-weight:400;overflow-wrap:anywhere}
+.lecture-section .timeline-box .timeline-close-label,
+.lecture-section .timeline-box[open] .timeline-open-label,
+.lecture-section .timeline-box[open] .timeline-preview{display:none}
+.lecture-section .timeline-box[open] .timeline-close-label{display:inline}
+.lecture-section .timeline-box>pre{margin:8px 0 0;line-height:1.75;max-height:none;overflow:visible}
+.empty-actions{display:block;margin-top:8px}
+.empty-actions .btn{margin:4px}
+
 /* Reading refinement / v11 (2026-11-07). Same black·red·gray tokens; clearer reading order, calmer timestamps, lecture pager. */
 .summary-head{padding-bottom:4px}
 .summary-head h1{text-wrap:balance}
@@ -633,7 +632,7 @@ a{color:var(--ink);text-decoration-color:var(--accent);text-decoration-thickness
 .compact-lecture #lecture-overview .summary-list li:last-child{padding-bottom:0}
 .compact-lecture #lecture-overview .summary-list li:first-child::before{top:7px}
 .compact-lecture #lecture-overview .summary-list li::before{content:counter(point,decimal-leading-zero);position:absolute;left:0;top:17px;font-size:13px;font-weight:800;letter-spacing:.04em;color:var(--accent);font-variant-numeric:tabular-nums}
-.lecture-section .timeline-box>pre{font-family:system-ui,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;font-variant-numeric:tabular-nums;font-size:14px;letter-spacing:-.005em;background:var(--card-bg);border:1px solid var(--line);border-radius:var(--radius-card);padding:14px 16px}
+.lecture-section .timeline-box>pre,.lecture-section .timeline-preview{font-family:system-ui,-apple-system,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;font-variant-numeric:tabular-nums;font-size:14px;letter-spacing:-.005em;background:var(--card-bg);border:1px solid var(--line);border-radius:var(--radius-card);padding:14px 16px}
 .lecture-section .timeline-box>pre code{font:inherit}
 .lecture-pager{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:32px 0 0}
 .pager-link{display:flex;flex-direction:column;gap:6px;min-height:var(--tap-target);padding:16px 18px;border:1px solid var(--line);border-radius:var(--radius-card);background:var(--card-bg);text-decoration:none;color:var(--ink);transition:border-color var(--motion-fast) var(--ease-out)}
@@ -651,7 +650,7 @@ a{color:var(--ink);text-decoration-color:var(--accent);text-decoration-thickness
 @media(max-width:780px){
  .compact-lecture #lecture-overview .summary-tier>.summary-lead{font-size:16px;padding:14px 14px 14px 16px}
  .compact-lecture #lecture-overview .summary-list li{font-size:15px;padding-left:34px}
- .lecture-section .timeline-box>pre{font-size:13.5px;padding:12px 14px}
+ .lecture-section .timeline-box>pre,.lecture-section .timeline-preview{font-size:13.5px;padding:12px 14px}
  .lecture-pager{grid-template-columns:1fr}
  .pager-link.is-next{text-align:left;align-items:flex-start}
  .pager-link.is-empty{display:none}
@@ -763,7 +762,7 @@ html{scroll-padding-top:158px}
  html{scroll-padding-top:136px}
  .detail-body h3{scroll-margin-top:0}}
 @media(max-width:360px){.reading-nav a{font-size:11px;padding-inline:3px}.summary-head h1{font-size:26px}}
-@media print{.reading-nav{display:none}.lecture-section .timeline-box>pre{max-height:none!important;overflow:visible!important}.lecture-section .timeline-box::after{display:none}.intro-steps details{break-inside:avoid}.intro-steps details>summary::after{display:none}}
+@media print{.reading-nav{display:none}.lecture-section .timeline-box>pre{max-height:none!important;overflow:visible!important}.lecture-section .timeline-box>summary{display:none}.lecture-section .timeline-box:not([open])::details-content{content-visibility:visible;display:block}.intro-steps details{break-inside:avoid}.intro-steps details>summary::after{display:none}}
 
 /* v13 (2026-11-12): 상세 요약 소제목 목차와 긴 글 읽기 폭 */
 .detail-toc{margin:0 0 28px;padding:6px 20px;background:var(--card-bg);border:1px solid var(--line);border-radius:var(--radius-card)}

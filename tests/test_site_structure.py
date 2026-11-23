@@ -100,8 +100,8 @@ class TimestampSectionIsTextAndCopyOnly(unittest.TestCase):
         for gone in ('<iframe','video-embed','video-open','time-map','youtube-nocookie','time-scale'):
             self.assertNotIn(gone,html_,gone)
         section=re.search(r'<section id="lecture-comment".*?</section>',html_,re.S).group(0)
-        tags=re.findall(r'<(span|h2|div|button|input|label|pre|figure)\b',section)
-        self.assertEqual(tags,['span','h2','div','button','span','input','label','pre'],tags)
+        tags=re.findall(r'<(span|h2|div|button|details|summary|pre|figure)\b',section)
+        self.assertEqual(tags,['span','h2','div','button','span','details','summary','span','span','span','pre'],tags)
 
 class LectureLayoutRegression(unittest.TestCase):
     def test_missing_required_stage_is_rejected(self):

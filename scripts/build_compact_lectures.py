@@ -98,8 +98,9 @@ def render(row,record,mini,prev=None,nxt=None):
   second+=f'<section id="lecture-detail" class="lecture-section"><h2>상세 요약</h2><nav class="detail-toc" aria-label="상세 요약 소제목"><ol>{outline}</ol></nav><div class="detail-body">{blocks}</div></section>'
  if timed:
   timeline_text=E(record['timeline'])
+  preview=E('\n'.join(record['timeline'].splitlines()[:4]))
   actions.append('<a class="btn secondary" href="#lecture-comment">타임스탬프로 이동</a>')
-  second+=f'<section id="lecture-comment" class="lecture-section"><span id="timeline"></span><h2>타임스탬프</h2><div class="actions"><button id="copy" data-copy-target="comment" type="button">타임스탬프 복사</button><span id="status" role="status" aria-live="polite"></span></div><input type="checkbox" id="timeline-toggle" class="timeline-toggle" aria-label="타임스탬프 전체 펼치기"><label class="timeline-box" for="timeline-toggle"><pre id="comment" tabindex="0"><code>{timeline_text}</code></pre></label></section>'
+  second+=f'<section id="lecture-comment" class="lecture-section"><span id="timeline"></span><h2>타임스탬프</h2><div class="actions"><button id="copy" data-copy-target="comment" type="button">타임스탬프 복사</button><span id="status" role="status" aria-live="polite"></span></div><details class="timeline-box"><summary><span class="timeline-preview">{preview}</span><span class="timeline-open-label">전체 타임스탬프 보기</span><span class="timeline-close-label">타임스탬프 접기</span></summary><pre id="comment" tabindex="0"><code>{timeline_text}</code></pre></details></section>'
  action=''.join(actions)
  sources=''.join(f'<li><a href="{E(s["url"],quote=True)}" target="_blank" rel="noopener">{E(s["label"])}</a></li>' for s in record['sources'])
  sections=[('lecture-overview','핵심 요약')]+([('lecture-detail','상세 요약')] if detailed else [])+([('lecture-comment','타임스탬프')] if timed else [])+[('lecture-sources','출처')]
