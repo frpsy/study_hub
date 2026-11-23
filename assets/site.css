@@ -1045,3 +1045,26 @@ html.header-hidden .sidebar{top:12px}
 .practice-quote p{margin:0;font-size:calc(14px*var(--reading-scale));line-height:1.8;color:var(--muted)}
 .practice-list .practice-source{margin:4px 0 0}
 @media(max-width:780px){.practice-list>li{padding:14px 16px}.practice-cells>div{grid-template-columns:3em minmax(0,1fr);column-gap:10px}}
+
+/* 페이지 구조 개편(2026-11-23): 해볼 일 카드는 할 일이 주, 언제·확인은 보조. 하단 두 접힘은 하나로. 여백은 한 호흡으로 이어지게 맞춘다. */
+#lecture-overview .summary-tier{margin:18px 0}
+.compact-lecture #lecture-overview .summary-list li{padding-top:12px;padding-bottom:12px;line-height:1.75}
+.practice-list{gap:10px}
+.practice-list>li{padding:14px 16px}
+.practice-cells{gap:6px}
+.practice-cells>div{grid-template-columns:3.2em minmax(0,1fr);column-gap:10px}
+.practice-cells dt{font-size:calc(12px*var(--reading-scale));font-weight:600;color:var(--muted)}
+.practice-cells dd{font-size:calc(14px*var(--reading-scale));font-weight:450;line-height:1.7;color:var(--muted)}
+.practice-cells>div:nth-child(2) dt{color:var(--accent)}
+.practice-cells>div:nth-child(2) dd{font-size:calc(16px*var(--reading-scale));font-weight:650;line-height:1.65;color:var(--ink)}
+.practice-quote{margin:8px 0 0;padding-left:12px}
+.practice-quote p{font-size:calc(13px*var(--reading-scale));line-height:1.75}
+.practice-list .practice-source{margin:0;font-size:calc(12.5px*var(--reading-scale));font-weight:500}
+@media(max-width:780px){.practice-list>li{padding:12px 14px}.practice-cells>div{grid-template-columns:3em minmax(0,1fr);column-gap:8px}}
+.notes-block h3,.editor-notes>h3{font-size:15px;font-weight:650;margin:16px 0 6px;color:var(--ink)}
+.editor-notes{margin-top:14px;padding-top:2px;border-top:1px solid var(--line)}
+.editor-notes h4{font-size:13.5px;font-weight:650;margin:12px 0 4px;color:var(--ink)}
+.lecture-pager{margin-top:28px}
+.compact-lecture{padding-bottom:8px}
+.practice-quote .practice-source{display:inline;min-height:0;margin:0 0 0 4px;white-space:nowrap}
+

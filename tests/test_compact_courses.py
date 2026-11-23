@@ -103,7 +103,7 @@ class CompactCourseChecks(unittest.TestCase):
   self.assertEqual(validate(R),[])
 
 class EditorNoteChecks(unittest.TestCase):
- """본문에는 강의 내용만 둔다. 한계·보충은 맨 끝 접힌 ‘편집자 주’에만 있다(편집규칙.md 17절)."""
+ """본문에는 강의 내용만 둔다. 한계·보충은 맨 끝 접힌 ‘출처와 편집자 주’ 안의 ‘편집자 주’에만 있다(편집규칙.md 17절)."""
  BANNED=('[보충]','대조하지 않았','확인하지 못했','이 요약에서')
  def test_body_has_no_limits_or_supplement_markers(self):
   records=json.loads((R/'data/lecture_compact.json').read_text())
@@ -125,8 +125,11 @@ class EditorNoteChecks(unittest.TestCase):
    self.assertTrue(groups,vid)
    for group in groups:self.assertTrue(group['h'] and group['items'],vid)
    self.assertEqual(source.count('id="lecture-editor"'),1,vid)
-   self.assertIn('<summary>편집자 주</summary>',source)
-   self.assertNotIn('<details class="source-disclosure editor-notes" id="lecture-editor" open',source)
+   self.assertIn('<summary>출처와 편집자 주</summary>',source)
+   self.assertNotIn('<summary>편집자 주</summary>',source)                       # 두 접힘을 하나로 합쳤다
+   self.assertEqual(source.count('<details class="source-disclosure"'),1,vid)
+   self.assertNotIn('<details class="source-disclosure" id="lecture-sources" open',source)
+   self.assertIn('<h3>편집자 주</h3>',source)
    self.assertLess(source.index('id="lecture-sources"'),source.index('id="lecture-editor"'),vid)
    self.assertLess(source.index('id="lecture-editor"'),source.index('class="lecture-pager"'),vid)
 
@@ -226,7 +229,7 @@ class IntroChecks(unittest.TestCase):
   self.assertEqual(html_.count('class="practice-cells"'),2)
   for label in ('<dt>언제</dt>','<dt>할 일</dt>','<dt>확인</dt>'):self.assertIn(label,html_)
   self.assertEqual(html_.count('<dt>확인</dt>'),1)   # 확인 칸이 없는 항목에는 빈 칸을 그리지 않는다
-  self.assertIn('<blockquote class="practice-quote"><p>“숨을 고르세요”</p></blockquote>',html_)
+  self.assertRegex(html_,r'<blockquote class="practice-quote"><p>“숨을 고르세요” <a class="practice-source"[^>]*>영상 1:05부터 보기 ↗</a></p></blockquote>')   # 링크는 인용 줄 끝에 둔다
   self.assertIn('v=abcdefghijk&amp;t=65s',html_)
   self.assertIn('<li><strong>라벨</strong>. 둘째 주장이다.</li>',html_)
   self.assertEqual(html_.count('<details><summary>'),2)
