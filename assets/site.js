@@ -79,6 +79,8 @@
     const clearButton=document.querySelector('[data-clear-for="'+input.id+'"]');
     const chips=[...document.querySelectorAll('[data-filter-for="topic"]')];
     const persist=input.dataset.persistQuery==='true';
+    const emptySearch=empty?.querySelector('[data-clear-search]');
+    const emptyTopic=empty?.querySelector('[data-clear-topic]');
     let topic='';
     const filter=(saveURL=false)=>{
       const words=input.value.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);let shown=0;
@@ -91,6 +93,8 @@
       if(count)count.textContent=shown+'개 '+input.dataset.noun;
       if(empty)empty.hidden=shown!==0;
       if(clearButton)clearButton.hidden=!input.value;
+      if(emptySearch)emptySearch.hidden=!words.length;
+      if(emptyTopic)emptyTopic.hidden=!topic;
       if(saveURL && persist){
         const url=new URL(location.href);
         if(input.value.trim())url.searchParams.set('q',input.value);else url.searchParams.delete('q');
@@ -114,7 +118,10 @@
       window.addEventListener('pageshow',restore);
       window.addEventListener('popstate',restore);
     }
-    clearButton?.addEventListener('click',()=>{input.value='';filter(true);input.focus()});
+    const clearSearch=()=>{input.value='';filter(true);input.focus()};
+    clearButton?.addEventListener('click',clearSearch);
+    emptySearch?.addEventListener('click',clearSearch);
+    emptyTopic?.addEventListener('click',()=>{topic='';filter(true);chips.find(button=>!button.dataset.value)?.focus()});
     chips.forEach(button=>button.addEventListener('click',()=>{
       const value=button.dataset.value||'';
       topic=topic===value?'':value;

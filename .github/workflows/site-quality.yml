@@ -26,14 +26,9 @@ jobs:
         env:
           PR_BODY: ${{ github.event.pull_request.body }}
         run: python3 scripts/check_pr_impact.py
-      - name: Generate public pages and ensure outputs are committed
-        run: |
-          python3 scripts/content_registry.py
-          python3 scripts/build_library.py
-          python3 scripts/build_compact_lectures.py
-          git diff --exit-code -- index.html lectures/
       - name: Check design contract, source links and generated output
         run: |
+          python3 scripts/content_registry.py
           python3 scripts/validate_design_system.py
           python3 scripts/validate_site.py
           python3 scripts/build_library.py --check
@@ -42,43 +37,55 @@ jobs:
         run: |
           python3 -m unittest discover -s tests -p 'test_*.py'
           node --test tests/test_*.cjs
-  browser:
-    # quality와 동시에 시작한다(둘 다 통과해야 병합된다). 기다리지 않아 전체 시간이 줄어든다.
+  browser-suite:
+    name: Browser suite (${{ matrix.suite }})
     runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - suite: chromium-1
+            engine: chromium
+            args: --shard=1/2
+          - suite: chromium-2
+            engine: chromium
+            args: --shard=2/2
+          - suite: webkit
+            engine: webkit
+            args: tests/pwa.spec.cjs
+    env:
+      BROWSER_NAME: ${{ matrix.engine }}
+      PLAYWRIGHT_VERSION: '1.56.1'
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-      - name: Cache Playwright browsers and npm downloads
-        uses: actions/cache@v4
+      - uses: actions/cache@v4
         with:
           path: |
             ~/.cache/ms-playwright
             ~/.npm
-          key: playwright-1.56.1-${{ runner.os }}-v1
-      - name: Install Playwright browser
+          key: playwright-${{ env.PLAYWRIGHT_VERSION }}-${{ runner.os }}-${{ runner.arch }}-ubuntu24-${{ matrix.engine }}
+      - name: Install Playwright and browser dependencies
         run: |
-          npm install --no-save --no-audit --no-fund --prefer-offline @playwright/test@1.56.1
-          # 브라우저 파일은 캐시에서 온다. 캐시가 없을 때만 내려받는다.
-          if [ ! -d ~/.cache/ms-playwright/chromium-* ] || [ ! -d ~/.cache/ms-playwright/webkit-* ]; then
-            npx playwright install chromium webkit
-          fi
-          # 시스템 패키지는 한 번만 설치한다(크로미움과 웹킷 함께).
-          npx playwright install-deps chromium webkit
-      - name: Check phone and desktop layouts and clipboard
-        run: |
-          npx playwright test --config=tests/playwright.config.cjs
-          BROWSER_NAME=webkit npx playwright test --config=tests/playwright.config.cjs tests/pwa.spec.cjs
+          npm install --no-save --no-audit --no-fund --prefer-offline "@playwright/test@$PLAYWRIGHT_VERSION"
+          npx playwright install --with-deps "$BROWSER_NAME"
+      - name: Run browser tests
+        run: npx playwright test --config=tests/playwright.config.cjs ${{ matrix.args }}
       - name: Upload browser failure evidence
         if: failure()
         uses: actions/upload-artifact@v4
         with:
-          name: browser-failure-evidence
+          name: browser-failure-${{ matrix.suite }}
           path: |
             test-results/
             playwright-report/
           if-no-files-found: ignore
+
+  browser:
+    runs-on: ubuntu-24.04
+    needs: browser-suite
+    if: ${{ always() }}
+    steps:
+      - name: Require all browser suites to pass
+        env:
+          RESULT: ${{ needs.browser-suite.result }}
+        run: test "$RESULT" = success

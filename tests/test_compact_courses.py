@@ -38,12 +38,8 @@ class CompactCourseChecks(unittest.TestCase):
    self.assertEqual(html.unescape(text),record['timeline'])
    self.assertEqual(source.count('id="comment"'),1)
    self.assertEqual(source.count('data-copy-target="comment"'),1)
-   self.assertIn('<label class="timeline-box" for="timeline-toggle"><pre id="comment"',source)
-   self.assertIn('type="checkbox" id="timeline-toggle"',source)
-   for gone in ('전체 타임스탬프 보기','timeline-teaser','timeline-disclosure'):
-    self.assertNotIn(gone,source)
-   self.assertIn(html.escape("\n".join(record["timeline"].splitlines()[:3])),source)
-   self.assertNotIn('class="timeline-preview"',source)
+   self.assertIn('<details class="timeline-box">',source)
+   self.assertIn('<span class="timeline-preview">'+html.escape("\n".join(record["timeline"].splitlines()[:4]))+'</span>',source)
    # 본문 이미지는 대표 이미지(figure.lecture-hero) 한 장과 상세 요약 안 이미지(figure.detail-figure, 최대 3장)만 허용한다.
    main_html=source[source.index('<main id="main"'):]
    hero=main_html.count('<figure class="lecture-hero"><img ');inline=main_html.count('<figure class="detail-figure"><img ')
