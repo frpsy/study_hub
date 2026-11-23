@@ -46,15 +46,15 @@ def check_intro(vid, record):
  for b in intro:
   if not b.get('h') or not b.get('items'):raise ValueError(f'{vid}: every intro block needs a heading and items')
   for item in b['items']:
-   if b['kind']=='practice' and not all(item.get(k) for k in ('when','do','check')):raise ValueError(f'{vid}: practice items need when, do and check')
+   if b['kind']=='practice' and not all(item.get(k) for k in ('when','do')):raise ValueError(f'{vid}: practice items need when and do (check is optional)')
    if 'detail_index' in item and not 0<=item['detail_index']<len(record.get('detail',[])):raise ValueError(f'{vid}: detail_index out of range')
 def point_html(item):
  """A point is a sentence (str) or a labelled sentence ({"l": label, "t": sentence})."""
  if isinstance(item,str):return '<li>'+E(item)+'</li>'
  return '<li><strong>'+E(item['l'])+'</strong>. '+E(item['t'])+'</li>'
 def action_html(item, record, youtube_url):
- """One thing to try: when / what to do / how to check, the lecturer's own words and a link to the moment."""
- cells=''.join(f'<div><dt>{label}</dt><dd>{E(item[key])}</dd></div>' for key,label in (('when','언제'),('do','할 일'),('check','확인')))
+ """One thing to try: when / what to do, plus how to check only when the lecturer gave a criterion, and the lecturer's own words and a link to the moment."""
+ cells=''.join(f'<div><dt>{label}</dt><dd>{E(item[key])}</dd></div>' for key,label in (('when','언제'),('do','할 일'),('check','확인')) if item.get(key))
  quote=('<blockquote class="practice-quote"><p>“'+E(item['quote'])+'”</p></blockquote>') if item.get('quote') else ''
  return '<li><dl class="practice-cells">'+cells+'</dl>'+quote+source_link(item,record,youtube_url)+'</li>'
 def intro_block_html(block, record, youtube_url):

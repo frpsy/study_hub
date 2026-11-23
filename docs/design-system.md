@@ -178,6 +178,6 @@
 - **방향:** 핵심 세 가지와 실천 포인트를 합친 첫 섹션이다. 제목은 `도입`(`id="lecture-overview"`)이고 목차 링크도 `도입`이다. 옛 `#lecture-practice` 링크가 계속 도착하도록 같은 이름의 빈 앵커(`span.legacy-anchor`)를 헤더 아래에 둔다. 아직 옮기지 않은 강의는 옛 ‘핵심 요약’과 ‘실천 포인트’ 두 섹션 그대로이다.
 - **구성:** 한 문장(`.summary-lead`) → 블록들(`.summary-tier.intro-block.intro-<kind>`). 블록의 종류·개수·순서는 강의 데이터(`intro`)가 정하고, 블록 제목은 `h3`이다.
   - `points`: 기존 핵심 목록과 같은 점 목록(`.summary-list`). 구분을 이름 붙인 항목은 굵은 라벨 뒤에 문장이 온다.
-  - `practice`: 카드 목록(`.practice-list`). 카드 하나에 `언제·할 일·확인` 세 줄(`dl.practice-cells`, 라벨은 강조색 13px, 본문 15px), 강연자 인용(`blockquote.practice-quote`, 14px, 왼쪽 선), 영상 시각 링크(`.practice-source`)가 순서대로 있다. 다른 강연자는 영상 대신 상세 요약 소제목으로 연결한다.
+  - `practice`: 카드 목록(`.practice-list`). 카드 하나에 `언제·할 일` 두 줄과, 있을 때만 `확인` 한 줄(`dl.practice-cells`, 라벨은 강조색 13px, 본문 15px), 강연자 인용(`blockquote.practice-quote`, 14px, 왼쪽 선), 영상 시각 링크(`.practice-source`)가 순서대로 있다. 다른 강연자는 영상 대신 상세 요약 소제목으로 연결한다.
   - `steps`: 기존 실천 포인트의 단계 펼침(`details`)을 그대로 쓴다(`.intro-steps`가 같은 규칙을 받는다). 설명 펼치기와 원본 이동은 별도 동작이다.
 - 글자 크기는 읽기 크기 설정(`--reading-scale`)을 따르고, 색은 토큰만 쓴다. 320·390·1280px, 라이트·다크에서 가로 넘침이 없어야 하며 `tests/browser-smoke.spec.cjs`가 확인한다.
