@@ -73,33 +73,35 @@ class TimelineDisplayRegression(unittest.TestCase):
             for section in sections:
                 self.assertNotRegex(section,r'<(?:ol|ul)\b',page.name)
 
-class TimeMapSeekLinks(unittest.TestCase):
-    def test_time_map_shapes_link_to_video_time(self):
-        import re
+class TimestampSectionIsTextAndCopyOnly(unittest.TestCase):
+    """타임스탬프 구간은 원문과 복사 버튼만 둔다(2026-11-23 사용자 요청). 영상 임베드와 구간 막대는 두지 않는다."""
+    def test_no_embed_or_time_map_anywhere(self):
         root=Path(__file__).resolve().parents[1]
-        checked=0
+        timed=0
         for page in (root/'lectures').glob('*.html'):
             source=page.read_text(encoding='utf-8')
-            if 'class="time-map"' not in source:
-                continue
-            svg=re.search(r'<figure class="time-map"><svg.*?</svg>',source,re.S).group(0)
-            shapes=len(re.findall(r'<rect class="(?:seg seg-\d|mark)"',svg))
-            links=re.findall(r'<a href="[^"]+&amp;t=\d+s" target="_blank" rel="noopener" aria-label="[^"]+">',svg)
-            if '<a ' in svg:
-                self.assertEqual(len(links),shapes,page.name)
-                checked+=1
-        self.assertGreater(checked,0)
+            for gone in ('<iframe','video-embed','video-open','class="time-map"','youtube-nocookie','time-scale'):
+                self.assertNotIn(gone,source,page.name+': '+gone)
+            if 'id="lecture-comment"' in source:
+                timed+=1
+                self.assertIn('data-copy-target="comment"',source,page.name)
+        self.assertGreater(timed,0)
 
-class VideoEmbedPlaceholder(unittest.TestCase):
-    def test_timed_lectures_offer_lazy_embed_without_iframe(self):
-        import re
+    def test_generator_output_has_only_title_copy_and_text(self):
+        """체크인된 HTML이 아니라 생성기 출력 자체를 본다."""
+        import re,sys
         root=Path(__file__).resolve().parents[1]
-        for page in (root/'lectures').glob('*.html'):
-            source=page.read_text(encoding='utf-8')
-            self.assertNotIn('<iframe',source,page.name)
-            if 'class="time-map"' in source and 'youtube.com/watch?v=' in source:
-                m=re.search(r'<div class="video-embed" data-video-id="([A-Za-z0-9_-]{11})"><a class="video-open" href="[^"]+&amp;t=0s"',source)
-                self.assertIsNotNone(m,page.name)
+        sys.path.insert(0,str(root/'scripts'))
+        from build_compact_lectures import render
+        row={'id':'abcdefghijk','title':'시험 강의','duration':'1시간','creator':'김주환','date':'2026-11-23','video_url':'https://www.youtube.com/watch?v=abcdefghijk'}
+        record={'aliases':[],'sources':[],'editor':[],'timeline':'■ 핵심 세션\n0:00 시작\n30:00 중간\n—상세—\n■ 1. 첫 장\n0:00 a',
+                'intro':[{'kind':'points','h':'핵심','items':['주장이다.']}]}
+        html_=render(row,record,{'lead':'“한 문장이다.”'})
+        for gone in ('<iframe','video-embed','video-open','time-map','youtube-nocookie','time-scale'):
+            self.assertNotIn(gone,html_,gone)
+        section=re.search(r'<section id="lecture-comment".*?</section>',html_,re.S).group(0)
+        tags=re.findall(r'<(span|h2|div|button|input|label|pre|figure)\b',section)
+        self.assertEqual(tags,['span','h2','div','button','span','input','label','pre'],tags)
 
 class LectureLayoutRegression(unittest.TestCase):
     def test_missing_required_stage_is_rejected(self):
