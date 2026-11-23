@@ -32,8 +32,9 @@ class CanonicalContentRegression(unittest.TestCase):
 
     def test_archived_manuscripts_are_kept_and_not_published_data(self):
         archive=ROOT/"docs/archive/manuscripts"
-        self.assertEqual(set(load_json(archive/"summaries.json")),set(load_json(ROOT/"data/mini_courses.json")))
-        self.assertEqual(set(load_json(archive/"mini-course-extras.json")),set(load_json(ROOT/"data/mini_courses.json")))
+        # 2026-11-23 이후 새 강의는 summaries를 만들지 않으므로, 보관본은 현재 mini 강의의 부분집합이다.
+        self.assertLessEqual(set(load_json(archive/"summaries.json")),set(load_json(ROOT/"data/mini_courses.json")))
+        self.assertLessEqual(set(load_json(archive/"mini-course-extras.json")),set(load_json(ROOT/"data/mini_courses.json")))
         self.assertFalse((ROOT/"data/summaries.json").exists())
 
     def test_catalog_has_unique_ids_and_required_metadata(self):
