@@ -1055,3 +1055,26 @@ html.header-hidden .sidebar{top:12px}
 .compact-lecture{padding-bottom:8px}
 .practice-quote .practice-source{display:inline;min-height:0;margin:0 0 0 4px;white-space:nowrap}
 
+
+/* 강의 목록과 핵심 요약의 읽는 순서 */
+.home-main .catalog-intro{margin-bottom:20px}
+.today-line{margin-bottom:16px}
+.today-line .eyebrow{margin-bottom:6px}
+.today-line .today-source{margin-top:6px}
+.catalog-order{flex-wrap:wrap;gap:4px 12px}
+.catalog-results{margin:0;color:var(--muted)}
+.catalog-results strong{color:var(--ink)}
+.home-main .lecture{padding:16px 0 18px}
+.home-main .lecture h2{margin:0 0 4px}
+.home-main .lecture .card-lead{margin-top:6px}
+.compact-lecture .summary-head{margin-bottom:14px}
+.compact-lecture .summary-head h1{margin-bottom:8px}
+.compact-lecture #lecture-overview .summary-tier{margin:12px 0;border-bottom:0}
+.compact-lecture #lecture-overview .intro-points .summary-list,
+.compact-lecture #lecture-overview .intro-quote{max-width:68ch}
+.compact-lecture #lecture-overview .intro-points .summary-list li{padding-top:3px;padding-bottom:3px;border:0;margin-bottom:0}
+@media(max-width:780px){
+ .home-main .catalog-intro{margin-bottom:14px}
+ .today-line{margin-bottom:12px}
+ .home-main .lecture{padding:14px 0 16px}
+}

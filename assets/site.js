@@ -75,6 +75,7 @@
     const target=document.querySelector(input.dataset.filterInput);if(!target)return;
     const cards=[...target.querySelectorAll('[data-search]')];
     const count=document.getElementById(input.dataset.count),empty=document.getElementById(input.dataset.empty);
+    const topicLabel=target.querySelector('#catalog-topic');
     const clearButton=document.querySelector('[data-clear-for="'+input.id+'"]');
     const chips=[...document.querySelectorAll('[data-filter-for="topic"]')];
     const persist=input.dataset.persistQuery==='true';
@@ -86,6 +87,7 @@
         card.hidden=!words.every(word=>hay.includes(word))||(topic!==''&&card.dataset.topic!==topic);
         if(!card.hidden)shown++;
       });
+      if(topicLabel)topicLabel.textContent=topic||'전체';
       if(count)count.textContent=shown+'개 '+input.dataset.noun;
       if(empty)empty.hidden=shown!==0;
       if(clearButton)clearButton.hidden=!input.value;

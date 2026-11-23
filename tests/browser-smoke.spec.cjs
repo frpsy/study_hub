@@ -226,7 +226,7 @@ test('a lecture card opens a page with the intro, detail summary and timestamps'
   await page.locator('#lecture-list [data-video-id="affirmation-20261101"]').click();
   await expect(page).toHaveURL(/\/lectures\/affirmation-20261101\.html$/);
   await expect(page.locator('main .lecture-section')).toHaveCount(3);
-  await expect(page.locator('#lecture-overview>h2')).toHaveText('도입');
+  await expect(page.locator('#lecture-overview>h2')).toHaveText('핵심 요약');
   await expect(page.locator('#lecture-detail>h2')).toHaveText('상세 요약');
   await expect(page.locator('#lecture-overview .intro-points li')).toHaveCount(3);
   await expect(page.locator('#lecture-overview .intro-steps details')).toHaveCount(4);
@@ -276,7 +276,7 @@ test('every lecture has a valid intro and source navigation',async({page})=>{
   for(const row of studyLectures){
     await page.goto('/lectures/'+row.id+'.html');
     // 도입 형식: 블록의 종류와 개수는 강의 내용이 정한다. 구조와 출처 링크만 본다.
-    await expect(page.locator('#lecture-overview>h2')).toHaveText('도입');
+    await expect(page.locator('#lecture-overview>h2')).toHaveText('핵심 요약');
     await expect(page.locator('#lecture-overview .intro-points li').first()).toBeVisible();
     await expect(page.locator('#lecture-practice')).toHaveCount(1);
     await expect(page.locator('section#lecture-practice')).toHaveCount(0);
@@ -307,7 +307,7 @@ test('reading navigation and disclosures work on small screens without scripts',
   const context=await browser.newContext({viewport:{width:320,height:760},javaScriptEnabled:false,reducedMotion:'reduce'});
   const page=await context.newPage();
   await page.goto('/lectures/izYj8g-j00U.html');
-  await page.getByRole('navigation',{name:'이 강의 목차'}).getByRole('link',{name:'도입'}).click();
+  await page.getByRole('navigation',{name:'이 강의 목차'}).getByRole('link',{name:'핵심 요약'}).click();
   await expect(page).toHaveURL(/#lecture-overview$/);
   // 도입의 해볼 일은 JS 없이 보이고, 영상 시각 링크도 바로 누를 수 있어야 한다.
   await expect(page.locator('#lecture-overview .practice-list>li').first()).toBeVisible();
@@ -322,8 +322,8 @@ test('reading navigation tracks sections and source disclosure opens',async({bro
   await page.goto('/lectures/izYj8g-j00U.html');
   if(process.env.STUDY_SCREENSHOT_DIR)await page.screenshot({path:require('node:path').join(process.env.STUDY_SCREENSHOT_DIR,'study-hub-mobile.png')});
   const nav=page.getByRole('navigation',{name:'이 강의 목차'});
-  await nav.getByRole('link',{name:'도입'}).click();
-  await expect(nav.getByRole('link',{name:'도입'})).toHaveAttribute('aria-current','location');
+  await nav.getByRole('link',{name:'핵심 요약'}).click();
+  await expect(nav.getByRole('link',{name:'핵심 요약'})).toHaveAttribute('aria-current','location');
   const geometry=await page.evaluate(()=>({heading:document.querySelector('#lecture-overview>h2').getBoundingClientRect().top,nav:document.querySelector('.reading-nav').getBoundingClientRect().bottom}));
   // 섹션은 목차 아래 선에 붙는다(다른 목차 테스트와 같은 2px 허용). 제목이 목차 아래로 가려지지 않는지 본다.
   expect(geometry.heading).toBeGreaterThanOrEqual(geometry.nav-2);
@@ -470,7 +470,7 @@ test('section anchors sit flush under the reading nav and the current section fo
     const page=await context.newPage();
     await page.goto('/lectures/ZCty0wvogDo.html');
     const nav=page.getByRole('navigation',{name:'이 강의 목차'});
-    for(const [id,name] of [['lecture-overview','도입'],['lecture-detail','상세 요약'],['lecture-comment','타임스탬프']]){
+    for(const [id,name] of [['lecture-overview','핵심 요약'],['lecture-detail','상세 요약'],['lecture-comment','타임스탬프']]){
       await nav.getByRole('link',{name}).click();
       await page.waitForTimeout(150);
       const g=await page.evaluate(id=>({section:document.getElementById(id).getBoundingClientRect().top,nav:document.querySelector('.reading-nav').getBoundingClientRect().bottom,atBottom:innerHeight+scrollY>=document.documentElement.scrollHeight-2}),id);
@@ -519,9 +519,9 @@ test('intro section merges key points and practice and fits small screens',async
     const context=await browser.newContext({viewport:{width,height:844},reducedMotion:'reduce'});
     const page=await context.newPage();
     await page.goto('/lectures/chance-acceptance-20240526.html');
-    await expect(page.locator('main .lecture-section').first().locator('h2')).toHaveText('도입');
+    await expect(page.locator('main .lecture-section').first().locator('h2')).toHaveText('핵심 요약');
     await expect(page.locator('#lecture-overview h3')).toHaveText(['우연을 받아들인다는 것','해볼 만한 일']);
-    await expect(page.getByRole('navigation',{name:'이 강의 목차'}).getByRole('link',{name:'도입'})).toBeVisible();
+    await expect(page.getByRole('navigation',{name:'이 강의 목차'}).getByRole('link',{name:'핵심 요약'})).toBeVisible();
     await expect(page.getByRole('navigation',{name:'이 강의 목차'}).getByRole('link',{name:'실천 포인트'})).toHaveCount(0);
     expect(await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(1);
     const m=await page.evaluate(()=>{
