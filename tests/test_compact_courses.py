@@ -207,7 +207,7 @@ class IntroChecks(unittest.TestCase):
   self.assertEqual(html_.count('<dt>확인</dt>'),1)   # 확인 칸이 없는 항목에는 빈 칸을 그리지 않는다
   self.assertRegex(html_,r'<blockquote class="practice-quote"><p>“숨을 고르세요” <a class="practice-source"[^>]*>영상 1:05부터 보기 ↗</a></p></blockquote>')   # 링크는 인용 줄 끝에 둔다
   self.assertIn('v=abcdefghijk&amp;t=65s',html_)
-  self.assertIn('<li><strong>라벨</strong>. 둘째 주장이다.</li>',html_)
+  self.assertIn('<li><strong class="point-label">라벨</strong>둘째 주장이다.</li>',html_)
   self.assertEqual(html_.count('<details><summary>'),2)
   self.assertEqual(html_.count('class="summary-tier intro-block'),3)
   only=dict(record,intro=record['intro'][:1]);short=render(row,only,{'lead':'“한 문장이다.”'})

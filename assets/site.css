@@ -1056,6 +1056,8 @@ html.header-hidden .sidebar{top:12px}
 .practice-quote .practice-source{display:inline;min-height:0;margin:0 0 0 4px;white-space:nowrap}
 
 
+/* 라벨이 있는 항목: 라벨은 굵은 한 줄, 설명은 그 아래 (2026-11-23 사용자 요청) */
+.point-label{display:block;font-weight:700;margin:0 0 2px}
 /* 강의 목록과 핵심 요약의 읽는 순서 */
 .home-main .catalog-intro{margin-bottom:20px}
 .today-line{margin-bottom:16px}
