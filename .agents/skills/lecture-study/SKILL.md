@@ -30,7 +30,7 @@ description: 내면의 서재(frpsy/study_hub)에 강의를 추가하거나 핵�
 ## 김주환 새 강의 만드는 법 (기준 예시: `peaceful-life-live`)
 - 문체는 `docs/kimjuhwan-style.md`를 따른다. 데이터 형식은 `data/lecture_compact.json`·`mini_courses.json`·`summaries.json`의 `peaceful-life-live` 항목을 그대로 본뜬다(타임스탬프 → 상세 요약 소제목 8개 → 실천 포인트 순으로 쓰면 수월하다).
 - 순서: 설명란·메타데이터(제목·게시일·길이) 확인 → 자막 전 구간 읽기 → 확인할 항목(고유명사·번역·계보·수치) 목록 → 웹 검색으로 실제 열어 본 출처만 `[보충]` → 쓰기 → 휴머나이저식 문장 검수 → 생성·검증.
-- `intro`는 필수다(19절). `points`(1~4개)는 항상 쓰고, `practice`(1~3개, 언제·할 일·확인과 `t`·`quote`)는 강연자가 청중에게 직접 권했거나 점검 기준으로 말한 대목이 있을 때만 쓴다. 개수를 3개에 맞추지 않는다. 강연에 없는 처방·기간·수치·신체 부위를 만들지 않는다. 시각과 인용은 자막 `grep`으로 확인하고, 인용은 자막 낱말만 쓴다(AI가 준 시각·인용은 틀릴 수 있다). 근거는 `study-audits`의 `intro_check`에 적는다.
+- `intro`는 필수다(19절). `points`(1~4개)는 항상 쓰고, `practice`(1~3개, 언제·할 일과 `t`·`quote`, 확인은 강연자가 점검 기준을 말했을 때만)는 강연자가 청중에게 직접 권했거나 점검 기준으로 말한 대목이 있을 때만 쓴다. 개수를 3개에 맞추지 않는다. 강연에 없는 처방·기간·수치·신체 부위를 만들지 않는다. 시각과 인용은 자막 `grep`으로 확인하고, 인용은 자막 낱말만 쓴다(AI가 준 시각·인용은 틀릴 수 있다). 근거는 `study-audits`의 `intro_check`에 적는다.
 - 확인하지 못한 값(방송 날짜, 영상 길이, 번역 귀속 등)은 비우거나 "약"으로 쓰고 `note`·`study-audits/`·PR 남은 위험에 적는다.
 
 ## 자주 놓치는 것
@@ -49,7 +49,7 @@ description: 내면의 서재(frpsy/study_hub)에 강의를 추가하거나 핵�
 
 ## 자주 걸리는 검사
 - `tests/test_korean_leads.py`: lead는 문장부호 1개, ‘다.’로 끝, 55–170자, 생성 HTML과 일치.
-- `tests/test_compact_courses.py`: 옛 형식의 three는 3개·‘다.’ 종결·머리말 금지. `intro`가 있으면 `three`·`practice` 금지, 블록 1~3개(같은 종류 중복 금지, `points` 필수, 제목에 개수 금지), 해볼 일은 세 칸과 `t`·`quote` 필수이고 `quote`의 낱말이 그 시각의 자막에 있어야 한다.
+- `tests/test_compact_courses.py`: 옛 형식의 three는 3개·‘다.’ 종결·머리말 금지. `intro`가 있으면 `three`·`practice` 금지, 블록 1~3개(같은 종류 중복 금지, `points` 필수, 제목에 개수 금지), 해볼 일은 `when`·`do`·`t`·`quote` 필수(`check`는 선택, 있으면 ‘다.’ 종결·80자 이내)이고 `quote`의 낱말이 그 시각의 자막에 있어야 한다.
 - `tests/test_caption_terms.py`: 용어집의 ‘점검할 표현’(배경자, 개별적인 자 등)과 음절이 빠진 ‘자’가 공개 본문에 남으면 실패.
 - `tests/test_lecture_images.py`: 대표·본문 이미지의 개수(본문 3장 이하), 450KB 이하, alt, 크기, 순서.
 - Playwright: 한 문장 글자 ≤17px, 목록 ≤16px, 제목 위계 h1>h2>h3, 가로 넘침 없음.

@@ -287,7 +287,9 @@ test('every lecture offers practice and valid source navigation',async({page})=>
       expect(count).toBeLessThanOrEqual(3);
       for(let i=0;i<count;i++){
         const item=items.nth(i);
-        await expect(item.locator('.practice-cells dt')).toHaveText(['언제','할 일','확인']);
+        const labels=await item.locator('.practice-cells dt').allTextContents();
+        expect(labels.slice(0,2)).toEqual(['언제','할 일']);
+        expect([2,3]).toContain(labels.length);   // 확인 칸은 강연자가 말했을 때만 있다
         const source=item.locator('.practice-source');
         await expect(source).toBeVisible();
         if(row.creator==='김주환'){

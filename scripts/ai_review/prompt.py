@@ -38,7 +38,7 @@ def _intro_fields(blocks: list) -> list[tuple[str, str]]:
                 else:
                     out += [(f"{base}.l", item["l"]), (f"{base}.t", item["t"])]
             elif block["kind"] == "practice":
-                out += [(f"{base}.{k}", item[k]) for k in ("when", "do", "check")]
+                out += [(f"{base}.{k}", item[k]) for k in ("when", "do", "check") if k in item]
             else:
                 out.append((f"{base}.h", item.get("h", "")))
                 out += [(f"{base}.b[{j}]", t) for j, t in enumerate(item.get("b", []))]

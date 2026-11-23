@@ -181,10 +181,11 @@ class IntroChecks(unittest.TestCase):
     elif kind=='practice':
      self.assertTrue(1<=len(items)<=3,vid)
      for item in items:
-      self.assertTrue(set(item)>={'when','do','check'},vid)
+      self.assertTrue(set(item)>={'when','do'},vid)   # 확인(check)은 강연자가 점검 기준을 말했을 때만 둔다
       self.assertTrue(set(item)<={'when','do','check','quote','t','detail_index'},vid)
       self.assertTrue(item['when'] and len(item['when'])<=45 and not item['when'].endswith('.'),vid+': '+item['when'])
-      for key in ('do','check'):self.assertTrue(item[key].endswith('다.') and len(item[key])<=80,vid+': '+item[key])
+      for key in ('do','check'):
+       if key in item:self.assertTrue(item[key].endswith('다.') and len(item[key])<=80,vid+': '+item[key])
       if kim:
        self.assertRegex(item['t'],STAMP,vid);self.assertNotIn('detail_index',item,vid)
        self.assertTrue(15<=len(item['quote'])<=170,vid+': '+item['quote'])   # 김주환 강의는 강연자의 말을 인용으로 남긴다
@@ -217,17 +218,30 @@ class IntroChecks(unittest.TestCase):
        found=window.find(token,pos)
        self.assertGreaterEqual(found,0,f"{row['id']} {item['t']}: ‘{word}’가 그 시각의 자막에 없거나 순서가 다르다")
        pos=found+len(token)
+ def test_practice_quotes_do_not_repeat_the_lead(self):
+  """도입에서 같은 말을 두 번 보이지 않는다: 한 문장(lead)과 12자 이상 겹치는 인용은 쓰지 않는다."""
+  norm=lambda x:re.sub(r'[^0-9A-Za-z가-힣]','',x)
+  minis=json.loads((R/'data/mini_courses.json').read_text())
+  for row,record in self.intro_lectures():
+   lead=norm(minis[row['id']]['lead'])
+   for block in record['intro']:
+    if block['kind']!='practice':continue
+    for item in block['items']:
+     quote=norm(item['quote'])
+     overlap=[lead[i:i+12] for i in range(max(0,len(lead)-11)) if lead[i:i+12] in quote]
+     self.assertFalse(overlap,f"{row['id']} {item['t']}: 인용이 한 문장과 겹친다 ‘{overlap[:1]}’")
  def test_every_block_kind_renders(self):
   """합성 기록으로 세 블록이 모두 기대한 HTML이 되는지 본다(실제 강의에는 블록이 일부만 있다)."""
   from build_compact_lectures import render
   row={'id':'abcdefghijk','title':'시험 강의','duration':'10분','creator':'김주환','date':'2026-11-22'}
   record={'aliases':[],'sources':[{'label':'원본','url':'https://example.com/'}],'editor':[],'timeline':'■ 핵심 세션\n0:00 시작',
    'intro':[{'kind':'points','h':'핵심','items':['첫째 주장이다.',{'l':'라벨','t':'둘째 주장이다.'}]},
-    {'kind':'practice','h':'해볼 일','items':[{'when':'화가 날 때','do':'숨을 고른다.','check':'몸이 풀렸는지 본다.','t':'1:05','quote':'숨을 고르세요'}]},
+    {'kind':'practice','h':'해볼 일','items':[{'when':'화가 날 때','do':'숨을 고른다.','check':'몸이 풀렸는지 본다.','t':'1:05','quote':'숨을 고르세요'},{'when':'잠들기 전','do':'불을 끈다.','t':'2:10','quote':'불을 끄세요'}]},
     {'kind':'steps','h':'순서','items':[{'h':'1단계','t':'2:00','b':['먼저 한다.']},{'h':'2단계','t':'3:00','b':['다음에 한다.']}]}]}
   html_=render(row,record,{'lead':'“한 문장이다.”'})
-  self.assertEqual(html_.count('class="practice-cells"'),1)
+  self.assertEqual(html_.count('class="practice-cells"'),2)
   for label in ('<dt>언제</dt>','<dt>할 일</dt>','<dt>확인</dt>'):self.assertIn(label,html_)
+  self.assertEqual(html_.count('<dt>확인</dt>'),1)   # 확인 칸이 없는 항목에는 빈 칸을 그리지 않는다
   self.assertIn('<blockquote class="practice-quote"><p>“숨을 고르세요”</p></blockquote>',html_)
   self.assertIn('v=abcdefghijk&amp;t=65s',html_)
   self.assertIn('<li><strong>라벨</strong>. 둘째 주장이다.</li>',html_)
@@ -243,7 +257,7 @@ class IntroChecks(unittest.TestCase):
   mini={'lead':'“한 문장이다.”'}
   bad={'알 수 없는 종류':[points,{'kind':'video','h':'영상','items':[{'h':'x','b':['y.']}]}],
    '같은 종류 두 번':[points,points],'빈 목록':[],
-   '해볼 일에 칸이 빠짐':[points,{'kind':'practice','h':'해볼 일','items':[{'when':'화날 때','do':'숨을 고른다.'}]}],
+   '해볼 일에 할 일이 빠짐':[points,{'kind':'practice','h':'해볼 일','items':[{'when':'화날 때','check':'몸이 풀렸는지 본다.'}]}],
    'detail_index 범위 밖':[points,{'kind':'steps','h':'순서','items':[{'h':'1','b':['가.'],'detail_index':5}]}]}
   for label,intro in bad.items():
    with self.assertRaises(ValueError,msg=label):render(row,dict(base,intro=intro),mini)
