@@ -11,14 +11,13 @@ from content_registry import catalog_leads, validate_catalog, load_json
 
 
 class CanonicalContentRegression(unittest.TestCase):
-    def test_every_lecture_has_one_lead_shown_on_its_page(self):
+    def test_every_lecture_has_one_archived_lead(self):
         courses=load_json(ROOT/"data/mini_courses.json")
         leads=catalog_leads(ROOT)
         self.assertEqual(leads,{k:v["lead"] for k,v in courses.items()})
         for vid,course in courses.items():
             with self.subTest(lecture=vid):
                 self.assertEqual(set(course),{"title","lead"},"옛 원고 필드는 docs/archive/manuscripts에 있다")
-                self.assertIn(course["lead"],(ROOT/"lectures"/f"{vid}.html").read_text(encoding="utf-8"))
 
     def test_lead_coverage_mismatch_fails_explicitly(self):
         with tempfile.TemporaryDirectory() as folder:

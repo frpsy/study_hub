@@ -203,7 +203,7 @@
     if(pool.length){
       const now=new Date();
       const day=Math.floor((Date.UTC(now.getFullYear(),now.getMonth(),now.getDate())-Date.UTC(2026,0,1))/864e5);
-      const quote=today.querySelector('blockquote'),source=today.querySelector('.today-source');
+      const quote=today.querySelector('.today-key'),source=today.querySelector('.today-source');
       const random=today.querySelector('.today-random');
       const render=card=>{
         const title=card.querySelector('.card-link');

@@ -108,13 +108,14 @@ test('sleep search aliases and independent empty-state resets',async({page})=>{
 
 test('random hero changes both the quote and its lecture destination',async({page})=>{
   await page.goto('/index.html');
-  const quote=page.locator('.today-line blockquote');
+  const quote=page.locator('.today-line .today-key');
   const original=await quote.textContent();
   await page.getByRole('button',{name:'다른 문장 보기'}).click();
   await expect(quote).not.toHaveText(original);
+  const selected=await quote.textContent();
   await page.locator('.today-source').click();
   await expect(page).toHaveURL(/\/lectures\/[^/]+\.html$/);
-  await expect(page.locator('.summary-lead')).not.toHaveText(original);
+  await expect(page.locator('#lecture-overview .intro-points li').first()).toContainText(selected);
 });
 
 test('bookmark filtering and read state survive navigation and reload',async({page})=>{

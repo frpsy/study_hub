@@ -122,7 +122,7 @@ class IntroChecks(unittest.TestCase):
    self.assertNotIn('practice',record,vid)
    self.assertEqual(source.count('id="lecture-overview"'),1,vid)
    self.assertIn('<h2>핵심 요약</h2>',source,vid)
-   self.assertLess(source.index('intro-points'),source.index('summary-lead'),vid)
+   self.assertNotIn('summary-lead',source,vid)
    self.assertNotIn('<h2>실천 포인트</h2>',source,vid)
    self.assertNotIn('핵심 세 가지',source,vid);self.assertNotIn('오늘의 실천 세 가지',source,vid)
    self.assertNotIn('<section id="lecture-practice"',source,vid)
@@ -189,8 +189,8 @@ class IntroChecks(unittest.TestCase):
      quote=norm(item['quote'])
      overlap=[lead[i:i+12] for i in range(max(0,len(lead)-11)) if lead[i:i+12] in quote]
      self.assertFalse(overlap,f"{row['id']} {item['t']}: 인용이 한 문장과 겹친다 ‘{overlap[:1]}’")
- def test_every_block_kind_renders(self):
-  """합성 기록으로 세 블록이 모두 기대한 HTML이 되는지 본다(실제 강의에는 블록이 일부만 있다)."""
+ def test_only_points_render_from_mixed_intro_records(self):
+  """기존 원고에 남은 실천과 단계 블록은 화면에 표시하지 않는다."""
   from build_compact_lectures import render
   row={'id':'abcdefghijk','title':'시험 강의','duration':'10분','creator':'김주환','date':'2026-11-22'}
   record={'aliases':[],'sources':[{'label':'원본','url':'https://example.com/'}],'editor':[],'timeline':'■ 핵심 세션\n0:00 시작',
@@ -198,16 +198,10 @@ class IntroChecks(unittest.TestCase):
     {'kind':'practice','h':'해볼 일','items':[{'when':'화가 날 때','do':'숨을 고른다.','check':'몸이 풀렸는지 본다.','t':'1:05','quote':'숨을 고르세요'},{'when':'잠들기 전','do':'불을 끈다.','t':'2:10','quote':'불을 끄세요'}]},
     {'kind':'steps','h':'순서','items':[{'h':'1단계','t':'2:00','b':['먼저 한다.']},{'h':'2단계','t':'3:00','b':['다음에 한다.']}]}]}
   html_=render(row,record,{'lead':'“한 문장이다.”'})
-  self.assertEqual(html_.count('class="practice-cells"'),2)
-  for label in ('<dt>언제</dt>','<dt>할 일</dt>','<dt>확인</dt>'):self.assertIn(label,html_)
-  self.assertEqual(html_.count('<dt>확인</dt>'),1)   # 확인 칸이 없는 항목에는 빈 칸을 그리지 않는다
-  self.assertRegex(html_,r'<blockquote class="practice-quote"><p>“숨을 고르세요” <a class="practice-source"[^>]*>영상 1:05부터 보기 ↗</a></p></blockquote>')   # 링크는 인용 줄 끝에 둔다
-  self.assertIn('v=abcdefghijk&amp;t=65s',html_)
   self.assertIn('<li><strong class="point-label">라벨</strong>둘째 주장이다.</li>',html_)
-  self.assertEqual(html_.count('<details><summary>'),2)
-  self.assertEqual(html_.count('class="summary-tier intro-block'),3)
-  only=dict(record,intro=record['intro'][:1]);short=render(row,only,{'lead':'“한 문장이다.”'})
-  self.assertNotIn('practice-cells',short);self.assertNotIn('<details>',short);self.assertIn('<h2>핵심 요약</h2>',short)
+  self.assertEqual(html_.count('class="summary-tier intro-block'),1)
+  for hidden in ('intro-practice','intro-steps','해볼 일','1단계'):
+   self.assertNotIn(hidden,html_)
  def test_generator_refuses_data_it_cannot_render(self):
   from build_compact_lectures import render
   row={'id':'abcdefghijk','title':'시험 강의','duration':'10분','creator':'김주환'}

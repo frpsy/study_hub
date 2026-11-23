@@ -63,19 +63,27 @@ def render(rows, materials=None, leads=None):
     views_button='<button type="button" data-sort="views" aria-pressed="false">조회수순</button>' if viewed else ''
     views_note=f'<p class="views-note" id="views-note" hidden>유튜브 조회수는 {checked.replace("-",".")} 기준이며 이후 달라질 수 있습니다.</p>' if viewed and checked else ''
     noun='자료' if materials else '강의'
-    # 오늘의 한 문장: 가장 최근 강의의 한 문장 핵심을 첫 화면에 둔다.
+    # 오늘의 한 문장: 가장 최근 강의의 첫 핵심 요점을 첫 화면에 둔다.
     feature=''
     first=next((r for r in rows if leads.get(r['id'])),None)
     if first:
-        feature=f'<section class="today-line" aria-label="오늘의 한 문장"><div class="today-heading"><span class="eyebrow">오늘의 한 문장</span><button type="button" class="today-random" hidden><span aria-hidden="true">↻</span> 다른 문장 보기</button></div><div aria-live="polite"><blockquote>{html.escape(leads[first["id"]])}</blockquote><a class="today-source stretched-link" href="lectures/{first["id"]}.html">{html.escape(first["title"])} · {html.escape(first.get("creator",""))}</a></div></section>'
+        feature=f'<section class="today-line" aria-label="오늘의 한 문장"><div class="today-heading"><span class="eyebrow">오늘의 한 문장</span><button type="button" class="today-random" hidden><span aria-hidden="true">↻</span> 다른 문장 보기</button></div><div aria-live="polite"><p class="today-key">{html.escape(leads[first["id"]])}</p><a class="today-source stretched-link" href="lectures/{first["id"]}.html">{html.escape(first["title"])} · {html.escape(first.get("creator",""))}</a></div></section>'
     body=f'''<div class="site-shell"><main id="main" class="home-main"><section id="lectures"><div id="home-catalog"><h1 class="home-title">강의 요약</h1><p class="catalog-intro">한 문장에서 시작해 깊이 읽는 강의 서재</p>{feature}<div class="search-panel"><label for="search">{noun} 검색</label><div class="search-controls"><div class="search-field"><svg class="search-icon" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 4 4"/></svg><input class="search" id="search" type="search" placeholder="강의 검색" data-filter-input="#home-catalog" data-count="count" data-empty="empty" data-noun="{noun}" data-persist-query="true"><button type="button" class="search-clear" aria-label="검색창 비우기" data-clear-for="search" hidden><span aria-hidden="true">×</span></button></div><button type="button" class="bookmark-filter" data-bookmark-filter aria-pressed="false" hidden><span aria-hidden="true">★</span> 북마크만</button></div><div class="filter-chips" role="group" aria-label="주제">{chips}</div></div><div class="catalog-order"><p class="catalog-results" aria-live="polite"><strong id="catalog-topic">전체</strong><span aria-hidden="true"> · </span><span id="count">{total}개 {noun}</span></p><div class="sort-toggle" role="group" aria-label="정렬"><button type="button" data-sort="latest" aria-pressed="true">최신순</button><button type="button" data-sort="added" aria-pressed="false">추가된순</button>{views_button}</div></div>{views_note}<div class="lecture-grid" id="lecture-list">{cards}</div></div><p class="empty" id="empty" hidden><span data-empty-message>검색 결과가 없습니다. 다른 단어로 찾거나 ‘전체’를 선택해 주세요.</span><span class="empty-actions"><button type="button" class="btn secondary" data-clear-bookmarks hidden>전체 강의 보기</button><button type="button" class="btn secondary" data-clear-search hidden>검색어 지우기</button><button type="button" class="btn secondary" data-clear-topic hidden>주제 필터 해제</button></span></p></section></main></div>'''
     return page('강의 요약',body)
 
+def first_key_point(record):
+    for block in record.get('intro', []):
+        if block['kind']=='points' and block['items']:
+            item=block['items'][0]
+            return item if isinstance(item,str) else item['t']
+    return ''
+
 def load_leads(root=R):
-    path=root/'data'/'mini_courses.json'
+    path=root/'data'/'lecture_compact.json'
     if not path.exists():return {}
-    minis=json.loads(path.read_text(encoding='utf-8'))
-    return {k:v['lead'] for k,v in minis.items() if isinstance(v,dict) and v.get('lead')}
+    records=json.loads(path.read_text(encoding='utf-8'))
+    return {vid:first_key_point(record) for vid,record in records.items()}
+
 def build(check=False):
     leads=load_leads()
     result=render(json.loads((R/'lectures.json').read_text(encoding='utf-8')),json.loads((R/'materials.json').read_text(encoding='utf-8')),leads)

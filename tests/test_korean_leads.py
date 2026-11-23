@@ -11,7 +11,7 @@ from content_registry import catalog_leads
 
 
 class KoreanLeads(unittest.TestCase):
-    def test_all_one_sentence_leads_match_across_three_reading_depths(self):
+    def test_archived_one_sentence_leads_keep_editorial_format(self):
         minis = json.loads((R/'data/mini_courses.json').read_text(encoding='utf-8'))
         summaries = catalog_leads(R)
         registry = json.loads((R/'lectures.json').read_text(encoding='utf-8'))
@@ -35,9 +35,7 @@ class KoreanLeads(unittest.TestCase):
                 self.assertLessEqual(len(body), 170, vid)
                 self.assertFalse(re.search(r'\s{2,}', lead), vid)
                 self.assertEqual(lead, summaries[vid], '카탈로그의 한 문장과 다름: '+vid)
-                for folder in ('lectures',):
-                    text = (R/folder/f'{vid}.html').read_text(encoding='utf-8')
-                    self.assertIn(lead, text, '화면이 편집 원고와 다름: '+folder+'/'+vid)
+
 
 
 if __name__ == '__main__':

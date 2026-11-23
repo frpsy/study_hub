@@ -783,7 +783,7 @@ html{scroll-padding-top:158px}
 .home-main .catalog-intro{margin-bottom:14px}
 .today-line{display:block;margin:0 0 16px;padding:18px 22px 14px;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 var(--radius-card) var(--radius-card) 0;background:var(--surface);color:var(--ink);text-decoration:none}
 .today-line .eyebrow{display:block;margin-bottom:8px}
-.today-line blockquote{margin:0;font-size:clamp(17px,2vw,19px);font-weight:650;line-height:1.6;letter-spacing:-.03em;text-wrap:pretty;word-break:keep-all}
+.today-line .today-key{margin:0;font-size:clamp(17px,2vw,19px);font-weight:650;line-height:1.6;letter-spacing:-.03em;text-wrap:pretty;word-break:keep-all}
 .today-source{display:block;margin-top:10px;font-size:12px;font-weight:650;color:var(--muted)}
 @media(hover:hover) and (pointer:fine){.today-line:hover{border-color:var(--accent)}.today-line:hover .today-source{color:var(--accent)}}
 .home-main .search-panel{padding:14px 18px 12px;margin-bottom:12px}
@@ -797,7 +797,7 @@ html{scroll-padding-top:158px}
  .home-title::after{margin-top:12px}
  .home-main .catalog-intro{margin-bottom:14px}
  .today-line{margin-bottom:14px;padding:16px 16px 14px}
- .today-line blockquote{font-size:16px;line-height:1.6;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+ .today-line .today-key{font-size:16px;line-height:1.6;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
  .today-source{margin-top:8px}
  .home-main .search-panel{padding:0;margin-bottom:12px;background:transparent;border:0}
  .home-main .search-panel label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
@@ -863,7 +863,7 @@ body{background:var(--paper)}
 .home-main .catalog-intro{margin:0 0 36px;font-size:14px;color:var(--muted)}
 .today-line{display:block;margin:0 0 44px;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;color:var(--ink);text-decoration:none}
 .today-line .eyebrow{display:block;margin:0 0 12px;color:var(--accent)}
-.today-line blockquote{margin:0;max-width:30em;font-size:clamp(22px,2.6vw,28px);font-weight:700;line-height:1.5;letter-spacing:-.04em;text-wrap:pretty;word-break:keep-all;display:block;-webkit-line-clamp:unset;overflow:visible}
+.today-line .today-key{margin:0;max-width:30em;font-size:clamp(22px,2.6vw,28px);font-weight:700;line-height:1.5;letter-spacing:-.04em;text-wrap:pretty;word-break:keep-all;display:block;-webkit-line-clamp:unset;overflow:visible}
 .today-line .today-source{display:inline-block;margin-top:14px;font-size:14px;font-weight:500;color:var(--muted);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:4px}
 @media(hover:hover) and (pointer:fine){.today-line:hover{border-color:transparent}.today-line:hover .today-source{color:var(--accent);text-decoration-color:currentColor}}
 .home-main .search-panel{margin:0 0 8px;padding:0;background:transparent;border:0;border-radius:0}
@@ -897,7 +897,7 @@ body{background:var(--paper)}
  .home-title{margin:26px 0 4px;font-size:22px}
  .home-main .catalog-intro{margin-bottom:26px;font-size:13px}
  .today-line{margin-bottom:32px}
- .today-line blockquote{font-size:20px;line-height:1.55}
+ .today-line .today-key{font-size:20px;line-height:1.55}
  .home-main .lecture{padding:20px 0 22px}
  .home-main .lecture h2{font-size:19px}
  .home-main .lecture .card-lead{font-size:14.5px;line-height:1.7}
@@ -905,16 +905,16 @@ body{background:var(--paper)}
  .compact-lecture .lecture-section>h2{font-size:22px}
  .compact-lecture #lecture-overview .summary-tier>.summary-lead{padding:2px 0 2px 16px;font-size:16px}
 }
-@media print{.today-line blockquote{font-size:18px}}
+@media print{.today-line .today-key{font-size:18px}}
 
 /* 디자인 검토 반영 / 2026-11-19
    - 오늘의 한 문장은 한 단계 작게 해서 검색과 첫 강의가 첫 화면에 더 가깝게 온다.
    - 목차 버튼은 불투명한 면으로 그려 아래 본문 글자와 겹쳐 읽히지 않게 한다(위 .outline-fab). */
 .today-line{margin-bottom:36px}
-.today-line blockquote{max-width:34em;font-size:clamp(19px,2.2vw,22px);line-height:1.55;letter-spacing:-.035em}
+.today-line .today-key{max-width:34em;font-size:clamp(19px,2.2vw,22px);line-height:1.55;letter-spacing:-.035em}
 @media(max-width:780px){
  .today-line{margin-bottom:28px}
- .today-line blockquote{font-size:18px}
+ .today-line .today-key{font-size:18px}
 }
 /* 앵커 위치는 스크립트가 잰 헤더·목차 높이(--anchor-offset)를 따른다. 스크립트가 없으면 예전 고정값을 쓴다. */
 html{scroll-padding-top:var(--anchor-offset,158px)}
@@ -1086,7 +1086,7 @@ html.header-hidden .sidebar{top:12px}
 .today-heading .eyebrow{margin:0}
 .today-random,.detail-read{padding:0 12px;font-size:13px}
 .today-random{padding-inline-end:0;color:var(--muted)}
-.today-line blockquote{line-height:1.6;margin-top:2px;font-weight:600;word-break:keep-all!important;overflow-wrap:anywhere}
+.today-line .today-key{line-height:1.6;margin-top:2px;font-weight:600;word-break:keep-all!important;overflow-wrap:anywhere}
 .home-main .lecture-card .card-link{word-break:keep-all!important;overflow-wrap:anywhere}
 .home-main .lecture-card .card-lead{margin-top:0}
 /* Compact tags keep a full-height hit area around the shorter selection pill. */
@@ -1106,7 +1106,7 @@ html.header-hidden .sidebar{top:12px}
 .detail-read{display:inline-flex;align-items:center;gap:6px;padding-inline:8px;background:transparent;border:0;white-space:nowrap}
 @media(max-width:780px){
  .today-line{margin:4px 0 16px;padding-bottom:12px}
- .today-line blockquote{font-size:17px}
+ .today-line .today-key{font-size:17px}
  .today-line .today-source{margin-top:8px;font-size:13px}
  .home-main .filter-chips{flex-wrap:wrap;overflow:visible;gap:0 2px;padding:0;mask-image:none;-webkit-mask-image:none}
  .home-main .filter-chips button{padding-inline:8px}
