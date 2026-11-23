@@ -1158,3 +1158,21 @@ html.header-hidden .sidebar{top:12px}
   overflow-wrap:anywhere;
  }
 }
+
+/* Catalog exploration keeps inputs and their live result status in one surface. */
+.discovery-panel{margin-block:0 12px;padding:12px 16px 0;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-card)}
+.home-main .discovery-panel .search-panel{margin:0;padding:0;background:transparent}
+.discovery-panel .search-field .search{background:var(--paper);border-color:var(--line-strong)}
+.discovery-panel .search-field .search:focus-visible{border-color:var(--focus-color)}
+.discovery-panel .bookmark-filter{padding-inline:10px}
+.discovery-panel .filter-chips{margin:2px 0 0}
+.discovery-panel .catalog-order{min-height:var(--tap-target);padding:0;border-top:1px solid var(--line)}
+.discovery-panel .catalog-results{font-variant-numeric:tabular-nums}
+.discovery-panel .sort-toggle button:last-child{padding-inline-end:0}
+.discovery-panel .views-note{margin:0 0 8px}
+@media(max-width:780px){
+ .discovery-panel{padding:8px 10px 0;margin-bottom:8px}
+ .home-main .discovery-panel .filter-chips button{padding-inline:7px}
+ .discovery-panel .catalog-order{column-gap:6px;row-gap:0}
+ .discovery-panel .sort-toggle button{padding-inline:6px}
+}
