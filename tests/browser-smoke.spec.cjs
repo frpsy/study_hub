@@ -342,7 +342,8 @@ test('reading navigation tracks sections and source disclosure opens',async({bro
   await nav.getByRole('link',{name:'도입'}).click();
   await expect(nav.getByRole('link',{name:'도입'})).toHaveAttribute('aria-current','location');
   const geometry=await page.evaluate(()=>({heading:document.querySelector('#lecture-overview>h2').getBoundingClientRect().top,nav:document.querySelector('.reading-nav').getBoundingClientRect().bottom}));
-  expect(geometry.heading).toBeGreaterThanOrEqual(geometry.nav);
+  // 섹션은 목차 아래 선에 붙는다(다른 목차 테스트와 같은 2px 허용). 제목이 목차 아래로 가려지지 않는지 본다.
+  expect(geometry.heading).toBeGreaterThanOrEqual(geometry.nav-2);
   if(process.env.STUDY_SCREENSHOT_DIR){
     await page.screenshot({path:require('node:path').join(process.env.STUDY_SCREENSHOT_DIR,'study-hub-practice.png')});
   }
@@ -514,7 +515,7 @@ test('section anchors sit flush under the reading nav and the current section fo
     const page=await context.newPage();
     await page.goto('/lectures/ZCty0wvogDo.html');
     const nav=page.getByRole('navigation',{name:'이 강의 목차'});
-    for(const [id,name] of [['lecture-practice','실천 포인트'],['lecture-detail','상세 요약'],['lecture-comment','타임스탬프']]){
+    for(const [id,name] of [['lecture-overview','도입'],['lecture-detail','상세 요약'],['lecture-comment','타임스탬프']]){
       await nav.getByRole('link',{name}).click();
       await expect(nav.getByRole('link',{name})).toHaveAttribute('aria-current','location');
       const g=await page.evaluate(id=>({section:document.getElementById(id).getBoundingClientRect().top,nav:document.querySelector('.reading-nav').getBoundingClientRect().bottom}),id);
