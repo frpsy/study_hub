@@ -26,6 +26,8 @@ python3 scripts/build_library.py --check && python3 scripts/build_compact_lectur
 python3 -m unittest discover -s tests -p 'test_*.py' && node --test tests/test_*.cjs
 npx playwright test --config=tests/playwright.config.cjs
 ```
+위 첫 세 줄은 `python3 scripts/build_all.py --check --tests` 한 명령으로 돌릴 수 있다. 홈 재생성(`build_library.py`)처럼 빠뜨리기 쉬운 단계까지 한꺼번에 하고, 화면 버전은 `--bump "변경 설명"`으로 올린다(Playwright는 따로).
+
 PR 본문에는 `## 변경 범위` `## 영향 기능` `## 검증 증거` `## 남은 위험` 네 제목이 필요하다(CI 검사). 실기기 Safari 미검증 등은 남은 위험에 적는다.
 
 ## 작업 방식

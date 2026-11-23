@@ -1,0 +1,4 @@
+# 생성 HTML은 GitHub 변경 화면에서 접어 보인다(원본은 data/*.json과 scripts/build_*.py).
+index.html linguist-generated=true
+offline.html linguist-generated=true
+lectures/*.html linguist-generated=true
