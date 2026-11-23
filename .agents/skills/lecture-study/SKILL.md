@@ -20,7 +20,7 @@ description: 내면의 서재(frpsy/study_hub)에 강의를 추가하거나 핵�
 10. 모든 강의는 편집규칙 14절의 자체 검수(사실·출처, 문장·문법, 형식)를 끝낸다. AGENTS.md의 검증 명령 전부 통과 → PR(네 제목) → CI의 `quality`와 `browser`가 **모두 pass**인지 확인 → 병합 → 공개 페이지에서 새 문구 확인 → 링크 보고.
 
 ## 기존 요약 다듬기
-- `mini_courses.json`만 고치고 재생성한다. 뜻을 바꾸는 수정은 저장된 자막·`data/summaries.json` 원고로 근거를 확인한다.
+- `mini_courses.json`만 고치고 재생성한다. 뜻을 바꾸는 수정은 저장된 자막(`transcripts/`)으로 근거를 확인한다.
 - 비문·어색한 연결·같은 서술어 반복을 없애고, 처음 읽는 사람도 바로 이해되게 쓴다.
 - 타임스탬프 원문·연구 수치·직접 인용은 문체를 이유로 고치지 않는다.
 
@@ -28,7 +28,7 @@ description: 내면의 서재(frpsy/study_hub)에 강의를 추가하거나 핵�
 - `timeline` + `detail` + `intro`(19절), 평서문·질문형 소제목·질문→정의→근거→실천. "교수님은 ~했습니다"·"강사는"·비문 금지, 확인한 사실만 `[보충]`(편집규칙 16절).
 
 ## 김주환 새 강의 만드는 법 (기준 예시: `peaceful-life-live`)
-- 문체는 `docs/kimjuhwan-style.md`를 따른다. 데이터 형식은 `data/lecture_compact.json`·`mini_courses.json`·`summaries.json`의 `peaceful-life-live` 항목을 그대로 본뜬다(타임스탬프 → 상세 요약 소제목 8개 → 실천 포인트 순으로 쓰면 수월하다).
+- 문체는 `docs/kimjuhwan-style.md`를 따른다. 데이터 형식은 `data/lecture_compact.json`·`mini_courses.json`의 `peaceful-life-live` 항목을 그대로 본뜬다(타임스탬프 → 상세 요약 소제목 8개 → 도입 순으로 쓰면 수월하다).
 - 순서: 설명란·메타데이터(제목·게시일·길이) 확인 → 자막 전 구간 읽기 → 확인할 항목(고유명사·번역·계보·수치) 목록 → 웹 검색으로 실제 열어 본 출처만 `[보충]` → 쓰기 → 휴머나이저식 문장 검수 → 생성·검증.
 - `intro`는 필수다(19절). `points`(1~4개)는 항상 쓰고, `practice`(1~3개, 언제·할 일과 `t`·`quote`, 확인은 강연자가 점검 기준을 말했을 때만)는 강연자가 청중에게 직접 권했거나 점검 기준으로 말한 대목이 있을 때만 쓴다. 개수를 3개에 맞추지 않는다. 강연에 없는 처방·기간·수치·신체 부위를 만들지 않는다. 시각과 인용은 자막 `grep`으로 확인하고, 인용은 자막 낱말만 쓴다(AI가 준 시각·인용은 틀릴 수 있다). 근거는 `study-audits`의 `intro_check`에 적는다. 후보는 `scripts/intro_candidates.py <id>`(탐색 전용)로 뽑고, 쓴 뒤에는 `python3 scripts/build_all.py --bump "변경 설명" --check --tests`로 생성·검증한다.
 - 확인하지 못한 값(방송 날짜, 영상 길이, 번역 귀속 등)은 비우거나 "약"으로 쓰고 `note`·`study-audits/`·PR 남은 위험에 적는다.
@@ -40,7 +40,7 @@ description: 내면의 서재(frpsy/study_hub)에 강의를 추가하거나 핵�
 - `id`는 밑줄로 시작하지 않는 주제형 키로 쓴다. 영상 ID가 `_`로 시작하면 `video_url`에만 쓴다(Pages의 Jekyll이 밑줄 파일을 제외할 수 있다).
 - `video_url`은 `watch?v=<영상ID>` 형식으로 쓴다. 실천 포인트의 시각 링크(`&t=`)가 이 형식을 전제하므로 `live/` 주소를 쓰면 링크가 깨진다. 사용자가 준 `live/` 주소는 `sources`에 둔다.
 - 김주환 강의 데이터 어디에도 "강사"라는 말이 들어가면 테스트가 실패한다. 공개 페이지에는 "자막은 ", "자막 없음", "교수의 해석" 같은 제작 메모도 금지다.
-- `lectures.json`에 새 강의를 넣으면 `mini_courses.json`·`summaries.json`·`lecture_compact.json`에 같은 `id`가 모두 있어야 한다.
+- `lectures.json`에 새 강의를 넣으면 `mini_courses.json`(`title`·`lead`만)·`lecture_compact.json`에 같은 `id`가 모두 있어야 한다.
 - Playwright가 `@playwright/test`를 못 찾으면 CLI와 같은 버전을 임시 폴더에 설치하고 `NODE_PATH`를 지정해 그 폴더의 `playwright`로 실행한다.
 - 푸시가 403이면 이 세션에 저장소 쓰기 권한이 없는 것이다. 우회하지 말고 GitHub App 설치나 커넥터 재연결이 필요하다고 알린다.
 

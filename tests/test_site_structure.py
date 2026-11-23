@@ -149,10 +149,10 @@ class ExternalLinkRegression(unittest.TestCase):
             for tag in re.findall(r"<a\b[^>]*target=\"_blank\"[^>]*>", page.read_text(encoding="utf-8")):
                 self.assertIn("noopener", tag, f"{page.name}: {tag[:80]}")
 
-    def test_summary_sources_are_kept_but_not_published(self):
+    def test_old_manuscripts_are_archived_not_published(self):
         root = Path(__file__).resolve().parents[1]
-        from content_registry import effective_summaries
-        self.assertEqual(len(effective_summaries(root)), len(json.loads((root / "lectures.json").read_text(encoding="utf-8"))))
+        from content_registry import catalog_leads
+        self.assertEqual(len(catalog_leads(root)), len(json.loads((root / "lectures.json").read_text(encoding="utf-8"))))
         for removed in ("concepts.html", "summaries", "mini-courses"):
             self.assertFalse((root / removed).exists(), removed)
         for page in (root / "lectures").glob("*.html"):

@@ -41,7 +41,7 @@ def glossary_rules():
 TIMELINE_CHECK_FROM = '2026-11-21'
 
 
-def public_texts(lecture_id, lectures, compact, minis, summaries):
+def public_texts(lecture_id, lectures, compact, minis):
     """공개 본문 문자열을 (필드 이름, 문자열)로 돌려준다. editor와 sources는 제외한다."""
     def walk(x, name):
         if isinstance(x, str):
@@ -57,10 +57,9 @@ def public_texts(lecture_id, lectures, compact, minis, summaries):
     for key in ('title', 'description', 'tags'):
         if key in row:
             yield from walk(row[key], f'lectures.{key}')
-    for key in ('title', 'lead', 'three', 'sections', 'question', 'answer'):
+    for key in ('title', 'lead'):
         if key in minis.get(lecture_id, {}):
             yield from walk(minis[lecture_id][key], f'mini.{key}')
-    yield from walk(summaries.get(lecture_id, {}), 'summaries')
     for key, value in compact.get(lecture_id, {}).items():
         if key in ('editor', 'sources', 'aliases'):
             continue
@@ -74,13 +73,12 @@ class CaptionTermsTest(unittest.TestCase):
         lectures = json.loads((ROOT / 'lectures.json').read_text(encoding='utf-8'))
         compact = json.loads((ROOT / 'data/lecture_compact.json').read_text(encoding='utf-8'))
         minis = json.loads((ROOT / 'data/mini_courses.json').read_text(encoding='utf-8'))
-        summaries = json.loads((ROOT / 'data/summaries.json').read_text(encoding='utf-8'))
         rules = glossary_rules()
         self.assertTrue(rules, '용어집 표를 읽지 못했다')
         problems = []
         for row in lectures:
             lecture_id = row['id']
-            for field, text in public_texts(lecture_id, lectures, compact, minis, summaries):
+            for field, text in public_texts(lecture_id, lectures, compact, minis):
                 for standard, alias, pattern in rules:
                     for m in pattern.finditer(text):
                         context = text[max(0, m.start() - 8):m.end() + 8]

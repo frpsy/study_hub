@@ -41,6 +41,6 @@
 - 새로운 강의를 추가할 때 별도 학습 기록 위젯이나 Firebase 저장 기능을 만들지 않는다. 테스트는 기능 부재와 학습 자료의 검색·읽기·댓글 복사 유지 여부를 검사한다.
 
 ## 한 문장 핵심의 단일 원본
-- `data/mini_courses.json`의 `lead`만 직접 수정한다. `data/summaries.json`에는 같은 내용을 중복 저장하지 않는다.
-- `scripts/content_registry.py`가 두 데이터 소스를 결합하고, 누락된 강의 ID·상충하는 한 문장 핵심을 오류로 처리한다.
+- `data/mini_courses.json`의 `lead`만 직접 수정한다. 옛 5분 요약 원고는 `docs/archive/manuscripts/`에 보존하며 어떤 검사도 읽지 않는다.
+- `scripts/content_registry.py`가 `lectures.json`과 `mini_courses.json`의 강의 ID가 어긋나면 오류로 처리한다.
 - 원본 영상의 실제 URL은 검증된 `video_url`로 기록하며 내부 콘텐츠 ID를 영상 ID로 잘못 가정하지 않는다.

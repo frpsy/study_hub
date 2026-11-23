@@ -67,8 +67,8 @@ class CompactCourseChecks(unittest.TestCase):
      for text in detail_texts(block):self.assertRegex(text,r'[.)]$',vid+': '+text[:30])
  def test_kim_lectures_do_not_use_instructor_subject_phrasing(self):
   rows={r['id']:r for r in json.loads((R/'lectures.json').read_text(encoding='utf-8'))}
-  for name in ('mini_courses','summaries','lecture_compact'):
-   for vid,item in json.loads((R/'data'/f'{name}.json').read_text(encoding='utf-8')).items():
+  for name,path in (('mini_courses','data/mini_courses.json'),('lecture_compact','data/lecture_compact.json')):
+   for vid,item in json.loads((R/path).read_text(encoding='utf-8')).items():
     if rows.get(vid,{}).get('creator')!='김주환':continue
     self.assertNotIn('강사',json.dumps(item,ensure_ascii=False),f'{name}:{vid}')
  def test_course_coverage_and_tiers(self):
@@ -76,8 +76,6 @@ class CompactCourseChecks(unittest.TestCase):
   records=json.loads((R/'data/lecture_compact.json').read_text())
   self.assertEqual({r['id'] for r in rows},set(courses))
   for vid,item in courses.items():
-   self.assertTrue(item['sections'])
-   self.assertTrue(item['question'] and item['answer'])
    # 핵심 주장의 원본은 intro 하나뿐이다(두 곳에 같은 내용을 두지 않는다).
    self.assertIn('intro',records[vid],vid);self.assertNotIn('three',item,vid)
   self.assertFalse(build(check=True))

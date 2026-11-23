@@ -1,7 +1,7 @@
 """Read and validate the canonical study data without changing editorial content.
 
-One-sentence key takeaways live in data/mini_courses.json. 5-minute
-summaries contribute the longer explanation but do not own a second copy.
+One-sentence key takeaways live in data/mini_courses.json. Old manuscripts
+(5-minute summaries, mini-course fields) are kept in docs/archive/manuscripts and are not read.
 """
 import json
 from pathlib import Path
@@ -9,20 +9,13 @@ from pathlib import Path
 def load_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
 
-def effective_summaries(root: Path):
-    summaries=load_json(root/"data/summaries.json")
+def catalog_leads(root: Path):
+    """{lecture id: one-sentence takeaway}. data/mini_courses.json must cover exactly the lectures in lectures.json."""
     courses=load_json(root/"data/mini_courses.json")
-    if set(summaries)!=set(courses):
-        missing=sorted(set(courses)-set(summaries))
-        extra=sorted(set(summaries)-set(courses))
-        raise ValueError(f"Summary coverage mismatch; missing={missing}, extra={extra}")
-    result={}
-    for lecture_id, summary in summaries.items():
-        lead=courses[lecture_id]["lead"]
-        if "lead" in summary and summary["lead"]!=lead:
-            raise ValueError(f"Conflicting one-sentence takeaway: {lecture_id}")
-        result[lecture_id]={**summary,"lead":lead}
-    return result
+    ids={r["id"] for r in load_json(root/"lectures.json")}
+    if set(courses)!=ids:
+        raise ValueError(f"Lead coverage mismatch; missing={sorted(ids-set(courses))}, extra={sorted(set(courses)-ids)}")
+    return {k:v["lead"] for k,v in courses.items()}
 
 def validate_catalog(root: Path):
     """Return actionable validation errors for the hand-edited source records."""
@@ -55,8 +48,8 @@ if __name__ == "__main__":
     root=Path(__file__).resolve().parents[1]
     errors=validate_catalog(root)
     try:
-        effective_summaries(root)
+        catalog_leads(root)
     except (ValueError,KeyError,TypeError) as exc:
         errors.append(str(exc))
-    print("\\n".join(errors) if errors else "PASS: catalog and canonical summaries")
+    print("\\n".join(errors) if errors else "PASS: catalog and canonical leads")
     sys.exit(bool(errors))
