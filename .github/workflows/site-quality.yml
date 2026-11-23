@@ -40,6 +40,7 @@ jobs:
   browser-suite:
     name: Browser suite (${{ matrix.suite }})
     runs-on: ubuntu-24.04
+    container: mcr.microsoft.com/playwright:v1.56.1-noble
     strategy:
       fail-fast: false
       matrix:
@@ -50,16 +51,11 @@ jobs:
       PLAYWRIGHT_VERSION: '1.56.1'
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/cache@v4
+      - uses: actions/setup-python@v5
         with:
-          path: |
-            ~/.cache/ms-playwright
-            ~/.npm
-          key: playwright-${{ env.PLAYWRIGHT_VERSION }}-${{ runner.os }}-${{ runner.arch }}-ubuntu24-${{ env.BROWSER_NAME }}
-      - name: Install Playwright and browser dependencies
-        run: |
-          npm install --no-save --no-audit --no-fund --prefer-offline "@playwright/test@$PLAYWRIGHT_VERSION"
-          npx playwright install --with-deps "$BROWSER_NAME"
+          python-version: '3.11'
+      - name: Install Playwright test runner
+        run: npm install --no-save --no-audit --no-fund --prefer-offline "@playwright/test@$PLAYWRIGHT_VERSION"
       - name: Run browser tests
         env:
           SUITE: ${{ matrix.suite }}
