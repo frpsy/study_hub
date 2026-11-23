@@ -225,11 +225,6 @@ test('a lecture card opens a page with the intro, detail summary and timestamps'
   await expect(page.locator('#lecture-overview>h2')).toHaveText('핵심 요약');
   await expect(page.locator('#lecture-detail>h2')).toHaveText('상세 요약');
   await expect(page.locator('#lecture-overview .intro-points li')).toHaveCount(3);
-  await expect(page.locator('#lecture-overview .intro-steps details')).toHaveCount(4);
-  const firstStep=page.locator('#lecture-overview .intro-steps details').first();
-  await expect(firstStep.locator('ul')).toBeHidden();
-  await firstStep.locator('summary').click();
-  await expect(firstStep.locator('ul')).toBeVisible();
   await expect(page.locator('#lecture-comment>h2')).toHaveText('타임스탬프');
   for(const removed of ['실천 포인트','5분 요약','미니강좌','용어와 개념']){
     await expect(page.getByText(removed,{exact:true})).toHaveCount(0);
@@ -250,7 +245,7 @@ test('lecture summary keeps a clear type hierarchy and readable width',async({br
       const size=selector=>parseFloat(getComputedStyle(document.querySelector(selector)).fontSize);
       const box=document.querySelector('.compact-lecture').getBoundingClientRect();
       return {h1:size('h1'),h2:size('#lecture-overview>h2'),h3:size('#lecture-overview .intro-block>h3'),
-        lead:size('#lecture-overview .summary-tier>.summary-lead'),list:size('#lecture-overview .intro-points li'),
+        list:size('#lecture-overview .intro-points li'),
         width:box.width,left:box.left,right:box.right,brand:document.querySelector('.site-brand').getBoundingClientRect().left,
         overflow:document.documentElement.scrollWidth-window.innerWidth};
     });
@@ -258,7 +253,6 @@ test('lecture summary keeps a clear type hierarchy and readable width',async({br
     expect(m.h2).toBeGreaterThan(m.h3);
     expect(m.h3).toBeGreaterThanOrEqual(m.list);
     expect(m.list).toBeLessThanOrEqual(16);
-    expect(m.lead).toBeLessThanOrEqual(17);
     expect(m.width).toBeLessThanOrEqual(width<=780 ? width-24 : 1041);
     expect(m.left).toBeGreaterThanOrEqual(width<=780 ? 12 : -1);
     expect(Math.abs(m.left-m.brand)).toBeLessThanOrEqual(1);
@@ -276,26 +270,7 @@ test('every lecture has a valid intro and source navigation',async({page})=>{
     await expect(page.locator('#lecture-overview .intro-points li').first()).toBeVisible();
     await expect(page.locator('#lecture-practice')).toHaveCount(1);
     await expect(page.locator('section#lecture-practice')).toHaveCount(0);
-    const items=page.locator('#lecture-overview .practice-list>li');
-    const count=await items.count();
-    expect(count).toBeLessThanOrEqual(3);
-    for(let i=0;i<count;i++){
-      const item=items.nth(i);
-      const labels=await item.locator('.practice-cells dt').allTextContents();
-      expect(labels.slice(0,2)).toEqual(['언제','할 일']);
-      expect([2,3]).toContain(labels.length);   // 확인 칸은 강연자가 말했을 때만 있다
-      const source=item.locator('.practice-source');
-      await expect(source).toBeVisible();
-      if(row.creator==='김주환'){
-        const expectedVideo=row.video_url||'https://www.youtube.com/watch?v='+row.id;
-        const href=await source.getAttribute('href');
-        expect(href).toContain(expectedVideo+'&t=');
-        expect(href).toMatch(/&t=\d+s$/);
-        expect(await source.getAttribute('target')).toBe('_blank');
-        expect(await source.getAttribute('rel')).toContain('noopener');
-        await expect(item.locator('.practice-quote')).toBeVisible();
-      }
-    }
+    await expect(page.locator('#lecture-overview .intro-practice, #lecture-overview .intro-steps')).toHaveCount(0);
   }
 });
 
@@ -305,9 +280,7 @@ test('reading navigation and disclosures work on small screens without scripts',
   await page.goto('/lectures/izYj8g-j00U.html');
   await page.getByRole('navigation',{name:'이 강의 목차'}).getByRole('link',{name:'핵심 요약'}).click();
   await expect(page).toHaveURL(/#lecture-overview$/);
-  // 도입의 해볼 일은 JS 없이 보이고, 영상 시각 링크도 바로 누를 수 있어야 한다.
-  await expect(page.locator('#lecture-overview .practice-list>li').first()).toBeVisible();
-  await expect(page.locator('#lecture-overview .practice-source').first()).toBeVisible();
+  await expect(page.locator('#lecture-overview .intro-points li').first()).toBeVisible();
   expect(await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(1);
   await context.close();
 });
@@ -386,12 +359,12 @@ test('home opens with a daily key sentence that links to its lecture',async({pag
   await page.goto('/index.html');
   const line=page.locator('.today-line');
   await expect(line).toBeVisible();
-  const text=(await line.locator('blockquote').textContent()).trim();
+  const text=(await line.locator('.today-key').textContent()).trim();
   const href=await line.locator('.today-source').getAttribute('href');
   const card=page.locator('#lecture-list .lecture-card').filter({has:page.locator('.card-link[href="'+href+'"]')});
   expect(await card.locator('.card-lead').textContent()).toBe(text);
   await line.locator('.today-source').click();
-  await expect(page.locator('#lecture-overview .summary-lead')).toHaveText(text);
+  await expect(page.locator('#lecture-overview .intro-points li').first()).toContainText(text);
 });
 
 test('list markers sit on the first text line at every text size',async({browser})=>{
@@ -495,24 +468,21 @@ test('outline button is opaque so body text never shows through it',async({page}
   expect(alpha?Number(alpha[1]):1).toBe(1);
 });
 
-test('intro section merges key points and practice and fits small screens',async({browser})=>{
+test('key points fit small screens',async({browser})=>{
   for(const width of [320,390,1280]){
     const context=await browser.newContext({viewport:{width,height:844},reducedMotion:'reduce'});
     const page=await context.newPage();
     await page.goto('/lectures/chance-acceptance-20240526.html');
     await expect(page.locator('main .lecture-section').first().locator('h2')).toHaveText('핵심 요약');
-    await expect(page.locator('#lecture-overview h3')).toHaveText(['우연을 받아들인다는 것','해볼 만한 일']);
+    await expect(page.locator('#lecture-overview h3')).toHaveText(['우연을 받아들인다는 것']);
     await expect(page.getByRole('navigation',{name:'이 강의 목차'}).getByRole('link',{name:'핵심 요약'})).toBeVisible();
     await expect(page.getByRole('navigation',{name:'이 강의 목차'}).getByRole('link',{name:'실천 포인트'})).toHaveCount(0);
     expect(await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(1);
     const m=await page.evaluate(()=>{
       const size=s=>parseFloat(getComputedStyle(document.querySelector(s)).fontSize);
-      const card=document.querySelector('.practice-list>li').getBoundingClientRect();
-      const dd=document.querySelector('.practice-cells dd').getBoundingClientRect();
-      return {h1:size('h1'),h2:size('#lecture-overview>h2'),h3:size('#lecture-overview .intro-block>h3'),dd:size('.practice-cells dd'),
-        ddInside:dd.left>=card.left&&dd.right<=card.right};
+      return {h1:size('h1'),h2:size('#lecture-overview>h2'),h3:size('#lecture-overview .intro-block>h3')};
     });
-    expect(m.h1).toBeGreaterThan(m.h2);expect(m.h2).toBeGreaterThan(m.h3);expect(m.dd).toBeLessThanOrEqual(16);expect(m.ddInside).toBe(true);
+    expect(m.h1).toBeGreaterThan(m.h2);expect(m.h2).toBeGreaterThan(m.h3);
     await context.close();
   }
 });
@@ -544,27 +514,6 @@ test('timestamp section is only the original text and the copy button',async({br
   }
 });
 
-test('practice links open the video in a new tab at the quoted moment',async({page,context})=>{
-  // 실제 유튜브로 나가지 않도록 빈 응답으로 바꿔 둔다(차단하면 팝업 주소가 오류 페이지로 바뀐다).
-  await context.route(/youtube(-nocookie)?\.com/,route=>route.fulfill({status:200,contentType:'text/html',body:'<title>video</title>'}));
-  await page.goto('/lectures/xA-4G4z-1MM.html');
-  const links=page.locator('#lecture-overview .practice-source');
-  const count=await links.count();
-  expect(count).toBeGreaterThan(0);
-  for(let i=0;i<count;i++){
-    expect(await links.nth(i).getAttribute('target')).toBe('_blank');
-    expect(await links.nth(i).getAttribute('rel')).toContain('noopener');
-    expect(await links.nth(i).getAttribute('href')).toMatch(/[?&]t=\d+s$/);
-  }
-  const first=links.first();
-  expect(await first.getAttribute('href')).toContain('&t=1473s');
-  const [popup]=await Promise.all([context.waitForEvent('page'),first.click()]);
-  expect(popup.url()).toContain('t=1473s');
-  expect(page.url()).toContain('/lectures/xA-4G4z-1MM.html');   // 이 페이지는 그대로 남는다
-  await expect(page.locator('iframe')).toHaveCount(0);
-  await popup.close();
-});
-
 test('sources and editor notes share one closed disclosure at the page end',async({page})=>{
   await page.goto('/lectures/ZCty0wvogDo.html');
   const box=page.locator('main details.source-disclosure');
@@ -581,7 +530,7 @@ test('sources and editor notes share one closed disclosure at the page end',asyn
   await expect(page.locator('#lecture-editor>h3')).toBeVisible();
 });
 
-test('intro stays compact on a phone and every practice card puts the action first',async({browser})=>{
+test('key points stay compact on a phone',async({browser})=>{
   test.setTimeout(90000);
   const context=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce'});
   const page=await context.newPage();
@@ -591,14 +540,9 @@ test('intro stays compact on a phone and every practice card puts the action fir
     if(!(await page.locator('#lecture-overview .intro-block').count()))continue;
     const m=await page.evaluate(()=>{
       const px=e=>e.getBoundingClientRect().height;
-      const cell=n=>{const e=document.querySelector('.practice-cells>div:nth-child('+n+') dd');if(!e)return null;const st=getComputedStyle(e);return {size:parseFloat(st.fontSize),weight:Number(st.fontWeight)};};
-      return {overview:px(document.querySelector('#lecture-overview')),cards:[...document.querySelectorAll('.practice-list>li')].map(px),when:cell(1),act:cell(2),overflow:document.documentElement.scrollWidth-innerWidth};
+      return {overview:px(document.querySelector('#lecture-overview')),overflow:document.documentElement.scrollWidth-innerWidth};
     });
-    // 도입은 모바일에서 1.5화면 안(1,320px)에 들어야 하고, 해볼 일 카드 하나는 320px를 넘기지 않는다.
-    expect(m.overview,row.id+' 도입 높이').toBeLessThanOrEqual(1600);
-    for(const h of m.cards)expect(h,row.id+' 카드 높이').toBeLessThanOrEqual(320);
-    // 위계: 할 일(둘째 칸)이 언제(첫째 칸)보다 크고 굵다.
-    if(m.act){expect(m.act.size).toBeGreaterThan(m.when.size);expect(m.act.weight).toBeGreaterThanOrEqual(600);expect(m.when.weight).toBeLessThan(600);}
+    expect(m.overview,row.id+' 핵심 요약 높이').toBeLessThanOrEqual(1600);
     expect(m.overflow).toBeLessThanOrEqual(1);
     checked++;
   }

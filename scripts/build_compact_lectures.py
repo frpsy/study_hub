@@ -1,7 +1,7 @@
 """Generate lecture pages: an intro (one sentence + content-driven blocks) plus timestamps (김주환 lectures) or a detailed summary (other creators)."""
 from pathlib import Path
 import html,json,re,sys
-from build_library import page,R
+from build_library import page,R,first_key_point
 E=html.escape
 def block_html(t):
  """A detail item is a paragraph (str), a labelled list ({"list": [{"l": label, "t": text}, ...]}) or an inline image ({"image": {"src","alt","width","height","caption"}})."""
@@ -17,24 +17,6 @@ def editor_html(groups):
  return '<div class="editor-notes" id="lecture-editor"><h3>편집자 주</h3>'+''.join('<h4>'+E(g['h'])+'</h4><ul class="editor-list">'+''.join('<li>'+E(t)+'</li>' for t in g['items'])+'</ul>' for g in groups)+'</div>'
 
 def load(name):return json.loads((R/'data'/name).read_text(encoding='utf-8'))
-def seconds(stamp):
- total=0
- for part in stamp.split(':'):total=total*60+int(part)
- return total
-def source_link(step, record, youtube_url):
- # Source navigation is separate from any disclosure: opening an explanation never
- # launches a video. Non-Kim lectures link to a real summary section, not a time.
- stamp=step.get('t')
- if stamp and youtube_url:
-  return f'<a class="practice-source" href="{E(youtube_url,quote=True)}&amp;t={seconds(stamp)}s" target="_blank" rel="noopener">영상 {E(stamp)}부터 보기 ↗</a>'
- if 'detail_index' in step:
-  index=step['detail_index']
-  return f'<a class="practice-source" href="#detail-{index+1}">관련 해설 · {E(record["detail"][index]["h"])}</a>'
- return ''
-def practice_step(step, record, youtube_url):
- stamp=step.get('t')
- label=(' <small>('+E(stamp)+')</small>') if stamp else ''
- return '<details><summary>'+E(step['h'])+label+'</summary><ul>'+''.join('<li>'+E(t)+'</li>' for t in step['b'])+'</ul>'+source_link(step,record,youtube_url)+'</details>'
 INTRO_KINDS=('points','practice','steps')
 def check_intro(vid, record):
  """Refuse data the intro cannot render faithfully. Editorial limits (counts, lengths, quotes) are checked by tests."""
@@ -52,24 +34,12 @@ def point_html(item):
  """A point is a sentence (str) or a labelled sentence ({"l": label, "t": sentence})."""
  if isinstance(item,str):return '<li>'+E(item)+'</li>'
  return '<li><strong class="point-label">'+E(item['l'])+'</strong>'+E(item['t'])+'</li>'
-def action_html(item, record, youtube_url):
- """One thing to try: when / what to do, plus how to check only when the lecturer gave a criterion, and the lecturer's own words and a link to the moment."""
- cells=''.join(f'<div><dt>{label}</dt><dd>{E(item[key])}</dd></div>' for key,label in (('when','언제'),('do','할 일'),('check','확인')) if item.get(key))
- link=source_link(item,record,youtube_url)
- # With a quote the moment link ends the quote line (an inline link keeps the card short); without one it stands alone.
- quote=('<blockquote class="practice-quote"><p>“'+E(item['quote'])+'”'+((' '+link) if link else '')+'</p></blockquote>',) if item.get('quote') else ('',)
- return '<li><dl class="practice-cells">'+cells+'</dl>'+quote[0]+('' if item.get('quote') else link)+'</li>'
-def intro_block_html(block, record, youtube_url):
- kind=block['kind'];head='<h3>'+E(block['h'])+'</h3>'
- if kind=='points':body='<ul class="summary-list">'+''.join(point_html(i) for i in block['items'])+'</ul>'
- elif kind=='practice':body='<ol class="practice-list">'+''.join(action_html(i,record,youtube_url) for i in block['items'])+'</ol>'
- else:body=''.join(practice_step(i,record,youtube_url) for i in block['items'])
- return f'<div class="summary-tier intro-block intro-{kind}">{head}{body}</div>'
-def intro_html(mini, record, youtube_url):
- """Show the key points before the quotation and optional practice blocks."""
- points=''.join(intro_block_html(b,record,youtube_url) for b in record['intro'] if b['kind']=='points')
- practice=''.join(intro_block_html(b,record,youtube_url) for b in record['intro'] if b['kind']!='points')
- return f'<section id="lecture-overview" class="lecture-section"><span id="overview"></span><h2>핵심 요약</h2>{points}<div class="summary-tier intro-quote"><span class="eyebrow">한 문장</span><p class="summary-lead">{E(mini["lead"])}</p></div>{practice}</section>'
+def intro_html(record):
+ points=''.join(
+  '<div class="summary-tier intro-block intro-points"><h3>'+E(block['h'])+'</h3><ul class="summary-list">'+''.join(point_html(item) for item in block['items'])+'</ul></div>'
+  for block in record['intro'] if block['kind']=='points'
+ )
+ return f'<section id="lecture-overview" class="lecture-section"><span id="overview"></span><h2>핵심 요약</h2>{points}</section>'
 def pager(prev,nxt):
  cell=lambda r,cls,label:(f'<a class="pager-link {cls}" href="{E(r["id"],quote=True)}.html"><small>{label}</small><span>{E(r["title"])}</span></a>' if r else '<span class="pager-link is-empty" aria-hidden="true"></span>')
  return f'<nav class="lecture-pager" aria-label="다른 강의">{cell(prev,"is-prev","← 최근 강의")}{cell(nxt,"is-next","지난 강의 →")}</nav>'
@@ -105,7 +75,7 @@ def render(row,record,mini,prev=None,nxt=None):
  sources=''.join(f'<li><a href="{E(s["url"],quote=True)}" target="_blank" rel="noopener">{E(s["label"])}</a></li>' for s in record['sources'])
  sections=[('lecture-overview','핵심 요약')]+([('lecture-detail','상세 요약')] if detailed else [])+([('lecture-comment','타임스탬프')] if timed else [])+[('lecture-sources','출처')]
  section_nav='<nav class="reading-nav" aria-label="이 강의 목차">'+''.join(f'<a href="#{target}">{label}</a>' for target,label in sections)+'</nav>'
- overview_html=intro_html(mini,record,youtube_url)
+ overview_html=intro_html(record)
  body=f'''<div class="site-shell"><nav class="breadcrumb" aria-label="현재 위치"><a href="../index.html">강의 목록</a><span aria-hidden="true">/</span><span>{title}</span></nav><main id="main" class="compact-lecture" data-layout="compact" data-video-id="{E(vid,quote=True)}"><header class="summary-head"><h1>{title}</h1><div class="detail-meta-row"><p class="meta">{date_info}{E(row['duration'])} · {E(row.get("creator","출처 미기재"))} · {source_info}</p><button type="button" class="detail-read" data-library-toggle="read" aria-pressed="false" hidden><span class="read-mark" aria-hidden="true"></span><span data-read-label>읽음 표시</span></button></div><div class="actions">{action}</div></header>{old}{overview_html}{second}<details class="source-disclosure" id="lecture-sources"><summary>출처와 편집자 주</summary><div class="notes-block"><h3>원본과 참고 자료</h3><ul>{sources}</ul></div>{editor}</details>{pager(prev,nxt)}</main></div>'''
  body=body.replace('<div class="actions">'+action+'</div>','')
  img=row.get('image')
@@ -113,7 +83,7 @@ def render(row,record,mini,prev=None,nxt=None):
  if img:
   hero=f'<figure class="lecture-hero"><img src="../{E(img["src"],quote=True)}" width="{int(img["width"])}" height="{int(img["height"])}" alt="{E(img["alt"],quote=True)}" decoding="async" fetchpriority="high"></figure>'
  body=body.replace('</header>'+old,'</header>'+hero+section_nav+old)
- return page(row['title'],body,base='../',description=mini['lead'],path=f'lectures/{vid}.html')
+ return page(row['title'],body,base='../',description=first_key_point(record),path=f'lectures/{vid}.html')
 def build(check=False):
  records=load('lecture_compact.json');minis=load('mini_courses.json');issues=[]
  rows=json.loads((R/'lectures.json').read_text(encoding='utf-8'))
