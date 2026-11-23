@@ -103,7 +103,7 @@
       try{localStorage.setItem(libraryKeys[kind],JSON.stringify([...ids]))}catch{}
       refreshLibraryButtons();
       document.dispatchEvent(new Event('library-change'));
-      if(button.closest('[hidden]'))document.querySelector('[data-value="bookmarks"]')?.focus();
+      if(button.closest('[hidden]'))document.querySelector('[data-bookmark-filter]')?.focus();
     });
   });
   window.addEventListener('pageshow',restoreLibrary);
@@ -119,21 +119,24 @@
     const count=document.getElementById(input.dataset.count),empty=document.getElementById(input.dataset.empty);
     const topicLabel=target.querySelector('#catalog-topic');
     const clearButton=document.querySelector('[data-clear-for="'+input.id+'"]');
-    const chips=[...document.querySelectorAll('[data-filter-for="topic"]')];
+    const chips=[...target.querySelectorAll('[data-filter-for="topic"]')];
+    const bookmarkFilter=target.querySelector('[data-bookmark-filter]');
     const persist=input.dataset.persistQuery==='true';
     const emptySearch=empty?.querySelector('[data-clear-search]');
     const emptyTopic=empty?.querySelector('[data-clear-topic]');
-    let topic='';
+    let topic='',bookmarkedOnly=false;
     const filter=(saveURL=false)=>{
       const words=input.value.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);let shown=0;
       cards.forEach(card=>{
         const lead=card.querySelector('.card-lead')?.textContent||'';
         const hay=(card.dataset.search+' '+lead).toLocaleLowerCase();
-        const matchesTopic=topic==='bookmarks'?library.bookmarks.has(card.dataset.videoId):!topic||card.dataset.topic===topic;
-        card.hidden=!matchesTopic||!words.every(word=>hay.includes(word));
+        const matchesTopic=!topic||card.dataset.topic===topic;
+        const matchesBookmark=!bookmarkedOnly||library.bookmarks.has(card.dataset.videoId);
+        card.hidden=!matchesTopic||!matchesBookmark||!words.every(word=>hay.includes(word));
         if(!card.hidden)shown++;
       });
-      if(topicLabel)topicLabel.textContent=topic==='bookmarks'?'북마크':topic||'전체';
+      if(topicLabel)topicLabel.textContent=[topic,bookmarkedOnly?'북마크':''].filter(Boolean).join(' · ')||'전체';
+      bookmarkFilter?.setAttribute('aria-pressed',String(bookmarkedOnly));
       if(count)count.textContent=shown+'개 '+input.dataset.noun;
       if(empty)empty.hidden=shown!==0;
       if(clearButton)clearButton.hidden=!input.value;
@@ -143,6 +146,7 @@
         const url=new URL(location.href);
         if(input.value.trim())url.searchParams.set('q',input.value);else url.searchParams.delete('q');
         if(topic)url.searchParams.set('topic',topic);else url.searchParams.delete('topic');
+        if(bookmarkedOnly)url.searchParams.set('bookmarks','1');else url.searchParams.delete('bookmarks');
         // Replacing this entry preserves the search when returning from a reading
         // page, without adding a browser-history entry for every keystroke.
         try{history.replaceState(history.state,'',url.href)}catch{}
@@ -153,10 +157,14 @@
       const params=new URLSearchParams(location.search);
       input.value=params.get('q')||'';
       const wanted=params.get('topic')||'';
+      bookmarkedOnly=params.get('bookmarks')==='1'||wanted==='bookmarks';
       topic=chips.some(button=>button.dataset.value===wanted)?wanted:'';
     };
     fromURL();
-    chips.forEach(button=>button.hidden=false);
+    if(bookmarkFilter){
+      bookmarkFilter.hidden=false;
+      bookmarkFilter.addEventListener('click',()=>{bookmarkedOnly=!bookmarkedOnly;filter(true)});
+    }
     document.addEventListener('library-change',()=>filter());
     input.addEventListener('input',()=>filter(true));filter();
     if(persist){
