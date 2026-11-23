@@ -71,6 +71,48 @@
     },{rootMargin:'-110px 0px -55% 0px'});
     links.forEach(a=>{const el=document.getElementById(a.hash.slice(1));if(el)observer.observe(el)});
   }
+  const libraryKeys={bookmarks:'study-hub-bookmarks',read:'study-hub-read'};
+  const library={bookmarks:new Set(),read:new Set()};
+  const libraryButtons=[...document.querySelectorAll('[data-library-toggle]')];
+  const refreshLibraryButtons=()=>{
+    libraryButtons.forEach(button=>{
+      const lecture=button.closest('[data-video-id]');
+      const kind=button.dataset.libraryToggle;
+      const selected=library[kind].has(lecture.dataset.videoId);
+      button.setAttribute('aria-pressed',String(selected));
+      if(kind==='bookmarks')button.firstElementChild.textContent=selected?'★':'☆';
+      else lecture.classList.toggle('is-read',selected);
+    });
+  };
+  const restoreLibrary=()=>{
+    for(const [kind,key] of Object.entries(libraryKeys)){
+      try{
+        const values=JSON.parse(localStorage.getItem(key));
+        library[kind]=new Set(Array.isArray(values)?values.filter(value=>typeof value==='string'):[]);
+      }catch{}
+    }
+    refreshLibraryButtons();
+  };
+  restoreLibrary();
+  libraryButtons.forEach(button=>{
+    button.hidden=false;
+    button.addEventListener('click',()=>{
+      const id=button.closest('[data-video-id]').dataset.videoId;
+      const kind=button.dataset.libraryToggle,ids=library[kind];
+      if(ids.has(id))ids.delete(id);else ids.add(id);
+      try{localStorage.setItem(libraryKeys[kind],JSON.stringify([...ids]))}catch{}
+      refreshLibraryButtons();
+      document.dispatchEvent(new Event('library-change'));
+      if(button.closest('[hidden]'))document.querySelector('[data-value="bookmarks"]')?.focus();
+    });
+  });
+  window.addEventListener('pageshow',restoreLibrary);
+  window.addEventListener('storage',event=>{
+    if(event.key===null||Object.values(libraryKeys).includes(event.key)){
+      restoreLibrary();
+      document.dispatchEvent(new Event('library-change'));
+    }
+  });
   document.querySelectorAll('[data-filter-input]').forEach(input=>{
     const target=document.querySelector(input.dataset.filterInput);if(!target)return;
     const cards=[...target.querySelectorAll('[data-search]')];
@@ -85,11 +127,13 @@
     const filter=(saveURL=false)=>{
       const words=input.value.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);let shown=0;
       cards.forEach(card=>{
-        const hay=(card.textContent+' '+card.dataset.search).toLocaleLowerCase();
-        card.hidden=!words.every(word=>hay.includes(word))||(topic!==''&&card.dataset.topic!==topic);
+        const lead=card.querySelector('.card-lead')?.textContent||'';
+        const hay=(card.dataset.search+' '+lead).toLocaleLowerCase();
+        const matchesTopic=topic==='bookmarks'?library.bookmarks.has(card.dataset.videoId):!topic||card.dataset.topic===topic;
+        card.hidden=!matchesTopic||!words.every(word=>hay.includes(word));
         if(!card.hidden)shown++;
       });
-      if(topicLabel)topicLabel.textContent=topic||'전체';
+      if(topicLabel)topicLabel.textContent=topic==='bookmarks'?'북마크':topic||'전체';
       if(count)count.textContent=shown+'개 '+input.dataset.noun;
       if(empty)empty.hidden=shown!==0;
       if(clearButton)clearButton.hidden=!input.value;
@@ -112,6 +156,8 @@
       topic=chips.some(button=>button.dataset.value===wanted)?wanted:'';
     };
     fromURL();
+    chips.forEach(button=>button.hidden=false);
+    document.addEventListener('library-change',()=>filter());
     input.addEventListener('input',()=>filter(true));filter();
     if(persist){
       const restore=()=>{fromURL();filter()};
@@ -131,15 +177,25 @@
   // 오늘의 한 문장: 날짜마다 다른 강의의 한 문장을 보여 준다. 스크립트가 없으면 최신 강의가 그대로 보인다.
   const today=document.querySelector('.today-line');
   if(today){
-    const pool=[...document.querySelectorAll('#lecture-list .lecture')].filter(card=>card.querySelector('.card-lead'));
+    const pool=[...document.querySelectorAll('#lecture-list .lecture-card')].filter(card=>card.querySelector('.card-lead'));
     if(pool.length){
       const now=new Date();
       const day=Math.floor((Date.UTC(now.getFullYear(),now.getMonth(),now.getDate())-Date.UTC(2026,0,1))/864e5);
-      const pick=pool[((day%pool.length)+pool.length)%pool.length];
-      today.href=pick.getAttribute('href');
-      today.querySelector('blockquote').textContent=pick.querySelector('.card-lead').textContent;
-      const source=today.querySelector('.today-source');
-      source.firstChild.textContent=pick.querySelector('h2').textContent+' · '+(pick.dataset.creator||'');
+      const quote=today.querySelector('blockquote'),source=today.querySelector('.today-source');
+      const random=today.querySelector('.today-random');
+      const render=card=>{
+        const title=card.querySelector('.card-link');
+        quote.textContent=card.querySelector('.card-lead').textContent;
+        source.setAttribute('href',title.getAttribute('href'));
+        source.textContent=title.textContent+' · '+card.dataset.creator;
+      };
+      render(pool[((day%pool.length)+pool.length)%pool.length]);
+      const alternatives=()=>pool.filter(card=>card.querySelector('.card-lead').textContent!==quote.textContent);
+      random.hidden=!alternatives().length;
+      random.addEventListener('click',()=>{
+        const choices=alternatives();
+        if(choices.length)render(choices[Math.floor(Math.random()*choices.length)]);
+      });
     }
   }
   document.querySelectorAll('.sort-toggle').forEach(group=>{
@@ -330,14 +386,6 @@
   const title=document.createElement('strong');title.textContent='목차';
   const close=document.createElement('button');close.type='button';close.className='outline-close';close.textContent='닫기';
   head.append(title,close);sheet.append(head,list);
-  // 읽는 중에도 글자 크기·강조 색을 바꿀 수 있게 푸터의 보기 설정을 시트에 한 벌 더 둔다.
-  // 같은 data 속성을 쓰므로 theme.js가 두 곳의 선택 상태를 함께 맞춘다. 화면 테마 버튼은 푸터에만 둔다.
-  const panel=document.querySelector('.site-footer .view-settings-panel');
-  if(panel){
-    const view=document.createElement('section');view.className='outline-view';view.setAttribute('aria-label','보기 설정');
-    const heading=document.createElement('strong');heading.textContent='보기 설정';
-    view.append(heading,panel.cloneNode(true));sheet.append(view);
-  }
   const button=document.createElement('button');
   button.type='button';button.className='outline-fab';button.setAttribute('aria-haspopup','dialog');
   const label=document.createElement('span');const prefix=document.createElement('b');prefix.textContent='목차';button.append(prefix,label);

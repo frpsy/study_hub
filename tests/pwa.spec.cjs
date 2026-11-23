@@ -26,21 +26,24 @@ test('auto, manual dark and light theme persist across lectures and desktop',asy
     await expect(page.locator('html')).toHaveAttribute('data-theme','dark');
     await expect(page.locator('html')).toHaveAttribute('data-theme-mode','auto');
     const dark=await page.locator('body').evaluate(e=>getComputedStyle(e).backgroundColor);
-    await expect(page.locator('[data-theme-toggle]')).toHaveText('화면 · 시스템');
-    await page.locator('[data-theme-toggle]').click();
+    await page.locator('.appearance-toggle').click();
+    await expect(page.locator('[data-theme-choice=auto]')).toHaveAttribute('aria-pressed','true');
+    await page.locator('[data-theme-choice=light]').click();
     await expect(page.locator('html')).toHaveAttribute('data-theme','light');
-    await expect(page.locator('[data-theme-toggle]')).toHaveText('화면 · 라이트');
+    await expect(page.locator('[data-theme-choice=light]')).toHaveAttribute('aria-pressed','true');
     const light=await page.locator('body').evaluate(e=>getComputedStyle(e).backgroundColor);
     expect(light).not.toBe(dark);
     await page.goto('/lectures/affirmation-20261101.html');
     await expect(page.locator('html')).toHaveAttribute('data-theme','light');
-    await page.locator('[data-theme-toggle]').click();
+    await page.locator('.appearance-toggle').click();
+    await page.locator('[data-theme-choice=dark]').click();
     await expect(page.locator('html')).toHaveAttribute('data-theme','dark');
     await page.reload();
     await expect(page.locator('html')).toHaveAttribute('data-theme','dark');
     const widths=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
     expect(widths).toBeLessThanOrEqual(1);
-    await page.locator('[data-theme-toggle]').click();
+    await page.locator('.appearance-toggle').click();
+    await page.locator('[data-theme-choice=auto]').click();
     await expect(page.locator('html')).toHaveAttribute('data-theme-mode','auto');
     await expect(page.locator('html')).toHaveAttribute('data-theme','dark');
     await context.close();
@@ -53,11 +56,15 @@ test('system appearance changes and keyboard operation remain accessible',async(
   await expect(page.locator('html')).toHaveAttribute('data-theme','light');
   await page.emulateMedia({colorScheme:'dark'});
   await expect(page.locator('html')).toHaveAttribute('data-theme','dark');
-  const toggle=page.locator('[data-theme-toggle]');
+  const toggle=page.locator('.appearance-toggle');
   await toggle.focus();
   await page.keyboard.press('Enter');
+  await expect(toggle).toHaveAttribute('aria-expanded','true');
+  await page.locator('[data-theme-choice=light]').click();
   await expect(page.locator('html')).toHaveAttribute('data-theme','light');
-  await expect(toggle).toHaveAttribute('aria-label',/화면 테마/);
+  await page.keyboard.press('Escape');
+  await expect(toggle).toHaveAttribute('aria-expanded','false');
+  await expect(toggle).toBeFocused();
   await context.close();
 });
 test('standalone screen does not overflow and offline fallback is available',async({browser})=>{
@@ -69,7 +76,7 @@ test('standalone screen does not overflow and offline fallback is available',asy
   expect(await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(1);
   await page.goto('/offline.html');
   await expect(page.getByRole('heading',{name:'인터넷에 연결되지 않았습니다'})).toBeVisible();
-  await expect(page.locator('[data-theme-toggle]')).toBeVisible();
+  await expect(page.locator('.appearance-toggle')).toBeVisible();
   await context.close();
 });
 test('service worker caches lecture library and app shell for offline reading',async({browser})=>{
@@ -106,32 +113,39 @@ test('service worker caches lecture library and app shell for offline reading',a
   await context.close();
 });
 
-test('appearance control is quiet and only at bottom of every page',async({browser})=>{
- for(const width of [360,390,768,1280]){
-  const context=await browser.newContext({viewport:{width,height:844},colorScheme:'dark'});
-  const page=await context.newPage();
-  for(const url of ['/index.html','/lectures/affirmation-20261101.html','/offline.html']){
-   await page.goto(url);
-   await expect(page.locator('.site-header [data-theme-toggle]')).toHaveCount(0);
-   await expect(page.locator('.site-footer-inner [data-theme-toggle]')).toHaveCount(1);
-   const styles=await page.locator('.site-footer-inner [data-theme-toggle]').evaluate(el=>({
-     font:parseFloat(getComputedStyle(el).fontSize),
-     border:getComputedStyle(el).borderTopWidth,
-     height:el.getBoundingClientRect().height,
-     bottom:el.getBoundingClientRect().bottom,
-     footer:el.closest('footer').getBoundingClientRect().bottom
-   }));
-   expect(styles.font).toBeLessThanOrEqual(12);
-   expect(styles.border).toBe('0px');
-   expect(styles.height).toBeGreaterThanOrEqual(44);
-   expect(styles.bottom).toBeLessThanOrEqual(styles.footer);
-   expect(await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(1);
-  }
+test('all lecture pages share the header panel and restore all appearance settings',async({page})=>{
+  test.setTimeout(60000);
+  await page.setViewportSize({width:390,height:844});
   await page.goto('/index.html');
-  await page.locator('.site-footer-inner [data-theme-toggle]').click();
-  await expect(page.locator('html')).toHaveAttribute('data-theme','light');
-  await context.close();
- }
+  await page.locator('.appearance-toggle').click();
+  await page.locator('[data-theme-choice=dark]').click();
+  await page.locator('.accent-swatch[data-accent=blue]').click();
+  await page.locator('.text-size[data-text-size=lg]').click();
+  for(const row of require('../lectures.json')){
+    await page.goto('/lectures/'+row.id+'.html');
+    const root=page.locator('html');
+    await expect(root).toHaveAttribute('data-theme','dark');
+    await expect(root).toHaveAttribute('data-accent','blue');
+    await expect(root).toHaveAttribute('data-text-size','lg');
+    await expect(page.locator('.site-footer button')).toHaveCount(0);
+    const readingSurfaces=await page.evaluate(()=>{
+      const expected=['rgb(27, 30, 33)','rgb(29, 32, 35)'];
+      return [...document.querySelectorAll('.practice-list>li,.detail-body blockquote,.timeline-preview')]
+        .filter(el=>el.getClientRects().length>0)
+        .every(el=>expected.includes(getComputedStyle(el).backgroundColor));
+    });
+    expect(readingSurfaces,row.id).toBe(true);
+    const toggle=page.locator('.site-header .appearance-toggle');
+    await toggle.click();
+    await expect(toggle).toHaveAttribute('aria-expanded','true');
+    await expect(page.locator('#appearance-panel')).toBeVisible();
+    const panel=await page.locator('#appearance-panel').boundingBox();
+    expect(panel.x).toBeGreaterThanOrEqual(0);
+    expect(panel.x+panel.width).toBeLessThanOrEqual(390);
+    await page.mouse.click(5,200);
+    await expect(toggle).toHaveAttribute('aria-expanded','false');
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(1);
+  }
 });
 
 test('online navigation rejects a stale cached header and offline still reads the page',async({browser})=>{
@@ -144,8 +158,8 @@ test('online navigation rejects a stale cached header and offline still reads th
     await registration.update();
   });
   await page.reload();
-  await expect(page.locator('.site-header [data-theme-toggle]')).toHaveCount(0);
-  await expect(page.locator('.site-footer [data-theme-toggle]')).toHaveCount(1);
+  await expect(page.locator('.site-header .appearance-toggle')).toHaveCount(1);
+  await expect(page.locator('.site-footer button')).toHaveCount(0);
   await page.evaluate(async()=>{
     const key=(await caches.keys()).find(k=>k.startsWith('study-home-static-'));
     const cache=await caches.open(key);
@@ -153,8 +167,8 @@ test('online navigation rejects a stale cached header and offline still reads th
     await cache.put(new URL('index.html',location.href),new Response(stale,{headers:{'Content-Type':'text/html;charset=UTF-8'}}));
   });
   await page.goto('/index.html?check=online-first');
-  await expect(page.locator('.site-header [data-theme-toggle]')).toHaveCount(0);
-  await expect(page.locator('.site-footer [data-theme-toggle]')).toHaveCount(1);
+  await expect(page.locator('.site-header .appearance-toggle')).toHaveCount(1);
+  await expect(page.locator('.site-footer button')).toHaveCount(0);
   await expect(page.locator('h1')).toHaveText('강의 요약');
   const freshCached=await page.evaluate(async()=>{
     const key=(await caches.keys()).find(k=>k.startsWith('study-home-static-'));
