@@ -1055,3 +1055,6 @@ html.header-hidden .sidebar{top:12px}
 .compact-lecture{padding-bottom:8px}
 .practice-quote .practice-source{display:inline;min-height:0;margin:0 0 0 4px;white-space:nowrap}
 
+
+/* 라벨이 있는 항목: 라벨은 굵은 한 줄, 설명은 그 아래 (2026-11-23 사용자 요청) */
+.point-label{display:block;font-weight:700;margin:0 0 2px}

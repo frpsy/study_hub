@@ -9,7 +9,7 @@ def block_html(t):
  if 'image' in t:
   g=t['image'];cap=('<figcaption>'+E(g['caption'])+'</figcaption>') if g.get('caption') else ''
   return f'<figure class="detail-figure"><img src="../{E(g["src"],quote=True)}" width="{int(g["width"])}" height="{int(g["height"])}" alt="{E(g["alt"],quote=True)}" loading="lazy" decoding="async">{cap}</figure>'
- return '<ul class="detail-points">'+''.join('<li><strong>'+E(i['l'])+'</strong>. '+E(i['t'])+'</li>' for i in t['list'])+'</ul>'
+ return '<ul class="detail-points">'+''.join('<li><strong class="point-label">'+E(i['l'])+'</strong>'+E(i['t'])+'</li>' for i in t['list'])+'</ul>'
 
 def editor_html(groups):
  """Limits, supplements and evidence checks live only here, inside the closed sources-and-notes fold at the page end."""
@@ -51,7 +51,7 @@ def check_intro(vid, record):
 def point_html(item):
  """A point is a sentence (str) or a labelled sentence ({"l": label, "t": sentence})."""
  if isinstance(item,str):return '<li>'+E(item)+'</li>'
- return '<li><strong>'+E(item['l'])+'</strong>. '+E(item['t'])+'</li>'
+ return '<li><strong class="point-label">'+E(item['l'])+'</strong>'+E(item['t'])+'</li>'
 def action_html(item, record, youtube_url):
  """One thing to try: when / what to do, plus how to check only when the lecturer gave a criterion, and the lecturer's own words and a link to the moment."""
  cells=''.join(f'<div><dt>{label}</dt><dd>{E(item[key])}</dd></div>' for key,label in (('when','언제'),('do','할 일'),('check','확인')) if item.get(key))
