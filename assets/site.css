@@ -1085,19 +1085,30 @@ html.header-hidden .sidebar{top:12px}
 .stretched-link:focus-visible::after{outline:2px solid var(--focus-color);outline-offset:-2px}
 .lecture-card .card-link{color:inherit;text-decoration:none}
 .lecture-card .card-actions,.today-random{position:relative;z-index:1}
-.home-main .lecture-card h2{padding-inline-end:96px}
-.lecture-card .card-actions{position:absolute;inset-block-start:8px;inset-inline-end:0;display:flex;gap:2px}
-.card-actions button,.appearance-toggle,.today-random,.detail-read{min-height:var(--tap-target);background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:var(--radius-control)}
+.lecture-card .card-context{display:flex;align-items:center;justify-content:space-between;gap:6px}
+.lecture-card .card-context .meta{min-width:0;flex-wrap:wrap;row-gap:2px;margin:0}
+.lecture-card .card-actions{display:flex;flex:none}
+.card-actions button,.appearance-toggle,.today-random,.detail-read{min-height:var(--tap-target);color:var(--ink);border-radius:var(--radius-control)}
+.card-actions button,.appearance-toggle,.today-random{background:transparent;border:0}
 .card-actions button,.appearance-toggle{min-width:var(--tap-target)}
-.card-actions button[aria-pressed="true"],.detail-read[aria-pressed="true"]{color:var(--accent);border-color:var(--accent);background:var(--tint)}
+.card-actions button{color:var(--muted);font-size:17px;padding:0}
+.card-actions button[aria-pressed="true"],.detail-read[aria-pressed="true"]{color:var(--accent);background:var(--tint)}
+.detail-read{background:var(--surface);border:1px solid var(--line)}
 .lecture-card.is-read .card-link{color:var(--muted)}
-.lecture-card.is-read{border-inline-start:2px solid var(--line-strong);padding-inline-start:8px}
 .lecture-card.is-read .card-link:hover{color:var(--accent)}
-.today-line{margin:16px 0 28px;padding:8px 0 16px;border-bottom:1px solid var(--line)}
+.today-line{margin:8px 0 20px;padding:0 0 14px;border-bottom:1px solid var(--line)}
 .today-heading{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .today-heading .eyebrow{margin:0}
 .today-random,.detail-read{padding:0 12px;font-size:13px}
-.today-line blockquote{line-height:1.75;margin-top:6px}
+.today-random{padding-inline-end:0;color:var(--muted)}
+.today-line blockquote{line-height:1.6;margin-top:2px;font-weight:600;word-break:keep-all!important;overflow-wrap:anywhere}
+.home-main .lecture-card .card-link{word-break:keep-all!important;overflow-wrap:anywhere}
+.home-main .lecture-card .card-lead{margin-top:0}
+.home-main .filter-chips button{border-color:transparent}
+.home-main .filter-chips button[aria-pressed="true"]{background:var(--tint);color:var(--ink);border-color:var(--line)}
+.home-main .sort-toggle{border:0;padding:0}
+.home-main .sort-toggle button{min-height:var(--tap-target);padding-inline:8px}
+.home-main .sort-toggle button[aria-pressed="true"]{background:transparent;color:var(--ink);text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:5px}
 .site-header-inner{display:flex;align-items:center;justify-content:space-between}
 .header-settings{position:relative;margin-inline-start:auto;flex:none}
 .header-settings .view-settings-panel{position:absolute;inset-inline-end:0;inset-block-start:100%;width:min(320px,calc(100vw - 32px));box-sizing:border-box;margin-top:6px;background:var(--surface);box-shadow:0 6px 18px var(--shadow-color,rgba(0,0,0,.18))}
@@ -1106,7 +1117,15 @@ html.header-hidden .sidebar{top:12px}
 .header-settings [data-theme-choice][aria-pressed="true"]{border-color:var(--accent);color:var(--accent);background:var(--tint)}
 .header-settings [hidden],.today-random[hidden],.detail-read[hidden],.card-actions button[hidden],.filter-chips button[hidden]{display:none}
 .detail-read{margin-top:8px}
-@media(max-width:780px){.today-line{margin:12px 0 20px;padding-bottom:12px}}
+@media(max-width:780px){
+ .today-line{margin:4px 0 16px;padding-bottom:12px}
+ .today-line blockquote{font-size:17px}
+ .today-line .today-source{margin-top:8px;font-size:13px}
+ .home-main .filter-chips{flex-wrap:wrap;overflow:visible;gap:0 2px;padding:0;mask-image:none;-webkit-mask-image:none}
+ .home-main .filter-chips button{padding-inline:6px}
+ .home-main .catalog-order{padding-bottom:0}
+ .home-main .lecture-card .meta{font-size:12px}
+}
 @media print{.header-settings,.detail-read,.card-actions,.today-random{display:none}}
 
 /* Keep lecture-specific reading surfaces and boundaries on the shared palette. */
