@@ -324,13 +324,11 @@ test('reading navigation and disclosures work on small screens without scripts',
   const context=await browser.newContext({viewport:{width:320,height:760},javaScriptEnabled:false,reducedMotion:'reduce'});
   const page=await context.newPage();
   await page.goto('/lectures/izYj8g-j00U.html');
-  await page.getByRole('navigation',{name:'이 강의 목차'}).getByRole('link',{name:'실천 포인트'}).click();
-  await expect(page).toHaveURL(/#lecture-practice$/);
-  const summary=page.locator('#lecture-practice summary').first();
-  await summary.focus();
-  await page.keyboard.press('Enter');
-  await expect(page.locator('#lecture-practice details').first()).toHaveAttribute('open','');
-  await expect(page.locator('#lecture-practice details').first().locator('.practice-source')).toBeVisible();
+  await page.getByRole('navigation',{name:'이 강의 목차'}).getByRole('link',{name:'도입'}).click();
+  await expect(page).toHaveURL(/#lecture-overview$/);
+  // 도입의 해볼 일은 JS 없이 보이고, 영상 시각 링크도 바로 누를 수 있어야 한다.
+  await expect(page.locator('#lecture-overview .practice-list>li').first()).toBeVisible();
+  await expect(page.locator('#lecture-overview .practice-source').first()).toBeVisible();
   expect(await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(1);
   await context.close();
 });
@@ -341,12 +339,11 @@ test('reading navigation tracks sections and source disclosure opens',async({bro
   await page.goto('/lectures/izYj8g-j00U.html');
   if(process.env.STUDY_SCREENSHOT_DIR)await page.screenshot({path:require('node:path').join(process.env.STUDY_SCREENSHOT_DIR,'study-hub-mobile.png')});
   const nav=page.getByRole('navigation',{name:'이 강의 목차'});
-  await nav.getByRole('link',{name:'실천 포인트'}).click();
-  await expect(nav.getByRole('link',{name:'실천 포인트'})).toHaveAttribute('aria-current','location');
-  const geometry=await page.evaluate(()=>({heading:document.querySelector('#lecture-practice>h2').getBoundingClientRect().top,nav:document.querySelector('.reading-nav').getBoundingClientRect().bottom}));
+  await nav.getByRole('link',{name:'도입'}).click();
+  await expect(nav.getByRole('link',{name:'도입'})).toHaveAttribute('aria-current','location');
+  const geometry=await page.evaluate(()=>({heading:document.querySelector('#lecture-overview>h2').getBoundingClientRect().top,nav:document.querySelector('.reading-nav').getBoundingClientRect().bottom}));
   expect(geometry.heading).toBeGreaterThanOrEqual(geometry.nav);
   if(process.env.STUDY_SCREENSHOT_DIR){
-    await page.locator('#lecture-practice summary').first().click();
     await page.screenshot({path:require('node:path').join(process.env.STUDY_SCREENSHOT_DIR,'study-hub-practice.png')});
   }
   await nav.getByRole('link',{name:'참고 자료'}).click();
@@ -399,7 +396,7 @@ for(const width of [390,1280]){
   expect(box.width).toBe(width);
   expect(box.background).not.toBe('rgba(0, 0, 0, 0)');
   expect(box.transform).not.toBe('matrix(0, 0, 0, 1, 0, 0)');
-  await page.locator('.reading-nav a[href="#lecture-practice"]').click();
+  await page.locator('.reading-nav a[href="#lecture-overview"]').click();
   await expect(bar).toBeVisible();
   await context.close();
  });

@@ -1070,3 +1070,6 @@ html.header-hidden .sidebar{top:12px}
 .practice-quote p{margin:0;font-size:calc(14px*var(--reading-scale));line-height:1.8;color:var(--muted)}
 .practice-list .practice-source{margin:4px 0 0}
 @media(max-width:780px){.practice-list>li{padding:14px 16px}.practice-cells>div{grid-template-columns:3em minmax(0,1fr);column-gap:10px}}
+
+/* 도입은 첫 섹션이라 목차로 가면 고정 헤더와 목차 아래에 제목이 가려지지 않도록 여백을 둔다. */
+.compact-lecture #lecture-overview{scroll-margin-top:calc(var(--header-height,72px) + 64px)}
