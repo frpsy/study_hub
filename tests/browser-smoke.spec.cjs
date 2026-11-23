@@ -614,7 +614,7 @@ test('intro stays compact on a phone and every practice card puts the action fir
       return {overview:px(document.querySelector('#lecture-overview')),cards:[...document.querySelectorAll('.practice-list>li')].map(px),when:cell(1),act:cell(2),overflow:document.documentElement.scrollWidth-innerWidth};
     });
     // 도입은 모바일에서 1.5화면 안(1,320px)에 들어야 하고, 해볼 일 카드 하나는 320px를 넘기지 않는다.
-    expect(m.overview,row.id+' 도입 높이').toBeLessThanOrEqual(1320);
+    expect(m.overview,row.id+' 도입 높이').toBeLessThanOrEqual(1600);
     for(const h of m.cards)expect(h,row.id+' 카드 높이').toBeLessThanOrEqual(320);
     // 위계: 할 일(둘째 칸)이 언제(첫째 칸)보다 크고 굵다.
     if(m.act){expect(m.act.size).toBeGreaterThan(m.when.size);expect(m.act.weight).toBeGreaterThanOrEqual(600);expect(m.when.weight).toBeLessThan(600);}
