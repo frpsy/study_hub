@@ -1060,7 +1060,8 @@ html.header-hidden .sidebar{top:12px}
 @media(max-width:780px){
  .home-main .catalog-intro{margin-bottom:14px}
  .today-line{margin-bottom:12px}
- .home-main .lecture{padding:14px 0 16px}
+ .home-main .lecture-grid{row-gap:0}
+ .home-main .lecture{padding:14px 0 12px}
 }
 
 /* Personal library cards and the shared appearance panel. */
