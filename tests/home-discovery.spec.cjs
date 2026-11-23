@@ -101,6 +101,9 @@ test('sleep search aliases and independent empty-state resets',async({page})=>{
   await page.getByRole('button',{name:'검색어 지우기'}).click();
   await expect(search).toBeEmpty();
   await expect(page.locator('#catalog-topic')).toHaveText('명상');
+  await search.fill('잠');
+  await page.getByRole('button',{name:'검색창 비우기'}).click();
+  await expect(search).toBeEmpty();
 });
 
 test('random hero changes both the quote and its lecture destination',async({page})=>{
@@ -119,15 +122,25 @@ test('bookmark filtering and read state survive navigation and reload',async({pa
   const card=page.locator('article[data-video-id="VUHrJZbpIjI"]');
   const bookmark=card.getByRole('button',{name:'북마크'});
   const read=card.getByRole('button',{name:'읽음 표시'});
+  for(const button of [bookmark,read]){
+    const bounds=await button.boundingBox();
+    expect(bounds.width).toBeGreaterThanOrEqual(44);
+    expect(bounds.height).toBeGreaterThanOrEqual(44);
+  }
   await bookmark.click();
   await read.click();
   await expect(page).toHaveURL(/\/index\.html$/);
   await expect(card).toHaveClass(/is-read/);
-  await page.locator('[data-value=bookmarks]').click();
+  await page.locator('[data-bookmark-filter]').click();
   await expect(page.locator('#count')).toHaveText('1개 강의');
+  await page.locator('[data-value=명상]').click();
+  await expect(page.locator('#count')).toHaveText('0개 강의');
+  await expect(page.locator('[data-bookmark-filter]')).toHaveAttribute('aria-pressed','true');
+  await page.locator('[data-value=명상]').click();
   await page.reload();
   await expect(bookmark).toHaveAttribute('aria-pressed','true');
   await expect(read).toHaveAttribute('aria-pressed','true');
+  await expect(read.locator('.read-mark')).toHaveCSS('background-color',await read.evaluate(el=>getComputedStyle(el).color));
   const meta=card.locator('.meta');
   await meta.scrollIntoViewIfNeeded();
   const box=await meta.boundingBox();
