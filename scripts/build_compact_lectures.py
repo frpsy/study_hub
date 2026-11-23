@@ -12,9 +12,9 @@ def block_html(t):
  return '<ul class="detail-points">'+''.join('<li><strong>'+E(i['l'])+'</strong>. '+E(i['t'])+'</li>' for i in t['list'])+'</ul>'
 
 def editor_html(groups):
- """Limits, supplements and evidence checks live only here, in a closed 'editor notes' fold at the page end."""
+ """Limits, supplements and evidence checks live only here, inside the closed sources-and-notes fold at the page end."""
  if not groups:return ''
- return '<details class="source-disclosure editor-notes" id="lecture-editor"><summary>편집자 주</summary>'+''.join('<h3>'+E(g['h'])+'</h3><ul class="editor-list">'+''.join('<li>'+E(t)+'</li>' for t in g['items'])+'</ul>' for g in groups)+'</details>'
+ return '<div class="editor-notes" id="lecture-editor"><h3>편집자 주</h3>'+''.join('<h4>'+E(g['h'])+'</h4><ul class="editor-list">'+''.join('<li>'+E(t)+'</li>' for t in g['items'])+'</ul>' for g in groups)+'</div>'
 
 def load(name):return json.loads((R/'data'/name).read_text(encoding='utf-8'))
 def seconds(stamp):
@@ -26,7 +26,7 @@ def source_link(step, record, youtube_url):
  # launches a video. Non-Kim lectures link to a real summary section, not a time.
  stamp=step.get('t')
  if stamp and youtube_url:
-  return f'<a class="practice-source" href="{E(youtube_url,quote=True)}&amp;t={seconds(stamp)}s" target="_blank" rel="noopener">영상에서 {E(stamp)} 보기 ↗</a>'
+  return f'<a class="practice-source" href="{E(youtube_url,quote=True)}&amp;t={seconds(stamp)}s" target="_blank" rel="noopener">영상 {E(stamp)}부터 보기 ↗</a>'
  if 'detail_index' in step:
   index=step['detail_index']
   return f'<a class="practice-source" href="#detail-{index+1}">관련 해설 · {E(record["detail"][index]["h"])}</a>'
@@ -55,8 +55,10 @@ def point_html(item):
 def action_html(item, record, youtube_url):
  """One thing to try: when / what to do, plus how to check only when the lecturer gave a criterion, and the lecturer's own words and a link to the moment."""
  cells=''.join(f'<div><dt>{label}</dt><dd>{E(item[key])}</dd></div>' for key,label in (('when','언제'),('do','할 일'),('check','확인')) if item.get(key))
- quote=('<blockquote class="practice-quote"><p>“'+E(item['quote'])+'”</p></blockquote>') if item.get('quote') else ''
- return '<li><dl class="practice-cells">'+cells+'</dl>'+quote+source_link(item,record,youtube_url)+'</li>'
+ link=source_link(item,record,youtube_url)
+ # With a quote the moment link ends the quote line (an inline link keeps the card short); without one it stands alone.
+ quote=('<blockquote class="practice-quote"><p>“'+E(item['quote'])+'”'+((' '+link) if link else '')+'</p></blockquote>',) if item.get('quote') else ('',)
+ return '<li><dl class="practice-cells">'+cells+'</dl>'+quote[0]+('' if item.get('quote') else link)+'</li>'
 def intro_block_html(block, record, youtube_url):
  kind=block['kind'];head='<h3>'+E(block['h'])+'</h3>'
  if kind=='points':body='<ul class="summary-list">'+''.join(point_html(i) for i in block['items'])+'</ul>'
@@ -69,7 +71,7 @@ def intro_html(mini, record, youtube_url):
  return f'<section id="lecture-overview" class="lecture-section"><span id="overview"></span><h2>도입</h2><div class="summary-tier"><span class="eyebrow">한 문장</span><p class="summary-lead">{E(mini["lead"])}</p></div>{blocks}</section>'
 def pager(prev,nxt):
  cell=lambda r,cls,label:(f'<a class="pager-link {cls}" href="{E(r["id"],quote=True)}.html"><small>{label}</small><span>{E(r["title"])}</span></a>' if r else '<span class="pager-link is-empty" aria-hidden="true"></span>')
- return f'<nav class="lecture-pager" aria-label="다른 강의">{cell(prev,"is-prev","← 더 최근 강의")}{cell(nxt,"is-next","지난 강의 →")}</nav>'
+ return f'<nav class="lecture-pager" aria-label="다른 강의">{cell(prev,"is-prev","← 최근 강의")}{cell(nxt,"is-next","지난 강의 →")}</nav>'
 def render(row,record,mini,prev=None,nxt=None):
  vid=row['id']; title=E(row['title'])
  # A lecture may be indexed by a stable internal content key before its actual YouTube ID is verified.
@@ -104,18 +106,17 @@ def render(row,record,mini,prev=None,nxt=None):
   today=''.join('<li>'+E(t)+'</li>' for t in practice['today'])
   practice_html='<section id="lecture-practice" class="lecture-section"><h2>실천 포인트</h2><div class="summary-tier"><h3>오늘의 실천 세 가지</h3><ol class="summary-list">'+today+'</ol></div><div class="summary-tier"><h3>'+E(practice.get('steps_title','단계별 따라 하기'))+'</h3>'+steps+'</div></section>'
  sources=''.join(f'<li><a href="{E(s["url"],quote=True)}" target="_blank" rel="noopener">{E(s["label"])}</a></li>' for s in record['sources'])
- sections=[('lecture-overview','도입' if intro is not None else '핵심 요약')]+([('lecture-practice','실천 포인트')] if practice else [])+([('lecture-detail','상세 요약')] if detailed else [])+([('lecture-comment','타임스탬프')] if timed else [])+[('lecture-sources','참고 자료')]
+ sections=[('lecture-overview','도입' if intro is not None else '핵심 요약')]+([('lecture-practice','실천 포인트')] if practice else [])+([('lecture-detail','상세 요약')] if detailed else [])+([('lecture-comment','타임스탬프')] if timed else [])+[('lecture-sources','출처')]
  section_nav='<nav class="reading-nav" aria-label="이 강의 목차">'+''.join(f'<a href="#{target}">{label}</a>' for target,label in sections)+'</nav>'
  # Pages with `intro` open with one merged section; pages not yet migrated keep the key summary + practice layout.
  overview_html=intro_html(mini,record,youtube_url) if intro is not None else f'''<section id="lecture-overview" class="lecture-section"><span id="overview"></span><h2>핵심 요약</h2><div class="summary-tier"><span class="eyebrow">한 문장</span><p class="summary-lead">{E(mini['lead'])}</p></div><div class="summary-tier"><h3>핵심 세 가지</h3><ol class="summary-list">{''.join('<li>'+E(t)+'</li>' for t in mini['three'])}</ol></div></section>'''
- body=f'''<div class="site-shell"><nav class="breadcrumb" aria-label="현재 위치"><a href="../index.html">강의 목록</a><span aria-hidden="true">/</span><span>{title}</span></nav><main id="main" class="compact-lecture" data-layout="compact"><header class="summary-head"><h1>{title}</h1><p class="meta">{date_info}{E(row['duration'])} · {E(row.get("creator","출처 미기재"))} · {source_info}</p><div class="actions">{action}</div></header>{old}{overview_html}{practice_html}{second}<details class="source-disclosure"><summary>원본과 참고 자료</summary><ul>{sources}</ul></details>{editor}{pager(prev,nxt)}</main></div>'''
+ body=f'''<div class="site-shell"><nav class="breadcrumb" aria-label="현재 위치"><a href="../index.html">강의 목록</a><span aria-hidden="true">/</span><span>{title}</span></nav><main id="main" class="compact-lecture" data-layout="compact"><header class="summary-head"><h1>{title}</h1><p class="meta">{date_info}{E(row['duration'])} · {E(row.get("creator","출처 미기재"))} · {source_info}</p><div class="actions">{action}</div></header>{old}{overview_html}{practice_html}{second}<details class="source-disclosure" id="lecture-sources"><summary>출처와 편집자 주</summary><div class="notes-block"><h3>원본과 참고 자료</h3><ul>{sources}</ul></div>{editor}</details>{pager(prev,nxt)}</main></div>'''
  body=body.replace('<div class="actions">'+action+'</div>','')
  img=row.get('image')
  hero=''
  if img:
   hero=f'<figure class="lecture-hero"><img src="../{E(img["src"],quote=True)}" width="{int(img["width"])}" height="{int(img["height"])}" alt="{E(img["alt"],quote=True)}" decoding="async" fetchpriority="high"></figure>'
  body=body.replace('</header>'+old,'</header>'+hero+section_nav+old)
- body=body.replace('<details class="source-disclosure">','<details class="source-disclosure" id="lecture-sources">')
  return page(row['title'],body,base='../',description=mini['lead'],path=f'lectures/{vid}.html')
 def build(check=False):
  records=load('lecture_compact.json');minis=load('mini_courses.json');issues=[]

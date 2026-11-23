@@ -351,7 +351,7 @@ test('reading navigation tracks sections and source disclosure opens',async({bro
   if(process.env.STUDY_SCREENSHOT_DIR){
     await page.screenshot({path:require('node:path').join(process.env.STUDY_SCREENSHOT_DIR,'study-hub-practice.png')});
   }
-  await nav.getByRole('link',{name:'참고 자료'}).click();
+  await nav.getByRole('link',{name:'출처'}).click();
   await expect(page.locator('#lecture-sources')).toHaveAttribute('open','');
   await context.close();
 });
@@ -493,13 +493,20 @@ test('section anchors sit flush under the reading nav and the current section fo
     const nav=page.getByRole('navigation',{name:'이 강의 목차'});
     for(const [id,name] of [['lecture-overview','도입'],['lecture-detail','상세 요약'],['lecture-comment','타임스탬프']]){
       await nav.getByRole('link',{name}).click();
-      await expect(nav.getByRole('link',{name})).toHaveAttribute('aria-current','location');
-      const g=await page.evaluate(id=>({section:document.getElementById(id).getBoundingClientRect().top,nav:document.querySelector('.reading-nav').getBoundingClientRect().bottom}),id);
-      // 섹션 위 선이 목차 아래 선과 겹친다. 두 선 사이 빈 띠가 없다.
-      expect(Math.abs(g.section-(g.nav-1))).toBeLessThanOrEqual(2);
+      await page.waitForTimeout(150);
+      const g=await page.evaluate(id=>({section:document.getElementById(id).getBoundingClientRect().top,nav:document.querySelector('.reading-nav').getBoundingClientRect().bottom,atBottom:innerHeight+scrollY>=document.documentElement.scrollHeight-2}),id);
+      if(g.atBottom){
+        // 페이지 끝 내용이 화면보다 짧아 섹션을 목차 아래에 맞출 수 없으면 페이지 끝에 닿고, 이때는 마지막 항목이 현재 위치이다.
+        await expect(nav.getByRole('link',{name:'출처'})).toHaveAttribute('aria-current','location');
+        expect(g.section).toBeGreaterThanOrEqual(g.nav-1);
+      }else{
+        await expect(nav.getByRole('link',{name})).toHaveAttribute('aria-current','location');
+        // 섹션 위 선이 목차 아래 선과 겹친다. 두 선 사이 빈 띠가 없다.
+        expect(Math.abs(g.section-(g.nav-1))).toBeLessThanOrEqual(2);
+      }
     }
     await page.evaluate(()=>window.scrollTo({top:document.documentElement.scrollHeight,behavior:'instant'}));
-    await expect(nav.getByRole('link',{name:'참고 자료'})).toHaveAttribute('aria-current','location');
+    await expect(nav.getByRole('link',{name:'출처'})).toHaveAttribute('aria-current','location');
     await context.close();
   }
 });
@@ -597,3 +604,45 @@ test('practice links open the video in a new tab at the quoted moment',async({pa
   await expect(page.locator('iframe')).toHaveCount(0);
   await popup.close();
 });
+
+test('sources and editor notes share one closed disclosure at the page end',async({page})=>{
+  await page.goto('/lectures/ZCty0wvogDo.html');
+  const box=page.locator('main details.source-disclosure');
+  await expect(box).toHaveCount(1);
+  await expect(box.locator('>summary')).toHaveText('출처와 편집자 주');
+  await expect(box).not.toHaveAttribute('open','');
+  await expect(box.locator('h3')).toHaveText(['원본과 참고 자료','편집자 주']);
+  await expect(page.locator('.pager-link.is-prev small')).toHaveText('← 최근 강의');
+  await page.getByRole('navigation',{name:'이 강의 목차'}).getByRole('link',{name:'출처'}).click();
+  await expect(box).toHaveAttribute('open','');
+  // 편집자 주로 바로 가는 링크도 접힘을 연다.
+  await page.goto('/lectures/ZCty0wvogDo.html#lecture-editor');
+  await expect(page.locator('#lecture-sources')).toHaveAttribute('open','');
+  await expect(page.locator('#lecture-editor>h3')).toBeVisible();
+});
+
+test('intro stays compact on a phone and every practice card puts the action first',async({browser})=>{
+  test.setTimeout(90000);
+  const context=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce'});
+  const page=await context.newPage();
+  let checked=0;
+  for(const row of studyLectures){
+    await page.goto('/lectures/'+row.id+'.html');
+    if(!(await page.locator('#lecture-overview .intro-block').count()))continue;
+    const m=await page.evaluate(()=>{
+      const px=e=>e.getBoundingClientRect().height;
+      const cell=n=>{const e=document.querySelector('.practice-cells>div:nth-child('+n+') dd');if(!e)return null;const st=getComputedStyle(e);return {size:parseFloat(st.fontSize),weight:Number(st.fontWeight)};};
+      return {overview:px(document.querySelector('#lecture-overview')),cards:[...document.querySelectorAll('.practice-list>li')].map(px),when:cell(1),act:cell(2),overflow:document.documentElement.scrollWidth-innerWidth};
+    });
+    // 도입은 모바일에서 1.5화면 안(1,320px)에 들어야 하고, 해볼 일 카드 하나는 320px를 넘기지 않는다.
+    expect(m.overview,row.id+' 도입 높이').toBeLessThanOrEqual(1320);
+    for(const h of m.cards)expect(h,row.id+' 카드 높이').toBeLessThanOrEqual(320);
+    // 위계: 할 일(둘째 칸)이 언제(첫째 칸)보다 크고 굵다.
+    if(m.act){expect(m.act.size).toBeGreaterThan(m.when.size);expect(m.act.weight).toBeGreaterThanOrEqual(600);expect(m.when.weight).toBeLessThan(600);}
+    expect(m.overflow).toBeLessThanOrEqual(1);
+    checked++;
+  }
+  expect(checked).toBeGreaterThan(0);
+  await context.close();
+});
+
