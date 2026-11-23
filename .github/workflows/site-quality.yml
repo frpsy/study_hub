@@ -67,12 +67,12 @@ jobs:
           if [ ! -d ~/.cache/ms-playwright/chromium-* ] || [ ! -d ~/.cache/ms-playwright/webkit-* ]; then
             npx playwright install chromium webkit
           fi
-          # 시스템 패키지는 한 번만 설치한다(크로미움과 웹킷 함께).
-          npx playwright install-deps chromium webkit
+          # PR에서는 크로미움만 설치한다. 웹킷은 병합 후 main에서만 검사한다.
+          if [ "$GITHUB_EVENT_NAME" = "push" ]; then npx playwright install-deps chromium webkit; else npx playwright install-deps chromium; fi
       - name: Check phone and desktop layouts and clipboard
         run: |
           npx playwright test --config=tests/playwright.config.cjs
-          BROWSER_NAME=webkit npx playwright test --config=tests/playwright.config.cjs tests/pwa.spec.cjs
+          if [ "$GITHUB_EVENT_NAME" = "push" ]; then BROWSER_NAME=webkit npx playwright test --config=tests/playwright.config.cjs tests/pwa.spec.cjs; fi
       - name: Upload browser failure evidence
         if: failure()
         uses: actions/upload-artifact@v4
