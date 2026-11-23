@@ -1,6 +1,6 @@
 """강연자 인용을 원본 자막과 대조한다. 테스트(tests/test_compact_courses.py)와 intro_candidates.py가 함께 쓴다.
 
-자막은 한 줄이 `[시:분:초] 문장`이다. 인용의 낱말은 인용 시각 앞 3초~뒤 75초의 자막에 같은 순서로 있어야 한다.
+자막은 `[시:분:초] 문장`(여러 줄 큐 가능), `M:SS<탭 또는 공백>문장`, `.srt` 중 하나이다(시각이 없는 txt는 같은 이름의 .srt로 대신한다). 인용의 낱말은 인용 시각 앞 3초~뒤 75초의 자막에 같은 순서로 있어야 한다.
 군더더기·오인식 교정, 띄어쓰기, 구두점 차이는 허용하고 ‘…’는 생략을 뜻한다.
 같은 조각(…으로 나뉜 한 덩어리) 안에서 낱말 사이에 자막의 다른 말이 MAX_GAP자(정규화한 글자 수)를 넘게 끼어 있으면
 실패한다. 그만큼 건너뛰려면 ‘…’로 표시해야 한다. 한국어 자막 기준이며 영어 자막의 인용은 대조하지 않는다.
@@ -8,7 +8,8 @@
 import re
 from pathlib import Path
 
-LINE = re.compile(r"\[(\d+):(\d+):(\d+)\] (.*)")
+LINE = re.compile(r"^(?:\[(?P<bh>\d+):(?P<bm>\d+):(?P<bs>\d+)\]|(?:(?P<h>\d+):)?(?P<m>\d{1,3}):(?P<s>\d{2}))[\t ]+(?P<text>.*)$")
+SRT_TIME = re.compile(r"^(\d+):(\d+):(\d+)[,.]\d+ --> ")
 BEFORE, AFTER = 3, 75
 MAX_GAP = 12   # 같은 조각 안에서 허용하는 건너뜀(‘막 그’ 같은 군더더기 수준)
 
@@ -48,14 +49,44 @@ def transcript_path(root, row):
     return None
 
 
-def load_transcript(path):
-    """[(초, 문장)] 목록."""
-    lines = []
-    for raw in Path(path).read_text(encoding="utf-8-sig").splitlines():
+def _seconds(m):
+    if m["bh"] is not None:
+        return int(m["bh"]) * 3600 + int(m["bm"]) * 60 + int(m["bs"])
+    return int(m["h"] or 0) * 3600 + int(m["m"]) * 60 + int(m["s"])
+
+
+def _parse_stamped(text):
+    cues = []
+    for raw in text.splitlines():
         m = LINE.match(raw)
         if m:
-            lines.append((int(m[1]) * 3600 + int(m[2]) * 60 + int(m[3]), m[4]))
-    return lines
+            cues.append([_seconds(m), m["text"]])
+        elif cues and raw.strip():
+            cues[-1][1] += " " + raw.strip()   # 시각 없는 이어지는 줄은 앞 큐에 합친다
+    return [(sec, t) for sec, t in cues]
+
+
+def _parse_srt(text):
+    cues, cur = [], None
+    for raw in text.splitlines():
+        m = SRT_TIME.match(raw.strip())
+        if m:
+            cur = [int(m[1]) * 3600 + int(m[2]) * 60 + int(m[3]), ""]
+            cues.append(cur)
+        elif cur is not None and raw.strip() and not raw.strip().isdigit():
+            cur[1] = (cur[1] + " " + raw.strip()).strip()
+    return [(sec, t) for sec, t in cues if t]
+
+
+def load_transcript(path):
+    """[(초, 문장)] 목록. 형식은 파일 내용으로 가린다. 시각이 없는 txt는 같은 이름의 .srt로 대신한다."""
+    path = Path(path)
+    cues = _parse_stamped(path.read_text(encoding="utf-8-sig"))
+    if not cues:
+        srt = path.with_suffix(".srt")
+        if srt.exists():
+            cues = _parse_srt(srt.read_text(encoding="utf-8-sig"))
+    return cues
 
 
 def window_text(lines, t, before=BEFORE, after=AFTER):

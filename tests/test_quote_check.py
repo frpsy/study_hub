@@ -31,11 +31,37 @@ class QuoteCheck(unittest.TestCase):
         self.assertEqual(quote_problems('오늘은 사과를 … 운동을 시작하세요',lines,10),[])      # ‘…’로 표시하면 통과
         near=[(10,'걸어다니고 막 그 심장 박동을 이렇게 하고 운동을 하면')]
         self.assertEqual(quote_problems('걸어 다니고 심장 박동을 이렇게 하고 운동을 하면',near,10),[])   # ‘막 그’ 정도의 군더더기는 허용
+    def test_continuation_lines_join_the_previous_cue(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            path=Path(tmp)/'a.en.txt';path.write_text('[00:00:01] first half of a cue\nsecond half of the cue\n[00:00:05] next cue\n',encoding='utf-8')
+            self.assertEqual(load_transcript(path),[(1,'first half of a cue second half of the cue'),(5,'next cue')])
+    def test_tab_space_and_srt_formats(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            d=Path(tmp)
+            (d/'a.ko.txt').write_text('0:03\t첫 줄\n1:20\t둘째 줄\n1:02:05\t셋째 줄\n',encoding='utf-8')
+            self.assertEqual(load_transcript(d/'a.ko.txt'),[(3,'첫 줄'),(80,'둘째 줄'),(3725,'셋째 줄')])
+            (d/'b.ko.txt').write_text('0:54 안녕하세요.\n1:04 말을 했군요 오늘도\n',encoding='utf-8')
+            self.assertEqual(load_transcript(d/'b.ko.txt'),[(54,'안녕하세요.'),(64,'말을 했군요 오늘도')])
+            (d/'c.ko.txt').write_text('시각이 없는 줄\n또 다른 줄\n',encoding='utf-8')          # 시각이 없는 txt
+            (d/'c.ko.srt').write_text('1\n00:00:01,000 --> 00:00:04,000\n첫 자막\n\n2\n00:01:05,500 --> 00:01:08,000\n둘째 자막\n이어지는 줄\n',encoding='utf-8')
+            self.assertEqual(load_transcript(d/'c.ko.txt'),[(1,'첫 자막'),(65,'둘째 자막 이어지는 줄')])
     def test_bom_on_first_line_is_ignored(self):
         import tempfile
         with tempfile.TemporaryDirectory() as tmp:
             path=Path(tmp)/'a.ko.txt';path.write_text('\ufeff[0:00:01] 첫 줄\n[0:00:05] 둘째 줄\n',encoding='utf-8')
             self.assertEqual(load_transcript(path),[(1,'첫 줄'),(5,'둘째 줄')])
+    def test_every_registered_lecture_has_a_readable_timed_transcript(self):
+        import json,re
+        root=Path(__file__).resolve().parents[1]
+        for row in json.loads((root/'lectures.json').read_text(encoding='utf-8')):
+            path=transcript_path(root,row);self.assertIsNotNone(path,row['id'])
+            lines=load_transcript(path);self.assertGreater(len(lines),200,row['id'])
+            m=re.fullmatch(r'\s*(?:(\d+)시간)?\s*(?:(\d+)분)?\s*(?:(\d+)초)?\s*',row['duration'])
+            length=sum(int(x or 0)*k for x,k in zip(m.groups(),(3600,60,1)))
+            self.assertLessEqual(lines[-1][0],length+120,row['id']+': 자막이 영상보다 길다')
+            self.assertGreaterEqual(lines[-1][0],length*0.8,row['id']+': 자막이 영상 끝까지 가지 않는다')
     def test_repo_transcripts_load(self):
         root=Path(__file__).resolve().parents[1]
         row={'id':'ZCty0wvogDo'}
