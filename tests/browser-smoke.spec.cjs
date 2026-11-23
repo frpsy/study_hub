@@ -271,54 +271,34 @@ test('lecture summary keeps a clear type hierarchy and readable width',async({br
   }
 });
 
-test('every lecture offers practice and valid source navigation',async({page})=>{
+test('every lecture has a valid intro and source navigation',async({page})=>{
   test.setTimeout(90000);
   for(const row of studyLectures){
     await page.goto('/lectures/'+row.id+'.html');
-    if(await page.locator('#lecture-overview .intro-block').count()){
-      // 도입 형식: 블록의 종류와 개수는 강의 내용이 정한다. 구조와 출처 링크만 본다.
-      await expect(page.locator('#lecture-overview>h2')).toHaveText('도입');
-      await expect(page.locator('#lecture-overview .intro-points li').first()).toBeVisible();
-      await expect(page.locator('#lecture-practice')).toHaveCount(1);
-      await expect(page.locator('section#lecture-practice')).toHaveCount(0);
-      const items=page.locator('#lecture-overview .practice-list>li');
-      const count=await items.count();
-      expect(count).toBeLessThanOrEqual(3);
-      for(let i=0;i<count;i++){
-        const item=items.nth(i);
-        const labels=await item.locator('.practice-cells dt').allTextContents();
-        expect(labels.slice(0,2)).toEqual(['언제','할 일']);
-        expect([2,3]).toContain(labels.length);   // 확인 칸은 강연자가 말했을 때만 있다
-        const source=item.locator('.practice-source');
-        await expect(source).toBeVisible();
-        if(row.creator==='김주환'){
-          const expectedVideo=row.video_url||'https://www.youtube.com/watch?v='+row.id;
-          const href=await source.getAttribute('href');
-          expect(href).toContain(expectedVideo+'&t=');
-          expect(href).toMatch(/&t=\d+s$/);
-          expect(await source.getAttribute('target')).toBe('_blank');
-          expect(await source.getAttribute('rel')).toContain('noopener');
-          await expect(item.locator('.practice-quote')).toBeVisible();
-        }
+    // 도입 형식: 블록의 종류와 개수는 강의 내용이 정한다. 구조와 출처 링크만 본다.
+    await expect(page.locator('#lecture-overview>h2')).toHaveText('도입');
+    await expect(page.locator('#lecture-overview .intro-points li').first()).toBeVisible();
+    await expect(page.locator('#lecture-practice')).toHaveCount(1);
+    await expect(page.locator('section#lecture-practice')).toHaveCount(0);
+    const items=page.locator('#lecture-overview .practice-list>li');
+    const count=await items.count();
+    expect(count).toBeLessThanOrEqual(3);
+    for(let i=0;i<count;i++){
+      const item=items.nth(i);
+      const labels=await item.locator('.practice-cells dt').allTextContents();
+      expect(labels.slice(0,2)).toEqual(['언제','할 일']);
+      expect([2,3]).toContain(labels.length);   // 확인 칸은 강연자가 말했을 때만 있다
+      const source=item.locator('.practice-source');
+      await expect(source).toBeVisible();
+      if(row.creator==='김주환'){
+        const expectedVideo=row.video_url||'https://www.youtube.com/watch?v='+row.id;
+        const href=await source.getAttribute('href');
+        expect(href).toContain(expectedVideo+'&t=');
+        expect(href).toMatch(/&t=\d+s$/);
+        expect(await source.getAttribute('target')).toBe('_blank');
+        expect(await source.getAttribute('rel')).toContain('noopener');
+        await expect(item.locator('.practice-quote')).toBeVisible();
       }
-      continue;
-    }
-    await expect(page.locator('#lecture-practice .summary-list li')).toHaveCount(3);
-    const steps=page.locator('#lecture-practice details');
-    expect(await steps.count()).toBeGreaterThanOrEqual(3);
-    await steps.first().locator('summary').click();
-    const source=steps.first().locator('.practice-source');
-    await expect(source).toBeVisible();
-    if(row.creator==='김주환'){
-      const expectedVideo=row.video_url||'https://www.youtube.com/watch?v='+row.id;
-      const href=await source.getAttribute('href');
-      expect(href).toContain(expectedVideo+'&t=');
-      expect(href).toMatch(/&t=\d+s$/);
-    }else{
-      const hash=await source.getAttribute('href');
-      await source.click();
-      await expect(page.locator(hash)).toBeVisible();
-      expect(await page.locator(hash).evaluate(el=>el.getBoundingClientRect().top)).toBeGreaterThan(100);
     }
   }
 });
@@ -440,7 +420,7 @@ test('list markers sit on the first text line at every text size',async({browser
           const d=box.top+top+ty+h/2-(line.top+line.bottom)/2;
           if(Math.abs(d)>3)off.push(el.parentElement.className+' '+Math.round(d));
         }
-        const statics=[...document.querySelectorAll('#lecture-overview .summary-list li,#lecture-practice .summary-tier:first-of-type .summary-list li')]
+        const statics=[...document.querySelectorAll('#lecture-overview .summary-list li')]
           .map(li=>getComputedStyle(li,'::before').position).filter(p=>p!=='static');
         return {off,statics};
       });
