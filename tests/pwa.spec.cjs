@@ -116,16 +116,16 @@ test('service worker caches lecture library and app shell for offline reading',a
 test('all lecture pages share the header panel and restore all appearance settings',async({page})=>{
   test.setTimeout(60000);
   await page.setViewportSize({width:390,height:844});
+  await page.addInitScript(()=>localStorage.setItem('study-site-accent','blue'));
   await page.goto('/index.html');
   await page.locator('.appearance-toggle').click();
   await page.locator('[data-theme-choice=dark]').click();
-  await page.locator('.accent-swatch[data-accent=blue]').click();
   await page.locator('.text-size[data-text-size=lg]').click();
   for(const row of require('../lectures.json')){
     await page.goto('/lectures/'+row.id+'.html');
     const root=page.locator('html');
     await expect(root).toHaveAttribute('data-theme','dark');
-    await expect(root).toHaveAttribute('data-accent','blue');
+    await expect(root).not.toHaveAttribute('data-accent',/./);
     await expect(root).toHaveAttribute('data-text-size','lg');
     await expect(page.locator('.site-footer button')).toHaveCount(0);
     const readingSurfaces=await page.evaluate(()=>{
@@ -139,6 +139,7 @@ test('all lecture pages share the header panel and restore all appearance settin
     await toggle.click();
     await expect(toggle).toHaveAttribute('aria-expanded','true');
     await expect(page.locator('#appearance-panel')).toBeVisible();
+    await expect(page.locator('#appearance-panel')).not.toContainText('강조 색');
     const panel=await page.locator('#appearance-panel').boundingBox();
     expect(panel.x).toBeGreaterThanOrEqual(0);
     expect(panel.x+panel.width).toBeLessThanOrEqual(390);
