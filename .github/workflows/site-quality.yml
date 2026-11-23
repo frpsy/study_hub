@@ -43,18 +43,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - suite: chromium-1
-            engine: chromium
-            args: --shard=1/2
-          - suite: chromium-2
-            engine: chromium
-            args: --shard=2/2
-          - suite: webkit
-            engine: webkit
-            args: tests/pwa.spec.cjs
+        # WebKit runs on main, as before. PRs run both Chromium shards.
+        suite: ${{ fromJSON(github.event_name == 'push' && '["chromium-1","chromium-2","webkit"]' || '["chromium-1","chromium-2"]') }}
     env:
-      BROWSER_NAME: ${{ matrix.engine }}
+      BROWSER_NAME: ${{ matrix.suite == 'webkit' && 'webkit' || 'chromium' }}
       PLAYWRIGHT_VERSION: '1.56.1'
     steps:
       - uses: actions/checkout@v4
@@ -63,13 +55,20 @@ jobs:
           path: |
             ~/.cache/ms-playwright
             ~/.npm
-          key: playwright-${{ env.PLAYWRIGHT_VERSION }}-${{ runner.os }}-${{ runner.arch }}-ubuntu24-${{ matrix.engine }}
+          key: playwright-${{ env.PLAYWRIGHT_VERSION }}-${{ runner.os }}-${{ runner.arch }}-ubuntu24-${{ env.BROWSER_NAME }}
       - name: Install Playwright and browser dependencies
         run: |
           npm install --no-save --no-audit --no-fund --prefer-offline "@playwright/test@$PLAYWRIGHT_VERSION"
           npx playwright install --with-deps "$BROWSER_NAME"
       - name: Run browser tests
-        run: npx playwright test --config=tests/playwright.config.cjs ${{ matrix.args }}
+        env:
+          SUITE: ${{ matrix.suite }}
+        run: |
+          if [ "$SUITE" = "webkit" ]; then
+            npx playwright test --config=tests/playwright.config.cjs tests/pwa.spec.cjs
+          else
+            npx playwright test --config=tests/playwright.config.cjs --shard="${SUITE#chromium-}/2"
+          fi
       - name: Upload browser failure evidence
         if: failure()
         uses: actions/upload-artifact@v4
