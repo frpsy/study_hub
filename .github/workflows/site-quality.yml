@@ -63,15 +63,15 @@ jobs:
       - name: Install Playwright browser
         run: |
           npm install --no-save --no-audit --no-fund --prefer-offline @playwright/test@1.56.1
-          npx playwright install chromium webkit
-          npx playwright install-deps chromium
+          # 브라우저 파일은 캐시에서 온다. 캐시가 없을 때만 내려받는다.
+          if [ ! -d ~/.cache/ms-playwright/chromium-* ] || [ ! -d ~/.cache/ms-playwright/webkit-* ]; then
+            npx playwright install chromium webkit
+          fi
+          # 시스템 패키지는 한 번만 설치한다(크로미움과 웹킷 함께).
+          npx playwright install-deps chromium webkit
       - name: Check phone and desktop layouts and clipboard
         run: |
-          # 웹킷용 시스템 패키지는 크로미움 테스트가 도는 동안 함께 설치한다.
-          npx playwright install-deps webkit > webkit-deps.log 2>&1 &
-          DEPS_PID=$!
           npx playwright test --config=tests/playwright.config.cjs
-          wait $DEPS_PID || { cat webkit-deps.log; exit 1; }
           BROWSER_NAME=webkit npx playwright test --config=tests/playwright.config.cjs tests/pwa.spec.cjs
       - name: Upload browser failure evidence
         if: failure()
