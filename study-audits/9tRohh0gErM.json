@@ -48,5 +48,49 @@
     "text": "Remember, if you eat your food within a certain feeding window, but that feeding window shifts by a couple of hours, it is effectively like jet lagging your system.",
     "source": "transcripts/9tRohh0gErM.en.txt 2:15:26~2:15:38",
     "note": "2026-11-20 사용자 요청으로 한 문장을 강의자 워딩 그대로의 인용 하나로 바꿈. 영어 원문 그대로(번역하지 않음), 쉼표만 더함."
+  },
+  "intro_check": {
+    "date": "2026-11-23",
+    "basis": "transcripts/9tRohh0gErM.en.txt 대조. 강연자가 직접 권했거나 가르친 대목만 도입에 넣고, 인용은 자막 낱말만 쓰며 군더더기·오인식을 교정했다(편집규칙 19절).",
+    "items": [
+      {
+        "field": "intro[0].items[0]",
+        "t": "40:22",
+        "lines": "40:22~41:23",
+        "note": "깨어난 뒤 60분과 잠자기 전 두세 시간 동안 열량을 먹지 않는 것이 연구가 잘 뒷받침하는 기둥이라는 말이 자막에 있다."
+      },
+      {
+        "field": "intro[0].items[1]",
+        "t": "1:40:40",
+        "lines": "1:40:40~1:41:10",
+        "note": "8시간이 지킬 만한 최소라고 보며 시간제한 식사가 호르몬 건강에 맞지 않는 사람도 있다는 말이 자막에 있다."
+      },
+      {
+        "field": "intro[0].items[2]",
+        "t": "2:12:41",
+        "lines": "2:12:23~2:13:00",
+        "note": "수면 관련 단식이 시간제한 식사의 건강 효과에 특히 중요하다는 말이 자막에 있다."
+      },
+      {
+        "field": "intro[1].items[0]",
+        "t": "1:15:00",
+        "lines": "1:14:43~1:15:40",
+        "note": "저녁 식사 뒤 20~30분 가벼운 걷기가 공복 상태로의 전환을 앞당긴다는 말이 자막에 있다(detail_index 0)."
+      },
+      {
+        "field": "intro[1].items[1]",
+        "t": "40:22",
+        "lines": "40:22~41:23",
+        "note": "기상 후 1시간과 취침 전 두세 시간 열량 섭취를 피하라는 말이 자막에 있다(detail_index 1)."
+      }
+    ],
+    "dropped": [
+      "옛 단계의 ‘간식과 음료 기록’은 강연에 없는 편집자의 제안이어서 뺐다."
+    ],
+    "ai_collaboration": {
+      "codex": "블라인드 근거 검수: 지적 4건(kLizfh 2, 2VTv 1, ENm4 1), 모두 타당해 반영",
+      "claude": "지적 외 항목은 자막 창을 직접 읽어 대조, 인용은 quote_check로 기계 검사",
+      "gemini": "자막 파일을 읽지 못해 생략"
+    }
   }
 }
