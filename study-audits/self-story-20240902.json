@@ -1,0 +1,78 @@
+{
+  "video_id": "Z4_iiqSKUms",
+  "review_basis": "yt-dlp 자동 자막 ko-orig(0:00~53:44, 1211줄)을 처음부터 끝까지 읽음. 설명란 전문 대조. 타임스탬프 43개는 자막 줄과 전부 일치 확인(check_draft).",
+  "duration_seconds": 3257,
+  "human_content_review_required": true,
+  "content_review": {
+    "reviewed_on": "2026-11-23",
+    "checks": [
+      "자막 줄 시각과 타임라인 항목 대조",
+      "설명란 목차와 자막 주제 순서 대조",
+      "Codex 판단 검수 지적 3건 자막 확인",
+      "Gemini 사실 대조 지적 2건 자막 확인"
+    ],
+    "new_primary_sources": []
+  },
+  "layout": "compact",
+  "lead_quote": {
+    "text": "내가 어떤 스토리텔링을 하고 있느냐가 곧 내가 누구고 내가 무엇이냐를 결정해요.",
+    "source": "transcripts/Z4_iiqSKUms.ko.txt 0:00:10~0:00:17",
+    "original": "내가 어떤 스토리텔링을 하고 있느냐가 곧 내가 누구고 내가 무엇이냐를 결정해요",
+    "note": "자막 원문 그대로 인용. 마침표만 추가. 끝의 ‘-요’ 어미와 낱말은 그대로 둠."
+  },
+  "detail_check": "2026-11-23 상세 요약 작성. 자막 대목을 읽고 타임라인 시각과 대조. 문장별 원문 대조는 하지 않음. 수치는 본문에 쓰지 않음.",
+  "unverified": [
+    "상세 요약 문장별 원문 대조 미완료",
+    "카너먼 실험, 팀 페리스 사례, 스파이라 비유는 웹에서 확인하지 않음",
+    "‘보슨 대학교’ 표기는 웹에서 확인하지 않음"
+  ],
+  "intro_check": {
+    "date": "2026-11-23",
+    "basis": "transcripts/Z4_iiqSKUms.ko.txt 대조. 강연자가 직접 말한 대목만 도입에 넣고 인용은 자막 낱말만 씀.",
+    "items": [
+      {
+        "field": "intro[1].items[0]",
+        "t": "27:10",
+        "lines": "27:10~27:15",
+        "note": "‘더 이상 마음의 상처를 찾아다니지 마세요’는 강연자의 직접 권고."
+      },
+      {
+        "field": "intro[1].items[1]",
+        "t": "48:02",
+        "lines": "48:02~48:07",
+        "note": "분노를 바꾸려 하지 말고 알아차리라는 권고가 직장 상사 사례 뒤에 나옴. ‘점검 기준’은 말하지 않았으므로 check 칸을 두지 않음."
+      }
+    ]
+  },
+  "checks": {
+    "ai_collaboration": {
+      "basis": "전역 AI 협업 규칙. 외부 AI는 검토만 맡기고 최종 판정은 Claude.",
+      "steps": [
+        {
+          "tool": "gemini(agy)",
+          "task": "summary",
+          "use": "초안 생성(prepare.py)",
+          "result": "완료"
+        },
+        {
+          "tool": "codex",
+          "task": "review -e medium",
+          "use": "판단 검수 3건(과장·귀속·조건 누락)",
+          "result": "3건 모두 자막 확인 후 반영. 실천 항목 지적 0건"
+        },
+        {
+          "tool": "gemini(agy)",
+          "task": "summary -e high",
+          "use": "사실 대조",
+          "result": "2건 지적(12:11, 48:09). 자막 확인 후 두 줄 모두 수정"
+        }
+      ],
+      "note": "Gemini 사실 대조는 agy를 거쳐 응답. 다른 AI로 대체하지 않음."
+    },
+    "sentence_review": {
+      "date": "2026-11-23",
+      "basis": "Claude 직접 검수. 번역투·긴 문장·비문을 확인하고 뜻은 바꾸지 않음.",
+      "items": []
+    }
+  }
+}

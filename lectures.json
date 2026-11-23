@@ -229,6 +229,28 @@
     "views_checked": "2026-11-21"
   },
   {
+    "id": "self-story-20240902",
+    "date": "2024-09-02",
+    "added": "2026-11-23T22:01:01+09:00",
+    "title": "지금 이걸 깨닫지 못하면 평생 불행하고 외롭습니다",
+    "duration": "54분 17초",
+    "description": "비난에 흔들리는 이유를 자아·에고·배경자아로 나눠 보는 김주환 교수 1부 강의",
+    "tags": [
+      "자아",
+      "에고",
+      "배경자아",
+      "스토리텔링",
+      "비난",
+      "선악 이분법"
+    ],
+    "topic": "마음근력",
+    "creator": "김주환",
+    "kind": "lecture",
+    "video_url": "https://www.youtube.com/watch?v=Z4_iiqSKUms",
+    "views": 429923,
+    "views_checked": "2026-11-23"
+  },
+  {
     "id": "chance-acceptance-20240526",
     "date": "2024-05-26",
     "added": "2026-11-22T20:15:00+09:00",
