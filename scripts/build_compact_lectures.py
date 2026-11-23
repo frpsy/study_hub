@@ -66,9 +66,10 @@ def intro_block_html(block, record, youtube_url):
  else:body=''.join(practice_step(i,record,youtube_url) for i in block['items'])
  return f'<div class="summary-tier intro-block intro-{kind}">{head}{body}</div>'
 def intro_html(mini, record, youtube_url):
- """The lecture's opening section: the one-sentence lead, then only the blocks this lecture's content calls for."""
- blocks=''.join(intro_block_html(b,record,youtube_url) for b in record['intro'])
- return f'<section id="lecture-overview" class="lecture-section"><span id="overview"></span><h2>도입</h2><div class="summary-tier"><span class="eyebrow">한 문장</span><p class="summary-lead">{E(mini["lead"])}</p></div>{blocks}</section>'
+ """Show the key points before the quotation and optional practice blocks."""
+ points=''.join(intro_block_html(b,record,youtube_url) for b in record['intro'] if b['kind']=='points')
+ practice=''.join(intro_block_html(b,record,youtube_url) for b in record['intro'] if b['kind']!='points')
+ return f'<section id="lecture-overview" class="lecture-section"><span id="overview"></span><h2>핵심 요약</h2>{points}<div class="summary-tier intro-quote"><span class="eyebrow">한 문장</span><p class="summary-lead">{E(mini["lead"])}</p></div>{practice}</section>'
 def pager(prev,nxt):
  cell=lambda r,cls,label:(f'<a class="pager-link {cls}" href="{E(r["id"],quote=True)}.html"><small>{label}</small><span>{E(r["title"])}</span></a>' if r else '<span class="pager-link is-empty" aria-hidden="true"></span>')
  return f'<nav class="lecture-pager" aria-label="다른 강의">{cell(prev,"is-prev","← 최근 강의")}{cell(nxt,"is-next","지난 강의 →")}</nav>'
@@ -101,7 +102,7 @@ def render(row,record,mini,prev=None,nxt=None):
   second+=f'<section id="lecture-comment" class="lecture-section"><span id="timeline"></span><h2>타임스탬프</h2><div class="actions"><button id="copy" data-copy-target="comment" type="button">타임스탬프 복사</button><span id="status" role="status" aria-live="polite"></span></div><input type="checkbox" id="timeline-toggle" class="timeline-toggle" aria-label="타임스탬프 전체 펼치기"><label class="timeline-box" for="timeline-toggle"><pre id="comment" tabindex="0"><code>{timeline_text}</code></pre></label></section>'
  action=''.join(actions)
  sources=''.join(f'<li><a href="{E(s["url"],quote=True)}" target="_blank" rel="noopener">{E(s["label"])}</a></li>' for s in record['sources'])
- sections=[('lecture-overview','도입')]+([('lecture-detail','상세 요약')] if detailed else [])+([('lecture-comment','타임스탬프')] if timed else [])+[('lecture-sources','출처')]
+ sections=[('lecture-overview','핵심 요약')]+([('lecture-detail','상세 요약')] if detailed else [])+([('lecture-comment','타임스탬프')] if timed else [])+[('lecture-sources','출처')]
  section_nav='<nav class="reading-nav" aria-label="이 강의 목차">'+''.join(f'<a href="#{target}">{label}</a>' for target,label in sections)+'</nav>'
  overview_html=intro_html(mini,record,youtube_url)
  body=f'''<div class="site-shell"><nav class="breadcrumb" aria-label="현재 위치"><a href="../index.html">강의 목록</a><span aria-hidden="true">/</span><span>{title}</span></nav><main id="main" class="compact-lecture" data-layout="compact"><header class="summary-head"><h1>{title}</h1><p class="meta">{date_info}{E(row['duration'])} · {E(row.get("creator","출처 미기재"))} · {source_info}</p><div class="actions">{action}</div></header>{old}{overview_html}{second}<details class="source-disclosure" id="lecture-sources"><summary>출처와 편집자 주</summary><div class="notes-block"><h3>원본과 참고 자료</h3><ul>{sources}</ul></div>{editor}</details>{pager(prev,nxt)}</main></div>'''

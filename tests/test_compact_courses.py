@@ -125,12 +125,13 @@ class IntroChecks(unittest.TestCase):
    vid=row['id'];source=(R/'lectures'/f'{vid}.html').read_text()
    self.assertNotIn('practice',record,vid)
    self.assertEqual(source.count('id="lecture-overview"'),1,vid)
-   self.assertIn('<h2>도입</h2>',source,vid)
-   self.assertNotIn('<h2>핵심 요약</h2>',source,vid);self.assertNotIn('<h2>실천 포인트</h2>',source,vid)
+   self.assertIn('<h2>핵심 요약</h2>',source,vid)
+   self.assertLess(source.index('intro-points'),source.index('summary-lead'),vid)
+   self.assertNotIn('<h2>실천 포인트</h2>',source,vid)
    self.assertNotIn('핵심 세 가지',source,vid);self.assertNotIn('오늘의 실천 세 가지',source,vid)
    self.assertNotIn('<section id="lecture-practice"',source,vid)
    self.assertEqual(source.count('id="lecture-practice"'),1,vid)   # 옛 #lecture-practice 링크가 이 페이지에 도착하도록 남긴 빈 앵커
-   self.assertIn('<a href="#lecture-overview">도입</a>',source,vid);self.assertNotIn('>실천 포인트</a>',source,vid)
+   self.assertIn('<a href="#lecture-overview">핵심 요약</a>',source,vid);self.assertNotIn('>실천 포인트</a>',source,vid)
  def test_intro_blocks_follow_the_lecture_content(self):
   for row,record in self.intro_lectures():
    vid=row['id'];kim=row.get('creator')=='김주환';blocks=record['intro']
@@ -210,7 +211,7 @@ class IntroChecks(unittest.TestCase):
   self.assertEqual(html_.count('<details><summary>'),2)
   self.assertEqual(html_.count('class="summary-tier intro-block'),3)
   only=dict(record,intro=record['intro'][:1]);short=render(row,only,{'lead':'“한 문장이다.”'})
-  self.assertNotIn('practice-cells',short);self.assertNotIn('<details>',short);self.assertIn('<h2>도입</h2>',short)
+  self.assertNotIn('practice-cells',short);self.assertNotIn('<details>',short);self.assertIn('<h2>핵심 요약</h2>',short)
  def test_generator_refuses_data_it_cannot_render(self):
   from build_compact_lectures import render
   row={'id':'abcdefghijk','title':'시험 강의','duration':'10분','creator':'김주환'}
