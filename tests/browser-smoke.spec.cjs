@@ -297,6 +297,8 @@ test('every lecture offers practice and valid source navigation',async({page})=>
           const href=await source.getAttribute('href');
           expect(href).toContain(expectedVideo+'&t=');
           expect(href).toMatch(/&t=\d+s$/);
+          expect(await source.getAttribute('target')).toBe('_blank');
+          expect(await source.getAttribute('rel')).toContain('noopener');
           await expect(item.locator('.practice-quote')).toBeVisible();
         }
       }
@@ -414,34 +416,6 @@ test('home opens with a daily key sentence that links to its lecture',async({pag
   expect(await page.locator('#lecture-list .lecture[href="'+href+'"] .card-lead').textContent()).toBe(text);
   await line.click();
   await expect(page.locator('#lecture-overview .summary-lead')).toHaveText(text);
-});
-
-test('time map places chapters and key sessions on the lecture length above the original text',async({page})=>{
-  await page.goto('/lectures/izYj8g-j00U.html');
-  const map=page.locator('#lecture-comment .time-map');
-  await expect(map).toBeVisible();
-  expect(await map.locator('rect.mark').count()).toBeGreaterThanOrEqual(2);
-  expect(await map.locator('rect.seg').count()).toBeGreaterThanOrEqual(2);
-  const order=await page.evaluate(()=>document.querySelector('.time-map').getBoundingClientRect().bottom<=document.querySelector('#comment').getBoundingClientRect().top);
-  expect(order).toBe(true);
-});
-
-test('time map and practice links play the lecture inside the page from that time',async({page})=>{
-  await page.route(/youtube(-nocookie)?\.com/,route=>route.abort());
-  await page.goto('/lectures/xA-4G4z-1MM.html');
-  await expect(page.locator('.video-embed iframe')).toHaveCount(0);
-  const mark=page.locator('#lecture-comment .time-map a').nth(1);
-  const href=await mark.getAttribute('href');
-  const start=/[?&]t=(\d+)s/.exec(href)[1];
-  await mark.click();
-  const frame=page.locator('.video-embed iframe');
-  await expect(frame).toHaveCount(1);
-  expect(await frame.getAttribute('src')).toContain('embed/xA-4G4z-1MM?start='+start+'&');
-  expect(page.context().pages().length).toBe(1);
-  const practice=page.locator('#lecture-overview .practice-list>li').first();
-  await practice.locator('.practice-source').click();
-  expect(await frame.getAttribute('src')).toContain('start=1473&');
-  await expect(page.locator('.video-embed iframe')).toHaveCount(1);
 });
 
 test('list markers sit on the first text line at every text size',async({browser})=>{
@@ -576,14 +550,50 @@ test('intro section merges key points and practice and fits small screens',async
   }
 });
 
-test('intro practice links open the player at the quoted moment',async({page})=>{
-  await page.route(/youtube(-nocookie)?\.com/,route=>route.abort());
-  await page.goto('/lectures/chance-acceptance-20240526.html');
-  await expect(page.locator('.video-embed iframe')).toHaveCount(0);
-  const source=page.locator('#lecture-overview .practice-source').first();
-  expect(await source.getAttribute('href')).toContain('&t=4844s');
-  await source.click();
-  await expect(page.locator('.video-embed iframe')).toHaveCount(1);
-  expect(await page.locator('.video-embed iframe').getAttribute('src')).toContain('start=4844&');
+test('timestamp section is only the original text and the copy button',async({browser})=>{
+  for(const width of [390,1100]){
+    const context=await browser.newContext({viewport:{width,height:900},reducedMotion:'reduce'});
+    await context.route(/youtube(-nocookie)?\.com/,route=>route.abort());
+    const page=await context.newPage();
+    for(const id of ['xA-4G4z-1MM','chance-acceptance-20240526','affirmation-20261101']){
+      await page.goto('/lectures/'+id+'.html');
+      const section=page.locator('#lecture-comment');
+      await expect(section.locator('h2')).toHaveText('타임스탬프');
+      await expect(section.locator('#copy')).toBeVisible();
+      await expect(section.locator('#comment')).toHaveCount(1);
+      // 영상 임베드와 구간 막대는 두지 않는다.
+      for(const gone of ['.video-embed','.video-open','.time-map','iframe'])await expect(page.locator(gone)).toHaveCount(0);
+      // 원문 박스는 제목·복사 버튼 아래에서 구간 전체 폭을 쓴다(그리드 자동 배치로 옆에 놓이거나 겹치지 않는다).
+      const g=await page.evaluate(()=>{
+        const r=s=>document.querySelector(s).getBoundingClientRect();
+        const sec=r('#lecture-comment'),h2=r('#lecture-comment>h2'),btn=r('#copy'),box=r('#lecture-comment .timeline-box');
+        return {boxTop:box.top,above:Math.max(h2.bottom,btn.bottom),boxWidth:box.width,secWidth:sec.width,boxLeft:box.left-sec.left};
+      });
+      expect(g.boxTop).toBeGreaterThanOrEqual(g.above);
+      expect(g.boxWidth).toBeGreaterThanOrEqual(g.secWidth-2);
+      expect(Math.abs(g.boxLeft)).toBeLessThanOrEqual(1);
+    }
+    await context.close();
+  }
 });
 
+test('practice links open the video in a new tab at the quoted moment',async({page,context})=>{
+  // 실제 유튜브로 나가지 않도록 빈 응답으로 바꿔 둔다(차단하면 팝업 주소가 오류 페이지로 바뀐다).
+  await context.route(/youtube(-nocookie)?\.com/,route=>route.fulfill({status:200,contentType:'text/html',body:'<title>video</title>'}));
+  await page.goto('/lectures/xA-4G4z-1MM.html');
+  const links=page.locator('#lecture-overview .practice-source');
+  const count=await links.count();
+  expect(count).toBeGreaterThan(0);
+  for(let i=0;i<count;i++){
+    expect(await links.nth(i).getAttribute('target')).toBe('_blank');
+    expect(await links.nth(i).getAttribute('rel')).toContain('noopener');
+    expect(await links.nth(i).getAttribute('href')).toMatch(/[?&]t=\d+s$/);
+  }
+  const first=links.first();
+  expect(await first.getAttribute('href')).toContain('&t=1473s');
+  const [popup]=await Promise.all([context.waitForEvent('page'),first.click()]);
+  expect(popup.url()).toContain('t=1473s');
+  expect(page.url()).toContain('/lectures/xA-4G4z-1MM.html');   // 이 페이지는 그대로 남는다
+  await expect(page.locator('iframe')).toHaveCount(0);
+  await popup.close();
+});

@@ -840,31 +840,6 @@ html{scroll-padding-top:158px}
 .compact-lecture .lecture-section .detail-body h3+p{color:var(--ink);font-weight:550}
 .detail-body h3{padding-top:18px;border-top:1px solid var(--line)}
 .detail-body h3:first-child{padding-top:0;border-top:0}
-#lecture-comment>.video-embed{grid-row:2;margin:18px 0 0}
-#lecture-comment>.time-map{grid-row:3;margin:18px 0 0}
-#lecture-comment>.timeline-box{grid-row:4}
-/* 영상 임베드 / 2026-11-18: 누르기 전에는 버튼 하나, 누르면 16:9 플레이어. */
-.video-embed{scroll-margin-top:calc(var(--header-height,72px) + 72px)}
-.video-open{display:inline-flex;align-items:center;gap:6px;min-height:var(--tap-target);padding:0 16px;border:1px solid var(--line);border-radius:var(--radius-control);color:var(--ink);font-size:14px;font-weight:600;text-decoration:none;background:var(--surface);transition:border-color .16s var(--ease-out),color .16s var(--ease-out),transform .16s var(--ease-out)}
-.video-open:active{transform:scale(.97)}
-.video-open:focus-visible{outline:2px solid var(--focus-color);outline-offset:2px}
-@media(hover:hover) and (pointer:fine){.video-open:hover{border-color:var(--accent);color:var(--accent)}}
-.video-embed.is-playing{position:relative;aspect-ratio:16/9;border-radius:var(--radius-card);overflow:hidden;background:#000}
-.video-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-@media print{.video-embed{display:none}}
-.time-map svg{display:block;width:100%;height:24px}
-.time-map .seg{fill:var(--ink);opacity:.12}
-.time-map .seg-1{opacity:.24}
-.time-map .mark{fill:var(--accent)}
-.time-map .hit{fill:transparent}
-.time-map a{cursor:pointer;-webkit-tap-highlight-color:transparent}
-.time-map a:focus-visible{outline:2px solid var(--focus-color);outline-offset:2px}
-@media(hover:hover){.time-map a:hover .seg{opacity:.38}.time-map a:hover .mark{fill:var(--ink)}}
-@media(pointer:coarse){.time-map svg{height:var(--tap-target)}}
-.time-scale{display:flex;justify-content:space-between;margin-top:4px;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
-.time-scale{gap:12px;align-items:center}
-.time-legend{display:inline-flex;align-items:center;gap:6px}
-.legend-mark{display:inline-block;width:3px;height:12px;background:var(--accent)}
 /* 깊이 목차 시트 */
 .outline-fab{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:30;min-height:var(--tap-target);max-width:calc(100% - 32px);padding:0 16px;border:1px solid var(--line-strong);border-radius:999px;background:var(--surface);color:var(--ink);font-size:13px;font-weight:700;box-shadow:0 8px 24px -10px rgba(0,0,0,.45);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity var(--motion-fast) var(--ease-out),transform var(--motion-fast) var(--ease-out)}
 .outline-fab.is-visible{opacity:1;transform:none;pointer-events:auto}
