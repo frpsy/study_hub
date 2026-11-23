@@ -221,23 +221,22 @@ test('catalog restores a shared search and returns to it after reading',async({p
   await expect(page.locator('#count')).toHaveText('1개 강의');
 });
 
-test('a lecture card opens a page with the key summary, practice points and timestamps',async({page})=>{
+test('a lecture card opens a page with the intro, detail summary and timestamps',async({page})=>{
   await page.goto('/index.html');
   await page.locator('#lecture-list [data-video-id="affirmation-20261101"]').click();
   await expect(page).toHaveURL(/\/lectures\/affirmation-20261101\.html$/);
-  await expect(page.locator('main .lecture-section')).toHaveCount(4);
+  await expect(page.locator('main .lecture-section')).toHaveCount(3);
+  await expect(page.locator('#lecture-overview>h2')).toHaveText('도입');
   await expect(page.locator('#lecture-detail>h2')).toHaveText('상세 요약');
-  await expect(page.locator('#lecture-overview>h2')).toHaveText('핵심 요약');
-  await expect(page.locator('#lecture-practice>h2')).toHaveText('실천 포인트');
-  await expect(page.locator('#lecture-practice .summary-list li')).toHaveCount(3);
-  await expect(page.locator('#lecture-practice details')).toHaveCount(4);
-  const firstStep=page.locator('#lecture-practice details').first();
+  await expect(page.locator('#lecture-overview .intro-points li')).toHaveCount(3);
+  await expect(page.locator('#lecture-overview .intro-steps details')).toHaveCount(4);
+  const firstStep=page.locator('#lecture-overview .intro-steps details').first();
   await expect(firstStep.locator('ul')).toBeHidden();
   await firstStep.locator('summary').click();
   await expect(firstStep.locator('ul')).toBeVisible();
   await expect(page.locator('#lecture-comment>h2')).toHaveText('타임스탬프');
-  for(const removed of ['5분 요약','미니강좌','용어와 개념']){
-    await expect(page.getByText(removed)).toHaveCount(0);
+  for(const removed of ['핵심 요약','실천 포인트','5분 요약','미니강좌','용어와 개념']){
+    await expect(page.getByText(removed,{exact:true})).toHaveCount(0);
   }
   await expect(page.locator('.summary-links')).toHaveCount(0);
   await page.locator('.breadcrumb a').click();
@@ -249,13 +248,13 @@ test('lecture summary keeps a clear type hierarchy and readable width',async({br
     const context=await browser.newContext({viewport:{width,height:844},reducedMotion:'reduce'});
     const page=await context.newPage();
     await page.goto('/lectures/affirmation-20261101.html');
-    await expect(page.locator('#lecture-overview .summary-tier>h3')).toHaveText('핵심 세 가지');
-    await expect(page.locator('#lecture-overview .summary-list li')).toHaveCount(3);
+    await expect(page.locator('#lecture-overview .intro-block>h3').first()).toHaveText('자기확언의 힘과 조건');
+    await expect(page.locator('#lecture-overview .intro-points li')).toHaveCount(3);
     const m=await page.evaluate(()=>{
       const size=selector=>parseFloat(getComputedStyle(document.querySelector(selector)).fontSize);
       const box=document.querySelector('.compact-lecture').getBoundingClientRect();
-      return {h1:size('h1'),h2:size('#lecture-overview>h2'),h3:size('#lecture-overview .summary-tier>h3'),
-        lead:size('#lecture-overview .summary-tier>.summary-lead'),list:size('#lecture-overview .summary-list li'),
+      return {h1:size('h1'),h2:size('#lecture-overview>h2'),h3:size('#lecture-overview .intro-block>h3'),
+        lead:size('#lecture-overview .summary-tier>.summary-lead'),list:size('#lecture-overview .intro-points li'),
         width:box.width,left:box.left,right:box.right,brand:document.querySelector('.site-brand').getBoundingClientRect().left,
         overflow:document.documentElement.scrollWidth-window.innerWidth};
     });
