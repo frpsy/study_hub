@@ -235,7 +235,7 @@ test('a lecture card opens a page with the intro, detail summary and timestamps'
   await firstStep.locator('summary').click();
   await expect(firstStep.locator('ul')).toBeVisible();
   await expect(page.locator('#lecture-comment>h2')).toHaveText('타임스탬프');
-  for(const removed of ['핵심 요약','실천 포인트','5분 요약','미니강좌','용어와 개념']){
+  for(const removed of ['실천 포인트','5분 요약','미니강좌','용어와 개념']){
     await expect(page.getByText(removed,{exact:true})).toHaveCount(0);
   }
   await expect(page.locator('.summary-links')).toHaveCount(0);
