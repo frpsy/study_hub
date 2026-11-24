@@ -11,31 +11,32 @@ from content_registry import catalog_leads
 
 
 class KoreanLeads(unittest.TestCase):
-    def test_archived_one_sentence_leads_keep_editorial_format(self):
+    def test_short_direct_leads_match_all_published_surfaces(self):
+        import html
+        from build_library import load_leads
         minis = json.loads((R/'data/mini_courses.json').read_text(encoding='utf-8'))
         summaries = catalog_leads(R)
+        visible_leads = load_leads(R)
         registry = json.loads((R/'lectures.json').read_text(encoding='utf-8'))
+        home = (R/'index.html').read_text(encoding='utf-8')
         self.assertEqual(set(minis), {r['id'] for r in registry})
-        self.assertEqual(set(minis), set(summaries))
+        self.assertEqual(summaries, visible_leads, '보관 lead와 공개 첫 핵심 문장이 어긋남')
         for vid, record in minis.items():
             with self.subTest(lecture=vid):
                 lead = record['lead']
-                # 인용형 한 문장: 큰따옴표로 감싼 강연자 발언 한 문장(안쪽 15~170자, 마침표 하나로 끝남).
-                quoted = lead.startswith('“') and lead.endswith('”')
-                body = lead[1:-1] if quoted else lead
-                self.assertEqual(sum(body.count(c) for c in '.!?'), 1)
-                if quoted:
-                    self.assertTrue(body.endswith('.'), vid)
-                    self.assertNotIn('“', body, vid)
-                    self.assertNotIn('”', body, vid)
-                    self.assertGreaterEqual(len(body), 15, vid)
-                else:
-                    self.assertTrue(lead.endswith('다.'), vid)
-                    self.assertGreaterEqual(len(lead), 55, vid)
-                self.assertLessEqual(len(body), 170, vid)
-                self.assertFalse(re.search(r'\s{2,}', lead), vid)
-                self.assertEqual(lead, summaries[vid], '카탈로그의 한 문장과 다름: '+vid)
-
+                self.assertEqual(sum(lead.count(c) for c in '.!?'), 1)
+                self.assertTrue(lead.endswith('다.'))
+                self.assertGreaterEqual(len(lead), 35)
+                self.assertLessEqual(len(lead), 65)
+                self.assertFalse(re.search(r'\s{2,}', lead))
+                self.assertNotRegex(lead, r'김주환은|강연자는|강의는|라고 말한다|고 말한다|살펴본다')
+                self.assertFalse(lead.startswith('“'), '한 문장 인용이 아닌 직접 서술')
+                text = html.escape(lead, quote=True)
+                self.assertIn(f'<p class="card-lead">{text}</p>', home)
+                detail = (R/'lectures'/f'{vid}.html').read_text(encoding='utf-8')
+                self.assertIn(text, detail)
+                self.assertIn(f'<meta name="description" content="{text}">', detail)
+                self.assertIn(f'<meta property="og:description" content="{text}">', detail)
 
 
 if __name__ == '__main__':

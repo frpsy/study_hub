@@ -246,7 +246,7 @@ test('unknown resume data and unavailable storage leave normal navigation usable
 });
 
 test('reading estimate and folded outline remain usable without JavaScript',async({browser})=>{
-  const context=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}});
+  const context=await browser.newContext({javaScriptEnabled:false,reducedMotion:'reduce',viewport:{width:390,height:844}});
   const page=await context.newPage();
   await page.goto('/index.html');
   const reading=await page.locator('.card-reading').first().innerText();
@@ -259,4 +259,25 @@ test('reading estimate and folded outline remain usable without JavaScript',asyn
   await page.locator('.detail-toc a').first().click();
   await expect(page).toHaveURL(/#detail-1$/);
   await context.close();
+});
+
+test('all 22 short Korean leads stay consistent and fit two lines on a phone',async({page})=>{
+  const records=require('../data/lecture_compact.json');
+  const minis=require('../data/mini_courses.json');
+  await page.setViewportSize({width:390,height:844});
+  await page.goto('/index.html');
+  for(const row of studyLectures){
+    const lead=minis[row.id].lead;
+    const first=records[row.id].intro.find(block=>block.kind==='points').items[0];
+    expect(typeof first==='string'?first:first.t).toBe(lead);
+    await expect(page.locator(`[data-video-id="${row.id}"] .card-lead`)).toHaveText(lead);
+  }
+  const overflow=await page.evaluate(leads=>{
+    const lines=el=>{const range=document.createRange();range.selectNodeContents(el);return new Set([...range.getClientRects()].map(rect=>Math.round(rect.top))).size};
+    const cards=[...document.querySelectorAll('.card-lead')].filter(el=>lines(el)>2).map(el=>el.textContent);
+    const quote=document.querySelector('.today-key');const old=quote.textContent;
+    const quotes=leads.filter(text=>{quote.textContent=text;return lines(quote)>2});quote.textContent=old;
+    return {cards,quotes};
+  },studyLectures.map(row=>minis[row.id].lead));
+  expect(overflow).toEqual({cards:[],quotes:[]});
 });
