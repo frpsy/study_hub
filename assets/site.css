@@ -1313,3 +1313,24 @@ html.header-hidden .sidebar{top:12px}
 /* Material 3 surface-container paired with on-surface and primary roles. */
 .today-line .today-key{color:var(--quote-ink)}
 .today-line .today-random{color:var(--quote-muted)}
+
+
+/* Compact catalog: one save action at the title, read state in the metadata row. */
+.home-main .lecture-card,.home-main .lecture-card:last-of-type{padding:14px 16px}
+.home-main .lecture-card h2{padding-inline-end:36px;font-size:19px;line-height:1.35;margin:0 0 6px}
+.home-main .lecture-card .card-lead{font-size:14px;line-height:1.6;-webkit-line-clamp:2}
+.lecture-card .card-context{grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px;margin-top:4px}
+.lecture-card .card-actions{display:contents}
+.lecture-card .card-actions button{position:relative;z-index:1;margin:0;background:transparent}
+.lecture-card .card-actions [data-library-toggle="bookmarks"]{position:absolute;inset-block-start:7px;inset-inline-end:7px;width:44px;height:44px;padding:0;border-radius:50%;color:var(--muted)}
+.lecture-card [data-bookmark-label]{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.lecture-card .bookmark-symbol{display:block}
+.lecture-card [data-library-toggle="bookmarks"][aria-pressed="true"]{background:var(--quote-surface,var(--editorial-feature));color:var(--quote-primary)}
+.lecture-card [data-library-toggle="bookmarks"][aria-pressed="true"] .bookmark-symbol{fill:currentColor}
+.lecture-card .card-context .meta{gap:4px 8px;align-items:center;font-size:11px;line-height:1.6}
+.lecture-card .card-reading{flex-basis:auto;color:var(--muted);font-weight:500}
+.lecture-card .card-timing{flex-basis:auto;white-space:normal;gap:0}
+.lecture-card .card-timing .meta-dot,.lecture-card .card-duration{display:none}
+.lecture-card .card-actions [data-library-toggle="read"]{min-width:44px;min-height:44px;padding-inline:4px;font-size:11px;color:var(--muted)}
+.lecture-card.is-read .card-actions [data-library-toggle="read"]{color:var(--quote-primary)}
+.lecture-card.is-read .read-mark{background:var(--quote-primary);color:var(--on-accent)}

@@ -81,7 +81,7 @@
       const selected=library[kind].has(lecture.dataset.videoId);
       button.setAttribute('aria-pressed',String(selected));
       if(kind==='bookmarks'){
-        button.firstElementChild.textContent=selected?'★':'☆';
+        button.title=selected?'저장 취소':'나중에 읽을 강의 저장';
         button.setAttribute('aria-label',selected?'북마크 저장됨':'북마크 저장');
         const label=button.querySelector('[data-bookmark-label]');
         if(label)label.textContent=selected?'저장됨':'저장';
@@ -89,7 +89,7 @@
       else{
         lecture.classList.toggle('is-read',selected);
         const label=button.querySelector('[data-read-label]');
-        if(label)label.textContent=selected?'읽음 완료':(button.closest('.lecture-card')?'읽음':'읽음 표시');
+        if(label)label.textContent=button.closest('.lecture-card')?'읽음':(selected?'읽음 완료':'읽음 표시');
       }
     });
   };
