@@ -1,4 +1,4 @@
-:root{--paper:#f5f5f6;--surface:#ffffff;--ink:#0f0f10;--muted:#5e5e66;--line:rgba(15,15,16,.12);--accent:#c8102e;--tint:rgba(15,15,16,.05);--radius:6px;--radius-card:var(--radius);--radius-control:4px;--font-body-size:16px;--font-ui-size:14px;--line-height-body:1.8;--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:20px;--space-6:24px;--space-8:32px;--space-12:48px;--site-max-width:1160px;--tap-target:44px;--button-pad-y:9px;--button-pad-x:15px;--brand-ink:#0f0f10;--brand-soft:rgba(15,15,16,.035);--brand-outline:rgba(15,15,16,.14);--reading-measure:760px;--card-shadow:none}
+:root{--paper:#faf9f6;--surface:#fefdfa;--ink:#1f2328;--muted:#5e5e66;--line:rgba(15,15,16,.12);--accent:#c8102e;--tint:rgba(15,15,16,.05);--radius:6px;--radius-card:var(--radius);--radius-control:4px;--font-body-size:16px;--font-ui-size:14px;--line-height-body:1.8;--space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:20px;--space-6:24px;--space-8:32px;--space-12:48px;--site-max-width:800px;--tap-target:44px;--button-pad-y:9px;--button-pad-x:15px;--brand-ink:#0f0f10;--brand-soft:rgba(15,15,16,.035);--brand-outline:rgba(15,15,16,.14);--reading-measure:760px;--card-shadow:none}
 *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:100px}body{margin:0;background:var(--paper);color:var(--ink);font:var(--font-body-size)/var(--line-height-body) system-ui,-apple-system,"Noto Sans KR",sans-serif;word-break:keep-all;overflow-wrap:anywhere}
 a{color:var(--accent);text-underline-offset:4px}button,input{font:inherit}button{cursor:pointer}a,button,input,summary{ -webkit-tap-highlight-color:transparent}a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--focus-color);outline-offset:4px}
 [hidden]{display:none!important}.site-shell,.site-header-inner,.site-footer-inner{width:min(var(--site-max-width),100% - 48px);margin:auto}.site-header{position:sticky;top:0;z-index:20;background:var(--header-bg);border-bottom:1px solid var(--line)}
@@ -399,11 +399,11 @@ html[data-standalone="true"] .site-footer-inner{padding-left:env(safe-area-inset
  .site-header-inner{gap:clamp(12px,1.7vw,22px)}
  .theme-toggle{min-width:100px}}
 :root[data-theme="dark"]{
- --paper:#151719;--surface:#1b1e21;--ink:#e6e3df;--muted:#adaeaf;
+ --paper:#121417;--surface:#1b1e21;--ink:#e6e8eb;--muted:#adaeaf;
  --line:#35383c;--accent:#ff4d63;--tint:rgba(255,255,255,.06);
  --brand-ink:#f3f3f4;--brand-soft:rgba(255,255,255,.04);--brand-outline:rgba(255,255,255,.14);
  --card-shadow:none;
- --header-bg:rgba(21,23,25,.92);--header-solid:#151719;--card-bg:#1d2023;--line-strong:#50545a;--glow:rgba(255,77,99,.16);
+ --header-bg:rgba(18,20,23,.96);--header-solid:#121417;--card-bg:#1d2023;--line-strong:#50545a;--glow:rgba(255,77,99,.16);
  --input-border:rgba(255,255,255,.3);--focus-color:#ff4d63;--on-accent:#0b0b0c;
  color-scheme:dark;
  --shadow-color:rgba(0,0,0,.4);
@@ -675,9 +675,6 @@ a{color:var(--ink);text-decoration-color:var(--accent);text-decoration-thickness
 .filter-chips button{min-height:44px;font-size:12px;padding:8px 12px}
 .catalog-order{display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;font-size:12px;color:var(--muted)}
 .catalog-order>span:first-child{font-weight:700;color:var(--ink)}
-.sort-toggle{display:inline-flex;gap:2px;padding:2px;border:1px solid var(--line);border-radius:6px}
-.sort-toggle button{min-height:32px;padding:4px 12px;border-color:transparent;border-radius:4px;background:transparent;color:var(--muted);font-size:12px;font-weight:400}
-.sort-toggle button[aria-pressed=true]{background:var(--tint);color:var(--ink);font-weight:650}
 .home-main .lecture-grid{gap:14px}
 .home-main .lecture{position:relative;padding:26px 28px;background:var(--surface)}
 .lecture h2{max-width:95%;margin:12px 0 10px;font-size:22px;line-height:1.45}
@@ -992,9 +989,8 @@ html.header-hidden .sidebar{top:12px}
 @media(max-width:780px){.detail-figure img{max-height:240px}}
 @media print{.detail-figure{break-inside:avoid}.detail-figure img{max-height:none}}
 
-/* 좌우 여백 최소화 / 2026-11-22 사용자 요청: 모든 글이 화면 좌우 여백에 가능한 한 꽉 차게 놓인다.
-   여백은 모바일 14px, PC 24px만 두고, 본문 폭 상한은 1040px로 올린다(이전 760px). */
-:root{--gutter:24px;--reading-measure:1040px;--site-max-width:1040px}
+/* Shared reading measure and responsive gutters. */
+:root{--gutter:24px;--reading-measure:800px;--site-max-width:800px}
 @media(max-width:780px){:root{--gutter:14px}}
 .site-shell,.site-header-inner,.site-footer-inner{max-width:none;width:min(var(--site-max-width),100% - 2*var(--gutter));margin-inline:auto}
 .compact-lecture,.summary-page{max-width:none;width:100%}
@@ -1093,9 +1089,6 @@ html.header-hidden .sidebar{top:12px}
 .home-main .filter-chips button{position:relative;isolation:isolate;min-height:var(--tap-target);min-width:var(--tap-target);padding-block:0;border:0;border-radius:var(--radius-control)}
 .home-main .filter-chips button[aria-pressed="true"]{background:transparent;color:var(--ink);font-weight:700}
 .home-main .filter-chips button[aria-pressed="true"]::before{content:"";position:absolute;z-index:-1;inset:9px 0;background:var(--tint);border:1px solid var(--line);border-radius:999px;pointer-events:none}
-.home-main .sort-toggle{border:0;padding:0}
-.home-main .sort-toggle button{min-height:var(--tap-target);padding-inline:8px}
-.home-main .sort-toggle button[aria-pressed="true"]{background:transparent;color:var(--ink);text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:5px}
 .site-header-inner{display:flex;align-items:center;justify-content:space-between}
 .header-settings{position:relative;margin-inline-start:auto;flex:none}
 .header-settings .view-settings-panel{position:absolute;inset-inline-end:0;inset-block-start:100%;width:min(320px,calc(100vw - 32px));box-sizing:border-box;margin-top:6px;background:var(--surface);box-shadow:0 6px 18px var(--shadow-color,rgba(0,0,0,.18))}
@@ -1191,7 +1184,6 @@ html.header-hidden .sidebar{top:12px}
 }
 .discovery-panel .catalog-order{min-height:var(--tap-target);padding:0;border-top:1px solid var(--line)}
 .discovery-panel .catalog-results{font-variant-numeric:tabular-nums}
-.discovery-panel .sort-toggle button:last-child{padding-inline-end:0}
 .discovery-panel .views-note{margin:0 0 var(--space-2)}
 
 .home-main .lecture-grid{row-gap:var(--space-2)}
@@ -1209,8 +1201,68 @@ html.header-hidden .sidebar{top:12px}
  .discovery-panel{padding:var(--space-2) var(--space-3) 0;margin-bottom:var(--space-2)}
  .home-main .discovery-panel .filter-chips button{padding-inline:7px}
  .discovery-panel .catalog-order{column-gap:6px;row-gap:0}
- .discovery-panel .sort-toggle button{padding-inline:6px}
  .home-main .lecture,.home-main .lecture:last-of-type{padding:var(--space-3) var(--space-4)}
 }
 
 .search-section-link{position:relative;z-index:1;display:block;align-self:flex-start;min-height:var(--tap-target);margin-top:4px;padding-block:10px;box-sizing:border-box;color:var(--accent);font-size:13px;line-height:1.5;text-underline-offset:3px;word-break:keep-all!important;overflow-wrap:anywhere}
+
+/* Editorial archive: paper surfaces with the existing rounded discovery controls. */
+:root{
+ --header-bg:rgba(250,249,246,.96);
+ --header-solid:var(--paper);
+ --editorial-feature:#f0ebe2;
+ --editorial-link:#304e74;
+ --editorial-active:#244d79;
+ --editorial-active-bg:#e3ebf7;
+}
+:root[data-theme="dark"]{
+ --editorial-feature:#242731;
+ --editorial-link:#adc8f2;
+ --editorial-active:#bdd5f8;
+ --editorial-active-bg:#2e3c51;
+}
+.site-header .site-brand{font-size:15px;gap:8px}
+.site-header .site-brand img.brand-symbol{width:28px;height:28px;flex-basis:28px}
+.site-header .appearance-toggle{color:var(--muted)}
+.home-main .home-title{color:var(--ink)}
+.today-line{background:var(--editorial-feature);border-inline-start:3px solid var(--accent);padding:var(--space-1) var(--space-5) var(--space-4)}
+.today-line .today-key{font-family:"AppleMyungjo","Nanum Myeongjo",Batang,serif;font-size:clamp(18px,3vw,23px);font-weight:600;line-height:1.65}
+.today-line .today-source{color:var(--editorial-link);text-decoration:underline;text-decoration-thickness:1px}
+.today-line .today-source::before{content:"↗";display:inline-block;margin-inline-end:.4em}
+@media(prefers-reduced-motion:no-preference){
+ .today-key.is-changing{animation:editorial-fade 180ms ease-out}
+ @keyframes editorial-fade{from{opacity:.4}to{opacity:1}}
+}
+.discovery-panel .catalog-sort{min-height:var(--tap-target);width:auto;max-width:100%;padding:0 8px;border:0;background:transparent;color:var(--ink);font:inherit;border-radius:var(--radius-control)}
+.discovery-panel .catalog-sort:focus-visible{outline:2px solid var(--focus-color)}
+.home-main .lecture-card h2{margin-bottom:var(--space-1)}
+.home-main .lecture-card .card-lead{margin:0;color:var(--ink);font-weight:450;word-break:keep-all!important;overflow-wrap:anywhere}
+.lecture-card .card-context .meta{column-gap:8px}
+.lecture-card .card-timing{display:inline-flex;align-items:baseline;gap:6px;max-width:100%;white-space:nowrap}
+.lecture-card .meta .card-topic{
+ color:var(--topic-ink,var(--muted));background:var(--topic-paper,var(--tint));border-radius:100vmax;
+ padding:2px 8px;font-size:11px;letter-spacing:0;line-height:1.5
+}
+.lecture-card[data-topic="명상"]{--topic-paper:#ece7f3;--topic-ink:#554265}
+.lecture-card[data-topic="몸과 수면"]{--topic-paper:#e3edf1;--topic-ink:#345466}
+.lecture-card[data-topic="감정과 뇌"]{--topic-paper:#f4e8df;--topic-ink:#704731}
+.lecture-card[data-topic="마음근력"]{--topic-paper:#e6ece2;--topic-ink:#425443}
+:root[data-theme="dark"] .lecture-card[data-topic="명상"]{--topic-paper:#362f43;--topic-ink:#ded0ed}
+:root[data-theme="dark"] .lecture-card[data-topic="몸과 수면"]{--topic-paper:#263944;--topic-ink:#c4dce8}
+:root[data-theme="dark"] .lecture-card[data-topic="감정과 뇌"]{--topic-paper:#44342c;--topic-ink:#f0d4c3}
+:root[data-theme="dark"] .lecture-card[data-topic="마음근력"]{--topic-paper:#2e3c31;--topic-ink:#cadcc8}
+.lecture-card [data-library-toggle="bookmarks"][aria-pressed="true"]{color:var(--editorial-active);background:var(--editorial-active-bg)}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+ .home-main .lecture-card:hover,.home-main .lecture-card:last-of-type:hover{transform:translateY(-2px);border-color:var(--line-strong);box-shadow:none}
+}
+.home-main .empty{margin:12px 0 0;padding:24px 16px;background:var(--surface);border:1px solid var(--line);border-radius:var(--library-radius)}
+.empty-icon{display:block;margin:0 auto 8px;color:var(--editorial-link)}
+.empty [data-empty-message]{margin:0}
+.empty-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.empty-actions .btn{min-height:var(--tap-target);margin:0;border-radius:100vmax}
+.site-footer-inner{font-size:12px}
+@media(max-width:768px){
+ .today-line{padding-inline:var(--space-3)}
+ .home-main .discovery-panel .filter-chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+ .home-main .discovery-panel .filter-chips button{flex:none}
+}

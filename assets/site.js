@@ -228,27 +228,33 @@
       random.hidden=!alternatives().length;
       random.addEventListener('click',()=>{
         const choices=alternatives();
-        if(choices.length)render(choices[Math.floor(Math.random()*choices.length)]);
+        if(!choices.length)return;
+        quote.classList.remove('is-changing');
+        render(choices[Math.floor(Math.random()*choices.length)]);
+        if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+          void quote.offsetWidth;
+          quote.classList.add('is-changing');
+        }
       });
     }
   }
-  document.querySelectorAll('.sort-toggle').forEach(group=>{
+  document.querySelectorAll('.catalog-sort').forEach(select=>{
     const list=document.getElementById('lecture-list');if(!list)return;
     const cards=[...list.children].filter(el=>el.matches('[data-video-id],[data-kind]'));
     const original=new Map(cards.map((card,index)=>[card,index]));
-    const buttons=[...group.querySelectorAll('[data-sort]')];
+    const modes=new Set([...select.options].map(option=>option.value));
     const stamp=(card,key)=>{const value=Date.parse(card.dataset[key]||'');return Number.isNaN(value)?-Infinity:value};
     const views=card=>{const raw=card.dataset.views;const value=raw===undefined||raw===''?NaN:Number(raw);return Number.isNaN(value)?-Infinity:value};
     const note=document.getElementById('views-note');
     const apply=(mode,save)=>{
-      if(!buttons.some(button=>button.dataset.sort===mode))mode='latest';
+      if(!modes.has(mode))mode='latest';
       const key=mode==='added'?'added':'date';
       const value=mode==='views'?views:card=>stamp(card,key);
       // 같은 값이면 등록 순서(최신순)를 유지하고, 값이 없는 자료는 맨 뒤로 보낸다.
       [...cards].sort((a,b)=>value(b)-value(a)||original.get(a)-original.get(b)).forEach(card=>list.appendChild(card));
       list.dataset.sortMode=mode;
       if(note)note.hidden=mode!=='views';
-      buttons.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.sort===mode)));
+      select.value=mode;
       if(save){
         try{localStorage.setItem('study-hub-sort',mode)}catch{}
         const url=new URL(location.href);
@@ -257,7 +263,8 @@
       }
     };
     const saved=()=>{let mode=new URLSearchParams(location.search).get('sort');if(!mode){try{mode=localStorage.getItem('study-hub-sort')}catch{}}return mode||'latest'};
-    buttons.forEach(button=>button.addEventListener('click',()=>apply(button.dataset.sort,true)));
+    select.hidden=false;
+    select.addEventListener('change',()=>apply(select.value,true));
     apply(saved(),false);
     window.addEventListener('pageshow',()=>apply(saved(),false));
   });

@@ -44,34 +44,34 @@ for(const viewport of [{width:390,height:844},{width:1280,height:800}]){
   });
 }
 
-test('home sort toggle orders by lecture date or by when it was added',async({page})=>{
+test('home sort selector orders by lecture date or by when it was added',async({page})=>{
   await page.goto('/index.html');
   const ids=()=>page.locator('#lecture-list .lecture').evaluateAll(cards=>cards.map(card=>card.dataset.videoId));
   const latest=await ids();
   const dates=await page.locator('#lecture-list .lecture').evaluateAll(cards=>cards.map(card=>card.dataset.date));
   expect(dates).toEqual([...dates].sort().reverse());
-  await expect(page.locator('[data-sort="latest"]')).toHaveAttribute('aria-pressed','true');
-  await page.locator('[data-sort="added"]').click();
-  await expect(page.locator('[data-sort="added"]')).toHaveAttribute('aria-pressed','true');
+  await expect(page.getByRole('combobox',{name:'강의 정렬'})).toHaveValue('latest');
+  await page.getByRole('combobox',{name:'강의 정렬'}).selectOption('added');
+  await expect(page.getByRole('combobox',{name:'강의 정렬'})).toHaveValue('added');
   const added=await page.locator('#lecture-list .lecture').evaluateAll(cards=>cards.map(card=>Date.parse(card.dataset.added)));
   expect(added).toEqual([...added].sort((a,b)=>b-a));
   expect(await ids()).not.toEqual(latest);
   expect((await ids())[0]).toBe(latestAddedId);
   await expect(page).toHaveURL(/[?&]sort=added/);
   await page.reload();  // The choice survives a reload.
-  await expect(page.locator('[data-sort="added"]')).toHaveAttribute('aria-pressed','true');
-  await page.locator('[data-sort="latest"]').click();
+  await expect(page.getByRole('combobox',{name:'강의 정렬'})).toHaveValue('added');
+  await page.getByRole('combobox',{name:'강의 정렬'}).selectOption('latest');
   expect(await ids()).toEqual(latest);
   await expect(page).not.toHaveURL(/sort=/);
 });
 
-test('home sort toggle can order by YouTube view count and shows the count only then',async({page})=>{
+test('home sort selector can order by YouTube view count and shows the count only then',async({page})=>{
   await page.goto('/index.html');
   const views=()=>page.locator('#lecture-list .lecture').evaluateAll(cards=>cards.map(card=>Number(card.dataset.views)));
   await expect(page.locator('#lecture-list .lecture .views').first()).toBeHidden();
   await expect(page.locator('#views-note')).toBeHidden();
-  await page.locator('[data-sort="views"]').click();
-  await expect(page.locator('[data-sort="views"]')).toHaveAttribute('aria-pressed','true');
+  await page.getByRole('combobox',{name:'강의 정렬'}).selectOption('views');
+  await expect(page.getByRole('combobox',{name:'강의 정렬'})).toHaveValue('views');
   const counts=await views();
   expect(counts.length).toBeGreaterThan(1);
   expect(counts).toEqual([...counts].sort((a,b)=>b-a));
@@ -79,8 +79,8 @@ test('home sort toggle can order by YouTube view count and shows the count only 
   await expect(page.locator('#views-note')).toBeVisible();
   await expect(page).toHaveURL(/[?&]sort=views/);
   await page.reload();
-  await expect(page.locator('[data-sort="views"]')).toHaveAttribute('aria-pressed','true');
-  await page.locator('[data-sort="latest"]').click();
+  await expect(page.getByRole('combobox',{name:'강의 정렬'})).toHaveValue('views');
+  await page.getByRole('combobox',{name:'강의 정렬'}).selectOption('latest');
   await expect(page.locator('#lecture-list .lecture .views').first()).toBeHidden();
   await expect(page.locator('#views-note')).toBeHidden();
 });

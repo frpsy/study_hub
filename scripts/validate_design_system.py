@@ -5,9 +5,9 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 TOKENS = {
-    "--paper": "#f5f5f6",
-    "--surface": "#ffffff",
-    "--ink": "#0f0f10",
+    "--paper": "#faf9f6",
+    "--surface": "#fefdfa",
+    "--ink": "#1f2328",
     "--muted": "#5e5e66",
     "--line": "rgba(15,15,16,.12)",
     "--accent": "#c8102e",
@@ -21,7 +21,7 @@ TOKENS = {
     "--space-1": "4px", "--space-2": "8px", "--space-3": "12px",
     "--space-4": "16px", "--space-5": "20px", "--space-6": "24px",
     "--space-8": "32px", "--space-12": "48px",
-    "--site-max-width": "1160px",
+    "--site-max-width": "800px",
     "--tap-target": "44px",
     "--button-pad-y": "9px", "--button-pad-x": "15px",
     "--brand-ink": "#0f0f10",
