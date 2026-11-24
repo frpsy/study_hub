@@ -1162,7 +1162,7 @@ html.header-hidden .sidebar{top:12px}
 }
 .today-line,.home-main .lecture{--link-focus-radius:var(--library-radius)}
 .home-main .home-title{letter-spacing:-.035em}
-.today-line .eyebrow{color:var(--muted);letter-spacing:0}
+.today-line .eyebrow{color:var(--quote-muted);letter-spacing:0}
 .today-line .today-key{max-width:38em;letter-spacing:-.025em}
 .today-line .today-source{text-underline-offset:.2em}
 .discovery-panel{
@@ -1210,13 +1210,19 @@ html.header-hidden .sidebar{top:12px}
 :root{
  --header-bg:rgba(250,249,246,.96);
  --header-solid:var(--paper);
- --editorial-feature:#f0ebe2;
+ --editorial-feature:#f3edf7;
+ --quote-ink:#1d1b20;
+ --quote-muted:#49454f;
+ --quote-primary:#6750a4;
  --editorial-link:#304e74;
  --editorial-active:#244d79;
  --editorial-active-bg:#e3ebf7;
 }
 :root[data-theme="dark"]{
- --editorial-feature:#242731;
+ --editorial-feature:#211f26;
+ --quote-ink:#e6e0e9;
+ --quote-muted:#cac4d0;
+ --quote-primary:#d0bcff;
  --editorial-link:#adc8f2;
  --editorial-active:#bdd5f8;
  --editorial-active-bg:#2e3c51;
@@ -1225,9 +1231,9 @@ html.header-hidden .sidebar{top:12px}
 .site-header .site-brand img.brand-symbol{width:28px;height:28px;flex-basis:28px}
 .site-header .appearance-toggle{color:var(--muted)}
 .home-main .home-title{color:var(--ink)}
-.today-line{background:var(--editorial-feature);border-inline-start:3px solid var(--accent);padding:var(--space-1) var(--space-5) var(--space-4)}
+.today-line{background:var(--editorial-feature);border-inline-start:3px solid var(--quote-primary);color:var(--quote-ink);padding:var(--space-1) var(--space-5) var(--space-4)}
 .today-line .today-key{font-family:"AppleMyungjo","Nanum Myeongjo",Batang,serif;font-size:clamp(18px,3vw,23px);font-weight:600;line-height:1.65}
-.today-line .today-source{color:var(--editorial-link);text-decoration:underline;text-decoration-thickness:1px}
+.today-line .today-source{color:var(--quote-primary);text-decoration:underline;text-decoration-thickness:1px}
 .today-line .today-source::before{content:"↗";display:inline-block;margin-inline-end:.4em}
 @media(prefers-reduced-motion:no-preference){
  .today-key.is-changing{animation:editorial-fade 180ms ease-out}
@@ -1303,3 +1309,7 @@ html.header-hidden .sidebar{top:12px}
  .today-line .today-key{font-size:18px}
 }
 @media print{.resume-reading{display:none}.detail-outline{display:none}}
+
+/* Material 3 surface-container paired with on-surface and primary roles. */
+.today-line .today-key{color:var(--quote-ink)}
+.today-line .today-random{color:var(--quote-muted)}

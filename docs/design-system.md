@@ -221,3 +221,9 @@
 ## 한 줄 요약 통일 (2026-11-24)
 - 22개 강의의 대표 문장은 메타 주어 없는 한국어 평서문 35~65자로 통일했다. 핵심 요약 첫 항목과 `data/mini_courses.json`의 `lead`는 같아야 한다. 홈 카드·오늘의 문장 풀·상세 첫 항목·공유 설명은 생성 결과와 브라우저 검사로 일치를 확인한다.
 - 기본 글자 크기의 390px 모바일과 PC에서 카드·오늘의 문장에 생략 없이 두 줄 안에 표시되는지 실제 글꼴의 줄 상자로 확인한다. 글자를 크게 설정하거나 더 좁은 화면에서는 문장 전체를 읽을 수 있도록 자연스러운 줄바꿈을 허용한다.
+
+
+## 한 문장 Material 3 색상 (2026-11-24)
+- 오늘의 한 문장은 Google Material 3 기본 팔레트의 `surface-container` 역할을 따른다. 라이트 배경 #f3edf7, 본문 `on-surface` #1d1b20, 보조 `on-surface-variant` #49454f, 링크·왼쪽 선 `primary` #6750a4이다.
+- 다크는 각각 #211f26, #e6e0e9, #cac4d0, #d0bcff를 쓴다. 색상은 공통 CSS 변수로 관리하고 문장·줄 수·레이아웃은 유지한다.
+- 근거: https://m3.material.io/styles/color/roles 및 Google material-web `tokens/versions/v0_192/_md-sys-color.scss`.
