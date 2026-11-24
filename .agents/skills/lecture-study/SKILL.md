@@ -7,6 +7,8 @@ description: 내면의 서재(frpsy/study_hub)에 강의를 추가하거나 핵�
 
 기준 문서: `AGENTS.md`(구성·검증) → `편집규칙.md`(문장·타임스탬프·자막 규칙). 이전 판(마인드맵·상세 해설 시기)은 `docs/archive/lecture-study-SKILL-2026-11-06.md`.
 
+YouTube 요약의 작성·수정과 상세 본문 윤문에는 기본적으로 [무손실 한국어 윤문 스킬](../lecture-polish/SKILL.md)을 함께 적용한다.
+
 ## 새 강의
 1. 영상 ID를 먼저 확정한다(확인 안 된 ID를 만들지 않는다).
 2. 자막 확보(편집규칙 8절 순서). 원문 그대로 `transcripts/<영상ID>.<언어>.txt`(+SRT/VTT)로 저장한다. 아직 없으면 편집규칙 10절대로 `caption-queue/<영상ID>.json`과 2시간 재확인으로 관리한다.
@@ -20,7 +22,7 @@ description: 내면의 서재(frpsy/study_hub)에 강의를 추가하거나 핵�
 10. 모든 강의는 편집규칙 14절의 자체 검수(사실·출처, 문장·문법, 형식)를 끝낸다. AGENTS.md의 검증 명령 전부 통과 → PR(네 제목) → CI의 `quality`와 `browser`가 **모두 pass**인지 확인 → 병합 → 공개 페이지에서 새 문구 확인 → 링크 보고.
 
 ## 기존 요약 다듬기
-- `mini_courses.json`만 고치고 재생성한다. 뜻을 바꾸는 수정은 저장된 자막(`transcripts/`)으로 근거를 확인한다.
+- 한 줄 요약은 `mini_courses.json`과 `intro` 첫 항목을 일치시키고, 상세 본문은 `lecture_compact.json`의 `detail`을 고친 뒤 재생성한다. 뜻을 바꾸는 수정은 저장된 자막(`transcripts/`)으로 근거를 확인한다.
 - 비문·어색한 연결·같은 서술어 반복을 없애고, 처음 읽는 사람도 바로 이해되게 쓴다.
 - 타임스탬프 원문·연구 수치·직접 인용은 문체를 이유로 고치지 않는다.
 
