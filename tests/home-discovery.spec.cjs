@@ -165,3 +165,34 @@ test('bookmark filtering and read state survive navigation and reload',async({pa
   await expect(page.locator('[data-bookmark-filter]')).toHaveAttribute('aria-pressed','false');
   await expect(card).toBeVisible();
 });
+
+test('topic cards share filters with the chips and restore the selected topic',async({page})=>{
+  await page.setViewportSize({width:320,height:700});
+  await page.goto('/index.html?q=불면증&sort=added');
+  const toggle=page.getByRole('button',{name:'주제 고르기'});
+  const group=page.getByRole('group',{name:'주제 선택'});
+  const choice=group.getByRole('button',{name:/몸과 수면/});
+  const chip=page.locator('[data-filter-for="topic"][data-value="몸과 수면"]');
+  await expect(group).toBeHidden();
+  await toggle.focus();
+  await page.keyboard.press('Enter');
+  await expect(toggle).toHaveAttribute('aria-expanded','true');
+  await expect(group.getByRole('button')).toHaveCount(4);
+  await expect(group.locator('.topic-choice').first()).toHaveCSS('min-height','44px');
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBe(320);
+  await choice.focus();
+  await page.keyboard.press('Space');
+  await expect(choice).toBeFocused();
+  await expect(choice).toHaveAttribute('aria-pressed','true');
+  await expect(chip).toHaveAttribute('aria-pressed','true');
+  await expect(page.locator('[data-video-id="VUHrJZbpIjI"]')).toBeVisible();
+  await expect(page.locator('#search')).toHaveValue('불면증');
+  await expect(page.locator('[data-sort="added"]')).toHaveAttribute('aria-pressed','true');
+  expect(new URL(page.url()).searchParams.get('topic')).toBe('몸과 수면');
+  await page.reload();
+  await toggle.click();
+  await expect(choice).toHaveAttribute('aria-pressed','true');
+  await chip.click();
+  await expect(choice).toHaveAttribute('aria-pressed','false');
+  await expect(page.locator('#search')).toHaveValue('불면증');
+});
