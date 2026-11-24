@@ -5,7 +5,8 @@ const CACHE = 'study-home-static-' + VERSION;
 const PREFIX = 'study-home-static-';
 const CORE = [
   './', './index.html', './offline.html',
-  './manifest.webmanifest', './assets/icon-512.png', './assets/apple-touch-icon.png',
+  './manifest.webmanifest', './assets/icon.svg', './assets/icon-512.png', './assets/apple-touch-icon.png',
+  './assets/icon.svg?v='+VERSION, './assets/apple-touch-icon.png?v='+VERSION,
   './assets/site.css', './assets/site.js', './assets/theme.js'
 ];
 const root = new URL(self.registration.scope);

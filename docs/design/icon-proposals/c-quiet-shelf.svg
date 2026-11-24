@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="고요한 책장">
+  <rect width="512" height="512" rx="112" fill="#eaddff"/>
+  <rect x="118" y="170" width="72" height="192" rx="20" fill="#6750a4"/>
+  <rect x="218" y="126" width="72" height="236" rx="20" fill="#6750a4"/>
+  <rect x="318" y="194" width="72" height="168" rx="20" fill="#6750a4"/>
+  <path d="M118 394h272" stroke="#6750a4" stroke-width="24" stroke-linecap="round"/>
+</svg>

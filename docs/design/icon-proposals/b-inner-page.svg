@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="내면을 여는 책">
+  <rect width="512" height="512" rx="112" fill="#eaddff"/>
+  <rect x="140" y="116" width="232" height="280" rx="36" fill="#6750a4"/>
+  <path d="M190 116v280" stroke="#eaddff" stroke-width="16"/>
+  <path d="M232 304V214a48 48 0 0 1 96 0v90l-48-28Z" fill="#eaddff"/>
+</svg>
