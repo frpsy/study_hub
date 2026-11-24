@@ -66,7 +66,7 @@
 - **형태:** 모서리 카드 6px, 컨트롤·칩 4px, 태그 3px. 그림자는 카드 호버 때 빨간 기운의 얕은 그림자만 쓴다.
 - **타이포:** 시스템 글꼴. 홈 제목·강의 제목은 굵기 800과 음수 자간, 라벨(eyebrow)은 11px·자간 .16em.
 - **레이아웃:** 헤더·본문·푸터 모두 최대 폭 760px로 맞춰 브랜드, 제목, 카드의 왼쪽 선을 일치시킨다. 홈 강의 카드는 한 열이다. 모바일 칩 줄은 가로 스크롤이며 오른쪽 끝을 투명 마스크로 흐리게 처리한다.
-- **아이콘:** assets/icon.svg는 검정 바탕·빨간 점·회백색 책. PNG(icon-512, apple-touch-icon)는 SVG에서 rsvg-convert로 생성한다. 다크 모드에서는 아이콘 둘레에 가는 선을 둔다.
+- **아이콘:** 2026-11-24 Material 3 열린 책(A안)을 확정했다. `assets/icon.svg`가 원본이며 #eaddff(primary-container) 위 #6750a4(primary)의 두 면으로 표현한다. PNG(icon-512, apple-touch-icon)는 같은 SVG를 512·180px로 렌더링한다. 비교 시안은 `docs/design/icon-proposals/`에 보관한다. 헤더·파비콘·Apple 아이콘에는 버전 쿼리를 붙이고 서비스 워커가 같은 버전을 캐시한다.
 - theme-color는 라이트 #ffffff, 다크 #0b0b0c, manifest 배경은 #f5f5f6이다.
 
 ## 읽기 개선 / v11 (2026-11-07)

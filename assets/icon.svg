@@ -1,1 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="96" fill="#0f0f10"/><circle cx="256" cy="142" r="46" fill="#c8102e"/><g transform="translate(256 300) scale(1.05) translate(-256 -300)"><path d="M256 232c-38-30-94-38-148-30v178c54-8 110 0 148 30 38-30 94-38 148-30V202c-54-8-110 0-148 30z" fill="#f5f5f6"/></g><path d="M256 226v186" stroke="#0f0f10" stroke-width="18" stroke-linecap="round"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="열린 책">
+  <rect width="512" height="512" rx="112" fill="#eaddff"/>
+  <g fill="#6750a4">
+    <path d="M128 160c46-6 88 4 116 26v172c-34-21-76-28-116-22-8 1-12-3-12-10V174c0-8 4-13 12-14Z"/>
+    <path d="M384 160c-46-6-88 4-116 26v172c34-21 76-28 116-22 8 1 12-3 12-10V174c0-8-4-13-12-14Z"/>
+  </g>
+</svg>
