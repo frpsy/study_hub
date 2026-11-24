@@ -165,3 +165,30 @@ test('bookmark filtering and read state survive navigation and reload',async({pa
   await expect(page.locator('[data-bookmark-filter]')).toHaveAttribute('aria-pressed','false');
   await expect(card).toBeVisible();
 });
+
+test('search finds secondary key points and opens the matching section',async({page})=>{
+  await page.setViewportSize({width:320,height:760});
+  await page.goto('/index.html');
+  const search=page.locator('#search');
+  const sleep=page.locator('[data-video-id="VUHrJZbpIjI"]');
+  const voice=page.locator('[data-video-id="sAgj5V4Ewno"]');
+  await search.fill('아데노신 수용체');
+  await expect(sleep).toBeVisible();
+  await expect(sleep.locator('.search-section-link:visible')).toHaveCount(0);
+  await search.fill('핑크노이즈');
+  const section=voice.getByRole('link',{name:/해당 부분 읽기/});
+  await expect(section).toHaveText(/핑크 노이즈/);
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(1);
+  await page.getByRole('button',{name:'몸과 수면'}).click();
+  await expect(voice).toBeHidden();
+  await page.getByRole('button',{name:'명상'}).click();
+  await expect(section).toBeVisible();
+  await section.click();
+  await expect(page).toHaveURL(/sAgj5V4Ewno\.html#detail-7$/);
+  await expect(page.locator('#detail-7')).toHaveText('잠들 때 핑크 노이즈는 어떻게 쓰는가');
+  await page.goBack();
+  await expect(search).toHaveValue('핑크노이즈');
+  await expect(section).toBeVisible();
+  await search.clear();
+  await expect(section).toHaveCount(0);
+});

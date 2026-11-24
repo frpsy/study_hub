@@ -27,8 +27,8 @@ def page(title,body,base='',description=None,path=''):
 def topic_of(row):
     # 홈의 주제 묶음. 등록부의 topic이 우선이고, 없으면 첫 태그를 쓴다.
     return row.get('topic') or row.get('filter_tag') or row['tags'][0]
-def render(rows, materials=None, leads=None):
-    materials=materials or [];leads=leads or {}
+def render(rows, materials=None, leads=None, records=None):
+    materials=materials or [];leads=leads or {};records=records or {}
     # 기본 목록 순서는 레지스트리 배열 순서(최신순)이다. 화면의 정렬 버튼은 data-date(강의 날짜)·data-added(사이트에 추가한 시각)로 다시 정렬한다. 날짜가 없는 강의에는 임의의 공개일을 만들지 않는다.
     topics=list(dict.fromkeys(topic_of(row) for row in rows+materials))
     count={t:sum(topic_of(r)==t for r in rows+materials) for t in topics}
@@ -40,11 +40,19 @@ def render(rows, materials=None, leads=None):
     for row in rows:
         creator=html.escape(row.get('creator','출처 미기재'))
         topic=html.escape(topic_of(row),quote=True)
-        searchable=html.escape(" ".join([row['title'],row.get('description',''),row.get('creator',''),topic_of(row)]+row['tags']),quote=True)
+        record=records.get(row['id'],{})
+        points=[item if isinstance(item,str) else item['l']+' '+item['t']
+                for block in record.get('intro',[]) if block['kind']=='points'
+                for item in block['items']]
+        searchable=html.escape(" ".join([row['title'],row.get('description',''),row.get('creator',''),topic_of(row)]+row['tags']+points),quote=True)
+        sections=''.join(
+            f'<a class="search-section-link" href="lectures/{row["id"]}.html#detail-{index}" hidden>해당 부분 읽기 · <span>{html.escape(block["h"])}</span></a>'
+            for index,block in enumerate(record.get('detail',[]),1)
+        )
         lead=leads.get(row['id'])
         text=f'<p class="card-lead">{html.escape(lead)}</p>' if lead else f'<p>{html.escape(row["description"])}</p>'
         actions=f'<div class="card-actions"><button type="button" data-library-toggle="bookmarks" aria-label="북마크" aria-pressed="false" hidden><span aria-hidden="true">☆</span></button><button type="button" data-library-toggle="read" aria-label="읽음 표시" aria-pressed="false" hidden><span class="read-mark" aria-hidden="true"></span></button></div>'
-        cards+=f'<article class="lecture-card lecture" data-video-id="{row["id"]}" data-kind="lecture" data-topic="{topic}" data-date="{row.get("date","")}" data-added="{row.get("added","")}"'+(f' data-views="{row["views"]}"' if isinstance(row.get("views"),int) else '')+f' data-creator="{html.escape(row.get("creator",""),quote=True)}" data-search="{searchable}"><h2><a class="card-link stretched-link" href="lectures/{row["id"]}.html">{html.escape(row["title"])}</a></h2><div class="card-context"><div class="meta"><span class="card-topic">{topic}</span>'+(f'<time datetime="{row["date"]}">{row["date"].replace("-",".")}</time><span class="meta-dot" aria-hidden="true">·</span>' if row.get("date") else '')+f'<span>{html.escape(row["duration"])}</span><span class="creator">{creator}</span>'+f'</div>{actions}</div>{text}</article>'
+        cards+=f'<article class="lecture-card lecture" data-video-id="{row["id"]}" data-kind="lecture" data-topic="{topic}" data-date="{row.get("date","")}" data-added="{row.get("added","")}"'+(f' data-views="{row["views"]}"' if isinstance(row.get("views"),int) else '')+f' data-creator="{html.escape(row.get("creator",""),quote=True)}" data-search="{searchable}"><h2><a class="card-link stretched-link" href="lectures/{row["id"]}.html">{html.escape(row["title"])}</a></h2><div class="card-context"><div class="meta"><span class="card-topic">{topic}</span>'+(f'<time datetime="{row["date"]}">{row["date"].replace("-",".")}</time><span class="meta-dot" aria-hidden="true">·</span>' if row.get("date") else '')+f'<span>{html.escape(row["duration"])}</span><span class="creator">{creator}</span>'+f'</div>{actions}</div>{text}{sections}</article>'
     # Other material types have their own pages and are not assumed to have a YouTube ID.
     type_names={'book':'책','paper':'연구','article':'글','note':'학습 노트'}
     for item in materials:
@@ -78,15 +86,20 @@ def first_key_point(record):
             return item if isinstance(item,str) else item['t']
     return ''
 
-def load_leads(root=R):
+def load_records(root=R):
     path=root/'data'/'lecture_compact.json'
-    if not path.exists():return {}
-    records=json.loads(path.read_text(encoding='utf-8'))
-    return {vid:first_key_point(record) for vid,record in records.items()}
+    return json.loads(path.read_text(encoding='utf-8')) if path.exists() else {}
+
+def load_leads(root=R):
+    return {vid:first_key_point(record) for vid,record in load_records(root).items()}
+
+def render_catalog(rows,materials,root=R):
+    records=load_records(root)
+    leads={vid:first_key_point(record) for vid,record in records.items()}
+    return render(rows,materials,leads,records)
 
 def build(check=False):
-    leads=load_leads()
-    result=render(json.loads((R/'lectures.json').read_text(encoding='utf-8')),json.loads((R/'materials.json').read_text(encoding='utf-8')),leads)
+    result=render_catalog(json.loads((R/'lectures.json').read_text(encoding='utf-8')),json.loads((R/'materials.json').read_text(encoding='utf-8')))
     offline_page=page('오프라인', '<main id="main" class="site-shell"><article class="summary-page offline-content"><h1>인터넷에 연결되지 않았습니다</h1><p>이미 열어 본 강의는 오프라인에서도 읽을 수 있습니다. 처음 여는 강의는 인터넷 연결이 필요합니다.</p><p><a href="index.html">강의 목록으로 돌아가기</a></p></article></main>')
     offline_target=R/'offline.html'
     target=R/'index.html'
