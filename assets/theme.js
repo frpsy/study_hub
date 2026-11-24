@@ -13,7 +13,7 @@
     root.dataset.theme=theme;
     root.style.colorScheme=theme;
     const bar=document.querySelector('meta[name="theme-color"]');
-    if(bar)bar.content=theme==='dark'?'#151719':'#ffffff';
+    if(bar)bar.content=theme==='dark'?'#121417':'#faf9f6';
     for(const {selector,field,option,fallback} of controls){
       const value=root.dataset[field]||fallback;
       document.querySelectorAll(selector).forEach(button=>button.setAttribute('aria-pressed',String(button.dataset[option]===value)));
