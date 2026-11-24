@@ -281,3 +281,25 @@ test('all 22 short Korean leads stay consistent and fit two lines on a phone',as
   },studyLectures.map(row=>minis[row.id].lead));
   expect(overflow).toEqual({cards:[],quotes:[]});
 });
+
+test('compact cards keep save at the title and do not grow when saved or read',async({page})=>{
+  await page.setViewportSize({width:390,height:844});
+  await page.goto('/index.html');
+  const layout=await page.locator('.lecture-card').evaluateAll(cards=>cards.map(card=>{
+    const box=card.getBoundingClientRect();const save=card.querySelector('[data-library-toggle="bookmarks"]').getBoundingClientRect();
+    const range=document.createRange();range.selectNodeContents(card.querySelector('h2 a'));
+    const overlap=[...range.getClientRects()].some(r=>r.right>save.left&&r.left<save.right&&r.bottom>save.top&&r.top<save.bottom);
+    return {height:box.height,saveWidth:save.width,saveHeight:save.height,top:save.top-box.top,right:box.right-save.right,overlap};
+  }));
+  for(const card of layout){
+    expect(card.height).toBeLessThanOrEqual(190);
+    expect(card.saveWidth).toBeGreaterThanOrEqual(44);expect(card.saveHeight).toBeGreaterThanOrEqual(44);
+    expect(card.top).toBeLessThanOrEqual(10);expect(card.right).toBeLessThanOrEqual(10);expect(card.overlap).toBe(false);
+  }
+  const first=page.locator('.lecture-card').first();const before=await first.boundingBox();
+  await first.getByRole('button',{name:'북마크'}).click();await first.getByRole('button',{name:'읽음 표시'}).click();
+  const after=await first.boundingBox();expect(after.height).toBeCloseTo(before.height,0);
+  await expect(page).toHaveURL(/\/index.html$/);
+  await expect(first.locator('.bookmark-symbol')).toBeVisible();
+  await first.locator('.card-link').click();await expect(page).toHaveURL(/\/lectures\/.*\.html$/);
+});
