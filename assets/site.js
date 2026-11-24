@@ -119,7 +119,16 @@
   });
   document.querySelectorAll('[data-filter-input]').forEach(input=>{
     const target=document.querySelector(input.dataset.filterInput);if(!target)return;
-    const cards=[...target.querySelectorAll('[data-search]')];
+    const normalize=value=>value.normalize('NFKC').toLocaleLowerCase();
+    const compactHangul=value=>value.replace(/([가-힣])\s+(?=[가-힣])/g,'$1');
+    const searchIndex=[...target.querySelectorAll('[data-search]')].map(card=>{
+      const sections=[...card.querySelectorAll('.search-section-link')].map(link=>({
+        link,heading:normalize(link.querySelector('span').textContent)
+      }));
+      const lead=card.querySelector('.card-lead')?.textContent||'';
+      const text=normalize([card.dataset.search,lead,...sections.map(section=>section.heading)].join(' / '));
+      return {card,text,compactText:compactHangul(text),sections};
+    });
     const count=document.getElementById(input.dataset.count),empty=document.getElementById(input.dataset.empty);
     const topicLabel=target.querySelector('#catalog-topic');
     const clearButton=document.querySelector('[data-clear-for="'+input.id+'"]');
@@ -133,14 +142,17 @@
     const searchEmptyMessage=emptyMessage?.textContent;
     let topic='',bookmarkedOnly=false;
     const filter=(saveURL=false)=>{
-      const words=input.value.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);let shown=0;
-      cards.forEach(card=>{
-        const lead=card.querySelector('.card-lead')?.textContent||'';
-        const hay=(card.dataset.search+' '+lead).toLocaleLowerCase();
+      const words=normalize(input.value.trim()).split(/\s+/).filter(Boolean);let shown=0;
+      const matches=(text,compactText)=>words.every(word=>text.includes(word)||(/[가-힣]/.test(word)&&compactText.includes(word)));
+      searchIndex.forEach(({card,text,compactText,sections})=>{
         const matchesTopic=!topic||card.dataset.topic===topic;
         const matchesBookmark=!bookmarkedOnly||library.bookmarks.has(card.dataset.videoId);
-        card.hidden=!matchesTopic||!matchesBookmark||!words.every(word=>hay.includes(word));
+        card.hidden=!matchesTopic||!matchesBookmark||!matches(text,compactText);
         if(!card.hidden)shown++;
+        const match=!card.hidden&&words.length
+          ? sections.find(section=>matches(section.heading,compactHangul(section.heading)))
+          : undefined;
+        sections.forEach(section=>{section.link.hidden=section!==match});
       });
       if(topicLabel)topicLabel.textContent=[topic,bookmarkedOnly?'북마크':''].filter(Boolean).join(' · ')||'전체';
       bookmarkFilter?.setAttribute('aria-pressed',String(bookmarkedOnly));

@@ -1212,3 +1212,5 @@ html.header-hidden .sidebar{top:12px}
  .discovery-panel .sort-toggle button{padding-inline:6px}
  .home-main .lecture,.home-main .lecture:last-of-type{padding:var(--space-3) var(--space-4)}
 }
+
+.search-section-link{position:relative;z-index:1;display:block;align-self:flex-start;min-height:var(--tap-target);margin-top:4px;padding-block:10px;box-sizing:border-box;color:var(--accent);font-size:13px;line-height:1.5;text-underline-offset:3px;word-break:keep-all!important;overflow-wrap:anywhere}
