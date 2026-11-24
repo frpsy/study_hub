@@ -1266,3 +1266,40 @@ html.header-hidden .sidebar{top:12px}
  .home-main .discovery-panel .filter-chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
  .home-main .discovery-panel .filter-chips button{flex:none}
 }
+
+/* Choose a summary quickly; keep the existing paper and editorial palette. */
+.site-header .appearance-toggle{display:inline-flex;align-items:center;gap:6px;padding-inline:8px;font-size:13px}
+.today-line{padding-block:0 var(--space-3)}
+.today-line .today-key{font-size:clamp(18px,2vw,21px);line-height:1.55;margin-block:var(--space-2)}
+.today-line .today-source::before{content:"→"}
+.today-line[hidden],.resume-reading[hidden],.search-context[hidden]{display:none}
+.lecture-card .card-context{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--space-2)}
+.lecture-card .card-actions{justify-self:end}
+.lecture-card .card-timing{white-space:normal;flex-wrap:wrap;gap:4px}
+.lecture-card .card-reading{flex-basis:100%;color:var(--editorial-link);font-weight:600}
+.lecture-card .card-actions button{display:inline-flex;align-items:center;justify-content:center;gap:5px;width:auto;min-width:var(--tap-target);padding-inline:8px;font-size:12px;white-space:nowrap}
+.lecture-card .card-actions button>span:first-child{font-size:17px}
+.lecture-card .card-actions .read-mark{border-radius:4px;width:15px;height:15px}
+.reading-estimate{color:var(--editorial-link);font-weight:600}
+.search-context{margin:var(--space-2) 0 0;color:var(--muted);font-size:13px;line-height:1.7;overflow-wrap:anywhere}
+.search-context mark{background:var(--editorial-active-bg);color:var(--editorial-active);font-weight:600}
+.resume-reading{display:flex;align-items:center;gap:var(--space-2);margin-block:0 var(--space-3);padding:var(--space-3) var(--space-4);border:1px solid var(--line);border-radius:var(--library-radius);background:var(--surface)}
+.resume-reading>a{display:grid;gap:2px;flex:1;min-width:0;min-height:var(--tap-target);text-decoration:none;color:var(--ink);overflow-wrap:anywhere}
+.resume-reading strong{font-size:12px;color:var(--editorial-link)}
+.resume-reading small{color:var(--muted);font-size:12px}
+.resume-reading button{flex:none;background:transparent;color:var(--muted);min-width:var(--tap-target);min-height:var(--tap-target);padding:0;border:0;font-size:22px}
+.detail-outline{margin:0 0 var(--space-5);border:1px solid var(--line);border-radius:var(--library-radius);background:var(--surface)}
+.detail-outline>summary{display:flex;align-items:center;gap:var(--space-2);min-height:var(--tap-target);padding:var(--space-2) var(--space-4);font-size:14px;color:var(--ink);cursor:pointer;list-style:none}
+.detail-outline>summary::-webkit-details-marker{display:none}
+.detail-outline>summary>span{margin-inline-start:auto;color:var(--muted);font-size:12px;flex:none}
+.detail-outline .outline-close-label,.detail-outline[open] .outline-open-label{display:none}
+.detail-outline[open] .outline-close-label{display:inline}
+.compact-lecture .detail-outline .detail-toc{margin:0;border:0;border-top:1px solid var(--line);border-radius:0;background:transparent}
+@media(max-width:780px){
+ .lecture-card .card-context{grid-template-columns:minmax(0,1fr)}
+ .lecture-card .card-actions{justify-content:flex-end;margin-top:-4px}
+ .lecture-card .card-context .meta{row-gap:4px}
+ .lecture-card .card-timing{flex-basis:100%}
+ .today-line .today-key{font-size:18px}
+}
+@media print{.resume-reading{display:none}.detail-outline{display:none}}

@@ -80,11 +80,16 @@
       const kind=button.dataset.libraryToggle;
       const selected=library[kind].has(lecture.dataset.videoId);
       button.setAttribute('aria-pressed',String(selected));
-      if(kind==='bookmarks')button.firstElementChild.textContent=selected?'★':'☆';
+      if(kind==='bookmarks'){
+        button.firstElementChild.textContent=selected?'★':'☆';
+        button.setAttribute('aria-label',selected?'북마크 저장됨':'북마크 저장');
+        const label=button.querySelector('[data-bookmark-label]');
+        if(label)label.textContent=selected?'저장됨':'저장';
+      }
       else{
         lecture.classList.toggle('is-read',selected);
         const label=button.querySelector('[data-read-label]');
-        if(label)label.textContent=selected?'읽음 완료':'읽음 표시';
+        if(label)label.textContent=selected?'읽음 완료':(button.closest('.lecture-card')?'읽음':'읽음 표시');
       }
     });
   };
@@ -123,10 +128,12 @@
     const compactHangul=value=>value.replace(/([가-힣])\s+(?=[가-힣])/g,'$1');
     const searchIndex=[...target.querySelectorAll('[data-search]')].map(card=>{
       const sections=[...card.querySelectorAll('.search-section-link')].map(link=>({
-        link,heading:normalize(link.querySelector('span').textContent)
+        link,heading:normalize(link.querySelector('span').textContent),
+        source:link.dataset.searchDetail||link.querySelector('span').textContent,
+        text:normalize(link.dataset.searchDetail||link.querySelector('span').textContent)
       }));
       const lead=card.querySelector('.card-lead')?.textContent||'';
-      const text=normalize([card.dataset.search,lead,...sections.map(section=>section.heading)].join(' / '));
+      const text=normalize([card.dataset.search,lead,...sections.map(section=>section.text)].join(' / '));
       return {card,text,compactText:compactHangul(text),sections};
     });
     const count=document.getElementById(input.dataset.count),empty=document.getElementById(input.dataset.empty);
@@ -144,6 +151,8 @@
     const filter=(saveURL=false)=>{
       const words=normalize(input.value.trim()).split(/\s+/).filter(Boolean);let shown=0;
       const matches=(text,compactText)=>words.every(word=>text.includes(word)||(/[가-힣]/.test(word)&&compactText.includes(word)));
+      const feature=target.querySelector('.today-line');
+      if(feature)feature.hidden=words.length>0;
       searchIndex.forEach(({card,text,compactText,sections})=>{
         const matchesTopic=!topic||card.dataset.topic===topic;
         const matchesBookmark=!bookmarkedOnly||library.bookmarks.has(card.dataset.videoId);
@@ -151,8 +160,34 @@
         if(!card.hidden)shown++;
         const match=!card.hidden&&words.length
           ? sections.find(section=>matches(section.heading,compactHangul(section.heading)))
+            ||sections.filter(section=>matches(section.text,compactHangul(section.text)))
+              .sort((a,b)=>words.reduce((score,word)=>score+b.text.split(word).length-a.text.split(word).length,0))[0]
           : undefined;
         sections.forEach(section=>{section.link.hidden=section!==match});
+        const context=card.querySelector('.search-context');
+        if(context){
+          context.hidden=card.hidden||!words.length;
+          context.replaceChildren();
+          if(!context.hidden){
+            const source=match?match.source:card.dataset.search||text;
+            const lower=source.toLocaleLowerCase();
+            const indices=words.map(word=>lower.indexOf(word)).filter(index=>index>=0);
+            const start=Math.max(0,(indices.length?Math.min(...indices):0)-30);
+            const excerpt=(start?'…':'')+source.slice(start,start+120)+(source.length>start+120?'…':'');
+            context.append(document.createTextNode('검색된 문맥 · '));
+            // Construct text nodes only: search terms and source text are never HTML.
+            let rest=excerpt;
+            while(rest){
+              const found=words.map(word=>({word,index:rest.toLocaleLowerCase().indexOf(word)}))
+                .filter(hit=>hit.index>=0).sort((a,b)=>a.index-b.index||b.word.length-a.word.length)[0];
+              if(!found){context.append(document.createTextNode(rest));break}
+              context.append(document.createTextNode(rest.slice(0,found.index)));
+              const mark=document.createElement('mark');
+              mark.textContent=rest.slice(found.index,found.index+found.word.length);context.append(mark);
+              rest=rest.slice(found.index+found.word.length);
+            }
+          }
+        }
       });
       if(topicLabel)topicLabel.textContent=[topic,bookmarkedOnly?'북마크':''].filter(Boolean).join(' · ')||'전체';
       bookmarkFilter?.setAttribute('aria-pressed',String(bookmarkedOnly));
@@ -450,4 +485,52 @@
   addEventListener('scroll',()=>{if(!frame)frame=requestAnimationFrame(()=>{frame=0;sync()})},{passive:true});
   addEventListener('pageshow',sync);
   sync();
+})();
+
+// Keep only the latest unfinished lecture and its section, on this browser.
+(()=>{
+  const key='study-hub-resume';
+  const banner=document.querySelector('.resume-reading');
+  const lecture=document.querySelector('main.compact-lecture[data-video-id]');
+  if(!banner&&!lecture)return;
+  const load=()=>{try{return JSON.parse(localStorage.getItem(key))}catch{return null}};
+  const isRead=id=>{try{const ids=JSON.parse(localStorage.getItem('study-hub-read'));return Array.isArray(ids)&&ids.includes(id)}catch{return false}};
+  const clear=()=>{try{localStorage.removeItem(key)}catch{}if(banner)banner.hidden=true};
+  const refresh=()=>{
+    if(!banner)return;
+    banner.hidden=true;
+    const saved=load();
+    if(!saved||typeof saved.id!=='string'||typeof saved.anchor!=='string'||
+      !/^(lecture-(overview|detail|comment|sources)|detail-\d+)$/.test(saved.anchor))return;
+    if(isRead(saved.id)){clear();return}
+    const card=[...document.querySelectorAll('.lecture-card[data-video-id]')].find(card=>card.dataset.videoId===saved.id);
+    const link=card?.querySelector('.card-link');if(!link)return;
+    const resume=banner.querySelector('[data-resume-link]');
+    resume.href=link.getAttribute('href')+'#'+saved.anchor;
+    banner.querySelector('[data-resume-title]').textContent=link.textContent;
+    banner.querySelector('[data-resume-section]').textContent=typeof saved.label==='string'?saved.label.slice(0,120):'';
+    banner.hidden=false;
+  };
+  banner?.querySelector('[data-resume-clear]').addEventListener('click',clear);
+  if(lecture){
+    const headings=[...lecture.querySelectorAll('.lecture-section > h2,.detail-body > h3')];
+    const save=()=>{
+      if(isRead(lecture.dataset.videoId))return;
+      if(scrollY<300)return;
+      const edge=(document.querySelector('.reading-nav')?.getBoundingClientRect().bottom||0)+80;
+      const current=headings.filter(h=>h.getBoundingClientRect().top<=edge).at(-1)||headings[0];
+      if(!current)return;
+      const anchor=current.id||current.parentElement.id;
+      try{localStorage.setItem(key,JSON.stringify({id:lecture.dataset.videoId,anchor,label:current.textContent}))}catch{}
+    };
+    let timer;
+    addEventListener('scroll',()=>{clearTimeout(timer);timer=setTimeout(save,250)},{passive:true});
+    addEventListener('pagehide',()=>{clearTimeout(timer);save()});
+    document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')save()});
+    document.addEventListener('library-change',()=>{if(isRead(lecture.dataset.videoId)&&load()?.id===lecture.dataset.videoId)clear()});
+  }
+  document.addEventListener('library-change',refresh);
+  addEventListener('pageshow',refresh);
+  addEventListener('storage',event=>{if(event.key===key||event.key==='study-hub-read'||event.key===null)refresh()});
+  refresh();
 })();

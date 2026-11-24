@@ -174,7 +174,8 @@ test('search finds secondary key points and opens the matching section',async({p
   const voice=page.locator('[data-video-id="sAgj5V4Ewno"]');
   await search.fill('아데노신 수용체');
   await expect(sleep).toBeVisible();
-  await expect(sleep.locator('.search-section-link:visible')).toHaveCount(0);
+  await expect(sleep.locator('.search-context')).toContainText('아데노신');
+  await expect(sleep.locator('.search-section-link:visible')).toHaveCount(1);
   await search.fill('핑크노이즈');
   const section=voice.getByRole('link',{name:/해당 부분 읽기/});
   await expect(section).toHaveText(/핑크 노이즈/);
@@ -191,4 +192,92 @@ test('search finds secondary key points and opens the matching section',async({p
   await expect(section).toBeVisible();
   await search.clear();
   await expect(section).toHaveCount(0);
+});
+
+test('search explains body matches and restores the daily sentence when cleared',async({page})=>{
+  await page.goto('/index.html');
+  const voice=page.locator('[data-video-id="sAgj5V4Ewno"]');
+  await page.locator('#search').fill('수면');
+  await expect(page.locator('.today-line')).toBeHidden();
+  await expect(voice.locator('.search-context')).toContainText('수면');
+  await expect(voice.locator('.search-context mark').first()).toHaveText('수면');
+  await expect(voice.locator('.search-section-link:visible')).toHaveCount(1);
+  await page.locator('#search').clear();
+  await expect(page.locator('.today-line')).toBeVisible();
+  await expect(voice.locator('.search-context')).toBeHidden();
+});
+
+test('resume keeps the last section across visits, can be cleared, and respects read completion',async({page})=>{
+  await page.emulateMedia({reducedMotion:'reduce'});
+  const saved=()=>page.evaluate(()=>JSON.parse(localStorage.getItem('study-hub-resume')));
+  await page.goto('/lectures/sAgj5V4Ewno.html#detail-4');
+  await expect.poll(()=>page.evaluate(()=>scrollY)).toBeGreaterThan(300);
+  await page.goto('/index.html'); // pagehide flushes a pending section save.
+  const resume=page.getByRole('link',{name:/이어서 읽기/});
+  await expect(resume).toHaveAttribute('href','lectures/sAgj5V4Ewno.html#detail-4');
+  await resume.click();
+  await expect(page).toHaveURL(/#detail-4$/);
+  await page.getByRole('button',{name:'읽음 표시',exact:true}).click();
+  expect(await saved()).toBeNull();
+  await page.goto('/index.html');
+  await expect(page.locator('.resume-reading')).toBeHidden();
+  await page.goto('/lectures/VUHrJZbpIjI.html#detail-2');
+  await expect.poll(()=>page.evaluate(()=>scrollY)).toBeGreaterThan(300);
+  await page.goto('/index.html');
+  await expect(page.locator('.resume-reading')).toBeVisible();
+  await page.getByRole('button',{name:'읽던 위치 지우기'}).click();
+  expect(await saved()).toBeNull();
+  await page.reload();
+  await expect(page.locator('.resume-reading')).toBeHidden();
+});
+
+test('unknown resume data and unavailable storage leave normal navigation usable',async({page})=>{
+  await page.goto('/index.html');
+  await page.evaluate(()=>localStorage.setItem('study-hub-resume',JSON.stringify({id:'unknown',anchor:'detail-1'})));
+  await page.reload();
+  await expect(page.locator('.resume-reading')).toBeHidden();
+  await page.evaluate(()=>localStorage.setItem('study-hub-resume','broken json'));
+  await page.reload();
+  await expect(page.locator('.resume-reading')).toBeHidden();
+  await page.addInitScript(()=>Object.defineProperty(window,'localStorage',{get(){throw new Error('storage denied')}}));
+  await page.goto('/index.html');
+  await page.locator('.card-link').first().click();
+  await expect(page.locator('#lecture-overview')).toBeVisible();
+});
+
+test('reading estimate and folded outline remain usable without JavaScript',async({browser})=>{
+  const context=await browser.newContext({javaScriptEnabled:false,reducedMotion:'reduce',viewport:{width:390,height:844}});
+  const page=await context.newPage();
+  await page.goto('/index.html');
+  const reading=await page.locator('.card-reading').first().innerText();
+  expect(reading).toMatch(/^요약 약 \d+분$/);
+  await page.locator('.card-link').first().click();
+  await expect(page.locator('.reading-estimate')).toHaveText(reading);
+  await expect(page.locator('.detail-outline')).not.toHaveAttribute('open','');
+  await page.locator('.detail-outline > summary').click();
+  await expect(page.locator('.detail-toc a').first()).toBeVisible();
+  await page.locator('.detail-toc a').first().click();
+  await expect(page).toHaveURL(/#detail-1$/);
+  await context.close();
+});
+
+test('all 22 short Korean leads stay consistent and fit two lines on a phone',async({page})=>{
+  const records=require('../data/lecture_compact.json');
+  const minis=require('../data/mini_courses.json');
+  await page.setViewportSize({width:390,height:844});
+  await page.goto('/index.html');
+  for(const row of studyLectures){
+    const lead=minis[row.id].lead;
+    const first=records[row.id].intro.find(block=>block.kind==='points').items[0];
+    expect(typeof first==='string'?first:first.t).toBe(lead);
+    await expect(page.locator(`[data-video-id="${row.id}"] .card-lead`)).toHaveText(lead);
+  }
+  const overflow=await page.evaluate(leads=>{
+    const lines=el=>{const range=document.createRange();range.selectNodeContents(el);return new Set([...range.getClientRects()].map(rect=>Math.round(rect.top))).size};
+    const cards=[...document.querySelectorAll('.card-lead')].filter(el=>lines(el)>2).map(el=>el.textContent);
+    const quote=document.querySelector('.today-key');const old=quote.textContent;
+    const quotes=leads.filter(text=>{quote.textContent=text;return lines(quote)>2});quote.textContent=old;
+    return {cards,quotes};
+  },studyLectures.map(row=>minis[row.id].lead));
+  expect(overflow).toEqual({cards:[],quotes:[]});
 });
