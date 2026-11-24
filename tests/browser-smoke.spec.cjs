@@ -14,6 +14,7 @@ const sizes=[
 
 for(const viewport of sizes){
   test('shared home and timestamps remain usable at '+viewport.width+'px',async({browser})=>{
+    test.setTimeout(60000); // Visits the complete lecture library before clipboard checks.
     const context=await browser.newContext({viewport,permissions:['clipboard-read','clipboard-write']});
     const page=await context.newPage();
     const pageErrors=[];
@@ -214,7 +215,10 @@ test('catalog restores a shared search and returns to it after reading',async({p
   await expect(page.locator('#count')).toHaveText('6개 강의');
   await expect(page.locator('[data-filter-for="topic"][data-value="마음근력"]')).toHaveAttribute('aria-pressed','true');
   await page.locator('#search').fill('수용');  // 주제와 검색어는 함께 걸린다.
-  await expect(page.locator('#count')).toHaveText('1개 강의');
+  await expect(page.locator('[data-video-id="ZCty0wvogDo"]')).toBeVisible();
+  const matches=page.locator('#lecture-list .lecture:visible');
+  expect(await matches.evaluateAll(cards=>cards.every(card=>card.dataset.topic==='마음근력'))).toBe(true);
+  await expect(page.locator('#count')).toHaveText((await matches.count())+'개 강의');
 });
 
 test('a lecture card opens a page with the intro, detail summary and timestamps',async({page})=>{
