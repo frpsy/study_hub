@@ -27,6 +27,35 @@ def page(title,body,base='',description=None,path=''):
 def topic_of(row):
     # 홈의 주제 묶음. 등록부의 topic이 우선이고, 없으면 첫 태그를 쓴다.
     return row.get('topic') or row.get('filter_tag') or row['tags'][0]
+TOPIC_DESCRIPTIONS = {
+    '명상': '호흡과 주의에 집중하는 연습',
+    '마음근력': '자기조절과 마음을 기르는 훈련',
+    '감정과 뇌': '감정과 스트레스에 반응하는 뇌',
+    '몸과 수면': '수면과 몸의 회복을 돕는 습관',
+}
+
+def render_topic_picker(topics):
+    options = []
+    for topic in topics:
+        if topic not in TOPIC_DESCRIPTIONS:
+            continue
+        label = html.escape(topic, quote=True)
+        description = html.escape(TOPIC_DESCRIPTIONS[topic])
+        options.append(
+            f'<button type="button" class="topic-choice" data-topic-choice="{label}" aria-pressed="false">'
+            f'<strong>{label}</strong><span class="topic-choice-description">{description}</span>'
+            '<span class="topic-choice-mark" aria-hidden="true">✓</span></button>'
+        )
+    if not options:
+        return ''
+    return (
+        '<div class="topic-picker" data-topic-picker hidden>'
+        '<button class="topic-picker-toggle" type="button" aria-expanded="false" '
+        'aria-controls="topic-choices">주제 고르기 <span aria-hidden="true">⌄</span></button>'
+        '<div id="topic-choices" class="topic-choices" role="group" aria-label="주제 선택" hidden>'
+        + ''.join(options) + '</div></div>'
+    )
+
 def render(rows, materials=None, leads=None):
     materials=materials or [];leads=leads or {}
     # 기본 목록 순서는 레지스트리 배열 순서(최신순)이다. 화면의 정렬 버튼은 data-date(강의 날짜)·data-added(사이트에 추가한 시각)로 다시 정렬한다. 날짜가 없는 강의에는 임의의 공개일을 만들지 않는다.
@@ -68,7 +97,7 @@ def render(rows, materials=None, leads=None):
     first=next((r for r in rows if leads.get(r['id'])),None)
     if first:
         feature=f'<section class="today-line" aria-label="오늘의 한 문장"><div class="today-heading"><span class="eyebrow">오늘의 한 문장</span><button type="button" class="today-random" hidden><span aria-hidden="true">↻</span> 다른 문장 보기</button></div><div aria-live="polite"><p class="today-key">{html.escape(leads[first["id"]])}</p><a class="today-source stretched-link" href="lectures/{first["id"]}.html">{html.escape(first["title"])} · {html.escape(first.get("creator",""))}</a></div></section>'
-    body=f'''<div class="site-shell"><main id="main" class="home-main"><section id="lectures"><div id="home-catalog"><h1 class="home-title">강의 요약</h1><p class="catalog-intro">한 문장에서 시작해 깊이 읽는 강의 서재</p>{feature}<section class="discovery-panel" aria-label="강의 탐색"><div class="search-panel"><label for="search">{noun} 검색</label><div class="search-controls"><div class="search-field"><svg class="search-icon" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 4 4"/></svg><input class="search" id="search" type="search" placeholder="강의 검색" data-filter-input="#home-catalog" data-count="count" data-empty="empty" data-noun="{noun}" data-persist-query="true"><button type="button" class="search-clear" aria-label="검색창 비우기" data-clear-for="search" hidden><span aria-hidden="true">×</span></button></div><button type="button" class="bookmark-filter" data-bookmark-filter aria-pressed="false" hidden><span aria-hidden="true">★</span> 북마크만</button></div><div class="filter-chips" role="group" aria-label="주제">{chips}</div></div><div class="catalog-order"><p class="catalog-results" aria-live="polite"><strong id="catalog-topic">전체</strong><span aria-hidden="true"> · </span><span id="count">{total}개 {noun}</span></p><div class="sort-toggle" role="group" aria-label="정렬"><button type="button" data-sort="latest" aria-pressed="true">최신순</button><button type="button" data-sort="added" aria-pressed="false">추가된순</button>{views_button}</div></div>{views_note}</section><div class="lecture-grid" id="lecture-list">{cards}</div></div><p class="empty" id="empty" hidden><span data-empty-message>검색 결과가 없습니다. 다른 단어로 찾거나 ‘전체’를 선택해 주세요.</span><span class="empty-actions"><button type="button" class="btn secondary" data-clear-bookmarks hidden>전체 강의 보기</button><button type="button" class="btn secondary" data-clear-search hidden>검색어 지우기</button><button type="button" class="btn secondary" data-clear-topic hidden>주제 필터 해제</button></span></p></section></main></div>'''
+    body=f'''<div class="site-shell"><main id="main" class="home-main"><section id="lectures"><div id="home-catalog"><h1 class="home-title">강의 요약</h1><p class="catalog-intro">한 문장에서 시작해 깊이 읽는 강의 서재</p>{feature}<section class="discovery-panel" aria-label="강의 탐색"><div class="search-panel"><label for="search">{noun} 검색</label><div class="search-controls"><div class="search-field"><svg class="search-icon" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 4 4"/></svg><input class="search" id="search" type="search" placeholder="강의 검색" data-filter-input="#home-catalog" data-count="count" data-empty="empty" data-noun="{noun}" data-persist-query="true"><button type="button" class="search-clear" aria-label="검색창 비우기" data-clear-for="search" hidden><span aria-hidden="true">×</span></button></div><button type="button" class="bookmark-filter" data-bookmark-filter aria-pressed="false" hidden><span aria-hidden="true">★</span> 북마크만</button></div><div class="filter-chips" role="group" aria-label="주제">{chips}</div>{render_topic_picker(topics)}</div><div class="catalog-order"><p class="catalog-results" aria-live="polite"><strong id="catalog-topic">전체</strong><span aria-hidden="true"> · </span><span id="count">{total}개 {noun}</span></p><div class="sort-toggle" role="group" aria-label="정렬"><button type="button" data-sort="latest" aria-pressed="true">최신순</button><button type="button" data-sort="added" aria-pressed="false">추가된순</button>{views_button}</div></div>{views_note}</section><div class="lecture-grid" id="lecture-list">{cards}</div></div><p class="empty" id="empty" hidden><span data-empty-message>검색 결과가 없습니다. 다른 단어로 찾거나 ‘전체’를 선택해 주세요.</span><span class="empty-actions"><button type="button" class="btn secondary" data-clear-bookmarks hidden>전체 강의 보기</button><button type="button" class="btn secondary" data-clear-search hidden>검색어 지우기</button><button type="button" class="btn secondary" data-clear-topic hidden>주제 필터 해제</button></span></p></section></main></div>'''
     return page('강의 요약',body)
 
 def first_key_point(record):

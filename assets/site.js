@@ -124,6 +124,10 @@
     const topicLabel=target.querySelector('#catalog-topic');
     const clearButton=document.querySelector('[data-clear-for="'+input.id+'"]');
     const chips=[...target.querySelectorAll('[data-filter-for="topic"]')];
+    const picker=target.querySelector('[data-topic-picker]');
+    const pickerToggle=picker?.querySelector('[aria-controls]');
+    const choices=picker?.querySelector('.topic-choices');
+    const choiceButtons=[...(choices?.querySelectorAll('[data-topic-choice]')||[])];
     const bookmarkFilter=target.querySelector('[data-bookmark-filter]');
     const persist=input.dataset.persistQuery==='true';
     const emptySearch=empty?.querySelector('[data-clear-search]');
@@ -165,6 +169,7 @@
         try{history.replaceState(history.state,'',url.href)}catch{}
       }
       chips.forEach(button=>button.setAttribute('aria-pressed',String((button.dataset.value||'')===topic)));
+      choiceButtons.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.topicChoice===topic)));
     };
     const fromURL=()=>{
       const params=new URLSearchParams(location.search);
@@ -190,11 +195,19 @@
     emptySearch?.addEventListener('click',clearSearch);
     emptyTopic?.addEventListener('click',()=>{topic='';filter(true);chips.find(button=>!button.dataset.value)?.focus()});
     emptyBookmarks?.addEventListener('click',()=>{bookmarkedOnly=false;filter(true);bookmarkFilter?.focus()});
-    chips.forEach(button=>button.addEventListener('click',()=>{
-      const value=button.dataset.value||'';
+    const selectTopic=value=>{
       topic=topic===value?'':value;
       filter(true);
-    }));
+    };
+    chips.forEach(button=>button.addEventListener('click',()=>selectTopic(button.dataset.value||'')));
+    if(pickerToggle && choices){
+      picker.hidden=false;
+      pickerToggle.addEventListener('click',()=>{
+        choices.hidden=!choices.hidden;
+        pickerToggle.setAttribute('aria-expanded',String(!choices.hidden));
+      });
+      choiceButtons.forEach(button=>button.addEventListener('click',()=>selectTopic(button.dataset.topicChoice)));
+    }
   });
   // 오늘의 한 문장: 날짜마다 다른 강의의 한 문장을 보여 준다. 스크립트가 없으면 최신 강의가 그대로 보인다.
   const today=document.querySelector('.today-line');
