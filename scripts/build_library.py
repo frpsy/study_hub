@@ -51,7 +51,7 @@ def render(rows, materials=None, leads=None, records=None):
             for index,block in enumerate(record.get('detail',[]),1)
         )
         minutes=reading_minutes(record)
-        reading=f'<span class="card-reading" title="공백 제외 분당 500자를 기준으로 계산한 예상 시간">요약 약 {minutes}분</span>' if minutes else ''
+        reading=f'<span class="card-reading" title="공백 제외 분당 500자를 기준으로 계산한 예상 시간">예상 읽기 시간 {minutes}분</span>' if minutes else ''
         lead=leads.get(row['id'])
         text=f'<p class="card-lead">{html.escape(lead)}</p>' if lead else f'<p>{html.escape(row["description"])}</p>'
         actions=f'<div class="card-actions"><button type="button" data-library-toggle="bookmarks" aria-label="북마크 저장" aria-pressed="false" hidden><span aria-hidden="true"><svg class="bookmark-symbol" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-4-6 4Z"/></svg></span><span data-bookmark-label>저장</span></button><button type="button" data-library-toggle="read" aria-label="읽음 표시" aria-pressed="false" hidden><span class="read-mark" aria-hidden="true"></span><span data-read-label>읽음</span></button></div>'

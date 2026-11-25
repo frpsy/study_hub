@@ -39,5 +39,17 @@ class KoreanLeads(unittest.TestCase):
                 self.assertIn(f'<meta property="og:description" content="{text}">', detail)
 
 
+    def test_key_points_avoid_generic_speaker_recaps(self):
+        records = json.loads((R/'data/lecture_compact.json').read_text(encoding='utf-8'))
+        for vid, record in records.items():
+            for block in record['intro']:
+                if block['kind'] != 'points':
+                    continue
+                for item in block['items']:
+                    text = item if isinstance(item, str) else item['t']
+                    with self.subTest(lecture=vid, point=text):
+                        self.assertNotRegex(text, r'^강연자는 .+다고 (?:설명|요약)한다[.]$')
+
+
 if __name__ == '__main__':
     unittest.main()
