@@ -4,13 +4,28 @@ import html,json,re,sys
 from build_library import page,R,first_key_point
 from reading_text import reading_minutes
 E=html.escape
-def block_html(t):
+def block_html(t, highlight=None):
  """A detail item is a paragraph (str), a labelled list ({"list": [{"l": label, "t": text}, ...]}) or an inline image ({"image": {"src","alt","width","height","caption"}})."""
- if isinstance(t,str):return '<p>'+E(t)+'</p>'
+ if isinstance(t,str):
+  text=E(t)
+  if highlight and highlight in t:
+   before,marked,after=t.partition(highlight)
+   text=E(before)+'<mark class="detail-highlight">'+E(marked)+'</mark>'+E(after)
+  return '<p>'+text+'</p>'
  if 'image' in t:
   g=t['image'];cap=('<figcaption>'+E(g['caption'])+'</figcaption>') if g.get('caption') else ''
   return f'<figure class="detail-figure"><img src="../{E(g["src"],quote=True)}" width="{int(g["width"])}" height="{int(g["height"])}" alt="{E(g["alt"],quote=True)}" loading="lazy" decoding="async">{cap}</figure>'
  return '<ul class="detail-points" role="list">'+''.join(point_html(i) for i in t['list'])+'</ul>'
+
+def detail_section_html(section,index):
+ highlight=section.get('highlight')
+ paragraphs=section['p']
+ if 'highlight' in section and (
+  not isinstance(highlight,str) or not highlight.strip()
+  or sum(p.count(highlight) for p in paragraphs if isinstance(p,str))!=1
+ ):
+  raise ValueError(f'detail-{index}: highlight must match exactly once in a paragraph')
+ return f'<h3 id="detail-{index}">'+E(section['h'])+'</h3>'+''.join(block_html(p,highlight) for p in paragraphs)
 
 def editor_html(groups):
  """Limits, supplements and evidence checks live only here, inside the closed sources-and-notes fold at the page end."""
@@ -64,7 +79,7 @@ def render(row,record,mini,prev=None,nxt=None):
  second='';actions=[]
  if detailed:
   actions.append('<a class="btn secondary" href="#lecture-detail">상세 요약으로 이동</a>')
-  blocks=''.join(f'<h3 id="detail-{i+1}">'+E(b['h'])+'</h3>'+''.join(block_html(t) for t in b['p']) for i,b in enumerate(record['detail']))
+  blocks=''.join(detail_section_html(section,index) for index,section in enumerate(record['detail'],1))
   # In-section outline: the question headings double as a map of the summary.
   outline=''.join(f'<li><a href="#detail-{i+1}">'+E(b['h'])+'</a></li>' for i,b in enumerate(record['detail']))
   second+=f'<section id="lecture-detail" class="lecture-section"><h2>상세 요약</h2><details class="detail-outline"><summary>이 강의에서 다루는 질문 {len(record["detail"])}개<span class="outline-open-label">펼치기</span><span class="outline-close-label">접기</span></summary><nav class="detail-toc" aria-label="상세 요약 소제목"><ol>{outline}</ol></nav></details><div class="detail-body">{blocks}</div></section>'

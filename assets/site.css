@@ -1036,6 +1036,16 @@ html.header-hidden .sidebar{top:12px}
 
 /* 라벨이 있는 항목: 라벨은 굵은 한 줄, 설명은 그 아래 (2026-11-23 사용자 요청) */
 .point-label{display:block;font-weight:700;margin:0 0 2px}
+.detail-body .detail-highlight{
+ color:inherit;
+ font-weight:650;
+ background:linear-gradient(transparent 45%,var(--tint) 45%);
+ -webkit-box-decoration-break:clone;
+ box-decoration-break:clone;
+}
+@media(forced-colors:active){
+ .detail-body .detail-highlight{text-decoration:underline}
+}
 .compact-lecture .lecture-section .detail-body .detail-points{list-style:none;padding-left:0}
 .compact-lecture #lecture-overview .summary-list>li,
 .compact-lecture .detail-body .detail-points>li{
