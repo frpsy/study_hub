@@ -199,7 +199,7 @@ class IntroChecks(unittest.TestCase):
     {'kind':'practice','h':'해볼 일','items':[{'when':'화가 날 때','do':'숨을 고른다.','check':'몸이 풀렸는지 본다.','t':'1:05','quote':'숨을 고르세요'},{'when':'잠들기 전','do':'불을 끈다.','t':'2:10','quote':'불을 끄세요'}]},
     {'kind':'steps','h':'순서','items':[{'h':'1단계','t':'2:00','b':['먼저 한다.']},{'h':'2단계','t':'3:00','b':['다음에 한다.']}]}]}
   html_=render(row,record,{'lead':'“한 문장이다.”'})
-  self.assertIn('<li><strong class="point-label">라벨</strong>둘째 주장이다.</li>',html_)
+  self.assertIn('<li><span class="point-content"><strong class="point-label">라벨</strong>둘째 주장이다.</span></li>',html_)
   self.assertEqual(html_.count('class="summary-tier intro-block'),1)
   for hidden in ('intro-practice','intro-steps','해볼 일','1단계'):
    self.assertNotIn(hidden,html_)

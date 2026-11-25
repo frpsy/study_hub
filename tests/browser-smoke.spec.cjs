@@ -371,38 +371,57 @@ test('home opens with a daily key sentence that links to its lecture',async({pag
   await expect(page.locator('#lecture-overview .intro-points li').first()).toContainText(text);
 });
 
-test('list markers sit on the first text line at every text size',async({browser})=>{
-  for(const [width,size] of [[360,'lg'],[390,'md'],[1280,'sm']]){
+test('summary and detail list markers align with the first line',async({browser})=>{
+  for(const [width,size] of [[320,'lg'],[390,'md'],[1280,'sm']]){
     const context=await browser.newContext({viewport:{width,height:844}});
-    await context.addInitScript(s=>{try{localStorage.setItem('study-site-text-size',s)}catch{}},size);
+    await context.addInitScript(s=>localStorage.setItem('study-site-text-size',s),size);
     const page=await context.newPage();
-    for(const url of ['/lectures/ZCty0wvogDo.html','/lectures/sAgj5V4Ewno.html','/index.html']){
-      await page.goto(url);
+    for(const id of ['hw4_kLaHOMg','sAgj5V4Ewno','9tRohh0gErM']){
+      await page.goto('/lectures/'+id+'.html');
       const result=await page.evaluate(()=>{
-        const off=[];
-        for(const el of document.querySelectorAll('body *')){
-          const cs=getComputedStyle(el,'::before');
-          if(cs.content==='none'||cs.content==='normal'||cs.display==='none'||cs.position!=='absolute')continue;
-          const h=parseFloat(cs.height),w=parseFloat(cs.width),top=parseFloat(cs.top);
-          if(!(h>0&&h<40&&w>0&&w<40)||Number.isNaN(top))continue;
-          const box=el.getBoundingClientRect();if(!box.height)continue;
-          const m=cs.transform.match(/matrix\(([^)]+)\)/);const ty=m?Number(m[1].split(',')[5]):0;
-          const walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT,{acceptNode:n=>n.textContent.trim()?1:3});
-          const text=walker.nextNode();if(!text)continue;
-          const range=document.createRange();range.setStart(text,0);range.setEnd(text,1);
-          const line=range.getClientRects()[0];if(!line)continue;
-          const d=box.top+top+ty+h/2-(line.top+line.bottom)/2;
-          if(Math.abs(d)>3)off.push(el.parentElement.className+' '+Math.round(d));
-        }
-        const statics=[...document.querySelectorAll('#lecture-overview .summary-list li')]
-          .map(li=>getComputedStyle(li,'::before').position).filter(p=>p!=='static');
-        return {off,statics};
+        const items=[...document.querySelectorAll('.summary-list>li,.detail-points>li')];
+        const off=items.flatMap((item,index)=>{
+          const style=getComputedStyle(item);
+          const marker=getComputedStyle(item,'::before');
+          const content=item.querySelector('.point-content')||item;
+          const text=document.createTreeWalker(content,NodeFilter.SHOW_TEXT).nextNode();
+          const range=document.createRange();
+          range.setStart(text,0);
+          range.setEnd(text,1);
+          const first=range.getBoundingClientRect();
+          const lineTop=item.getBoundingClientRect().top+parseFloat(style.paddingTop);
+          const markerCenter=lineTop+parseFloat(marker.marginTop)+parseFloat(marker.height)/2;
+          const textCenter=(first.top+first.bottom)/2;
+          if(style.display!=='grid'||first.top>=lineTop+parseFloat(style.lineHeight)||Math.abs(markerCenter-textCenter)>4)return [index];
+          return [];
+        });
+        return {count:items.length,off};
       });
-      expect(result.off,url+' @'+width+'/'+size).toEqual([]);
-      expect(result.statics,url).toEqual([]);
+      expect(result.count).toBeGreaterThan(0);
+      expect(result.off,id+' @'+width+'/'+size).toEqual([]);
     }
     await context.close();
   }
+});
+
+test('timestamp copy feedback stays below the heading and button on a narrow phone',async({browser})=>{
+  const context=await browser.newContext({viewport:{width:320,height:844}});
+  await context.addInitScript(()=>Object.defineProperty(navigator,'clipboard',{value:undefined}));
+  const page=await context.newPage();
+  await page.goto('/lectures/hw4_kLaHOMg.html');
+  const section=page.locator('#lecture-comment');
+  await section.locator('#copy').click();
+  await expect(section.locator('#status')).toHaveText('선택한 내용을 직접 복사해 주세요.');
+  await expect(section.locator('.timeline-box')).toHaveAttribute('open','');
+  const layout=await section.evaluate(el=>{
+    const heading=el.querySelector('h2').getBoundingClientRect();
+    const button=el.querySelector('#copy').getBoundingClientRect();
+    const status=el.querySelector('#status').getBoundingClientRect();
+    return {feedbackGap:status.top-Math.max(heading.bottom,button.bottom),overflow:document.documentElement.scrollWidth-innerWidth};
+  });
+  expect(layout.feedbackGap).toBeGreaterThanOrEqual(0);
+  expect(layout.overflow).toBeLessThanOrEqual(1);
+  await context.close();
 });
 
 test('outline sheet lists sections and detail headings and closes on navigation',async({browser})=>{
