@@ -1,13 +1,24 @@
 # -*- coding: utf-8 -*-
 """Build the lecture list from the registry: python scripts/build_library.py"""
 from pathlib import Path
-import json,html,sys
+import json,html,sys,hashlib
 from reading_text import reading_minutes, section_text
 R=Path(__file__).resolve().parents[1]
 SITE_NAME='내면의 서재'
 SITE_DESCRIPTION='강의별 핵심 요약과 타임스탬프·상세 요약을 모은 서재'
 SITE_URL='https://frpsy.github.io/study_hub/'
-ASSET_VERSION=json.loads((R/'build-info.json').read_text(encoding='utf-8'))['version']
+# 화면 버전 = 공통 자산(CSS·JS·아이콘·서비스 워커) 내용의 해시. 손으로 올리지 않는다.
+# 문구·데이터만 바뀌면 값이 그대로라서 강의 HTML의 `?v=`도 바뀌지 않는다.
+ASSET_FILES=('assets/site.css','assets/site.js','assets/theme.js','assets/icon.svg','assets/icon-512.png','assets/apple-touch-icon.png','sw.js')
+def asset_version(root=R):
+    h=hashlib.sha256()
+    for name in ASSET_FILES:
+        h.update(name.encode('utf-8')+b'\0')
+        h.update((Path(root)/name).read_bytes().replace(b'\r\n',b'\n'))
+    return h.hexdigest()[:10]
+ASSET_VERSION=asset_version()
+def build_info_text(version=None):
+    return json.dumps({'version':version or ASSET_VERSION},ensure_ascii=False,indent=2)+'\n'
 APPEARANCE_BOOT = """<script>(()=>{const root=document.documentElement;let mode='auto',size='';try{mode=localStorage.getItem('study-site-appearance');size=localStorage.getItem('study-site-text-size')}catch{}mode=['light','dark'].includes(mode)?mode:'auto';const theme=mode==='auto'?(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'):mode;root.dataset.theme=theme;root.dataset.themeMode=mode;root.style.colorScheme=theme;if(['sm','lg'].includes(size))root.dataset.textSize=size;if(navigator.standalone||matchMedia('(display-mode: standalone)').matches)root.dataset.standalone='true'})()</script>"""
 
 def header(base=''):
@@ -117,7 +128,11 @@ def build(check=False):
             print('Actual:  ',repr(current[max(0,first-100):first+180]))
         offline_matches=offline_target.read_text(encoding="utf-8")==offline_page
         if not offline_matches:print("FAIL: regenerate offline.html with scripts/build_library.py")
-        return 0 if matches and offline_matches else 1
+        info=R/'build-info.json'
+        info_matches=info.exists() and info.read_text(encoding='utf-8')==build_info_text()
+        if not info_matches:print('FAIL: build-info.json is not the asset hash; regenerate with scripts/build_library.py')
+        return 0 if matches and offline_matches and info_matches else 1
+    (R/'build-info.json').write_text(build_info_text(),encoding='utf-8')
     target.write_text(result,encoding='utf-8')
     offline_target.write_text(offline_page,encoding='utf-8')
     return 0

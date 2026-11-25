@@ -22,7 +22,7 @@
 | `scripts/build_compact_lectures.py` | 강의 페이지(핵심 요약 + 타임스탬프) 생성 |
 | `assets/site.css`, `assets/site.js` | 공통 디자인과 검색·복사·버전 확인 |
 | `sw.js` | 동일 출처 정적 리소스 캐싱 |
-| `build-info.json` | **배포·캐시 버전의 단일 원본** |
+| `build-info.json` | 배포·캐시 버전. 공통 자산 내용 해시이며 `build_library.py`가 자동으로 쓴다 |
 
 기존 콘텐츠 ID와 공개 주소를 바꾸지 않으며, 생성된 HTML은 **직접 편집하지 않습니다.**
 
@@ -42,7 +42,7 @@ python3 -m unittest discover -s tests -p 'test_*.py'
 node --test tests/test_*.cjs
 ```
 
-브라우저 검사는 GitHub Actions에서 Chromium/Playwright로 자동 실행합니다. 강의 원고를 수정할 때는 데이터에서 고치고 두 생성기를 다시 실행하세요. 정적 화면 버전이 바뀌면 **`build-info.json.version`만 올리고** 생성된 HTML과 `offline.html`의 자산 URL을 맞춥니다.
+브라우저 검사는 GitHub Actions에서 Chromium/Playwright로 자동 실행합니다. 강의 원고를 수정할 때는 데이터에서 고치고 두 생성기를 다시 실행하세요. 화면 버전은 공통 자산(CSS·JS·아이콘·서비스 워커) 내용 해시라서 생성기가 자동으로 정하며, 손으로 올리지 않습니다. 문구·데이터만 고치면 버전도 생성 HTML의 `?v=`도 바뀌지 않아 변경 파일이 원본·홈·해당 강의 정도로 줄어듭니다.
 
 ## 강의 추가
 

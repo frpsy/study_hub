@@ -48,14 +48,13 @@ jobs:
         suite: ${{ fromJSON(github.event_name == 'push' && '["chromium-1","chromium-2","webkit"]' || '["chromium-1","chromium-2"]') }}
     env:
       BROWSER_NAME: ${{ matrix.suite == 'webkit' && 'webkit' || 'chromium' }}
-      PLAYWRIGHT_VERSION: '1.56.1'
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
       - name: Install Playwright test runner
-        run: npm install --no-save --no-audit --no-fund --prefer-offline "@playwright/test@$PLAYWRIGHT_VERSION"
+        run: npm ci --no-audit --no-fund --prefer-offline   # package-lock.json이 @playwright/test 버전을 고정한다
       - name: Run browser tests
         env:
           SUITE: ${{ matrix.suite }}

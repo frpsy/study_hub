@@ -18,7 +18,7 @@ YouTube 요약의 작성·수정과 상세 본문 윤문에는 기본적으로 [
 6. `data/lecture_compact.json`에 — 김주환 강의: `timeline`(편집규칙 4절 형식)과 `detail`(16절: 평서문·질문형 소제목, 웹 보충은 편집자 주), 그리고 `intro`(19절: 핵심 주장 `points`는 항상, 해볼 일 `practice`와 `steps`는 강연자가 실제로 권했을 때만). 그 외 강연자: `timeline`과 `detail`(자막 기반 상세 요약, 필요 시 웹 보충은 편집자 주 ‘강의 밖 보충 자료’에, 편집규칙 14절). 공통: `sources`(label·url, 실제 확인한 링크만), 필요 시 `note`·`aliases`.
 7. (이미지를 요청받았을 때만) 대표 이미지 1장과 필요하면 본문 이미지 최대 3장을 만든다. 규칙은 `docs/design-system.md`의 ‘강의 대표 이미지’·‘상세 요약 안 이미지’이다. ChatGPT(Codex)만 쓰고, 필름 사진 느낌 프롬프트에 글자·인물·과한 빛 연출은 뺀다. JPEG 450KB 이하로 `assets/lectures/<id>.jpg`에 두고 `lectures.json`의 `image`를 채운다. 만든 사진은 직접 열어 확인한다.
 8. 자막 오인식은 편집규칙 18절 순서로 점검한다. 용어는 `용어집.md`가 원본이고, 새 오인식은 그 표에 한 줄 추가한다. `tests/test_caption_terms.py`가 별칭 잔존을 막는다.
-9. `build-info.json` 버전을 올리고 `build_library.py`, `build_compact_lectures.py`를 실행한다. 버전이 바뀌면 모든 강의 페이지가 바뀌므로 생성된 `lectures/*.html` 전체와 `index.html`을 커밋한다.
+9. `python3 scripts/build_all.py --check --tests`로 생성·검증한다. 화면 버전은 자산 해시라 자동이며, 생성기가 바꾼 `lectures/*.html`·`index.html`·`build-info.json`만 지정해서 커밋한다.
 10. 모든 강의는 편집규칙 14절의 자체 검수(사실·출처, 문장·문법, 형식)를 끝낸다. AGENTS.md의 검증 명령 전부 통과 → PR(네 제목) → CI의 `quality`와 `browser`가 **모두 pass**인지 확인 → 병합 → 공개 페이지에서 새 문구 확인 → 링크 보고.
 
 ## 기존 요약 다듬기
