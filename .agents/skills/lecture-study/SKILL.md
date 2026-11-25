@@ -49,7 +49,7 @@ YouTube 요약의 작성·수정과 상세 본문 윤문에는 기본적으로 [
 - 실제 자막 시각에 맞춘 `timeline`과 `detail`을 함께 둔다. 사족 없이 쓰고 출처를 남긴다. 보고 전 사실·출처 검수와 문장·문법 검수를 끝낸다(편집규칙 14절).
 
 ## 자주 걸리는 검사
-- `tests/test_korean_leads.py`: lead는 문장부호 1개, ‘다.’로 끝, 35~65자, 메타 주어 없는 직접 서술, 첫 핵심 항목·생성 HTML과 일치.
+- `tests/test_korean_leads.py`: lead는 문장부호 1개, ‘다.’로 끝, 하드 한계 15~100자(35~65자는 목표라 벗어나면 경고), 메타 주어 없는 직접 서술, 첫 핵심 항목·생성 HTML과 일치.
 - `tests/test_compact_courses.py`: 옛 형식의 three는 3개·‘다.’ 종결·머리말 금지. `intro`가 있으면 `three`·`practice` 금지, 블록 1~3개(같은 종류 중복 금지, `points` 필수, 제목에 개수 금지), 해볼 일은 `when`·`do`·`t`·`quote` 필수(`check`는 선택, 있으면 ‘다.’ 종결·80자 이내)이고 `quote`의 낱말이 그 시각의 자막에 있어야 한다.
 - `tests/test_caption_terms.py`: 용어집의 ‘점검할 표현’(배경자, 개별적인 자 등)과 음절이 빠진 ‘자’가 공개 본문에 남으면 실패.
 - `tests/test_lecture_images.py`: 대표·본문 이미지의 개수(본문 3장 이하), 450KB 이하, alt, 크기, 순서.
