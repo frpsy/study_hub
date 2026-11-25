@@ -250,7 +250,7 @@ test('reading estimate and folded outline remain usable without JavaScript',asyn
   const page=await context.newPage();
   await page.goto('/index.html');
   const reading=await page.locator('.card-reading').first().innerText();
-  expect(reading).toMatch(/^요약 약 \d+분$/);
+  expect(reading).toMatch(/^예상 읽기 시간 \d+분$/);
   await page.locator('.card-link').first().click();
   await expect(page.locator('.reading-estimate')).toHaveText(reading);
   await expect(page.locator('.detail-outline')).not.toHaveAttribute('open','');
