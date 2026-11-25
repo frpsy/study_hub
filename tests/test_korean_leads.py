@@ -27,7 +27,7 @@ class KoreanLeads(unittest.TestCase):
                 lead = record['lead']
                 self.assertEqual(sum(lead.count(c) for c in '.!?'), 1)
                 self.assertTrue(lead.endswith('다.'))
-                # 35~65자는 목표다(경고). 하드 한계는 이상치만 막고, 실제 판정은 모바일 두 줄 표시 검사(tests/home-discovery.spec.cjs)가 한다.
+                # 35~65자는 목표다(경고). 하드 한계는 이상치만 막는다. 두 줄 표시는 자동 검사가 없으니 화면에서 직접 확인한다.
                 self.assertGreaterEqual(len(lead), 15)
                 self.assertLessEqual(len(lead), 100)
                 if not 35 <= len(lead) <= 65:
