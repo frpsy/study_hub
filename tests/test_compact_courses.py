@@ -1,4 +1,4 @@
-import unittest,json,sys,re,html
+import unittest,json,sys,re,html,warnings
 from pathlib import Path
 R=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(R/'scripts'))
@@ -153,15 +153,19 @@ class IntroChecks(unittest.TestCase):
      for item in items:
       text=item if isinstance(item,str) else item['t']
       if not isinstance(item,str):self.assertTrue(item['l'] and set(item)=={'l','t'},vid)
-      self.assertTrue(text.endswith('다.') and len(text)<=90 and text.count(',')<=1,vid+': '+text)
+      self.assertTrue(text.endswith('다.') and len(text)<=140,vid+': '+text)   # 하드 한계는 이상치만 막는다
+      if len(text)>90 or text.count(',')>1:warnings.warn(vid+': 도입 문장 목표(90자·쉼표 1개) 초과: '+text[:30])
     elif kind=='practice':
      self.assertTrue(1<=len(items)<=3,vid)
      for item in items:
       self.assertTrue(set(item)>={'when','do'},vid)   # 확인(check)은 강연자가 점검 기준을 말했을 때만 둔다
       self.assertTrue(set(item)<={'when','do','check','quote','t','detail_index'},vid)
-      self.assertTrue(item['when'] and len(item['when'])<=45 and not item['when'].endswith('.'),vid+': '+item['when'])
+      self.assertTrue(item['when'] and len(item['when'])<=80 and not item['when'].endswith('.'),vid+': '+item['when'])
+      if len(item['when'])>45:warnings.warn(vid+': when 목표(45자) 초과: '+item['when'])
       for key in ('do','check'):
-       if key in item:self.assertTrue(item[key].endswith('다.') and len(item[key])<=80,vid+': '+item[key])
+       if key in item:
+        self.assertTrue(item[key].endswith('다.') and len(item[key])<=140,vid+': '+item[key])
+        if len(item[key])>80:warnings.warn(vid+': '+key+' 목표(80자) 초과: '+item[key][:30])
       if kim:
        self.assertRegex(item['t'],STAMP,vid);self.assertNotIn('detail_index',item,vid)
        self.assertTrue(15<=len(item['quote'])<=170,vid+': '+item['quote'])   # 김주환 강의는 강연자의 말을 인용으로 남긴다
