@@ -215,3 +215,12 @@
 ## 영어 핵심 용어 표기
 
 - `9tRohh0gErM` 상세 요약의 ‘식사 창’을 ‘하루에 음식을 먹는 시간대(feeding window)’로 풀었다. 원어는 보관 자막에서 확인했다. 이후 문장에는 문맥에 맞는 한국어를 썼다. 검토 범위는 해당 용어와 주변 표현이다.
+
+## 공개 영어 강의 네 편의 용어 검토
+
+공개 목록의 영어 강의 4편을 대상으로 핵심·상세 요약과 타임스탬프 제목을 읽고, 병기한 용어를 각 강의의 보관 영어 자막에서 대조했다. 타임스탬프 시각과 직접 인용, 출처를 유지했다. 검토 범위는 전문 용어와 주변 한국어 표현이다.
+
+- `KHd-luu3M8s` — 몰입(flow), 기본 모드 네트워크(default mode network)를 병기하고 ‘스크롤링’은 화면을 계속 넘겨 본다는 뜻으로 풀었다.
+- `7R3-3HR6-u4` — 시간제한 식사(time-restricted eating), 하루에 음식을 먹는 시간대(feeding window)를 먼저 설명하고 이후 문장과 타임스탬프 제목의 ‘식사 창’을 다듬었다.
+- `9tRohh0gErM` — 단식 상태(fasted state), 위 배출(gastric emptying), 인슐린 감수성(insulin sensitivity), 유리 테스토스테론(free testosterone) 등을 병기했다.
+- `QmOF0crdyRU` — 신경조절물질(neuromodulator)을 병기하고, 지속 분비(tonic release)와 순간 분비(phasic release)의 차이를 본문에서 설명했다. 간헐 강화(intermittent reinforcement)는 보상을 매번 주지 않는다는 뜻을 풀었다.
