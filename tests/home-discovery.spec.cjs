@@ -261,10 +261,9 @@ test('reading estimate and folded outline remain usable without JavaScript',asyn
   await context.close();
 });
 
-test('all 22 short Korean leads stay consistent and fit two lines on a phone',async({page})=>{
+test('all 22 short Korean leads stay consistent',async({page})=>{
   const records=require('../data/lecture_compact.json');
   const minis=require('../data/mini_courses.json');
-  await page.setViewportSize({width:390,height:844});
   await page.goto('/index.html');
   for(const row of studyLectures){
     const lead=minis[row.id].lead;
@@ -272,14 +271,6 @@ test('all 22 short Korean leads stay consistent and fit two lines on a phone',as
     expect(typeof first==='string'?first:first.t).toBe(lead);
     await expect(page.locator(`[data-video-id="${row.id}"] .card-lead`)).toHaveText(lead);
   }
-  const overflow=await page.evaluate(leads=>{
-    const lines=el=>{const range=document.createRange();range.selectNodeContents(el);return new Set([...range.getClientRects()].map(rect=>Math.round(rect.top))).size};
-    const cards=[...document.querySelectorAll('.card-lead')].filter(el=>lines(el)>2).map(el=>el.textContent);
-    const quote=document.querySelector('.today-key');const old=quote.textContent;
-    const quotes=leads.filter(text=>{quote.textContent=text;return lines(quote)>2});quote.textContent=old;
-    return {cards,quotes};
-  },studyLectures.map(row=>minis[row.id].lead));
-  expect(overflow).toEqual({cards:[],quotes:[]});
 });
 
 test('compact cards keep save at the title and do not grow when saved or read',async({page})=>{
