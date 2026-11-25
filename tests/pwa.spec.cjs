@@ -193,3 +193,54 @@ test('online navigation rejects a stale cached header and offline still reads th
   }
   await context.close();
 });
+
+test('Material color roles stay consistent and readable in light and dark',async({browser})=>{
+  const contrast=(foreground,background)=>{
+    const luminance=color=>{
+      const channels=color.match(/[\d.]+/g).slice(0,3).map(Number).map(v=>{
+        v/=255;return v<=.04045?v/12.92:((v+.055)/1.055)**2.4;
+      });
+      return channels[0]*.2126+channels[1]*.7152+channels[2]*.0722;
+    };
+    const a=luminance(foreground),b=luminance(background);
+    return (Math.max(a,b)+.05)/(Math.min(a,b)+.05);
+  };
+  for(const theme of ['light','dark']){
+    const context=await browser.newContext({viewport:{width:390,height:844},colorScheme:theme});
+    const page=await context.newPage();
+    await page.goto('/index.html');
+    const card=page.locator('.lecture-card').first();
+    await card.locator('[data-library-toggle=bookmarks]').click();
+    await card.locator('[data-library-toggle=read]').click();
+    const colors=await page.evaluate(()=>{
+      const css=selector=>getComputedStyle(document.querySelector(selector));
+      const quote=css('.today-line');
+      return {
+        primary:css('.today-source').color,
+        quoteInk:css('.today-key').color,quoteMuted:css('.today-random').color,
+        quoteSurface:quote.backgroundColor,
+        saved:css('.lecture-card [data-library-toggle=bookmarks]').color,
+        savedSurface:css('.lecture-card [data-library-toggle=bookmarks]').backgroundColor,
+        mark:css('.lecture-card .read-mark').color,markSurface:css('.lecture-card .read-mark').backgroundColor,
+        selected:css('.filter-chips button[aria-pressed=true]').color,selectedSurface:getComputedStyle(document.querySelector('.filter-chips button[aria-pressed=true]'),'::before').backgroundColor
+      };
+    });
+    expect(colors.saved).toBe(colors.primary);
+    for(const [ink,surface] of [['quoteInk','quoteSurface'],['quoteMuted','quoteSurface'],
+      ['primary','quoteSurface'],['saved','savedSurface'],['mark','markSurface'],['selected','selectedSurface']]){
+      expect(contrast(colors[ink],colors[surface]),`${theme}: ${ink}/${surface}`).toBeGreaterThanOrEqual(4.5);
+    }
+    await page.locator('#search').focus();
+    await expect(page.locator('#search')).toHaveCSS('outline-color',colors.primary);
+    await page.goto('/lectures/affirmation-20261101.html');
+    const detail=await page.evaluate(()=>{
+      const button=getComputedStyle(document.querySelector('#copy'));
+      return {progress:getComputedStyle(document.querySelector('.read-progress'),'::before').backgroundColor,
+        button:button.backgroundColor,buttonInk:button.color};
+    });
+    expect(detail.progress).toBe(colors.primary);
+    expect(detail.button).toBe(colors.primary);
+    expect(contrast(detail.buttonInk,detail.button)).toBeGreaterThanOrEqual(4.5);
+    await context.close();
+  }
+});
