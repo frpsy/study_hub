@@ -599,7 +599,7 @@ a{color:var(--ink);text-decoration-color:var(--accent);text-decoration-thickness
 .source-disclosure{border-top:1px solid var(--line);margin-top:28px}
 @media(max-width:780px){.site-footer-inner .theme-toggle{margin-left:0}}
 .source-disclosure ul{list-style:none;padding:0;margin:6px 0 14px}.source-disclosure li{border-bottom:1px solid var(--line)}.source-disclosure li a{display:block;padding:12px 0;line-height:1.7;overflow-wrap:anywhere}
-#lecture-comment{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:12px}#lecture-comment>*{grid-column:1/-1}#lecture-comment>#timeline{position:absolute;width:0;height:0}#lecture-comment>h2{grid-column:1;grid-row:1;margin:0}#lecture-comment>.actions{grid-column:2;grid-row:1;display:flex;flex-direction:row-reverse;align-items:center;gap:8px;margin:0}#lecture-comment .actions #status{margin:0;font-size:12px;white-space:nowrap}#lecture-comment .actions #copy{min-width:0;min-height:var(--tap-target);padding:0 14px;font-size:13px;font-weight:600;line-height:1;letter-spacing:.01em;color:var(--on-accent);background:var(--accent);border-color:var(--accent);border-radius:var(--radius-control);white-space:nowrap;transition:filter .15s ease,transform .15s ease}#lecture-comment .actions #copy:active{transform:scale(.97)}@media(hover:hover) and (pointer:fine){#lecture-comment .actions #copy:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent);filter:brightness(1.08)}}#lecture-comment .actions #copy:focus-visible{outline:2px solid var(--focus-color);outline-offset:2px}#lecture-comment>.timeline-box{grid-row:2;margin-top:14px}
+#lecture-comment{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:12px}#lecture-comment>*{grid-column:1/-1}#lecture-comment>#timeline{position:absolute;width:0;height:0}#lecture-comment>h2{grid-column:1;grid-row:1;margin:0}#lecture-comment>.actions{grid-column:2;grid-row:1;display:flex;flex-direction:row-reverse;align-items:center;gap:8px;margin:0}#lecture-comment>#status{grid-row:2;margin:0;font-size:12px;overflow-wrap:anywhere}#lecture-comment>#status:not(:empty){margin-top:6px}#lecture-comment .actions #copy{min-width:0;min-height:var(--tap-target);padding:0 14px;font-size:13px;font-weight:600;line-height:1;letter-spacing:.01em;color:var(--on-accent);background:var(--accent);border-color:var(--accent);border-radius:var(--radius-control);white-space:nowrap;transition:filter .15s ease,transform .15s ease}#lecture-comment .actions #copy:active{transform:scale(.97)}@media(hover:hover) and (pointer:fine){#lecture-comment .actions #copy:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent);filter:brightness(1.08)}}#lecture-comment .actions #copy:focus-visible{outline:2px solid var(--focus-color);outline-offset:2px}#lecture-comment>.timeline-box{grid-row:3;margin-top:14px}
 .lecture-section .timeline-box>summary{display:block;padding:0 0 8px;cursor:pointer;text-align:center;color:var(--accent);font-size:13px;font-weight:600;line-height:1.5}
 .lecture-section .timeline-box>summary::-webkit-details-marker{display:none}
 .lecture-section .timeline-box>summary::marker{content:""}
@@ -884,9 +884,9 @@ body{background:var(--paper)}
 .compact-lecture #lecture-overview .summary-tier>.summary-lead{padding:4px 0 4px 20px;background:transparent;border:0;border-left:3px solid var(--accent);border-radius:0;font-weight:600;line-height:1.8}
 
 /* 핵심 세 가지는 순서가 아니므로 번호 대신 점 */
-.compact-lecture #lecture-overview .summary-list li{padding-left:22px}
+.compact-lecture #lecture-overview .summary-list li{padding-left:0}
 /* 점을 첫 줄 글자에 붙여 둔다. 고정 top 값은 글자 크기·기기마다 어긋난다. */
-.compact-lecture #lecture-overview .summary-list li::before{content:"";position:static;display:inline-block;top:auto;left:auto;width:6px;height:6px;margin:0 14px 0 -20px;border-radius:50%;background:var(--accent);vertical-align:middle;transform:translateY(-1px)}
+.compact-lecture #lecture-overview .summary-list li::before{content:"";position:static;font-size:inherit}
 
 /* 오늘의 실천 번호 원: 카드 가운데가 아니라 첫 줄에 맞춘다. 원 안 숫자와 문장의 기준선을 맞추므로 글자 크기·줄 수와 상관없다. */
 
@@ -1036,6 +1036,23 @@ html.header-hidden .sidebar{top:12px}
 
 /* 라벨이 있는 항목: 라벨은 굵은 한 줄, 설명은 그 아래 (2026-11-23 사용자 요청) */
 .point-label{display:block;font-weight:700;margin:0 0 2px}
+.compact-lecture .lecture-section .detail-body .detail-points{list-style:none;padding-left:0}
+.compact-lecture #lecture-overview .summary-list>li,
+.compact-lecture .detail-body .detail-points>li{
+ display:grid;
+ grid-template-columns:14px minmax(0,1fr);
+ column-gap:8px;
+}
+.compact-lecture #lecture-overview .summary-list>li::before,
+.compact-lecture .detail-body .detail-points>li::before{
+ content:"";
+ width:6px;
+ height:6px;
+ margin:calc((1lh - 6px) / 2) 0 0 2px;
+ border-radius:50%;
+ background:var(--accent);
+}
+.point-content{min-width:0;overflow-wrap:anywhere}
 /* 강의 목록과 핵심 요약의 읽는 순서 */
 .home-main .catalog-intro{margin-bottom:20px}
 .today-line{margin-bottom:16px}

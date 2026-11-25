@@ -10,7 +10,7 @@ def block_html(t):
  if 'image' in t:
   g=t['image'];cap=('<figcaption>'+E(g['caption'])+'</figcaption>') if g.get('caption') else ''
   return f'<figure class="detail-figure"><img src="../{E(g["src"],quote=True)}" width="{int(g["width"])}" height="{int(g["height"])}" alt="{E(g["alt"],quote=True)}" loading="lazy" decoding="async">{cap}</figure>'
- return '<ul class="detail-points">'+''.join('<li><strong class="point-label">'+E(i['l'])+'</strong>'+E(i['t'])+'</li>' for i in t['list'])+'</ul>'
+ return '<ul class="detail-points" role="list">'+''.join(point_html(i) for i in t['list'])+'</ul>'
 
 def editor_html(groups):
  """Limits, supplements and evidence checks live only here, inside the closed sources-and-notes fold at the page end."""
@@ -33,11 +33,11 @@ def check_intro(vid, record):
    if 'detail_index' in item and not 0<=item['detail_index']<len(record.get('detail',[])):raise ValueError(f'{vid}: detail_index out of range')
 def point_html(item):
  """A point is a sentence (str) or a labelled sentence ({"l": label, "t": sentence})."""
- if isinstance(item,str):return '<li>'+E(item)+'</li>'
- return '<li><strong class="point-label">'+E(item['l'])+'</strong>'+E(item['t'])+'</li>'
+ text=E(item) if isinstance(item,str) else '<strong class="point-label">'+E(item['l'])+'</strong>'+E(item['t'])
+ return '<li><span class="point-content">'+text+'</span></li>'
 def intro_html(record):
  points=''.join(
-  '<div class="summary-tier intro-block intro-points"><h3>'+E(block['h'])+'</h3><ul class="summary-list">'+''.join(point_html(item) for item in block['items'])+'</ul></div>'
+  '<div class="summary-tier intro-block intro-points"><h3>'+E(block['h'])+'</h3><ul class="summary-list" role="list">'+''.join(point_html(item) for item in block['items'])+'</ul></div>'
   for block in record['intro'] if block['kind']=='points'
  )
  return f'<section id="lecture-overview" class="lecture-section"><span id="overview"></span><h2>핵심 요약</h2>{points}</section>'
@@ -71,7 +71,7 @@ def render(row,record,mini,prev=None,nxt=None):
  timeline_text=E(record['timeline'])
  preview=E('\n'.join(record['timeline'].splitlines()[:4]))
  actions.append('<a class="btn secondary" href="#lecture-comment">타임스탬프로 이동</a>')
- second+=f'<section id="lecture-comment" class="lecture-section"><span id="timeline"></span><h2>타임스탬프</h2><div class="actions"><button id="copy" data-copy-target="comment" type="button">타임스탬프 복사</button><span id="status" role="status" aria-live="polite"></span></div><details class="timeline-box"><summary><span class="timeline-preview">{preview}</span><span class="timeline-open-label">전체 타임스탬프 보기</span><span class="timeline-close-label">타임스탬프 접기</span></summary><pre id="comment" tabindex="0"><code>{timeline_text}</code></pre></details></section>'
+ second+=f'<section id="lecture-comment" class="lecture-section"><span id="timeline"></span><h2>타임스탬프</h2><div class="actions"><button id="copy" data-copy-target="comment" type="button">타임스탬프 복사</button></div><span id="status" role="status" aria-live="polite"></span><details class="timeline-box"><summary><span class="timeline-preview">{preview}</span><span class="timeline-open-label">전체 타임스탬프 보기</span><span class="timeline-close-label">타임스탬프 접기</span></summary><pre id="comment" tabindex="0"><code>{timeline_text}</code></pre></details></section>'
  action=''.join(actions)
  sources=''.join(f'<li><a href="{E(s["url"],quote=True)}" target="_blank" rel="noopener">{E(s["label"])}</a></li>' for s in record['sources'])
  sections=[('lecture-overview','핵심 요약')]+([('lecture-detail','상세 요약')] if detailed else [])+[('lecture-comment','타임스탬프')]+[('lecture-sources','출처')]
