@@ -29,6 +29,14 @@ def intro_texts(record):
     yield item['h'];yield from item['b']
 STAMP=r'^(\d+:[0-5]\d|\d+:[0-5]\d:[0-5]\d)$'   # 분·초는 59 이하
 class CompactCourseChecks(unittest.TestCase):
+ def test_detailed_summaries_highlight_three_to_five_existing_passages(self):
+  records=json.loads((R/'data/lecture_compact.json').read_text(encoding='utf-8'))
+  for vid,record in records.items():
+   expected=[section['highlight'] for section in record['detail'] if 'highlight' in section]
+   with self.subTest(lecture=vid):
+    self.assertIn(len(expected),range(3,6))
+    source=(R/'lectures'/f'{vid}.html').read_text(encoding='utf-8')
+    self.assertEqual([html.unescape(t) for t in re.findall(r'<mark class="detail-highlight">(.*?)</mark>',source)],expected)
  def test_timeline_text_is_preserved_and_copy_has_single_target(self):
   records=json.loads((R/'data/lecture_compact.json').read_text())
   for vid,record in records.items():
