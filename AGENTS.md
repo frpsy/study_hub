@@ -35,9 +35,9 @@ npx playwright test --config=tests/playwright.config.cjs
 ### 변경 종류별 검증 등급 (작은 수정에 큰 검증을 붙이지 않는다)
 | 변경 | 로컬에서 돌릴 것 | 비고 |
 |---|---|---|
-| 문구·데이터·문서 (`data/`, `lectures.json`, `*.md`) | `build_all.py --check --tests` | 브라우저 검사와 22편 높이 측정은 생략한다. CI(`quality`·`browser`)가 어차피 전체를 돈다. 변경 파일은 보통 원본 + 홈 + 해당 강의 3개다 |
+| 문구·데이터·문서 (`data/`, `lectures.json`, `*.md`) | `build_all.py --check --tests` | 로컬 브라우저 검사는 생략한다. CI(`quality`·`browser`)가 어차피 전체를 돈다. 변경 파일은 보통 원본 + 홈 + 해당 강의 3개다 |
 | 새 강의 추가 | 위 + 자막 대조·AI 검수 | 외부 AI 검수는 새 강의와 대량 윤문에만 쓴다. 한 줄 수정에는 쓰지 않는다 |
-| `assets/*.css·js`, 생성기, 레이아웃, 서비스 워커 | 위 + `bash scripts/pw_local.sh`(브라우저 전체, 약 1분) + 22편 높이 측정 | 이때만 버전 해시가 바뀌어 모든 페이지가 다시 생성된다 |
+| `assets/*.css·js`, 생성기, 레이아웃, 서비스 워커 | 위 + `bash scripts/pw_local.sh`(브라우저 전체, 약 1분) | 이때만 버전 해시가 바뀌어 모든 페이지가 다시 생성된다 |
 
 ### 로컬 브라우저 검사 (빠르게 돌리는 법)
 - 실행은 `bash scripts/pw_local.sh`(또는 `npm run test:browser`)만 쓴다. 깨끗한 환경에서 전체가 약 1분이다(2026-11-25 실측 53초, 8코어). 일부만 보려면 파일이나 `-g "이름"`을 붙인다.
