@@ -275,5 +275,6 @@
     "characters_with_spaces": 39,
     "source": "transcripts/QmOF0crdyRU.en.txt",
     "review": "기존 핵심 항목·상세 요약 관련 절·보관 자막 관련 구간을 대조한 한 줄 요약 교정이다. 전체 영상·자막 재검수나 외부 AI 교차 검수는 수행하지 않았다. 원본 자막·타임스탬프·상세 본문은 보존했다."
-  }
+  },
+  "timeline_review_2026_11_25": {"basis": "transcripts/QmOF0crdyRU.en.txt의 시각이 있는 발화 대조", "checked_cues": ["00:09:58", "00:15:32", "00:36:59", "01:10:46", "01:29:54", "01:37:57"], "scope": "추가한 구간의 자막 시각과 주제를 확인했으며 실제 영상 재생은 확인하지 않았다."}
 }

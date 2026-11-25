@@ -69,8 +69,7 @@ def validate(root):
             m=re.search(r'</h1><p[^>]*>(.*?)</p>',source)
             if 'data-layout="compact"' not in source and (not m or len(m.group(1))<150):problems.append('hero intro must state why it matters and what the lecture gives')
         if p.parent.name=='lectures':
-            kim=next((r.get('creator')=='김주환' for r in rows if r['id']==p.stem),True)
-            if kim!=('id="lecture-comment"' in source):problems.append('timestamps belong only to 김주환 lectures; others need a detailed summary')
+            if source.count('id="lecture-comment"')!=1:problems.append('every lecture needs one timestamp section')
         errors.extend(p.name+': '+x for x in problems)
     for p,d in docs.items():
         for href in d.hrefs+d.styles+d.scripts:
