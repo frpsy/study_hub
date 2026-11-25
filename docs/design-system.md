@@ -1,20 +1,20 @@
 # 디자인 기준 (현행만)
 
-> 현행 기준만 둔다. 이전 녹색 팔레트·미니멀 모던·메뉴 2개·5분 요약 시기의 설명은 `docs/archive/design-system-2026-11-07.md`에 보존했다. 최종 기준은 `assets/site.css`의 `:root` 토큰과 마지막 레이어(v10 → v11), `assets/site.js`의 공통 동작이다.
+> 현행 기준만 둔다. 이전 녹색 팔레트·미니멀 모던·메뉴 2개·5분 요약 시기의 설명은 `docs/archive/design-system-2026-11-07.md`에 보존했다. 색상은 아래 ‘Material 블루 테마 / 2026-11-25’를 우선하며, 최종 기준은 `assets/site.css`의 공통 `:root` 토큰과 현행 레이어, `assets/site.js`의 공통 동작이다.
 
 ## 1. 공통 토큰
 | 범주 | 토큰 | 값/역할 |
 |---|---|---|
-| 배경 | --paper / --surface | #f5f5f6 / #ffffff |
-| 글자 | --ink / --muted | #0f0f10 / #5e5e66 |
-| 강조 | --accent / --tint | #c8102e / rgba(15,15,16,.05) |
+| 배경 | --paper / --surface | #faf9f6 / #fefdfa |
+| 글자 | --ink / --muted | #1f2328 / #5e5e66 |
+| 강조 | --accent / --tint | #0b57d0 / #d3e3fd (primary / primary-container) |
 | 경계선 | --line | rgba(15,15,16,.12) |
 | 카드 | --radius-card | 6px (--radius 참조) |
 | 버튼 | --radius-control | 4px |
 | 본문 | --font-body-size / --line-height-body | 16px / 1.8 |
 | 작은 UI | --font-ui-size | 14px |
 | 간격 | --space-1, 2, 3, 4, 5, 6, 8, 12 | 4, 8, 12, 16, 20, 24, 32, 48px |
-| 레이아웃 | --site-max-width | 1160px |
+| 레이아웃 | --site-max-width | 800px |
 | 터치 | --tap-target | 최소 44px |
 | 버튼 여백 | --button-pad-y / --button-pad-x | 9px / 15px |
 
@@ -53,12 +53,12 @@
 - 학습 콘텐츠의 연구·인과·한계·출처는 스타일을 이유로 삭제하지 않는다. 최신 세부 기준은 편집규칙.md의 ‘한국어 문체와 화면 문구’에 둔다.
 
 ## 동작 규칙 (2026-11-06 인터랙티브 스타일 중 현행)
-- 호버는 마우스 환경에서만. 카드는 경계선·제목이 강조색으로 바뀌고 빨간 기운의 얕은 그림자가 생긴다(v10).
+- 호버는 마우스 환경에서만. 카드는 경계선·제목이 강조색으로 바뀐다. 옛 v10의 그림자도 공통 블루 토큰을 따르며, 현행 홈 카드는 그림자를 쓰지 않는다.
 - 눌림: 버튼·칩 scale(.97). 전환 .16초, 곡선 --ease-out.
 - 등장: 홈·강의 섹션은 아래에서 10px 올라오며 나타나고 카드는 최대 .25초까지 순차 지연한다. details를 펼치면 내용이 4px 아래에서 나타난다.
 - `prefers-reduced-motion: reduce`에서는 애니메이션·전환을 끈다. 애니메이션은 transform과 opacity만 쓴다.
 
-## 블랙·레드·그레이 / v10 (2026-11-06 · 현행 시각 기준)
+## 블랙·레드·그레이 / v10 (2026-11-06 · 과거 결정, 색상은 2026-11-25 개정으로 대체)
 - **방향:** 슬릭하고 시크한 화면. 검정과 회색이 바탕이고, 빨강은 얇은 강조(제목 아래 짧은 선, 라벨, 링크 밑줄, 목록 번호, 진행 막대, 포커스, 카드 호버)에만 쓴다. 넓은 면을 빨강으로 칠하지 않는다.
 - **라이트:** 배경 #f5f5f6, 면 #ffffff, 글자 #0f0f10, 보조 #5e5e66, 강조 #c8102e(흰 배경 대비 약 5.9:1).
 - **다크:** 배경 #0b0b0c, 면 #131315, 글자 #f3f3f4, 보조 #a2a2aa, 강조 #ff4d63(배경 대비 약 6:1).
@@ -223,7 +223,7 @@
 - 기본 글자 크기의 390px 모바일과 PC에서 카드·오늘의 문장에 생략 없이 두 줄 안에 표시되는지 실제 글꼴의 줄 상자로 확인한다. 글자를 크게 설정하거나 더 좁은 화면에서는 문장 전체를 읽을 수 있도록 자연스러운 줄바꿈을 허용한다.
 
 
-## 한 문장 Material 3 색상 (2026-11-24)
+## 한 문장 Material 3 색상 (2026-11-24 · 2026-11-25 블루 역할로 개정)
 - 오늘의 한 문장은 Google Material 3 기본 팔레트의 `surface-container` 역할을 따른다. 라이트 배경 #f3edf7, 본문 `on-surface` #1d1b20, 보조 `on-surface-variant` #49454f, 링크·왼쪽 선 `primary` #6750a4이다.
 - 다크는 각각 #211f26, #e6e0e9, #cac4d0, #d0bcff를 쓴다. 색상은 공통 CSS 변수로 관리하고 문장·줄 수·레이아웃은 유지한다.
 - 근거: https://m3.material.io/styles/color/roles 및 Google material-web `tokens/versions/v0_192/_md-sys-color.scss`.
@@ -233,3 +233,22 @@
 - 카드 하단의 별도 버튼 행을 없앴다. 제목 오른쪽 위에 책갈피 저장 버튼 하나를 고정하고, 읽음 체크는 메타 정보 오른쪽에 둔다. 별과 저장 문구를 중복 표시하지 않으며 저장 상태는 채워진 책갈피로 구분한다. 두 버튼은 44px 터치 영역을 유지한다.
 - 제목 19px, 요약 14px·두 줄, 안여백 14×16px이다. 주제·강연자·날짜·예상 읽기 시간을 작은 메타 영역에 묶고 줄별 강제 전체 폭을 없앴다. 원본 영상 길이는 상세 페이지에서 확인한다.
 - 제목 오른쪽은 저장 버튼 영역을 비워 텍스트와 버튼이 겹치지 않는다. 카드의 나머지 영역은 강의 링크이고 저장·읽음 버튼은 별도로 동작한다.
+
+
+## Material 블루 테마 / 2026-11-25 (현행 색상 기준)
+
+- Google 블루·Material 바이올렛·틸의 세 후보를 같은 홈·상세 화면에서 비교하고 **A안 Google 블루**를 확정했다. 시안과 판단 근거는 [테마 비교 기록](design/theme-proposals/README.md)에 보관한다.
+- 보라색 열린 책 아이콘(#6750a4 / #eaddff)은 브랜드 색으로 유지한다. 링크·포커스·진행 막대·복사 버튼·저장/읽음 표시·선택 면은 아래 공통 역할을 사용한다. 본문과 카드 면적은 중립색을 유지해 읽기에 집중하게 한다.
+
+| 역할 | 토큰 | 라이트 | 다크 |
+|---|---|---|---|
+| primary | --accent, --focus-color | #0b57d0 | #a8c7fa |
+| on-primary | --on-accent | #ffffff | #062e6f |
+| primary-container | --tint | #d3e3fd | #0842a0 |
+| on-primary-container | --on-accent-container | #041e49 | #d3e3fd |
+| 강조된 읽기 면 | --feature-surface | #eef3fc | #202b3f |
+
+- `--quote-primary`, `--editorial-link`는 `--accent`를 참조한다. `--library-selected`, `--editorial-active-bg`는 `--tint`를 참조한다. `--editorial-feature`, `--library-feature`는 `--feature-surface`를 참조한다. 옛 빨간 selection·hover·focus 하드코딩은 제거했다.
+- 오늘의 한 문장은 위 읽기 면 위에 기존 `on-surface`·`on-surface-variant` 텍스트를 유지한다. 작은 조작 글자, 저장·읽음 상태, 선택 상태, 복사 버튼은 라이트·다크에서 실제 계산 색상의 대비가 4.5:1 이상인지 브라우저 회귀 검사로 확인한다.
+- 도형·레이아웃·문장·44px 터치 영역·원자료는 바꾸지 않는다. 브라우저 상단과 PWA 배경은 기존 중립 표면을 유지한다.
+- ‘Google에서 가장 많이 쓰는 색’에 관한 공식 점유율 통계는 확인하지 못했다. 선택 이유는 익숙한 Google 블루와 이 사이트에서 확인한 가독성·일관성이다. #0b57d0의 실제 Google 사용 근거는 [공식 Google 버튼 사양](https://developers.google.com/identity/gsi/web/reference/html-reference), 역할 구분 근거는 [Material 3 색상 역할](https://m3.material.io/styles/color/the-color-system)이다. 모든 Google 제품이 동일한 단색 테마를 쓴다는 뜻은 아니다.
