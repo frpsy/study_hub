@@ -16,3 +16,6 @@ webkit-deps.log
 
 # 여러 AI 문장 검수 작업 산출물(원 출력·프롬프트). 판정 표는 docs/ai-review-*/에 남긴다.
 drafts/ai-review/
+node_modules
+playwright-report/
+test-results/

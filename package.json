@@ -1,0 +1,11 @@
+{
+  "name": "study-hub",
+  "private": true,
+  "description": "브라우저 검사(Playwright) 설치를 고정하기 위한 파일. 사이트 자체는 정적 HTML이다.",
+  "devDependencies": {
+    "@playwright/test": "1.56.1"
+  },
+  "scripts": {
+    "test:browser": "bash scripts/pw_local.sh"
+  }
+}

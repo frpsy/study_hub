@@ -52,7 +52,7 @@ class EditorialBrandContract(unittest.TestCase):
 
     def test_asset_and_manifest_versions_are_synchronized(self):
         manifest = json.loads((ROOT/'build-info.json').read_text(encoding='utf-8'))
-        self.assertRegex(manifest['version'], r'^\d{4}\.\d{2}\.\d{2}\.\d+$')
+        self.assertRegex(manifest['version'], r'^[0-9a-f]{10}$')
         script = (ROOT/'assets/site.js').read_text(encoding='utf-8')
         self.assertIn("new URL(siteScriptURL).searchParams.get('v')", script)
         self.assertIn("workerURL.searchParams.set('v'", script)

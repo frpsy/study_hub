@@ -15,7 +15,7 @@ YouTube 강의 요약의 작성·수정과 상세 본문 윤문에는 `.agents/s
 | 강의 등록(최신순) | `lectures.json` → `python3 scripts/build_library.py` |
 | 대표 한 문장 | `data/lecture_compact.json`의 첫 `points` 항목 (`data/mini_courses.json`의 `lead`도 같은 문장으로 유지) |
 | 타임스탬프·도입 블록 `intro`·상세 요약 `detail`·편집자 주 `editor`·출처·옛 앵커 | `data/lecture_compact.json` → `python3 scripts/build_compact_lectures.py` |
-| 화면 버전 | `build-info.json`의 `version` (보이는 변경마다 올리고 재생성) |
+| 화면 버전 | `build-info.json`의 `version`은 공통 자산(CSS·JS·아이콘·서비스 워커) 내용 해시다. 생성기가 알아서 쓰니 손으로 올리지 않는다. 문구·데이터만 고치면 버전도 강의 HTML의 `?v=`도 그대로다 |
 | 원본 자막·근거 | `transcripts/`(가공 금지), `study-audits/<영상ID>.json` |
 
 - **도입(2026-11-22):** 핵심 세 가지와 실천 포인트를 합쳐 첫 섹션 ‘핵심 요약’에 담는다. 3개씩 맞추지 않고 강의가 실제로 말한 것만 쓴다. 해볼 일은 강연자가 직접 권한 대목만 ‘언제·할 일’(확인은 강연자가 점검 기준을 말한 경우에만)과 자막 인용·시각으로 쓴다. 모든 강의(22편, 2026-11-23 이관 완료)가 `intro`를 쓰며, 생성기와 테스트가 `three`·`practice`를 거부한다(`편집규칙.md` 19절).
@@ -30,7 +30,22 @@ python3 scripts/build_library.py --check && python3 scripts/build_compact_lectur
 python3 -m unittest discover -s tests -p 'test_*.py' && node --test tests/test_*.cjs
 npx playwright test --config=tests/playwright.config.cjs
 ```
-위 첫 세 줄은 `python3 scripts/build_all.py --check --tests` 한 명령으로 돌릴 수 있다. 홈 재생성(`build_library.py`)처럼 빠뜨리기 쉬운 단계까지 한꺼번에 하고, 화면 버전은 `--bump "변경 설명"`으로 올린다(Playwright는 따로).
+위 첫 세 줄은 `python3 scripts/build_all.py --check --tests` 한 명령으로 돌릴 수 있다(약 2초). 홈 재생성(`build_library.py`)처럼 빠뜨리기 쉬운 단계까지 한꺼번에 한다(Playwright는 따로).
+
+### 변경 종류별 검증 등급 (작은 수정에 큰 검증을 붙이지 않는다)
+| 변경 | 로컬에서 돌릴 것 | 비고 |
+|---|---|---|
+| 문구·데이터·문서 (`data/`, `lectures.json`, `*.md`) | `build_all.py --check --tests` | 로컬 브라우저 검사는 생략한다. CI(`quality`·`browser`)가 어차피 전체를 돈다. 변경 파일은 보통 원본 + 홈 + 해당 강의 3개다 |
+| 새 강의 추가 | 위 + 자막 대조·AI 검수 | 외부 AI 검수는 새 강의와 대량 윤문에만 쓴다. 한 줄 수정에는 쓰지 않는다 |
+| `assets/*.css·js`, 생성기, 레이아웃, 서비스 워커 | 위 + `bash scripts/pw_local.sh`(브라우저 전체, 약 1분) | 이때만 버전 해시가 바뀌어 모든 페이지가 다시 생성된다 |
+
+### 로컬 브라우저 검사 (빠르게 돌리는 법)
+- 실행은 `bash scripts/pw_local.sh`(또는 `npm run test:browser`)만 쓴다. 깨끗한 환경에서 전체가 약 1분이다(2026-11-25 실측 53초, 8코어). 일부만 보려면 파일이나 `-g "이름"`을 붙인다.
+- 느리거나 이상하게 실패하면 먼저 두 가지를 의심한다. ① Mac 절전(실행 중 잠들면 수십 분으로 늘고 시간 초과 실패가 쏟아진다. 스크립트가 `caffeinate`로 막는다) ② 다른 세션의 서버(고정 포트를 재사용하면 다른 브랜치 내용으로 검사한다. 포트는 worktree마다 다르고 기존 서버는 재사용하지 않는다).
+- 로컬에서만 실패하는 검사가 있다(2026-11-25 관찰, CI에서는 통과). 모바일 한 문장 두 줄 검사(`home-discovery` 'all 22 short Korean leads')는 로컬에서 계속 실패한다. 로컬 macOS 폰트 차이로 추정하지만 확정하지 못했다. 다크 색상 검사(`pwa` 'Material color roles')는 전체 병렬 실행에서 한 번 실패했고 단독으로는 통과했으니 타이밍 문제로 보인다. 이런 건만 실패하면 푸시해서 CI 결과로 판단한다. CI는 컨테이너에서 약 1분이다.
+- 레이아웃 변경은 로컬에서 오래 붙들지 말고 일찍 PR을 올려 CI를 브라우저 검사기로 쓴다.
+
+PR은 만든 세션에서 CI가 통과하면 바로 병합한다. 통과한 PR을 열어 두지 않는다.
 
 PR 본문에는 `## 변경 범위` `## 영향 기능` `## 검증 증거` `## 남은 위험` 네 제목이 필요하다(CI 검사). 실기기 Safari 미검증 등은 남은 위험에 적는다.
 

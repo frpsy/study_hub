@@ -66,11 +66,11 @@ python scripts/get_youtube_urls.py "<채널/재생목록 URL>" -o "authors/Jooha
 위 스크립트들이 공유하는 공용 모듈입니다 (yt-dlp 호출 방식 탐색, 쿠키 옵션, 파일명 정리,
 VTT → 텍스트 변환, 영상 ID 추출). 직접 실행하는 파일이 아닙니다.
 
-## build_all.py (생성·버전·검증을 한 명령으로)
+## build_all.py (생성·검증을 한 명령으로)
 ```bash
-python3 scripts/build_all.py --bump "변경 설명" --check --tests
+python3 scripts/build_all.py --check --tests
 ```
-홈과 강의 페이지를 다시 만들고(선택: 화면 버전 올림), design·site 검증과 `--check`, 단위·노드 테스트를 돈다. Playwright는 포함하지 않는다.
+홈과 강의 페이지를 다시 만들고(화면 버전은 자산 해시라 자동), design·site 검증과 `--check`, 단위·노드 테스트를 돈다. Playwright는 포함하지 않는다.
 
 ## intro_candidates.py (도입 해볼 일 후보, 탐색 전용)
 ```bash
