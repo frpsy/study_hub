@@ -423,6 +423,8 @@ test('outline sheet lists sections and detail headings and closes on navigation'
   const page=await context.newPage();
   await page.goto('/lectures/sAgj5V4Ewno.html');
   await page.evaluate(()=>window.scrollTo({top:1400,behavior:'instant'}));
+  await page.evaluate(()=>window.scrollTo({top:1300,behavior:'instant'})); // 위로 조금 올려 하단 막대를 띄운다
+  await expect(page.locator('html')).not.toHaveClass(/header-hidden/);
   await expect(page.locator('.dock')).toHaveClass(/is-visible/);
   await page.locator('.dock [data-dock="outline"]').click();
   const sheet=page.locator('.outline-sheet');

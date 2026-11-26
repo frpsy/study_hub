@@ -1498,3 +1498,28 @@ main.compact-lecture #lecture-overview .summary-tier.intro-points h3{margin-top:
 /* 이전·다음 강의: 카드 반응 */
 .lecture-pager a{transition:background-color var(--dur-2) var(--ease-standard),transform var(--dur-2) var(--ease-spring)}
 .lecture-pager a:active{transform:scale(.98)}
+
+/* S5 움직임: 누르면 줄었다가 놓으면 스프링으로 돌아온다. 저장된 상태가 페이지를 열 때 튀지 않도록 애니메이션이 아니라 전환을 쓴다 */
+[data-library-toggle],[data-copy-target],.today-random,.header-search,.search-sheet-close,.outline-close,.filter-chips button,.reading-nav a{transition:transform var(--dur-3) var(--ease-spring),background-color var(--dur-2) var(--ease-standard),color var(--dur-2) var(--ease-standard)}
+[data-library-toggle]:active,[data-copy-target]:active,.today-random:active,.header-search:active,.search-sheet-close:active,.outline-close:active,.filter-chips button:active{transform:scale(.92);transition-duration:var(--dur-1)}
+[data-library-toggle] svg,[data-library-toggle] .read-mark{transition:transform var(--dur-3) var(--ease-spring)}
+[data-library-toggle][aria-pressed="true"] svg,[data-library-toggle][aria-pressed="true"] .read-mark{transform:scale(1.08)}
+/* S5 포커스: 키보드 초점은 어디서나 같은 3px 강조색 테두리 */
+.dock button:focus-visible,.header-search:focus-visible,.search-sheet-close:focus-visible,.outline-close:focus-visible,.lecture-pager a:focus-visible,.reading-nav a:focus-visible,[data-library-toggle]:focus-visible{outline:3px solid var(--focus-color);outline-offset:2px}
+.search-sheet-bar:focus-within{box-shadow:inset 0 -2px 0 var(--accent)}
+/* S5 대비: 검색 결과 설명은 투명도 대신 보조 글자색 */
+.search-sheet-results span{opacity:1;color:var(--muted)}
+@media(prefers-reduced-motion:reduce){
+ [data-library-toggle],[data-copy-target],.today-random,.header-search,.search-sheet-close,.outline-close,.filter-chips button,.reading-nav a,.bento-tile,.dock,.dock button,.lecture-pager a,[data-library-toggle] svg,[data-library-toggle] .read-mark{transition:none!important}
+ [data-library-toggle]:active,[data-copy-target]:active,.bento-tile:active,.dock button:active,.lecture-pager a:active{transform:none!important}
+}
+/* S5 검수 반영(Codex 화면 판독, 2026-11-26) */
+/* 내려 읽을 때는 헤더처럼 하단 막대도 비켜서 본문을 가리지 않는다. 위로 올리면 다시 보인다 */
+html.header-hidden .dock.is-visible{opacity:0;pointer-events:none;transform:translate(-50%,16px)}
+@media(max-width:780px){html.header-hidden .dock.is-visible{transform:translateY(16px)}}
+/* 목차 띠는 거의 불투명하게: 뒤 글자가 비쳐 탭과 겹쳐 보이지 않게 한다 */
+.reading-nav{background:color-mix(in srgb,var(--paper) 92%,transparent);border-bottom:1px solid var(--line)}
+/* 타일 안 글은 단어 단위로 줄을 바꾼다(본문의 글자 단위 줄바꿈은 그대로) */
+.bento,.bento *{word-break:keep-all!important;overflow-wrap:anywhere}
+/* 주제 편수는 벤토 타일에만 보인다 */
+.filter-chips button small{display:none}
