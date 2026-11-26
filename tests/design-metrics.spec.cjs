@@ -17,8 +17,8 @@ const TARGETS={
   homeTodayLineAboveFold:{enforce:true,stage:'S0.5'},           // 지금도 지켜진다
   lectureFirstPointAboveFold:{enforce:false,stage:'S4'},
   siteJsBytes:{max:29254,enforce:true,stage:'S0.5'},           // 원본 바이트, 최소화 안 함
-  searchIndexBytes:{max:50*1024,enforce:false,stage:'S2b'},
-  precacheGrowth:{maxRatio:1.10,enforce:false,stage:'S2b'},     // S0.5 기록값 대비
+  searchIndexBytes:{max:50*1024,enforce:true,stage:'S2'},
+  precacheGrowth:{maxRatio:1.10,enforce:true,stage:'S2'},     // S0.5 기록값 대비
   // 홈은 오늘의 한 문장을 스크립트가 바꾸며 0.0385가 난다. S3 벤토 타일에서 고치고 homeMax를 0.01로 내린다.
   layoutShift:{max:0.01,homeMax:0.1,stage:'S3에서 homeMax 0.01'}
 };
@@ -100,7 +100,8 @@ for(const {name,url} of PAGES){
 test('asset and precache size budget',async()=>{
   const size=p=>fs.existsSync(path.join(ROOT,p))?fs.statSync(path.join(ROOT,p)).size:0;
   const core=['index.html','offline.html','manifest.webmanifest','assets/icon.svg','assets/icon-512.png',
-    'assets/apple-touch-icon.png','assets/site.css','assets/site.js','assets/theme.js','lectures.json'];
+    'assets/apple-touch-icon.png','assets/site.css','assets/site.js','assets/theme.js','lectures.json',
+    'assets/search.js','search-index.json'];
   const pages=lectures.map(l=>`lectures/${l.id}.html`);
   const images=lectures.filter(l=>l.image&&/^assets\/lectures\/[\w-]+\.jpg$/.test(l.image.src)).map(l=>l.image.src);
   const searchIndex=fs.existsSync(path.join(ROOT,'search-index.json'))?size('search-index.json'):null;

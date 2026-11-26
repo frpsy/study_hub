@@ -9,7 +9,7 @@ SITE_DESCRIPTION='강의별 핵심 요약과 타임스탬프·상세 요약을 �
 SITE_URL='https://frpsy.github.io/study_hub/'
 # 화면 버전 = 공통 자산(CSS·JS·아이콘·서비스 워커) 내용의 해시. 손으로 올리지 않는다.
 # 문구·데이터만 바뀌면 값이 그대로라서 강의 HTML의 `?v=`도 바뀌지 않는다.
-ASSET_FILES=('assets/site.css','assets/site.js','assets/theme.js','assets/icon.svg','assets/icon-512.png','assets/apple-touch-icon.png','sw.js')
+ASSET_FILES=('assets/site.css','assets/site.js','assets/search.js','assets/theme.js','assets/icon.svg','assets/icon-512.png','assets/apple-touch-icon.png','sw.js')
 def asset_version(root=R):
     h=hashlib.sha256()
     for name in ASSET_FILES:
@@ -24,7 +24,7 @@ APPEARANCE_BOOT = """<script>(()=>{const root=document.documentElement;let mode=
 def header(base=''):
     sizes=''.join(f'<button type="button" class="text-size" data-text-size="{k}" aria-pressed="{str(k=="md").lower()}">{n}</button>' for k,n in (('sm','작게'),('md','보통'),('lg','크게')))
     themes=''.join(f'<button type="button" data-theme-choice="{k}" aria-pressed="{str(k=="auto").lower()}">{n}</button>' for k,n in (('auto','시스템'),('light','라이트'),('dark','다크')))
-    settings=f'<div class="header-settings"><button type="button" class="appearance-toggle" aria-label="보기 설정" aria-expanded="false" aria-controls="appearance-panel"><span aria-hidden="true">Aa</span> <span>보기</span></button><div id="appearance-panel" class="view-settings-panel" hidden><div class="view-row"><span>글자 크기</span><div class="text-size-picker" role="group" aria-label="글자 크기">{sizes}</div></div><div class="view-row"><span>테마</span><div class="text-size-picker" role="group" aria-label="테마">{themes}</div></div></div></div>'
+    settings=f'<div class="header-settings"><button type="button" class="header-search" data-search-open aria-label="검색" aria-keyshortcuts="/ Control+K Meta+K" hidden><svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 4 4"/></svg><span>검색</span><kbd>/</kbd></button><button type="button" class="appearance-toggle" aria-label="보기 설정" aria-expanded="false" aria-controls="appearance-panel"><span aria-hidden="true">Aa</span> <span>보기</span></button><div id="appearance-panel" class="view-settings-panel" hidden><div class="view-row"><span>글자 크기</span><div class="text-size-picker" role="group" aria-label="글자 크기">{sizes}</div></div><div class="view-row"><span>테마</span><div class="text-size-picker" role="group" aria-label="테마">{themes}</div></div></div></div>'
     return f'<a class="skip-link" href="#main">본문으로 건너뛰기</a><header class="site-header"><div class="site-header-inner"><a class="site-brand" href="{base}index.html"><img class="brand-symbol" src="{base}assets/icon.svg?v={ASSET_VERSION}" width="32" height="32" alt="" aria-hidden="true"><span class="brand-name">{SITE_NAME}</span></a>{settings}</div></header>'
 
 def footer(base=''):
@@ -93,6 +93,16 @@ def render(rows, materials=None, leads=None, records=None):
     body=f'''<div class="site-shell"><main id="main" class="home-main"><section id="lectures"><div id="home-catalog"><h1 class="home-title">강의 요약</h1><p class="catalog-intro">마음에 남은 한 문장에서 시작하는 강의 읽기</p>{feature}<section class="discovery-panel" aria-label="강의 탐색"><div class="search-panel"><label for="search">{noun} 검색</label><div class="search-controls"><div class="search-field"><svg class="search-icon" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 4 4"/></svg><input class="search" id="search" type="search" placeholder="주제·궁금한 내용 검색" data-filter-input="#home-catalog" data-count="count" data-empty="empty" data-noun="{noun}" data-persist-query="true"><button type="button" class="search-clear" aria-label="검색창 비우기" data-clear-for="search" hidden><span aria-hidden="true">×</span></button></div><button type="button" class="bookmark-filter" data-bookmark-filter aria-pressed="false" hidden><span aria-hidden="true">★</span> 북마크만</button></div><div class="filter-chips" role="group" aria-label="주제">{chips}</div></div><div class="catalog-order"><p class="catalog-results" aria-live="polite"><strong id="catalog-topic">전체</strong><span aria-hidden="true"> · </span><span id="count">{total}개 {noun}</span></p><select class="catalog-sort" id="catalog-sort" aria-label="강의 정렬" hidden><option value="latest">최신순</option><option value="added">추가된순</option>{views_option}</select></div>{views_note}</section><aside class="resume-reading" aria-label="이어서 읽기" hidden><a data-resume-link><strong>이어서 읽기</strong><span data-resume-title></span><small data-resume-section></small></a><button type="button" data-resume-clear aria-label="읽던 위치 지우기">×</button></aside><div class="lecture-grid" id="lecture-list">{cards}</div></div><div class="empty" id="empty" hidden><svg class="empty-icon" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h5a4 4 0 0 1 4 4v11a3 3 0 0 0-3-3H3zM21 5h-5a4 4 0 0 0-4 4v11a3 3 0 0 1 3-3h6z"/></svg><p data-empty-message>검색 결과가 없습니다. 다른 단어로 찾거나 ‘전체’를 선택해 주세요.</p><div class="empty-actions"><button type="button" class="btn secondary" data-clear-bookmarks hidden>전체 강의 보기</button><button type="button" class="btn secondary" data-clear-search hidden>검색어 지우기</button><button type="button" class="btn secondary" data-clear-topic hidden>주제 필터 해제</button></div></div></section></main></div>'''
     return page('강의 요약',body)
 
+def search_index(rows,records,leads):
+    """명령 팔레트 검색 색인(search-index.json). 제목·한 줄 요약·강연자·주제·태그·상세 요약 소제목만 담는다."""
+    items=[]
+    for row in rows:
+        record=records.get(row['id'],{})
+        items.append({'id':row['id'],'t':row['title'],'l':leads.get(row['id']) or row.get('description',''),
+            'c':row.get('creator',''),'p':topic_of(row),'g':row.get('tags',[]),
+            's':[block.get('h','') for block in record.get('detail',[])]})  # 위치 i가 #detail-(i+1) 앵커다
+    return json.dumps(items,ensure_ascii=False,separators=(',',':'))+'\n'
+
 def first_key_point(record):
     for block in record.get('intro', []):
         if block['kind']=='points' and block['items']:
@@ -117,6 +127,9 @@ def build(check=False):
     offline_page=page('오프라인', '<main id="main" class="site-shell"><article class="summary-page offline-content"><h1>인터넷에 연결되지 않았습니다</h1><p>이미 열어 본 강의는 오프라인에서도 읽을 수 있습니다. 처음 여는 강의는 인터넷 연결이 필요합니다.</p><p><a href="index.html">강의 목록으로 돌아가기</a></p></article></main>')
     offline_target=R/'offline.html'
     target=R/'index.html'
+    rows=json.loads((R/'lectures.json').read_text(encoding='utf-8'));records=load_records()
+    index_text=search_index(rows,records,{vid:first_key_point(r) for vid,r in records.items()})
+    index_target=R/'search-index.json'
     if check:
         matches=target.read_text(encoding='utf-8')==result
         print('PASS: generated home matches index.html' if matches else 'FAIL: regenerate index.html with scripts/build_library.py')
@@ -131,10 +144,13 @@ def build(check=False):
         info=R/'build-info.json'
         info_matches=info.exists() and info.read_text(encoding='utf-8')==build_info_text()
         if not info_matches:print('FAIL: build-info.json is not the asset hash; regenerate with scripts/build_library.py')
-        return 0 if matches and offline_matches and info_matches else 1
+        index_matches=index_target.exists() and index_target.read_text(encoding='utf-8')==index_text
+        if not index_matches:print('FAIL: regenerate search-index.json with scripts/build_library.py')
+        return 0 if matches and offline_matches and info_matches and index_matches else 1
     (R/'build-info.json').write_text(build_info_text(),encoding='utf-8')
     target.write_text(result,encoding='utf-8')
     offline_target.write_text(offline_page,encoding='utf-8')
+    index_target.write_text(index_text,encoding='utf-8')
     return 0
 
 if __name__=='__main__':sys.exit(build('--check' in sys.argv))
