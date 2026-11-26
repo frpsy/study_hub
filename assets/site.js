@@ -19,7 +19,7 @@
     if(header)sizes.observe(header);
     if(readingNav)sizes.observe(readingNav);
   }
-  // 본문을 내려 읽을 때는 헤더를 숨기고, 올리면 다시 보인다. 맨 위 근처와 헤더 안 초점 이동 중에는 항상 보인다.
+  // 내려 읽으면 헤더를 숨기고 올리면 보인다. 맨 위 근처와 헤더 안 초점 이동 중에는 늘 보인다.
   if(header){
     const root=document.documentElement;
     let lastY=window.scrollY,ticking=false,lockUntil=0;
@@ -36,7 +36,7 @@
     }
     window.addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(updateHeaderVisibility)}},{passive:true});
     header.addEventListener('focusin',()=>setHidden(false));
-    // 페이지 안 링크로 이동할 때는 도착 방향에 맞춰 헤더 상태를 먼저 정하고, 도착 위치가 목차와 맞도록 한다.
+    // 페이지 안 링크는 도착 방향에 맞춰 헤더 상태를 먼저 정해 도착 위치를 목차에 맞춘다.
     document.addEventListener('click',event=>{
       const link=event.target.closest&&event.target.closest('a[href^="#"]');
       if(!link||link.getAttribute('href').length<2)return;
@@ -358,7 +358,7 @@
   }
 })();
 
-/* 읽기 진행 막대: CSS 스크롤 연동(animation-timeline)이 그린다. 지원하지 않는 브라우저만 스크롤 비율을 --p로 넘긴다. */
+/* 읽기 진행 막대: CSS 스크롤 연동이 그린다. 미지원 브라우저만 --p를 넘긴다. */
 (()=>{
   const page=document.querySelector('.compact-lecture,.summary-page');
   if(!page||page.classList.contains('offline-content'))return;
@@ -477,7 +477,7 @@
   refresh();
 })();
 
-// 하단 도구 막대: 목차(강의)·검색·보기·맨 위. 검색 팔레트(search.js)는 처음 열 때만 불러온다.
+// 하단 도구 막대와 검색 팔레트(search.js는 처음 열 때 불러온다). 누른 카드 제목은 상세 제목으로 이어지듯 전환한다.
 (()=>{
   const src=document.currentScript?.src;if(!src)return;
   const openSearch=from=>{
@@ -487,6 +487,7 @@
     tag.onload=()=>window.studySearchOpen(from);
     document.head.append(tag);
   };
+  addEventListener('click',e=>{const a=e.target.closest?.('.card-link');if(a)a.parentElement.style.viewTransitionName='lecture-title'});
   document.querySelectorAll('[data-search-open]').forEach(b=>{b.hidden=false;b.addEventListener('click',()=>openSearch(b))});
   addEventListener('keydown',event=>{
     const typing=event.target.closest?.('input,textarea,select,[contenteditable="true"]');

@@ -15,7 +15,7 @@ const FOLD={width:390,height:844};
 const TARGETS={
   homeDestinationsAboveFold:{min:6,enforce:true,stage:'S3'},
   homeTodayLineAboveFold:{enforce:true,stage:'S0.5'},           // 지금도 지켜진다
-  lectureFirstPointAboveFold:{enforce:false,stage:'S4'},
+  lectureFirstPointAboveFold:{enforce:true,stage:'S4'},
   siteJsBytes:{max:29254,enforce:true,stage:'S0.5'},           // 원본 바이트, 최소화 안 함
   searchIndexBytes:{max:50*1024,enforce:true,stage:'S2'},
   precacheGrowth:{maxRatio:1.10,enforce:true,stage:'S2'},     // S0.5 기록값 대비

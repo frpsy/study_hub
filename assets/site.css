@@ -1474,3 +1474,27 @@ body:has(.home-main) .site-shell,body:has(.home-main) .site-header-inner,body:ha
 /* 오늘의 한 문장은 스크립트가 날짜별로 바꾼다. 문장 3줄·출처 2줄 높이를 미리 잡아 바뀔 때 아래가 밀리지 않게 한다(레이아웃 이동 0). */
 .bento>.today-line .today-source{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;line-height:1.5;min-height:3em}
 .today-random[hidden]{display:inline-flex!important;visibility:hidden}
+
+/* S4 강의 상세: 문서 간 전환(카드 제목 → 상세 제목), 편집 매체식 머리, 핵심 요약 카드 */
+@view-transition{navigation:auto}
+@media(prefers-reduced-motion:reduce){@view-transition{navigation:none}}
+::view-transition-group(*){animation-duration:var(--dur-3);animation-timing-function:var(--ease-emphasized)}
+::view-transition-old(root),::view-transition-new(root){animation-duration:var(--dur-2)}
+.summary-head{padding-top:4px}
+.summary-head h1{margin:6px 0 10px;text-wrap:balance;view-transition-name:lecture-title}
+.summary-head .meta{color:var(--muted);font-size:13px}
+/* 대표 이미지: 모바일은 21:9로 낮춰 핵심 요약 첫 항목이 첫 화면에 들어오게 한다. PC는 2:1 */
+.lecture-hero img{width:100%;height:auto;aspect-ratio:2/1;object-fit:cover}
+@media(max-width:780px){.lecture-hero img{aspect-ratio:21/9}.lecture-hero{margin-block:10px 8px}}
+/* 목차 탭: 헤더 아래 붙는 글래스 띠 */
+.reading-nav{background:var(--glass-bg);-webkit-backdrop-filter:var(--glass-filter);backdrop-filter:var(--glass-filter)}
+.reading-nav a{transition:background-color var(--dur-2) var(--ease-standard),color var(--dur-2) var(--ease-standard)}
+.reading-nav a[aria-current="location"]{background:var(--tint);color:var(--on-accent-container)}
+@media(prefers-reduced-transparency:reduce){.reading-nav{background:var(--paper);-webkit-backdrop-filter:none;backdrop-filter:none}}
+/* 핵심 요약: 요점 묶음을 면 톤 카드로 */
+main.compact-lecture #lecture-overview .summary-tier.intro-points{padding:16px 18px 10px;border-bottom:0;border-radius:var(--v16-radius-lg);background:var(--surface-1);box-shadow:inset 0 0 0 1px var(--glass-edge)}
+main.compact-lecture #lecture-overview .summary-tier.intro-points h3{margin-top:0}
+@media(max-width:780px){main.compact-lecture #lecture-overview .summary-tier.intro-points{padding:14px 14px 8px}}
+/* 이전·다음 강의: 카드 반응 */
+.lecture-pager a{transition:background-color var(--dur-2) var(--ease-standard),transform var(--dur-2) var(--ease-spring)}
+.lecture-pager a:active{transform:scale(.98)}
