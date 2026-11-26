@@ -13,14 +13,14 @@ const PAGES=[{name:'home',url:'/index.html'},...FIXTURES.map(id=>({name:id,url:`
 const FOLD={width:390,height:844};
 
 const TARGETS={
-  homeDestinationsAboveFold:{min:6,enforce:false,stage:'S3'},
+  homeDestinationsAboveFold:{min:6,enforce:true,stage:'S3'},
   homeTodayLineAboveFold:{enforce:true,stage:'S0.5'},           // 지금도 지켜진다
   lectureFirstPointAboveFold:{enforce:false,stage:'S4'},
   siteJsBytes:{max:29254,enforce:true,stage:'S0.5'},           // 원본 바이트, 최소화 안 함
   searchIndexBytes:{max:50*1024,enforce:true,stage:'S2'},
   precacheGrowth:{maxRatio:1.10,enforce:true,stage:'S2'},     // S0.5 기록값 대비
-  // 홈은 오늘의 한 문장을 스크립트가 바꾸며 0.0385가 난다. S3 벤토 타일에서 고치고 homeMax를 0.01로 내린다.
-  layoutShift:{max:0.01,homeMax:0.1,stage:'S3에서 homeMax 0.01'}
+  // 홈은 S3에서 오늘의 한 문장 타일 높이를 미리 잡아 0.0385 → 0.0011이 됐다.
+  layoutShift:{max:0.01,homeMax:0.01,stage:'S3'}
 };
 // S0.5에서 잰 사전 캐시 총량(바이트). 기준을 다시 잡을 때만 고친다.
 const PRECACHE_BASELINE_BYTES=1808331;

@@ -12,7 +12,8 @@ for(const viewport of [{width:390,height:844},{width:1280,height:800}]){
     const first=page.locator('#lecture-list .lecture').first();
     await expect(first).toBeVisible();
     const layout=await page.evaluate(()=>{
-      const title=document.querySelector('#lecture-list .lecture h2').getBoundingClientRect();
+      // v16 S3: 첫 화면의 첫 강의 링크는 벤토 타일(최근 추가·많이 본 강의)이다. 카드 목록은 그 아래에 있다.
+      const title=document.querySelector('.bento a[href^="lectures/"]').getBoundingClientRect();
       const search=document.querySelector('#search').getBoundingClientRect();
       const chips=document.querySelector('.filter-chips').getBoundingClientRect();
       const card=document.querySelector('#lecture-list .lecture').getBoundingClientRect();
@@ -22,7 +23,7 @@ for(const viewport of [{width:390,height:844},{width:1280,height:800}]){
         filterHeight:Math.round(chips.height),horizontalOverflow:document.documentElement.scrollWidth-innerWidth};
     });
     expect(layout.horizontalOverflow).toBeLessThanOrEqual(1);
-    expect(layout.scrollToSeeFirstTitle,'first card title must appear above fold').toBe(0);
+    expect(layout.scrollToSeeFirstTitle,'a lecture link must appear above fold').toBe(0);
     if(viewport.width===390)expect(layout.filterHeight,'topic chips stay on one compact row').toBeLessThanOrEqual(48);
     if(process.env.STUDY_SCREENSHOT_DIR&&viewport.width===1280)await page.screenshot({path:require('node:path').join(process.env.STUDY_SCREENSHOT_DIR,'study-hub-home.png')});
     await first.click();  // No search: one card tap.

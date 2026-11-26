@@ -138,7 +138,7 @@
     const filter=(saveURL=false)=>{
       const words=normalize(input.value.trim()).split(/\s+/).filter(Boolean);let shown=0;
       const matches=(text,compactText)=>words.every(word=>text.includes(word)||(/[가-힣]/.test(word)&&compactText.includes(word)));
-      const feature=target.querySelector('.today-line');
+      const feature=target.querySelector('.bento');
       if(feature)feature.hidden=words.length>0;
       searchIndex.forEach(({card,text,compactText,sections})=>{
         const matchesTopic=!topic||card.dataset.topic===topic;

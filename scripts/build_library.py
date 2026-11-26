@@ -39,6 +39,33 @@ def page(title,body,base='',description=None,path=''):
 def topic_of(row):
     # 홈의 주제 묶음. 등록부의 topic이 우선이고, 없으면 첫 태그를 쓴다.
     return row.get('topic') or row.get('filter_tag') or row['tags'][0]
+TOPIC_ICONS={  # 주제 타일 아이콘(24px 선 그림). 없는 주제는 책 모양.
+    '명상':'M12 4a3 3 0 1 1 0 6a3 3 0 0 1 0-6zM5 20c1-4 3.5-6 7-6s6 2 7 6M3 15c2 0 3-1 4-2M21 15c-2 0-3-1-4-2',
+    '마음근력':'M7 9v6M17 9v6M4 11v2M20 11v2M7 12h10',
+    '감정과 뇌':'M9 5a3 3 0 0 0-3 3a3 3 0 0 0-2 5a3 3 0 0 0 3 4a3 3 0 0 0 5 1V6a2 2 0 0 0-3-1zM15 5a3 3 0 0 1 3 3a3 3 0 0 1 2 5a3 3 0 0 1-3 4a3 3 0 0 1-5 1',
+    '몸과 수면':'M20 14a8 8 0 1 1-10-10a6 6 0 0 0 10 10z',
+}
+BOOK_ICON='M4 5h6a3 3 0 0 1 2 1v13a3 3 0 0 0-2-1H4zM20 5h-6a3 3 0 0 0-2 1v13a3 3 0 0 1 2-1h6z'
+def icon(path):
+    return f'<svg class="bento-icon" aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="{path}"/></svg>'
+def bento_tiles(rows,topics,count,feature):
+    """홈 첫 화면 벤토: 오늘의 한 문장(큰 타일) + 주제 타일 + 최근 추가 + 많이 본 강의. 타일은 모두 링크다."""
+    tiles=feature
+    for topic in topics:
+        q=html.escape(topic,quote=True)
+        tiles+=(f'<a class="bento-tile bento-topic" href="index.html?topic={q}#lecture-list" data-topic-link="{q}">'
+                f'{icon(TOPIC_ICONS.get(topic,BOOK_ICON))}<strong>{html.escape(topic)}</strong><small>{count[topic]}편</small></a>')
+    dated=[r for r in rows if r.get('added')]
+    if dated:
+        new=max(dated,key=lambda r:r['added'])
+        tiles+=(f'<a class="bento-tile bento-pick" href="lectures/{new["id"]}.html"><small>최근 추가</small>'
+                f'<strong>{html.escape(new["title"])}</strong><span>{html.escape(new.get("creator",""))}</span></a>')
+    viewed=[r for r in rows if isinstance(r.get('views'),int)]
+    if viewed:
+        top=max(viewed,key=lambda r:r['views'])
+        tiles+=(f'<a class="bento-tile bento-pick" href="lectures/{top["id"]}.html"><small>많이 본 강의</small>'
+                f'<strong>{html.escape(top["title"])}</strong><span>{html.escape(top.get("creator",""))}</span></a>')
+    return f'<section class="bento" aria-label="서재 바로가기">{tiles}</section>'
 def render(rows, materials=None, leads=None, records=None):
     materials=materials or [];leads=leads or {};records=records or {}
     # 기본 목록 순서는 레지스트리 배열 순서(최신순)이다. 화면의 정렬 버튼은 data-date(강의 날짜)·data-added(사이트에 추가한 시각)로 다시 정렬한다. 날짜가 없는 강의에는 임의의 공개일을 만들지 않는다.
@@ -90,7 +117,8 @@ def render(rows, materials=None, leads=None, records=None):
     first=next((r for r in rows if leads.get(r['id'])),None)
     if first:
         feature=f'<section class="today-line" aria-label="오늘의 한 문장"><div class="today-heading"><span class="eyebrow">오늘의 한 문장</span><button type="button" class="today-random" hidden><span aria-hidden="true">↻</span> 다른 문장 보기</button></div><div aria-live="polite"><p class="today-key">{html.escape(leads[first["id"]])}</p><a class="today-source stretched-link" href="lectures/{first["id"]}.html">{html.escape(first["title"])} · {html.escape(first.get("creator",""))}</a></div></section>'
-    body=f'''<div class="site-shell"><main id="main" class="home-main"><section id="lectures"><div id="home-catalog"><h1 class="home-title">강의 요약</h1><p class="catalog-intro">마음에 남은 한 문장에서 시작하는 강의 읽기</p>{feature}<section class="discovery-panel" aria-label="강의 탐색"><div class="search-panel"><label for="search">{noun} 검색</label><div class="search-controls"><div class="search-field"><svg class="search-icon" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 4 4"/></svg><input class="search" id="search" type="search" placeholder="주제·궁금한 내용 검색" data-filter-input="#home-catalog" data-count="count" data-empty="empty" data-noun="{noun}" data-persist-query="true"><button type="button" class="search-clear" aria-label="검색창 비우기" data-clear-for="search" hidden><span aria-hidden="true">×</span></button></div><button type="button" class="bookmark-filter" data-bookmark-filter aria-pressed="false" hidden><span aria-hidden="true">★</span> 북마크만</button></div><div class="filter-chips" role="group" aria-label="주제">{chips}</div></div><div class="catalog-order"><p class="catalog-results" aria-live="polite"><strong id="catalog-topic">전체</strong><span aria-hidden="true"> · </span><span id="count">{total}개 {noun}</span></p><select class="catalog-sort" id="catalog-sort" aria-label="강의 정렬" hidden><option value="latest">최신순</option><option value="added">추가된순</option>{views_option}</select></div>{views_note}</section><aside class="resume-reading" aria-label="이어서 읽기" hidden><a data-resume-link><strong>이어서 읽기</strong><span data-resume-title></span><small data-resume-section></small></a><button type="button" data-resume-clear aria-label="읽던 위치 지우기">×</button></aside><div class="lecture-grid" id="lecture-list">{cards}</div></div><div class="empty" id="empty" hidden><svg class="empty-icon" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h5a4 4 0 0 1 4 4v11a3 3 0 0 0-3-3H3zM21 5h-5a4 4 0 0 0-4 4v11a3 3 0 0 1 3-3h6z"/></svg><p data-empty-message>검색 결과가 없습니다. 다른 단어로 찾거나 ‘전체’를 선택해 주세요.</p><div class="empty-actions"><button type="button" class="btn secondary" data-clear-bookmarks hidden>전체 강의 보기</button><button type="button" class="btn secondary" data-clear-search hidden>검색어 지우기</button><button type="button" class="btn secondary" data-clear-topic hidden>주제 필터 해제</button></div></div></section></main></div>'''
+    bento=bento_tiles(rows,topics,count,feature)
+    body=f'''<div class="site-shell"><main id="main" class="home-main"><section id="lectures"><div id="home-catalog"><h1 class="home-title">강의 요약</h1><p class="catalog-intro">마음에 남은 한 문장에서 시작하는 강의 읽기</p>{bento}<section class="discovery-panel" aria-label="강의 탐색"><div class="search-panel"><label for="search">{noun} 검색</label><div class="search-controls"><div class="search-field"><svg class="search-icon" aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6"/><path d="m15 15 4 4"/></svg><input class="search" id="search" type="search" placeholder="주제·궁금한 내용 검색" data-filter-input="#home-catalog" data-count="count" data-empty="empty" data-noun="{noun}" data-persist-query="true"><button type="button" class="search-clear" aria-label="검색창 비우기" data-clear-for="search" hidden><span aria-hidden="true">×</span></button></div><button type="button" class="bookmark-filter" data-bookmark-filter aria-pressed="false" hidden><span aria-hidden="true">★</span> 북마크만</button></div><div class="filter-chips" role="group" aria-label="주제">{chips}</div></div><div class="catalog-order"><p class="catalog-results" aria-live="polite"><strong id="catalog-topic">전체</strong><span aria-hidden="true"> · </span><span id="count">{total}개 {noun}</span></p><select class="catalog-sort" id="catalog-sort" aria-label="강의 정렬" hidden><option value="latest">최신순</option><option value="added">추가된순</option>{views_option}</select></div>{views_note}</section><aside class="resume-reading" aria-label="이어서 읽기" hidden><a data-resume-link><strong>이어서 읽기</strong><span data-resume-title></span><small data-resume-section></small></a><button type="button" data-resume-clear aria-label="읽던 위치 지우기">×</button></aside><div class="lecture-grid" id="lecture-list">{cards}</div></div><div class="empty" id="empty" hidden><svg class="empty-icon" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h5a4 4 0 0 1 4 4v11a3 3 0 0 0-3-3H3zM21 5h-5a4 4 0 0 0-4 4v11a3 3 0 0 1 3-3h6z"/></svg><p data-empty-message>검색 결과가 없습니다. 다른 단어로 찾거나 ‘전체’를 선택해 주세요.</p><div class="empty-actions"><button type="button" class="btn secondary" data-clear-bookmarks hidden>전체 강의 보기</button><button type="button" class="btn secondary" data-clear-search hidden>검색어 지우기</button><button type="button" class="btn secondary" data-clear-topic hidden>주제 필터 해제</button></div></div></section></main></div>'''
     return page('강의 요약',body)
 
 def search_index(rows,records,leads):
