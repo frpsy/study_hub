@@ -423,6 +423,8 @@ test('outline sheet lists sections and detail headings and closes on navigation'
   const page=await context.newPage();
   await page.goto('/lectures/sAgj5V4Ewno.html');
   await page.evaluate(()=>window.scrollTo({top:1400,behavior:'instant'}));
+  // 머리글 숨김은 프레임마다 스크롤을 한 번 본다. 내려간 것이 반영된 뒤에 올려야 두 스크롤이 한 번의 '내려감'으로 합쳐지지 않는다.
+  await expect(page.locator('html')).toHaveClass(/header-hidden/);
   await page.evaluate(()=>window.scrollTo({top:1300,behavior:'instant'})); // 위로 조금 올려 하단 막대를 띄운다
   await expect(page.locator('html')).not.toHaveClass(/header-hidden/);
   await expect(page.locator('.dock')).toHaveClass(/is-visible/);
