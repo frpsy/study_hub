@@ -6,7 +6,7 @@ const root=require('node:path').resolve(__dirname,'..');
 const PORT=Number(process.env.PW_PORT)||(process.env.CI?8765:20000+parseInt(crypto.createHash('sha1').update(root).digest('hex').slice(0,6),16)%20000);
 module.exports=defineConfig({
   testDir:'.',
-  testMatch:['browser-smoke.spec.cjs','pwa.spec.cjs','home-discovery.spec.cjs'],
+  testMatch:['browser-smoke.spec.cjs','pwa.spec.cjs','home-discovery.spec.cjs','design-metrics.spec.cjs'],
   timeout:30000,
   retries:1,
   // 테스트는 서로 독립이다(각자 새 브라우저 컨텍스트). 파일 안에서도 병렬로 돌려 시간을 줄인다.

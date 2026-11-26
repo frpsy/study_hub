@@ -253,3 +253,7 @@
 - 오늘의 한 문장은 위 읽기 면 위에 기존 `on-surface`·`on-surface-variant` 텍스트를 유지한다. 작은 조작 글자, 저장·읽음 상태, 선택 상태, 복사 버튼은 라이트·다크에서 실제 계산 색상의 대비가 4.5:1 이상인지 브라우저 회귀 검사로 확인한다.
 - 도형·레이아웃·문장·44px 터치 영역·원자료는 바꾸지 않는다. 브라우저 상단과 PWA 배경은 기존 중립 표면을 유지한다.
 - ‘Google에서 가장 많이 쓰는 색’에 관한 공식 점유율 통계는 확인하지 못했다. 선택 이유는 익숙한 Google 블루와 이 사이트에서 확인한 가독성·일관성이다. #0b57d0의 실제 Google 사용 근거는 [공식 Google 버튼 사양](https://developers.google.com/identity/gsi/web/reference/html-reference), 역할 구분 근거는 [Material 3 색상 역할](https://m3.material.io/styles/color/the-color-system)이다. 모든 Google 제품이 동일한 단색 테마를 쓴다는 뜻은 아니다.
+
+## 레이아웃 이동 방지 / 2026-11-26
+- 강의 머리의 `읽음 표시`(`.detail-read`)는 스크립트가 켜기 전에도 `visibility:hidden`으로 자리를 잡는다. 켜질 때 대표 이미지와 핵심 요약이 44px 밀리던 레이아웃 이동(느린 기기 0.029)이 0이 됐다.
+- `tests/design-metrics.spec.cjs`가 개편 v16의 측정 기준선(첫 화면 위치, 레이아웃 이동, 용량, 가로 넘침)을 잰다. 기준값과 강제 시점은 `docs/design-overhaul-plan-2026-11-26.md` 6절에 있다.
