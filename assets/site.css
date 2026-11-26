@@ -11,7 +11,7 @@ a{color:var(--accent);text-underline-offset:4px}button,input{font:inherit}button
 main section{margin-bottom:48px}h2{font-size:26px;line-height:1.45;letter-spacing:-.04em;margin:0 0 20px}h3{font-size:19px;line-height:1.6;margin:20px 0 10px;letter-spacing:-.025em}h4{font-size:16px;margin:18px 0 8px}p{margin:12px 0 18px}.lead{font-size:21px;line-height:1.8}.bar{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:18px}.bar h2{margin:0}
 .card,.lecture{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-card);padding:24px}.card p:last-child{margin-bottom:0}.cards,.lecture-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.cards p{font-size:15px}
 .lecture{text-decoration:none;color:var(--ink);display:flex;flex-direction:column;transition:border-color .15s,transform .15s}.lecture:hover{border-color:var(--line-strong);transform:translateY(-2px)}.lecture h3{font-size:23px;margin:16px 0 12px}.lecture p{color:var(--muted);font-size:15px}.lecture .read{margin-top:auto;align-self:flex-start;background:transparent;color:var(--accent);border:0;padding:10px 0 0}
-.search-panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;margin-bottom:22px}.search-panel label{display:block;font-size:14px;font-weight:650;margin-bottom:9px}.search{width:100%;padding:12px 15px;border:1px solid var(--input-border);border-radius:9px;background:var(--surface);color:var(--ink);font-size:16px}.search-summary{font-size:13px;color:var(--muted);margin:10px 0 0}.filter-chips{margin:12px 0 0}.filter-chips button{font-size:13px;padding:6px 11px}.empty{text-align:center;padding:28px;color:var(--muted)}
+.search-panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px;margin-bottom:22px}.search-panel label{display:block;font-size:14px;font-weight:650;margin-bottom:9px}.search{width:100%;padding:12px 15px;border:1px solid var(--input-border);border-radius:9px;background:var(--surface);color:var(--ink);font-size:16px}.filter-chips{margin:12px 0 0}.filter-chips button{font-size:13px;padding:6px 11px}.empty{text-align:center;padding:28px;color:var(--muted)}
 details{border-bottom:1px solid var(--line)}summary{cursor:pointer;font-weight:650;line-height:1.7;padding:18px 10px 18px 0}summary:hover{color:var(--accent)}details[open]>summary{color:var(--accent)}details p,details ul,details ol{margin-top:10px}
 figure{margin:20px 0}img{display:block;width:100%;height:auto;max-width:100%;border:1px solid var(--line);border-radius:7px}figcaption{font-size:12px;color:var(--muted);margin-top:8px}.time{font-size:13px;font-variant-numeric:tabular-nums;color:var(--accent)}
 .core{list-style:none;padding:0}.core li{border-bottom:1px solid var(--line)}.core a,details li a{display:grid;grid-template-columns:82px 1fr;gap:12px;text-decoration:none;padding:12px 0}.core a:hover,details li a:hover{text-decoration:underline}#timeline details ul{list-style:none;padding:0}#timeline details li a{font-size:15px}.check{display:flex;gap:12px;align-items:flex-start;margin:12px 0;font-size:15px}input[type=checkbox]{margin-top:9px;accent-color:var(--accent);flex-shrink:0}pre{font:14px/1.9 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;max-height:620px;overflow:auto}#status{font-size:13px;color:var(--accent);margin-left:12px}
@@ -35,11 +35,11 @@ figure{margin:20px 0}img{display:block;width:100%;height:auto;max-width:100%;bor
 .summary-head .meta{display:block;margin:0;color:var(--muted)}
 .summary-page h2{font-size:21px;margin:30px 0 10px}
 .summary-page p{margin:0 0 14px}
-.summary-lead{line-height:1.75;padding:16px 18px;background:var(--tint);border-left:3px solid var(--accent);border-radius:0 12px 12px 0}
+
 .summary-list{padding-left:22px;margin:0 0 20px}
 .summary-list li{margin:0 0 6px}
 
-.summary-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+
 
 /* Reading layout: one visual container per topic; measured sticky navigation. */
 html{scroll-padding-top:var(--anchor-offset,100px)}
@@ -47,7 +47,7 @@ html{scroll-padding-top:var(--anchor-offset,100px)}
 .search-panel{background:transparent;border:0;border-radius:0;padding:0;margin-bottom:16px}
 .search-panel label{font-size:13px;font-weight:500;margin-bottom:6px}
 .search-panel .search{padding:9px 12px}
-.search-summary{margin-top:6px}
+
 .filter-chips{gap:6px;margin:8px 0 0}
 .filter-chips button{border-color:transparent;padding:5px 10px;font-weight:400}
 .filter-chips button[aria-pressed=true]{background:var(--tint);border-color:var(--line);font-weight:650}
@@ -118,8 +118,8 @@ html{scroll-padding-top:var(--anchor-offset,100px)}
  
  .compact-lecture h1{font-size:27px;line-height:1.4;word-break:keep-all;overflow-wrap:anywhere}
  .compact-lecture .actions{gap:8px;flex-wrap:wrap}
- .summary-links{align-items:center;gap:12px}
- .summary-links a{min-height:44px;display:inline-flex;align-items:center}}
+ 
+ }
 @media(max-width:360px){.site-header-inner{gap:0}.site-shell{padding-left:16px;padding-right:16px}}
 
 .breadcrumb>:nth-child(even){display:none}.breadcrumb>:nth-child(n+3)::before{content:"/";margin-right:8px;color:var(--muted)}
@@ -171,11 +171,7 @@ html{scroll-padding-top:var(--anchor-offset,100px)}
 
 /* Home: public study materials; no account controls. */
 
-@media(max-width:780px){
-  
-  
-  
-}
+
 
 /* Editorial library / v7. Single final presentation layer for all public pages. */
 body{letter-spacing:-.012em}
@@ -199,7 +195,7 @@ main#main{min-width:0}
 .filter-chips{gap:7px;margin:12px 0 4px}
 .filter-chips button{min-height:38px;padding:7px 13px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--muted);font-size:13px;font-weight:550}
 .filter-chips button[aria-pressed="true"]{background:var(--brand-soft);border-color:var(--line-strong);color:var(--brand-ink);font-weight:700}
-.search-summary{font-size:12px;margin:9px 0 0;color:var(--muted)}
+
 .lecture-grid{gap:15px;align-items:stretch}
 .lecture{background:var(--surface);border:1px solid var(--line);border-radius:19px;padding:22px 23px 20px;box-shadow:var(--card-shadow);transition:border-color .16s ease,box-shadow .16s ease,transform .16s ease}
 .lecture:hover{border-color:var(--line-strong);box-shadow:0 7px 26px rgba(15,15,16,.08);transform:translateY(-2px)}
@@ -217,7 +213,7 @@ main#main{min-width:0}
 .compact-lecture,.summary-page{max-width:var(--reading-measure)}
 .summary-head{margin:14px 0 24px}
 .summary-head h1{font-size:clamp(27px,4vw,38px);margin:8px 0 12px}
-.summary-lead{font-size:18px;line-height:1.73;letter-spacing:-.02em;color:var(--ink)}
+
 .compact-lecture p,.summary-page p{line-height:1.76}
 .summary-tier{padding:18px 0 20px}
 .summary-tier h3{line-height:1.4}
@@ -266,7 +262,7 @@ main#main{min-width:0}
   
   .compact-lecture,.summary-page{padding-bottom:28px}
   .summary-head h1{font-size:clamp(26px,7vw,33px);line-height:1.3}
-  .summary-lead{font-size:16px;line-height:1.7}
+  
   .site-footer-inner{padding:20px 0;gap:8px 16px}}
 @media(max-width:360px){
   .site-brand{font-size:17px}
@@ -279,10 +275,7 @@ main#main{min-width:0}
 
 /* The public catalog requires no account controls. */
 
-@media(max-width:780px){
-  
-  
-}
+
 
 /* Source-neutral catalog cards with clearly labeled creators. */
 .lecture .meta{display:flex;flex-wrap:wrap;align-items:center;column-gap:10px;row-gap:3px}
@@ -318,12 +311,12 @@ main#main{min-width:0}
 .compact-lecture #lecture-overview .summary-list{padding-left:1.35em;margin:0;list-style:decimal}
 .compact-lecture #lecture-overview .summary-list li{font-size:15px;line-height:1.72;letter-spacing:-.01em;font-weight:400;margin:0 0 12px;padding-left:2px;overflow-wrap:anywhere;word-break:keep-all}
 .compact-lecture #lecture-overview .summary-list li:last-child{margin-bottom:0}
-.compact-lecture #lecture-overview .summary-tier>.summary-lead{font-size:16px;line-height:1.72;letter-spacing:-.015em;padding:16px 17px;margin:0;background:var(--tint);word-break:keep-all;overflow-wrap:anywhere}
+
 .compact-lecture #lecture-overview .summary-tier>summary{font-size:16px;line-height:1.5;font-weight:650;padding:12px 0;min-height:44px}
 @media(max-width:780px){
  .compact-lecture #lecture-overview>h2{font-size:23px;margin-bottom:10px}
  .compact-lecture #lecture-overview .summary-tier{padding:15px 0 18px}
- .compact-lecture #lecture-overview .summary-tier>.summary-lead{font-size:16px;line-height:1.68;padding:15px 16px}
+ 
  .compact-lecture #lecture-overview .summary-list li{font-size:15px;line-height:1.68;margin-bottom:11px}}
 
 /* Layout refinement: one spacing scale, readable measures, two real navigation tabs. */
@@ -365,7 +358,7 @@ main#main{min-width:0}
  .compact-lecture .summary-head{margin:9px 0 22px}
  .compact-lecture .lecture-section{margin-bottom:29px}
  .compact-lecture #lecture-overview .summary-tier{padding:16px 0 18px}
- .compact-lecture #lecture-overview .summary-tier>.summary-lead{padding:17px 18px;line-height:1.72}
+ 
  .compact-lecture #lecture-overview .summary-list li{margin-bottom:13px;line-height:1.72}
  .compact-lecture .lecture-section pre{max-width:100%;overflow-wrap:anywhere}}
 @media(max-width:360px){
@@ -374,14 +367,14 @@ main#main{min-width:0}
  
  
  .home-main .lecture{padding:17px}
- .compact-lecture #lecture-overview .summary-tier>.summary-lead{padding:15px}}
+ }
 
 /* Installed web app shell: iPhone safe areas and a usable desktop window. */
 .offline-content{padding-top:clamp(40px,10vh,100px);padding-bottom:64px}
 :root{--header-bg:rgba(255,255,255,.78);--header-solid:#ffffff;--glass-blur:saturate(180%) blur(16px);--card-bg:rgba(255,255,255,.72);--line-strong:rgba(15,15,16,.42);--glow:rgba(11,87,208,.085);--input-border:rgba(15,15,16,.3);--focus-color:var(--accent);--on-accent:#ffffff}
-.theme-toggle{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:98px;padding:9px 12px;border:1px solid var(--line);border-radius:11px;background:var(--surface);color:var(--ink);font-size:13px;font-weight:650;line-height:1.3;white-space:nowrap;cursor:pointer}
-.theme-toggle:hover{border-color:var(--accent)}
-.theme-toggle:focus-visible{outline:3px solid var(--focus-color);outline-offset:2px}
+
+
+
 .site-header{background:var(--header-bg)}
 
 html[data-standalone="true"] .site-header{padding-top:env(safe-area-inset-top,0px)}
@@ -392,12 +385,12 @@ html[data-standalone="true"] .site-footer-inner{padding-left:env(safe-area-inset
 @media(max-width:780px){
  .site-header-inner{grid-template-columns:minmax(0,1fr) auto;column-gap:10px;row-gap:7px;padding-block:8px}
  .site-brand{grid-column:1;grid-row:1;min-width:0}
- .theme-toggle{grid-column:2;grid-row:1;min-width:94px}
+ 
  
  .site-shell,.site-footer-inner{min-width:0}}
 @media(min-width:781px){
  .site-header-inner{gap:clamp(12px,1.7vw,22px)}
- .theme-toggle{min-width:100px}}
+ }
 :root[data-theme="dark"]{
  --paper:#121417;--surface:#1b1e21;--ink:#e6e8eb;--muted:#adaeaf;
  --line:#35383c;--accent:#a8c7fa;--tint:#0842a0;--on-accent-container:#d3e3fd;--feature-surface:#202b3f;--selection-bg:#0842a0;--hover-glow:rgba(168,199,250,.2);
@@ -424,36 +417,18 @@ html[data-standalone="true"] .site-footer-inner{padding-left:env(safe-area-inset
 :root[data-theme="dark"] button:focus-visible,
 :root[data-theme="dark"] input:focus-visible,
 :root[data-theme="dark"] summary:focus-visible{outline-color:var(--focus-color)}
-@media(prefers-reduced-motion:reduce){
- .theme-toggle{transition:none}}
 
-/* Appearance is a secondary preference: keep the header clean. */
-.site-footer-inner .theme-toggle{
- order:99;
- flex:0 0 auto;
- min-width:0;
- min-height:44px;
- padding:10px 4px;
- margin-left:auto;
- border:0;
- border-radius:4px;
- background:transparent;
- color:var(--muted);
- font-size:11px;
- font-weight:500;
- letter-spacing:0;
- box-shadow:none;
- opacity:.85;
-}
-.site-footer-inner .theme-toggle:hover{opacity:1;color:var(--ink);background:transparent;text-decoration:underline}
-.site-footer-inner .theme-toggle:focus-visible{opacity:1;outline:2px solid var(--focus-color);outline-offset:2px}
+
+
+
+
 .site-footer-inner .site-version{order:50}
 @media(max-width:780px){
  .site-header-inner{grid-template-columns:minmax(0,1fr)}
  .site-header-inner .site-brand{grid-column:1;grid-row:1}
  
- .site-footer-inner .theme-toggle{margin-left:auto}}
-@media print{.site-footer-inner .theme-toggle{display:none}}
+ }
+
 
 /* Minimal modern / v8. Final presentation layer: flat surfaces, hairlines, one accent, no motion on cards. */
 body{letter-spacing:-.011em;-webkit-font-smoothing:antialiased;font-family:system-ui,-apple-system,"Apple SD Gothic Neo","Noto Sans KR","Segoe UI",sans-serif}
@@ -479,7 +454,7 @@ h1,h2,h3{font-weight:650;letter-spacing:-.03em}
 .btn{background:var(--ink);border-color:var(--ink);color:var(--paper)}
 .btn.secondary{background:transparent;border:1px solid var(--line);border-radius:var(--radius-control);color:var(--ink)}
 .btn.secondary:hover{background:var(--tint);filter:none}
-.summary-lead,.compact-lecture #lecture-overview .summary-tier>.summary-lead{background:transparent;border-left:2px solid var(--ink);border-radius:0;padding:2px 0 2px 18px}
+
 
 pre,.lecture-section pre{background:var(--tint);border:0;border-radius:var(--radius-control)}
 img{border-color:var(--line)}
@@ -567,7 +542,7 @@ a{color:var(--ink);text-decoration-color:var(--accent);text-decoration-thickness
 .summary-head .meta a{color:var(--ink)}
 .compact-lecture .lecture-section{border-top:1px solid var(--line);padding-top:28px;margin-top:8px}
 .compact-lecture #lecture-overview>h2,.compact-lecture #lecture-comment>h2{font-weight:800;letter-spacing:-.045em}
-.summary-lead,.compact-lecture #lecture-overview .summary-tier>.summary-lead{border-left:2px solid var(--accent)}
+
 .summary-list li::marker{color:var(--accent);font-weight:700}
 .source-disclosure>summary{color:var(--ink);font-weight:650}
 .source-disclosure>summary::marker{color:var(--accent)}
@@ -586,7 +561,7 @@ a{color:var(--ink);text-decoration-color:var(--accent);text-decoration-thickness
  .filter-chips::-webkit-scrollbar{display:none}
  .filter-chips button{flex:none}}
 .source-disclosure a[target="_blank"]::after{content:" ↗";color:var(--muted)}
-.source-note{font-size:13px;line-height:1.7;color:var(--muted);margin:4px 0 16px}
+
 /* Final review fixes (2026-11-06): timestamps, quiet buttons, tap targets, alignment. */
 .lecture-section pre,.lecture-section pre code{word-break:keep-all}
 
@@ -597,7 +572,7 @@ a{color:var(--ink);text-decoration-color:var(--accent);text-decoration-thickness
 .search-controls .search,.search-controls button{min-height:46px}
 
 .source-disclosure{border-top:1px solid var(--line);margin-top:28px}
-@media(max-width:780px){.site-footer-inner .theme-toggle{margin-left:0}}
+
 .source-disclosure ul{list-style:none;padding:0;margin:6px 0 14px}.source-disclosure li{border-bottom:1px solid var(--line)}.source-disclosure li a{display:block;padding:12px 0;line-height:1.7;overflow-wrap:anywhere}
 #lecture-comment{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;column-gap:12px}#lecture-comment>*{grid-column:1/-1}#lecture-comment>#timeline{position:absolute;width:0;height:0}#lecture-comment>h2{grid-column:1;grid-row:1;margin:0}#lecture-comment>.actions{grid-column:2;grid-row:1;display:flex;flex-direction:row-reverse;align-items:center;gap:8px;margin:0}#lecture-comment>#status{grid-row:2;margin:0;font-size:12px;overflow-wrap:anywhere}#lecture-comment>#status:not(:empty){margin-top:6px}#lecture-comment .actions #copy{min-width:0;min-height:var(--tap-target);padding:0 14px;font-size:13px;font-weight:600;line-height:1;letter-spacing:.01em;color:var(--on-accent);background:var(--accent);border-color:var(--accent);border-radius:var(--radius-control);white-space:nowrap;transition:filter .15s ease,transform .15s ease}#lecture-comment .actions #copy:active{transform:scale(.97)}@media(hover:hover) and (pointer:fine){#lecture-comment .actions #copy:hover{background:var(--accent);color:var(--on-accent);border-color:var(--accent);filter:brightness(1.08)}}#lecture-comment .actions #copy:focus-visible{outline:2px solid var(--focus-color);outline-offset:2px}#lecture-comment>.timeline-box{grid-row:3;margin-top:14px}
 .lecture-section .timeline-box>summary{display:block;padding:0 0 8px;cursor:pointer;text-align:center;color:var(--accent);font-size:13px;font-weight:600;line-height:1.5}
@@ -621,7 +596,7 @@ a{color:var(--ink);text-decoration-color:var(--accent);text-decoration-thickness
 .summary-head .actions .btn.secondary::after{content:"↓";margin-left:6px;color:var(--accent)}
 @media(hover:hover) and (pointer:fine){.summary-head .actions .btn.secondary:hover{border-color:var(--accent);color:var(--accent);filter:none}}
 .compact-lecture #lecture-overview .summary-tier>.eyebrow{display:block;margin:0 0 10px;font-size:11px;letter-spacing:.16em}
-.compact-lecture #lecture-overview .summary-tier>.summary-lead{margin:0;padding:16px 18px 16px 20px;border-left:3px solid var(--accent);background:var(--card-bg);border-radius:0 var(--radius-card) var(--radius-card) 0;font-size:17px;font-weight:600;line-height:1.75;letter-spacing:-.015em;color:var(--ink);text-wrap:pretty;word-break:keep-all}
+
 .compact-lecture #lecture-overview .summary-tier>h3{font-size:16px;font-weight:750;letter-spacing:-.02em;margin:0 0 6px}
 .compact-lecture #lecture-overview .summary-list{list-style:none;counter-reset:point;margin:0;padding:0}
 .compact-lecture #lecture-overview .summary-list li::marker{content:none}
@@ -639,20 +614,20 @@ a{color:var(--ink);text-decoration-color:var(--accent);text-decoration-thickness
 .pager-link.is-next{text-align:right;align-items:flex-end}
 .pager-link.is-empty{border-style:dashed;opacity:.35;background:transparent}
 @media(hover:hover) and (pointer:fine){.pager-link:not(.is-empty):hover{border-color:var(--accent)}.pager-link:not(.is-empty):hover span{color:var(--accent)}}
-.compact-lecture .summary-links{margin:20px 0 0}
+
 .home-main .lecture .read{font-size:13px;font-weight:650;color:var(--muted);padding-top:4px}
 @media(hover:hover) and (pointer:fine){.home-main .lecture:hover .read{color:var(--accent)}}
 .site-footer-inner{display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px}
-.site-footer-inner .theme-toggle{order:55;margin-left:auto;padding-left:0;padding-right:0}
+
 .site-footer-inner .site-version{flex-basis:100%;order:60;font-size:11px}
 @media(max-width:780px){
- .compact-lecture #lecture-overview .summary-tier>.summary-lead{font-size:16px;padding:14px 14px 14px 16px}
+ 
  .compact-lecture #lecture-overview .summary-list li{font-size:15px;padding-left:34px}
  .lecture-section .timeline-box>pre,.lecture-section .timeline-preview{font-size:13.5px;padding:12px 14px}
  .lecture-pager{grid-template-columns:1fr}
  .pager-link.is-next{text-align:left;align-items:flex-start}
  .pager-link.is-empty{display:none}
- .site-footer-inner .theme-toggle{margin-left:auto}}
+ }
 @media(prefers-reduced-motion:reduce){.pager-link{transition:none}}
 @media print{.lecture-pager{display:none}}
 
@@ -696,20 +671,20 @@ a{color:var(--ink);text-decoration-color:var(--accent);text-decoration-thickness
 .compact-lecture #lecture-overview{border-top:0;padding-top:0}
 .compact-lecture .lecture-section>h2{font-size:22px;font-weight:750;letter-spacing:-.035em;margin-bottom:24px}
 .compact-lecture .summary-tier{margin:22px 0}
-.compact-lecture #lecture-overview .summary-tier>.summary-lead{padding:22px 24px;font-weight:550;line-height:1.85;background:var(--surface)}
+
 .compact-lecture #lecture-overview .summary-list li{padding-top:18px;padding-bottom:18px;line-height:1.85}
 .compact-lecture #lecture-overview .summary-list li::before{top:23px}
 .compact-lecture #lecture-overview .summary-list li:first-child::before{top:9px}
-.intro-steps details{background:var(--card-bg);border:1px solid var(--line);border-radius:var(--radius-card);padding:0 20px;margin:10px 0}
-.intro-steps details>summary{position:relative;list-style:none;padding:18px 30px 18px 0;font-size:15px;font-weight:650;line-height:1.7;min-height:var(--tap-target)}
-.intro-steps details>summary::-webkit-details-marker{display:none}
-.intro-steps details>summary::after{content:'+';position:absolute;right:0;top:18px;font-size:20px;font-weight:400;color:var(--accent);line-height:1.3}
-.intro-steps details[open]>summary::after{content:'−'}
-.intro-steps details[open]{border-color:var(--line-strong);background:var(--surface)}
-.intro-steps summary small{font-size:12px;font-weight:450;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
-.intro-steps details ul{padding-left:20px;margin:0 0 12px;font-size:15px;line-height:1.85}
-.intro-steps details li{padding:4px 0}
-.practice-source{display:inline-flex;align-items:center;min-height:var(--tap-target);margin:0 0 10px;font-size:12px;font-weight:650;color:var(--accent);line-height:1.7}
+
+
+
+
+
+
+
+
+
+
 .detail-body h3{scroll-margin-top:0;font-size:18px;font-weight:700;padding-top:10px;margin-top:32px}
 .detail-body h3:first-child{margin-top:0}
 .detail-body p{font-size:16px;line-height:1.95;margin:12px 0 20px}
@@ -736,17 +711,17 @@ html{scroll-padding-top:158px}
  .reading-nav a{flex:1;padding:8px 5px;font-size:12px}
  .compact-lecture .lecture-section{margin-bottom:34px;padding-top:24px}
  .compact-lecture .lecture-section>h2{font-size:21px;margin-bottom:20px}
- .compact-lecture #lecture-overview .summary-tier>.summary-lead{padding:18px;font-size:16px}
+ 
  .compact-lecture #lecture-overview .summary-list li{font-size:15px;padding-left:32px}
- .intro-steps details{padding:0 16px}
- .intro-steps details>summary{font-size:14px}
+ 
+ 
  .detail-body p{font-size:15px;line-height:1.9}
  .source-disclosure{padding:0 16px}
  .pager-link{padding:18px}
  html{scroll-padding-top:136px}
  .detail-body h3{scroll-margin-top:0}}
 @media(max-width:360px){.reading-nav a{font-size:11px;padding-inline:3px}.summary-head h1{font-size:26px}}
-@media print{.reading-nav{display:none}.lecture-section .timeline-box>pre{max-height:none!important;overflow:visible!important}.lecture-section .timeline-box>summary{display:none}.lecture-section .timeline-box:not([open])::details-content{content-visibility:visible;display:block}.intro-steps details{break-inside:avoid}.intro-steps details>summary::after{display:none}}
+@media print{.reading-nav{display:none}.lecture-section .timeline-box>pre{max-height:none!important;overflow:visible!important}.lecture-section .timeline-box>summary{display:none}.lecture-section .timeline-box:not([open])::details-content{content-visibility:visible;display:block}}
 
 /* v13 (2026-11-12): 상세 요약 소제목 목차와 긴 글 읽기 폭 */
 .detail-toc{margin:0 0 28px;padding:6px 20px;background:var(--card-bg);border:1px solid var(--line);border-radius:var(--radius-card)}
@@ -804,10 +779,9 @@ html{scroll-padding-top:158px}
  .lecture .card-lead{font-size:14.5px;line-height:1.7}
  .filter-chips button small{display:none}
 }
-/* 강의: 핵심 → 실천 → 상세 → 원본 시각 */
-.compact-lecture #lecture-overview .summary-tier>.summary-lead{font-size:calc(17px*var(--reading-scale))}
+
 .compact-lecture #lecture-overview .summary-list li{font-size:calc(16px*var(--reading-scale))}
-.intro-steps details ul{font-size:calc(15px*var(--reading-scale))}
+
 .compact-lecture .lecture-section .detail-body p,.compact-lecture .lecture-section .detail-body .detail-points li{font-size:calc(17px*var(--reading-scale))}
 .compact-lecture .lecture-section .detail-body h3+p{color:var(--ink);font-weight:550}
 .detail-body h3{padding-top:18px;border-top:1px solid var(--line)}
@@ -829,22 +803,21 @@ html{scroll-padding-top:158px}
 .outline-sheet ol ol a{font-size:14px;font-weight:500;color:var(--muted);min-height:40px}
 @media(min-width:781px){.outline-sheet{margin:auto;border-bottom:1px solid var(--line);border-radius:var(--radius-card)}}
 @media print{.outline-fab,.outline-sheet{display:none!important}}
-/* 보기 설정: 화면·글자 크기를 한 패널에 */
-.view-settings{order:54;margin-left:auto;border:0}
-.view-settings[open]{flex-basis:100%;order:58}
-.view-settings[open]>summary{color:var(--ink)}
-.view-settings>summary{display:inline-flex;align-items:center;min-height:var(--tap-target);padding:0 4px;font-size:12px;font-weight:600;color:var(--muted);list-style:none}
-.view-settings>summary::-webkit-details-marker{display:none}
-.view-settings>summary::after{content:"▾";margin-left:6px;font-size:10px}
-.view-settings[open]>summary::after{content:"▴"}
+
+
+
+
+
+
+
 .view-settings-panel{display:grid;gap:4px;margin:4px 0 8px;padding:10px 14px;border:1px solid var(--line);border-radius:var(--radius-card);background:var(--surface)}
 .view-row{display:flex;align-items:center;justify-content:space-between;gap:16px;font-size:12px;color:var(--muted)}
 .text-size-picker{display:inline-flex;gap:2px;padding:2px;border:1px solid var(--line);border-radius:6px}
 .text-size{min-height:36px;padding:4px 10px;border:0;border-radius:4px;background:transparent;color:var(--muted);font-size:12px}
 .text-size[aria-pressed="true"]{background:var(--tint);color:var(--ink);font-weight:700}
-@media(max-width:780px){.view-settings{margin-left:0}}
-.site-footer-inner .theme-toggle{margin-left:0}
-@media print{.view-settings{display:none}}
+
+
+
 @media(prefers-reduced-motion:reduce){.outline-fab{transition:none}}
 
 /* ───────────────────────── v15 조용한 서재 (2026-11-18) ─────────────────────────
@@ -881,7 +854,7 @@ body{background:var(--paper)}
 
 /* 한 문장: 상자 대신 강조선 하나 */
 .compact-lecture #lecture-overview .summary-tier>.eyebrow{font-size:13px;letter-spacing:0;margin:0 0 10px}
-.compact-lecture #lecture-overview .summary-tier>.summary-lead{padding:4px 0 4px 20px;background:transparent;border:0;border-left:3px solid var(--accent);border-radius:0;font-weight:600;line-height:1.8}
+
 
 /* 핵심 세 가지는 순서가 아니므로 번호 대신 점 */
 .compact-lecture #lecture-overview .summary-list li{padding-left:0}
@@ -900,7 +873,7 @@ body{background:var(--paper)}
  .home-main .lecture .card-lead{font-size:14.5px;line-height:1.7}
  .summary-head h1{font-size:28px;margin-top:20px}
  .compact-lecture .lecture-section>h2{font-size:22px}
- .compact-lecture #lecture-overview .summary-tier>.summary-lead{padding:2px 0 2px 16px;font-size:16px}
+ 
 }
 @media print{.today-line .today-key{font-size:18px}}
 
@@ -1363,3 +1336,45 @@ html.header-hidden .sidebar{top:12px}
 .lecture-card .card-actions [data-library-toggle="read"]{min-width:44px;min-height:44px;padding-inline:4px;font-size:11px;color:var(--muted)}
 .lecture-card.is-read .card-actions [data-library-toggle="read"]{color:var(--quote-primary)}
 .lecture-card.is-read .read-mark{background:var(--quote-primary);color:var(--on-accent)}
+
+/* ==========================================================================
+   v16 · 개편 층 (docs/design-overhaul-plan-2026-11-26.md)
+   새 디자인은 이 층에서만 정의한다. 위쪽은 옛 층이며 이 층이 덮는다.
+   ========================================================================== */
+/* S1 토큰: 반경 단계, 유동 글자 크기, 움직임, 면 톤, 글래스 */
+:root{
+ --v16-radius-sm:8px;--v16-radius-md:14px;--v16-radius-lg:20px;--v16-radius-xl:28px;--v16-radius-full:999px;
+ --type-display:clamp(28px,1.6vw + 22px,44px);
+ --type-home-title:clamp(24px,1.4vw + 19px,34px);
+ --type-section:clamp(21px,.7vw + 18px,26px);
+ --type-lead:clamp(18px,.5vw + 16px,22px);
+ --type-card-title:clamp(18px,.3vw + 17px,20px);
+ --ease-standard:cubic-bezier(.2,0,0,1);
+ --ease-emphasized:cubic-bezier(.05,.7,.1,1);
+ --ease-spring:linear(0,.009,.035 2.1%,.141 4.4%,.723 12.9%,.938 16.7%,1.017 19.4%,1.067,1.099 24.3%,1.104 26.2%,1.091 28.9%,1.02 37.1%,.993 42.2%,.986 46.8%,1.001 64.4%,1);
+ --dur-1:.12s;--dur-2:.2s;--dur-3:.32s;
+ --surface-1:color-mix(in srgb,var(--accent) 4%,var(--surface));
+ --surface-2:color-mix(in srgb,var(--accent) 8%,var(--surface));
+ --surface-3:color-mix(in srgb,var(--accent) 13%,var(--surface));
+ --glass-bg:color-mix(in srgb,var(--paper) 70%,transparent);
+ --glass-edge:color-mix(in srgb,var(--ink) 10%,transparent);
+ --glass-filter:saturate(180%) blur(20px);
+ --glass-shadow:0 8px 32px color-mix(in srgb,#000 12%,transparent);
+ --home-max-width:1120px;
+}
+@supports not (color:color-mix(in srgb,red,blue)){
+ :root{--surface-1:var(--surface);--surface-2:var(--feature-surface);--surface-3:var(--tint);--glass-bg:var(--header-solid);--glass-edge:var(--line)}
+}
+/* S1 유동 타이포 */
+.home-title{font-size:var(--type-home-title);letter-spacing:-.04em}
+.summary-head h1{font-size:var(--type-display);line-height:1.22;letter-spacing:-.045em}
+.lecture-section>h2{font-size:var(--type-section);letter-spacing:-.03em}
+.today-key{font-size:var(--type-lead);letter-spacing:-.02em}
+.lecture-card h2{font-size:var(--type-card-title)}
+/* S1 반경 단계: 큰 면 xl, 카드 lg, 작은 조작 md, 알약 full */
+.today-line{border-radius:var(--v16-radius-xl)}
+.lecture-card,.discovery-panel,.lecture-pager a,.lecture-hero img{border-radius:var(--v16-radius-lg)}
+.reading-nav a,.copy-button,[data-copy-target],.detail-read,.today-random,.appearance-toggle{border-radius:var(--v16-radius-md)}
+/* S1 움직임: 상태 전환은 표준 곡선, 누름은 스프링 */
+.lecture-card,.filter-chips button,.reading-nav a,[data-library-toggle],[data-copy-target]{transition-timing-function:var(--ease-standard)}
+@media(prefers-reduced-motion:reduce){:root{--dur-1:0s;--dur-2:0s;--dur-3:0s}}

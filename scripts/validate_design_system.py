@@ -34,6 +34,14 @@ TOKENS = {
     "--reading-measure": "760px",
     "--card-shadow": "none",
 }
+# v16 개편 층의 토큰(docs/design-overhaul-plan-2026-11-26.md). 값이 아니라 존재를 검사한다.
+V16_TOKENS = (
+    "--v16-radius-sm", "--v16-radius-md", "--v16-radius-lg", "--v16-radius-xl", "--v16-radius-full",
+    "--type-display", "--type-home-title", "--type-section", "--type-lead", "--type-card-title",
+    "--ease-standard", "--ease-emphasized", "--ease-spring", "--dur-1", "--dur-2", "--dur-3",
+    "--surface-1", "--surface-2", "--surface-3", "--glass-bg", "--glass-edge", "--glass-filter",
+    "--home-max-width",
+)
 CSS_CONTRACT = (
     "font:var(--font-body-size)/var(--line-height-body)",
     "width:min(var(--site-max-width),",
@@ -62,6 +70,11 @@ def contract_errors(root=ROOT):
     for name, value in TOKENS.items():
         if variables.get(name, "").strip() != value:
             issues.append(f"design token changed or missing: {name}")
+    for name in V16_TOKENS:
+        if not re.search(re.escape(name) + r"\s*:", css):
+            issues.append(f"v16 token missing: {name}")
+    if "prefers-reduced-motion:reduce){:root{--dur-1:0s" not in css:
+        issues.append("v16 motion tokens must collapse under reduced motion")
     for snippet in CSS_CONTRACT:
         if snippet not in css:
             issues.append(f"shared CSS contract missing: {snippet}")

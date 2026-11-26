@@ -257,3 +257,8 @@
 ## 레이아웃 이동 방지 / 2026-11-26
 - 강의 머리의 `읽음 표시`(`.detail-read`)는 스크립트가 켜기 전에도 `visibility:hidden`으로 자리를 잡는다. 켜질 때 대표 이미지와 핵심 요약이 44px 밀리던 레이아웃 이동(느린 기기 0.029)이 0이 됐다.
 - `tests/design-metrics.spec.cjs`가 개편 v16의 측정 기준선(첫 화면 위치, 레이아웃 이동, 용량, 가로 넘침)을 잰다. 기준값과 강제 시점은 `docs/design-overhaul-plan-2026-11-26.md` 6절에 있다.
+
+## v16 개편 층 (2026-11-26~, 계획: `docs/design-overhaul-plan-2026-11-26.md`)
+- `assets/site.css` 맨 끝의 ‘v16 · 개편 층’이 새 디자인의 유일한 정의 위치다. 위쪽 옛 층은 고치지 않고 이 층이 덮는다. 옛 층은 쓰이지 않는 클래스만 겨냥한 규칙 63개를 지웠다(98,540 → 90,315바이트, 화면 영향 없음).
+- **S1 토큰:** 반경 `--v16-radius-sm·md·lg·xl·full`(8·14·20·28·999px), 유동 글자 `--type-display·home-title·section·lead·card-title`(`clamp()`), 움직임 `--ease-standard·emphasized·spring`(`linear()` 스프링), `--dur-1·2·3`(동작 줄이기에서 0), 면 톤 `--surface-1·2·3`(강조색 4·8·13% 섞음), 글래스 `--glass-bg·edge·filter·shadow`, 홈 폭 `--home-max-width` 1120px. `color-mix()`를 못 쓰는 브라우저는 옛 면 색으로 대체한다. 옛 토큰 값(`--radius` 6px 등)은 계약 그대로 두고 쓰는 곳만 새 토큰으로 바꿨다.
+- 큰 면(오늘의 한 문장)은 xl, 카드·탐색 상자·대표 이미지·이전/다음은 lg, 작은 조작(목차 탭·복사·읽음)은 md 반경이다.
