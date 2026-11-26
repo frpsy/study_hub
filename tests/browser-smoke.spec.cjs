@@ -156,7 +156,7 @@ test('library identity and reading hierarchy stay consistent',async({browser})=>
   await context.close();
 });
 
-test('home lists every lecture in one aligned column',async({browser})=>{
+test('home lists every lecture in an aligned grid (one column on phones, two on wide screens)',async({browser})=>{
   for(const width of [360,390,768,1280]){
     const context=await browser.newContext({viewport:{width,height:900},reducedMotion:'reduce'});
     const page=await context.newPage();
@@ -164,15 +164,15 @@ test('home lists every lecture in one aligned column',async({browser})=>{
     const m=await page.evaluate(()=>{
       const rect=el=>el.getBoundingClientRect();
       const cards=[...document.querySelectorAll('#lecture-list .lecture')].map(rect);
-      return {lefts:[...new Set(cards.map(r=>Math.round(r.left)))],rights:cards.map(r=>r.right),width:cards[0].width,
+      return {lefts:[...new Set(cards.map(r=>Math.round(r.left)))].sort((a,b)=>a-b),rights:cards.map(r=>r.right),width:cards[0].width,
         brand:rect(document.querySelector('.site-brand')).left,title:rect(document.querySelector('.home-title')).left,
         overflow:document.documentElement.scrollWidth-innerWidth};
     });
-    expect(m.lefts).toHaveLength(1);
+    expect(m.lefts.length).toBe(width<=780?1:2);
     expect(Math.abs(m.brand-m.title)).toBeLessThanOrEqual(1);
     expect(Math.abs(m.lefts[0]-m.title)).toBeLessThanOrEqual(1);
     expect(Math.max(...m.rights)).toBeLessThanOrEqual(width);
-    expect(m.width).toBeGreaterThan(width<=780?width-40:700);
+    expect(m.width).toBeGreaterThan(width<=780?width-40:460);
     expect(m.overflow).toBeLessThanOrEqual(1);
     await context.close();
   }
