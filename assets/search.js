@@ -16,7 +16,7 @@
   const load=()=>loading||(loading=fetch(new URL('search-index.json',base),{cache:'no-cache'})
     .then(r=>{if(!r.ok)throw new Error('index');return r.json()})
     .then(rows=>{items=rows.map(row=>({row,title:normalize(row.t),body:normalize([row.l,row.c,row.p,...row.g].join(' ')),heads:row.s.map(h=>normalize(h))}));render()})
-    .catch(()=>{loading=null;status.textContent=navigator.onLine===false?'오프라인에서는 검색할 수 없습니다. 연결되면 다시 열어 주세요.':'검색 색인을 불러오지 못했습니다.'}));
+    .catch(()=>{loading=null;status.textContent=navigator.onLine===false?'오프라인 상태라 검색할 수 없습니다. 인터넷에 연결한 뒤 다시 열어 주세요.':'검색 색인을 불러오지 못했습니다.'}));
   const has=(text,word)=>text.includes(word)||(/[가-힣]/.test(word)&&compact(text).includes(word));
   const search=query=>{
     const words=normalize(query.trim()).split(/\s+/).filter(Boolean);
@@ -51,7 +51,7 @@
       const m=document.createElement('small');m.textContent=row.p+' · '+row.c;
       a.append(t,d,m);li.append(a);return li;
     }));
-    status.textContent=input.value.trim()?(results.length?results.length+'개 결과':'맞는 강의가 없습니다.'):'최근 강의';
+    status.textContent=input.value.trim()?(results.length?results.length+'개 강의':'검색 결과가 없습니다.'):'최근 강의';
     select(0);
   };
   input.addEventListener('input',render);
