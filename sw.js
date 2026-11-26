@@ -7,14 +7,16 @@ const CORE = [
   './', './index.html', './offline.html',
   './manifest.webmanifest', './assets/icon.svg', './assets/icon-512.png', './assets/apple-touch-icon.png',
   './assets/icon.svg?v='+VERSION, './assets/apple-touch-icon.png?v='+VERSION,
-  './assets/site.css', './assets/site.js', './assets/theme.js'
+  './assets/site.css', './assets/site.js', './assets/theme.js',
+  './assets/search.js?v='+VERSION, './search-index.json'
 ];
 const root = new URL(self.registration.scope);
 
+const INDEX_PATH = new URL('./search-index.json', root).pathname;
 function isStaticSiteResource(request) {
   const url = new URL(request.url);
   if (request.method !== 'GET' || url.origin !== root.origin || !url.pathname.startsWith(root.pathname)) return false;
-  if (request.mode === 'navigate') return true;
+  if (request.mode === 'navigate' || url.pathname === INDEX_PATH) return true;
   return ['style', 'script', 'image', 'font', 'manifest'].includes(request.destination);
 }
 async function update(cache, request, isNavigation = false) {
@@ -67,6 +69,13 @@ self.addEventListener('fetch', event => {
     const cache = await caches.open(CACHE);
     // Navigation must be network-first. Cache-first HTML can indefinitely show
     // an old header even when build-info.json reports a newer deployment.
+    // 검색 색인은 데이터라 화면 버전과 따로 바뀐다. 페이지처럼 네트워크 우선, 오프라인이면 저장본을 쓴다.
+    if (new URL(request.url).pathname === INDEX_PATH) {
+      const key = new Request(new URL(request.url).origin + INDEX_PATH);
+      const fresh = await fetch(new Request(request, {cache:'no-store'})).catch(() => null);
+      if (fresh && fresh.ok) { await cache.put(key, fresh.clone()); return fresh; }
+      return await cache.match(key) || fresh || Response.error();
+    }
     if (request.mode === 'navigate') {
       const fresh = await update(cache, new Request(request, {cache:'no-store'}), true);
       if (fresh) return fresh;

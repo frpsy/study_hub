@@ -308,23 +308,17 @@ test('reading navigation tracks sections and source disclosure opens',async({bro
   await context.close();
 });
 
-test('reading progress eases toward scroll position and respects reduced motion',async({page})=>{
- await page.emulateMedia({reducedMotion:'no-preference'});
- await page.goto('/lectures/VUHrJZbpIjI.html');
- await page.waitForTimeout(600);
- const sample=await page.evaluate(async()=>{
-  const bar=document.querySelector('.read-progress');
-  const value=()=>Number(bar.style.getPropertyValue('--p'));
-  window.scrollTo({top:(document.documentElement.scrollHeight-innerHeight)/2,behavior:'instant'});
-  await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
-  return {value:value(),target:scrollY/(document.documentElement.scrollHeight-innerHeight)};
- });
- expect(sample.value).toBeGreaterThan(0);
- expect(sample.value).toBeLessThan(sample.target);
- await expect.poll(()=>page.locator('.read-progress').evaluate(el=>Number(el.style.getPropertyValue('--p')))).toBeCloseTo(sample.target,3);
- await page.emulateMedia({reducedMotion:'reduce'});
- await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));
- await expect.poll(()=>page.locator('.read-progress').evaluate(el=>Number(el.style.getPropertyValue('--p')))).toBe(0);
+// 진행 막대 채움 비율: ::before의 가로 배율(CSS 스크롤 연동 또는 대체 JS의 --p)을 읽는다.
+const progressFill=el=>{const t=getComputedStyle(el,'::before').transform;if(t==='none')return 1;const m=/matrix\(([^,]+)/.exec(t);return m?Number(m[1]):0};
+test('reading progress follows the scroll position, also with reduced motion',async({page})=>{
+ for(const motion of ['no-preference','reduce']){
+  await page.emulateMedia({reducedMotion:motion});
+  await page.goto('/lectures/VUHrJZbpIjI.html');
+  const target=await page.evaluate(()=>{window.scrollTo({top:(document.documentElement.scrollHeight-innerHeight)/2,behavior:'instant'});return scrollY/(document.documentElement.scrollHeight-innerHeight)});
+  await expect.poll(()=>page.locator('.read-progress').evaluate(progressFill),motion).toBeCloseTo(target,1);
+  await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));
+  await expect.poll(()=>page.locator('.read-progress').evaluate(progressFill),motion).toBeLessThan(.02);
+ }
 });
 
 for(const width of [390,1280]){
@@ -343,7 +337,7 @@ for(const width of [390,1280]){
   await page.evaluate(()=>window.scrollTo({top:700,behavior:'instant'}));
   await expect(page.locator('html')).not.toHaveClass(/header-hidden/);
   await expect.poll(()=>page.locator('.site-header').evaluate(el=>Math.round(el.getBoundingClientRect().top))).toBe(0);
-  await expect.poll(()=>bar.evaluate(el=>Number(el.style.getPropertyValue('--p')))).toBeGreaterThan(0);
+  await expect.poll(()=>bar.evaluate(progressFill)).toBeGreaterThan(0);
   const box=await bar.evaluate(el=>{
    const rect=el.getBoundingClientRect(),head=el.parentElement.getBoundingClientRect(),style=getComputedStyle(el,'::before');
    return {top:rect.top,bottom:rect.bottom,width:rect.width,headerBottom:head.bottom,transform:style.transform,background:style.backgroundColor};
@@ -429,9 +423,8 @@ test('outline sheet lists sections and detail headings and closes on navigation'
   const page=await context.newPage();
   await page.goto('/lectures/sAgj5V4Ewno.html');
   await page.evaluate(()=>window.scrollTo({top:1400,behavior:'instant'}));
-  const fab=page.locator('.outline-fab');
-  await expect(fab).toHaveClass(/is-visible/);
-  await fab.click();
+  await expect(page.locator('.dock')).toHaveClass(/is-visible/);
+  await page.locator('.dock [data-dock="outline"]').click();
   const sheet=page.locator('.outline-sheet');
   await expect(sheet).toBeVisible();
   expect(await sheet.locator('ol ol a').count()).toBe(await page.locator('.detail-toc a').count());
@@ -483,12 +476,20 @@ test('section anchors sit flush under the reading nav and the current section fo
   }
 });
 
-test('outline button is opaque so body text never shows through it',async({page})=>{
-  await page.setViewportSize({width:390,height:844});
-  await page.goto('/lectures/sAgj5V4Ewno.html');
-  const bg=await page.locator('.outline-fab').evaluate(el=>getComputedStyle(el).backgroundColor);
-  const alpha=/rgba\([^)]*,\s*([\d.]+)\)/.exec(bg);
-  expect(alpha?Number(alpha[1]):1).toBe(1);
+test('dock is legible glass and turns opaque with reduced transparency',async({browser})=>{
+  for(const transparency of ['no-preference','reduce']){
+    const context=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce'});
+    const page=await context.newPage();
+    const cdp=await context.newCDPSession(page);
+    await cdp.send('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-transparency',value:transparency}]});
+    await page.goto('/lectures/sAgj5V4Ewno.html');
+    const style=await page.locator('.dock').evaluate(el=>{const c=getComputedStyle(el);return {bg:c.backgroundColor,blur:c.backdropFilter||c.webkitBackdropFilter||''}});
+    const alpha=/rgba?\([^)]*,\s*([\d.]+)\)/.exec(style.bg);
+    const value=alpha&&style.bg.startsWith('rgba')?Number(alpha[1]):(/color\(srgb[^/]*\/\s*([\d.]+)\)/.exec(style.bg)?.[1]??1);
+    if(transparency==='reduce')expect(Number(value),style.bg).toBe(1);
+    else{expect(Number(value),'body text must not read through the dock').toBeGreaterThanOrEqual(.8);if(Number(value)<1)expect(style.blur).toContain('blur')}
+    await context.close();
+  }
 });
 
 test('key points fit small screens',async({browser})=>{

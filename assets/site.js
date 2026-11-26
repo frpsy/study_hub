@@ -1,18 +1,15 @@
 /* Shared navigation, search, text copying and deployed-version feedback. */
 (()=>{
   const header=document.querySelector('.site-header');
-  const sidebar=document.querySelector('.sidebar');
   const readingNav=document.querySelector('.reading-nav');
   let headerHidden=false;
   function syncNavigationSize(){
     const headerHeight=header ? header.getBoundingClientRect().height : 0;
-    const mobile=window.matchMedia('(max-width:780px)').matches;
-    const sidebarHeight=mobile && sidebar ? sidebar.getBoundingClientRect().height : 0;
     document.documentElement.style.setProperty('--header-height',headerHeight+'px');
     // 강의 페이지는 헤더 아래에 목차가 붙어 있다. 앵커로 이동하면 섹션의 위 선이 목차 아래 선과 겹치게 둔다.
     const navHeight=readingNav ? readingNav.getBoundingClientRect().height : 0;
     const shownHeader=headerHidden ? 0 : headerHeight;
-    const offset=readingNav ? shownHeader+navHeight-1 : shownHeader+sidebarHeight+16;
+    const offset=readingNav ? shownHeader+navHeight-1 : shownHeader+16;
     document.documentElement.style.setProperty('--anchor-offset',offset+'px');
   }
   syncNavigationSize();
@@ -20,7 +17,6 @@
   if('ResizeObserver' in window){
     const sizes=new ResizeObserver(syncNavigationSize);
     if(header)sizes.observe(header);
-    if(sidebar)sizes.observe(sidebar);
     if(readingNav)sizes.observe(readingNav);
   }
   // 본문을 내려 읽을 때는 헤더를 숨기고, 올리면 다시 보인다. 맨 위 근처와 헤더 안 초점 이동 중에는 항상 보인다.
@@ -62,15 +58,6 @@
   }
   window.addEventListener('hashchange',revealAnchor);
   if(location.hash)revealAnchor();
-  const links=[...document.querySelectorAll('.sidebar a[href^="#"]')];
-  if('IntersectionObserver' in window){
-    const observer=new IntersectionObserver(entries=>{
-      const visible=entries.filter(e=>e.isIntersecting).sort((a,b)=>a.boundingClientRect.top-b.boundingClientRect.top)[0];
-      if(!visible)return;
-      links.forEach(a=>{if(a.hash==='#'+visible.target.id)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current')});
-    },{rootMargin:'-110px 0px -55% 0px'});
-    links.forEach(a=>{const el=document.getElementById(a.hash.slice(1));if(el)observer.observe(el)});
-  }
   const libraryKeys={bookmarks:'study-hub-bookmarks',read:'study-hub-read'};
   const library={bookmarks:new Set(),read:new Set()};
   const libraryButtons=[...document.querySelectorAll('[data-library-toggle]')];
@@ -327,9 +314,6 @@
       resetTimer=setTimeout(()=>{button.textContent=originalLabel;if(status)status.textContent=''},2200);
     });
   });
-  document.querySelectorAll('[data-expand-scope]').forEach(button=>button.addEventListener('click',()=>{
-    document.querySelectorAll(button.dataset.expandScope+' details').forEach(d=>d.open=button.dataset.expand==='true');
-  }));
 
   // The label identifies the JavaScript actually loaded by this tab. A fresh,
   // uncached version manifest allows comparison with the currently deployed site.
@@ -374,45 +358,17 @@
   }
 })();
 
-/* Reading progress: a thin bar on long reading pages. Decorative only; no state is stored. */
+/* 읽기 진행 막대: CSS 스크롤 연동(animation-timeline)이 그린다. 지원하지 않는 브라우저만 스크롤 비율을 --p로 넘긴다. */
 (()=>{
   const page=document.querySelector('.compact-lecture,.summary-page');
   if(!page||page.classList.contains('offline-content'))return;
   const bar=document.createElement('div');
   bar.className='read-progress';
   bar.setAttribute('aria-hidden','true');
-  const host=document.querySelector('.site-header')||document.body;
-  host.append(bar);
-  const motion=window.matchMedia('(prefers-reduced-motion: reduce)');
-  let frame=0,current=0,target=0,last=0;
-  const measure=()=>{
-    const total=document.documentElement.scrollHeight-window.innerHeight;
-    return total>0?Math.min(1,Math.max(0,window.scrollY/total)):0;
-  };
-  const paint=()=>bar.style.setProperty('--p',String(current));
-  const animate=time=>{
-    frame=0;
-    const elapsed=last?Math.min(time-last,64):16;
-    last=time;
-    current=motion.matches?target:current+(target-current)*(1-Math.exp(-elapsed/85));
-    if(Math.abs(target-current)<0.0001)current=target;
-    paint();
-    if(current!==target)frame=requestAnimationFrame(animate);else last=0;
-  };
-  const schedule=()=>{
-    target=measure();
-    if(!frame)frame=requestAnimationFrame(animate);
-  };
-  const restore=()=>{
-    if(frame)cancelAnimationFrame(frame);
-    frame=0;last=0;current=target=measure();paint();
-  };
-  window.addEventListener('scroll',schedule,{passive:true});
-  window.addEventListener('resize',schedule);
-  window.addEventListener('pageshow',restore);
-  motion.addEventListener('change',schedule);
-  if('ResizeObserver' in window)new ResizeObserver(schedule).observe(document.body);
-  restore();
+  (document.querySelector('.site-header')||document.body).append(bar);
+  if(window.CSS?.supports?.('animation-timeline:scroll()'))return;
+  const set=()=>{const total=document.documentElement.scrollHeight-innerHeight;bar.style.setProperty('--p',String(total>0?Math.min(1,Math.max(0,scrollY/total)):0))};
+  addEventListener('scroll',set,{passive:true});addEventListener('resize',set);addEventListener('pageshow',set);set();
 })();
 
 // Highlight the section currently being read. Plain anchors work without JS.
@@ -462,29 +418,15 @@
   const title=document.createElement('strong');title.textContent='목차';
   const close=document.createElement('button');close.type='button';close.className='outline-close';close.textContent='닫기';
   head.append(title,close);sheet.append(head,list);
-  const button=document.createElement('button');
-  button.type='button';button.className='outline-fab';button.setAttribute('aria-haspopup','dialog');
-  const label=document.createElement('span');const prefix=document.createElement('b');prefix.textContent='목차';button.append(prefix,label);
-  document.body.append(sheet,button);
+  document.body.append(sheet);
   const current=()=>nav.querySelector('[aria-current="location"]')||nav.querySelector('a');
-  const sync=()=>{
-    const active=current();label.textContent=active?active.textContent:'';
-    const foot=document.querySelector('.site-footer');
-    const nearFooter=foot&&foot.getBoundingClientRect().top<innerHeight;
-    button.classList.toggle('is-visible',(nav.getBoundingClientRect().bottom<0||scrollY>480)&&!nearFooter);
-    sheet.querySelectorAll(':scope>ol>li>a').forEach(a=>a.classList.toggle('is-current',active&&a.hash===active.hash));
-  };
-  button.addEventListener('click',()=>{sync();sheet.showModal()});
+  const sync=()=>{const active=current();sheet.querySelectorAll(':scope>ol>li>a').forEach(a=>a.classList.toggle('is-current',active&&a.hash===active.hash))};
+  window.studyOutlineOpen=()=>{sync();sheet.showModal()};
   close.addEventListener('click',()=>sheet.close());
   sheet.addEventListener('click',event=>{
     if(event.target===sheet){sheet.close();return}
-    const link=event.target.closest('a[href^="#"]');
-    if(link){sheet.close()}
+    if(event.target.closest('a[href^="#"]'))sheet.close();
   });
-  let frame=0;
-  addEventListener('scroll',()=>{if(!frame)frame=requestAnimationFrame(()=>{frame=0;sync()})},{passive:true});
-  addEventListener('pageshow',sync);
-  sync();
 })();
 
 // Keep only the latest unfinished lecture and its section, on this browser.
@@ -533,4 +475,45 @@
   addEventListener('pageshow',refresh);
   addEventListener('storage',event=>{if(event.key===key||event.key==='study-hub-read'||event.key===null)refresh()});
   refresh();
+})();
+
+// 하단 도구 막대: 목차(강의)·검색·보기·맨 위. 검색 팔레트(search.js)는 처음 열 때만 불러온다.
+(()=>{
+  const src=document.currentScript?.src;if(!src)return;
+  const openSearch=from=>{
+    if(window.studySearchOpen)return window.studySearchOpen(from);
+    const tag=document.createElement('script');
+    tag.src=new URL('search.js?v='+(new URL(src).searchParams.get('v')||''),src).href;
+    tag.onload=()=>window.studySearchOpen(from);
+    document.head.append(tag);
+  };
+  document.querySelectorAll('[data-search-open]').forEach(b=>{b.hidden=false;b.addEventListener('click',()=>openSearch(b))});
+  addEventListener('keydown',event=>{
+    const typing=event.target.closest?.('input,textarea,select,[contenteditable="true"]');
+    if((event.key==='k'&&(event.metaKey||event.ctrlKey))||(event.key==='/'&&!typing&&!event.metaKey&&!event.ctrlKey)){event.preventDefault();openSearch(document.activeElement)}
+  });
+  const dock=document.createElement('nav');
+  dock.className='dock';dock.setAttribute('aria-label','빠른 이동');
+  const paths={outline:'M4 6h16M4 12h10M4 18h13',search:'M10.5 4.5a6 6 0 1 0 0 12a6 6 0 0 0 0-12zM15 15l4 4',view:'M4 19 9.5 5h1L16 19M6.3 14h7.4',top:'M12 19V5M6 11l6-6 6 6'};
+  const add=(key,label,run)=>{
+    const b=document.createElement('button');b.type='button';b.dataset.dock=key;
+    b.innerHTML='<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="'+paths[key]+'"/></svg>';
+    const t=document.createElement('span');t.textContent=label;b.append(t);
+    b.addEventListener('click',()=>run(b));dock.append(b);
+  };
+  if(window.studyOutlineOpen)add('outline','목차',()=>window.studyOutlineOpen());
+  add('search','검색',openSearch);
+  const toggle=document.querySelector('.appearance-toggle');
+  if(toggle)add('view','보기',()=>{toggle.focus();setTimeout(()=>{if(toggle.getAttribute('aria-expanded')!=='true')toggle.click()})});
+  add('top','맨 위',()=>{scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});document.querySelector('.site-brand')?.focus({preventScroll:true})});
+  document.body.append(dock);
+  let frame=0;
+  const sync=()=>{
+    frame=0;
+    const foot=document.querySelector('.site-footer');
+    const near=foot&&foot.getBoundingClientRect().top<innerHeight-8;
+    dock.classList.toggle('is-visible',scrollY>240&&!near);
+  };
+  addEventListener('scroll',()=>{if(!frame)frame=requestAnimationFrame(sync)},{passive:true});
+  addEventListener('pageshow',sync);sync();
 })();
