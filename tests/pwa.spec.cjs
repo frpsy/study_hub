@@ -206,7 +206,8 @@ test('Material color roles stay consistent and readable in light and dark',async
     return (Math.max(a,b)+.05)/(Math.min(a,b)+.05);
   };
   for(const theme of ['light','dark']){
-    const context=await browser.newContext({viewport:{width:390,height:844},colorScheme:theme});
+    // reducedMotion: 누른 직후 색을 읽으므로 .16초 색 전환을 끈다(전환 중 회색을 읽어 로컬에서 가끔 실패했다).
+    const context=await browser.newContext({viewport:{width:390,height:844},colorScheme:theme,reducedMotion:'reduce'});
     const page=await context.newPage();
     await page.goto('/index.html');
     const card=page.locator('.lecture-card').first();

@@ -1121,9 +1121,11 @@ html.header-hidden .sidebar{top:12px}
 .header-settings .view-settings-panel{position:absolute;inset-inline-end:0;inset-block-start:100%;width:min(320px,calc(100vw - 32px));box-sizing:border-box;margin-top:6px;background:var(--surface);box-shadow:0 6px 18px var(--shadow-color,rgba(0,0,0,.18))}
 .header-settings [data-theme-choice]{min-height:var(--tap-target);padding:0 8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:var(--radius-control);font:inherit}
 .header-settings [data-theme-choice][aria-pressed="true"]{border-color:var(--accent);color:var(--accent);background:var(--tint)}
-.header-settings [hidden],.today-random[hidden],.detail-read[hidden],.card-actions button[hidden],.filter-chips button[hidden]{display:none}
+.header-settings [hidden],.today-random[hidden],.card-actions button[hidden],.filter-chips button[hidden]{display:none}
 .detail-meta-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0 12px}
 .detail-read{display:inline-flex;align-items:center;gap:6px;padding-inline:8px;background:transparent;border:0;white-space:nowrap}
+/* 스크립트가 버튼을 켜기 전에도 자리를 잡아 둔다. 켜질 때 대표 이미지와 핵심 요약이 44px 밀리지 않는다(레이아웃 이동 0). */
+.detail-read[hidden]{display:inline-flex!important;visibility:hidden}
 @media(max-width:780px){
  .today-line{margin:4px 0 16px;padding-bottom:12px}
  .today-line .today-key{font-size:17px}
